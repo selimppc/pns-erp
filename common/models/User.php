@@ -7,6 +7,8 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
+
+
 /**
  * User model
  *
@@ -55,6 +57,10 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
+
+
+
+
 
     /**
      * @inheritdoc
@@ -161,6 +167,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function setPassword($password)
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+
+    }
+
+    public function hashPassword($password)
+    {
+        return Yii::$app->getSecurity()->generatePasswordHash($password);
     }
 
     /**
@@ -186,4 +198,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+
+
+
+
 }

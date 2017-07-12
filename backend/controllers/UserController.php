@@ -70,20 +70,25 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
+        $model->scenario = 'create';
 
         if ($model->load(Yii::$app->request->post()))
         {
 
-            var_dump(Yii::$app->request->post());
-            #$transaction = \Yii::$app->db->beginTransaction();
-            #try {
-                if ($model->save()){
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+
+                if ($model->save())
+                {
+                    $transaction->commit();
+
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
 
-            #} catch (Exception $e) {
-            #    $transaction->rollBack();
-            #}
+            } catch (\Exception $e) {
+
+                $transaction->rollBack();
+            }
         }
 
         return $this->render('create', [

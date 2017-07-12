@@ -50,7 +50,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'username', 'email', 'password', 'repeat_password'], 'required','on'=>'create'],
+            [['first_name', 'last_name', 'username', 'email', 'password'], 'required','on'=>'create'],
             [['email'], 'required','on'=>'forgot_password'],
             [['password','repeat_password'], 'required','on'=>'reset_password'],
 
@@ -58,7 +58,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['username', 'email', 'password', 'password_reset_token', 'last_access', 'image'], 'string', 'max' => 255],
             [['first_name', 'last_name', 'auth_key', 'password_reset_token', 'last_access'], 'string', 'max' => 64],
             ['repeat_password', 'compare', 'compareAttribute'=>'password' ],
-            [['roles'],'safe']
+            [['first_name', 'last_name', 'username', 'email', 'password','password_reset_token', 'last_access','auth_key', 'roles'],'safe']
         ];
 
 
@@ -203,7 +203,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function setPassword($password)
     {
-        $this->password_hash = crypt($password);
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public function hashPassword($password)
+    {
+        return Yii::$app->getSecurity()->generatePasswordHash($password);
     }
 
     /**
