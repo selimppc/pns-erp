@@ -22,9 +22,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 
 
     <div class="form-group">

@@ -77,6 +77,15 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post()))
         {
 
+            $model->status = 10;
+            $valid = $model->validate();
+
+            if($valid){
+                // set hash password
+                $model->password = Yii::$app->security->generatePasswordHash($model->password);
+                $model->repeat_password = $model->password;
+            }
+
             $transaction = Yii::$app->db->beginTransaction();
             try {
 

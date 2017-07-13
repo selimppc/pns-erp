@@ -50,7 +50,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'username', 'email', 'password'], 'required','on'=>'create'],
+            [['first_name', 'last_name', 'username', 'email', 'status','password'], 'required','on'=>'create'],
             [['email'], 'required','on'=>'forgot_password'],
             [['password','repeat_password'], 'required','on'=>'reset_password'],
 
