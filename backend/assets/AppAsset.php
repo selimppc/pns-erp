@@ -16,6 +16,8 @@ class AppAsset extends AssetBundle
 
         'admin-theme/iconbar/assets/css/site.min.css',
 
+        'admin-theme/global/css/bootstrap-extend.min.css',
+
         'admin-theme/global/vendor/animsition/animsition.css',
         'admin-theme/global/vendor/asscrollable/asScrollable.css',
         'admin-theme/global/vendor/switchery/switchery.css',
@@ -28,6 +30,8 @@ class AppAsset extends AssetBundle
         'admin-theme/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css',
 
         'admin-theme/iconbar/assets/examples/css/dashboard/v1.css',
+
+        'admin-theme/iconbar/assets/examples/css/pages/login-v2.css',
 
         'admin-theme/global/fonts/material-design/material-design.min.css',
         'admin-theme/global/fonts/brand-icons/brand-icons.min.css',

@@ -36,7 +36,8 @@
   right: 0;
   height: auto;
   min-height: 100%;
-  padding: 150px 60px 180px;
+  /*padding: 150px 60px 180px;*/
+  padding: 40px 60px 180px;
   color: #757575;
   background: #fff;
 }
