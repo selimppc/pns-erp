@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 
@@ -93,10 +93,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      * @inheritdoc
      * @return UsersQuery the active query used by this AR class.
      */
-    public static function find()
+    /*public static function find()
     {
         return new UsersQuery(get_called_class());
-    }
+    }*/
 
 
 
@@ -119,7 +119,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     /* modified */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['access_token' => $token]);
+        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
 
     /* removed
@@ -147,17 +147,25 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function findByPasswordResetToken($token)
     {
-        $expire = \Yii::$app->params['user.passwordResetTokenExpire'];
-        $parts = explode('_', $token);
-        $timestamp = (int) end($parts);
-        if ($timestamp + $expire < time()) {
-            // token expired
+        if (!static::isPasswordResetTokenValid($token)) {
             return null;
         }
 
         return static::findOne([
-            'password_reset_token' => $token
+            'password_reset_token' => $token,
+            //'status' => self::STATUS_ACTIVE,
         ]);
+    }
+
+    public static function isPasswordResetTokenValid($token)
+    {
+        if (empty($token)) {
+            return false;
+        }
+        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        $parts = explode('_', $token);
+        $timestamp = (int) end($parts);
+        return $timestamp + $expire >= time();
     }
 
     /**
@@ -192,7 +200,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        #return $this->password === sha1($password);
         return Yii::$app->security->validatePassword($password, $this->password);
     }
 
@@ -206,17 +213,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 
-    public function hashPassword($password)
-    {
-        return Yii::$app->getSecurity()->generatePasswordHash($password);
-    }
-
     /**
      * Generates "remember me" authentication key
      */
     public function generateAuthKey()
     {
-        $this->auth_key = Yii::$app->security->generateRandomKey();
+        $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
     /**
@@ -224,7 +226,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function generatePasswordResetToken()
     {
-        $this->password_reset_token = Yii::$app->security->generateRandomKey() . '_' . time();
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
     /**
