@@ -10,38 +10,45 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('app', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<div class="page-header">
+      <h1 class="page-title"><?= Html::encode($this->title) ?></h1>
+     
+      <div class="page-header-actions">
+        <?= Html::a(Yii::t('app', 'Create User'), ['create'], ['class' => 'btn btn-sm btn-primary btn-round']) ?>        
+      </div>
+</div>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<div class="page-content">
+    <!-- Panel Basic -->
+    <div class="panel">
+     
+    <div class="panel-body">
+
+        <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'username',
             'email:email',
-            'password',
-            'first_name',
-            // 'last_name',
-            // 'auth_key',
-            // 'password_reset_token',
-            // 'last_access',
-            // 'status',
-            // 'ip_address',
-            // 'image',
-            // 'created_by',
-            // 'updated_by',
-            // 'created_at',
-            // 'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+           [
+    'class' => 'yii\grid\ActionColumn',
+    'visibleButtons' => [
+        'view' => function ($model, $key, $index) {
+            return $model->status === 1 ? false : true;
+         }
+    ]
+]
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+
+           
+
+
+    </div>
+
+</div>
+

@@ -61,12 +61,12 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/user/index']); ?>">
                     <span class="site-menu-title">Lists of Customer</span>
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="layouts/grids.html">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/user/create']); ?>">
                     <span class="site-menu-title">Add a Customer</span>
                   </a>
                 </li>                
