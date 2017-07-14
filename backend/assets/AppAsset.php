@@ -51,6 +51,7 @@ class AppAsset extends AssetBundle
 
         'admin-theme/global/vendor/babel-external-helpers/babel-external-helpers.js',
         'admin-theme/global/vendor/tether/tether.js',
+        'admin-theme/global/vendor/bootstrap/bootstrap.js',
         'admin-theme/global/vendor/animsition/animsition.js',
         'admin-theme/global/vendor/mousewheel/jquery.mousewheel.js',
         'admin-theme/global/vendor/asscrollbar/jquery-asScrollbar.js',

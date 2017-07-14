@@ -37,10 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
             
 
             <div class="form-group clearfix">
-                <div class="checkbox-custom checkbox-inline checkbox-primary float-left">
-                  <?= $form->field($model, 'rememberMe')->checkbox() ?>
-                </div>
-                <a style="float: right;margin-top: 15px;" class="float-right" href="#">Forgot password?</a>
+                
+                <?= $form->field($model, 'rememberMe',['options' => ['class' => '']])->checkbox() ?>
+               
+                <a style="float: right;margin-top: -45px;" class="float-right" href="#">Forgot password?</a>
             </div>
 
             <div class="form-group">

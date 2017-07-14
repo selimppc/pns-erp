@@ -219,36 +219,7 @@
         <!-- Navbar Toolbar Right -->
         <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
 
-          <li class="nav-item dropdown">
-            <?= Html::beginForm(['/site/logout'], 'post'); ?>
-              
-            <?= Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            ); ?>
-            
-            <?= Html::endForm(); ?>
-           
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" data-animation="scale-up"
-            aria-expanded="false" role="button">
-              <span class="flag-icon flag-icon-us"></span>
-            </a>
-            <div class="dropdown-menu" role="menu">
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                <span class="flag-icon flag-icon-gb"></span> English</a>
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                <span class="flag-icon flag-icon-fr"></span> French</a>
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                <span class="flag-icon flag-icon-cn"></span> Chinese</a>
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                <span class="flag-icon flag-icon-de"></span> German</a>
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                <span class="flag-icon flag-icon-nl"></span> Dutch</a>
-            </div>
-          </li>
+         
           <li class="nav-item dropdown">
             <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="scale-up" role="button">
@@ -262,7 +233,14 @@
               <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> Billing</a>
               <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> Settings</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
+             
+              <?= Html::beginForm(['/site/logout'], 'post'); ?>
+              <?= Html::submitButton(
+                  'Logout',
+                  ['class' => 'dropdown-item waves-effect waves-light waves-round logout']
+              ); ?>
+              
+              <?= Html::endForm(); ?>
             </div>
           </li>
           <li class="nav-item dropdown">
