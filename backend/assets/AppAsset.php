@@ -16,6 +16,7 @@ class AppAsset extends AssetBundle
 
         'admin-theme/iconbar/assets/css/site.min.css',
 
+        'admin-theme/global/css/bootstrap.min.css',
         'admin-theme/global/css/bootstrap-extend.min.css',
 
         'admin-theme/global/vendor/animsition/animsition.css',
@@ -95,6 +96,6 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+       # 'yii\bootstrap\BootstrapAsset',
     ];
 }
