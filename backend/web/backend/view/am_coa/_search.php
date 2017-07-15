@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\UserSearch */
+/* @var $model backend\models\AmCoaSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="user-search">
+<div class="am-coa-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,27 +17,29 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'username') ?>
+    <?= $form->field($model, 'account_code') ?>
 
-    <?= $form->field($model, 'email') ?>
+    <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'password') ?>
+    <?= $form->field($model, 'description') ?>
 
-    <?= $form->field($model, 'first_name') ?>
+    <?= $form->field($model, 'account_type') ?>
 
-    <?php // echo $form->field($model, 'last_name') ?>
+    <?php // echo $form->field($model, 'account_usage') ?>
 
-    <?php // echo $form->field($model, 'auth_key') ?>
+    <?php // echo $form->field($model, 'group_one_id') ?>
 
-    <?php // echo $form->field($model, 'password_reset_token') ?>
+    <?php // echo $form->field($model, 'group_two_id') ?>
 
-    <?php // echo $form->field($model, 'last_access') ?>
+    <?php // echo $form->field($model, 'group_three_id') ?>
+
+    <?php // echo $form->field($model, 'group_four_id') ?>
+
+    <?php // echo $form->field($model, 'analyical_code') ?>
+
+    <?php // echo $form->field($model, 'branch_id') ?>
 
     <?php // echo $form->field($model, 'status') ?>
-
-    <?php // echo $form->field($model, 'ip_address') ?>
-
-    <?php // echo $form->field($model, 'image') ?>
 
     <?php // echo $form->field($model, 'created_by') ?>
 

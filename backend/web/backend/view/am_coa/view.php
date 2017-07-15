@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\User */
+/* @var $model backend\models\AmCoa */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+$this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Am Coas'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-view">
+<div class="am-coa-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,17 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'username',
-            'email:email',
-            'password',
-            'first_name',
-            'last_name',
-            'auth_key',
-            'password_reset_token',
-            'last_access',
+            'account_code',
+            'title',
+            'description:ntext',
+            'account_type',
+            'account_usage',
+            'group_one_id',
+            'group_two_id',
+            'group_three_id',
+            'group_four_id',
+            'analyical_code',
+            'branch_id',
             'status',
-            'ip_address',
-            'image',
             'created_by',
             'updated_by',
             'created_at',
