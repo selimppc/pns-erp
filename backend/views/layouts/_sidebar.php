@@ -1,5 +1,6 @@
  <?php
  	use yii\helpers\Url;
+  use yii\helpers\Html;
  ?>
  <div class="site-menubar">
     <div class="site-menubar-body">
@@ -176,7 +177,22 @@
               </ul>
             </li>
 
+            <li class="site-menu-item has-sub">
+              <a href="javascript:void(0)">
+                <i class="site-menu-icon md-power" aria-hidden="true"></i>
+                <span class="site-menu-title"><?= Html::beginForm(['/site/logout'], 'post'); ?>
+              <?= Html::submitButton(
+                  'Logout',
 
+                  ['class' => 'dropdown-item waves-effect waves-light waves-round logout',
+                  ]
+              ); ?>
+              
+              <?= Html::endForm(); ?>
+                
+              </span>
+              </a>
+            </li>
 
           </ul>
         </div>
