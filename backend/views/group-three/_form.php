@@ -3,6 +3,9 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use yii\helpers\ArrayHelper;
+use backend\models\GroupTwo;
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\GroupThree */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,7 +15,16 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'group_two_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+
+    <div class="form-group form-material" data-plugin="formMaterial">
+
+		<?= $form->field($model, 'group_two_id')
+	                ->dropDownList(
+	                    ArrayHelper::map(GroupTwo::find()->all(), 'id', 'title'),
+	                     ['prompt'=>'-Select-','class'=>'form-control']
+	                ); ?>
+
+    </div>
 
     <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 

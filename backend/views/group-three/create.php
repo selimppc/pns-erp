@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	    	<?= $this->render('_form', [
 			        'model' => $model,
+              'group_two_data' => $group_two_data
 			    ]) ?>
 
 	    </div>

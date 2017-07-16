@@ -45,7 +45,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'group_two_id',
+            [
+               'label'=>'Group Two',
+               'format' => 'raw',
+               'value'=>function ($data) {
+                    return $data->groupTwo->title;
+                },
+            ],
             'title',
             'description:ntext',
             //'created_by',

@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use backend\models\GroupOne;
 
 /**
  * This is the model class for table "{{%group_two}}".
@@ -36,6 +37,8 @@ class GroupTwo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['group_one_id','title'],'required'],
+            [['title'],'unique'],
             [['group_one_id', 'created_by', 'updated_by'], 'integer'],
             [['description'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
@@ -51,7 +54,7 @@ class GroupTwo extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'group_one_id' => Yii::t('app', 'Group One ID'),
+            'group_one_id' => Yii::t('app', 'Group One'),
             'title' => Yii::t('app', 'Title'),
             'description' => Yii::t('app', 'Description'),
             'created_by' => Yii::t('app', 'Created By'),

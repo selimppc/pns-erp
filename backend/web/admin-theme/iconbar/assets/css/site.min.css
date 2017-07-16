@@ -31,3 +31,7 @@
 .list-icons>li i{
 	margin: 0 !important;
 }
+
+.help-block{
+	color: red;
+}

@@ -5,9 +5,11 @@ namespace backend\controllers;
 use Yii;
 use backend\models\GroupTwo;
 use backend\models\GroupTwoSearch;
+use backend\models\GroupOne;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * GroupTwoController implements the CRUD actions for GroupTwo model.
@@ -65,11 +67,14 @@ class GroupTwoController extends Controller
     {
         $model = new GroupTwo();
 
+        $group_one_data = ArrayHelper::map(GroupOne::find()->all(), 'id', 'title');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'group_one_data' => $group_one_data
             ]);
         }
     }
@@ -84,11 +89,14 @@ class GroupTwoController extends Controller
     {
         $model = $this->findModel($id);
 
+        $group_one_data = ArrayHelper::map(GroupOne::find()->all(), 'id', 'title');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'group_one_data' => $group_one_data
             ]);
         }
     }

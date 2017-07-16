@@ -47,7 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'group_two_id',
+                     [
+                        'label'  => 'Group Two',
+                        'value'  => $model->groupTwo->title
+                    ],
                     'title',
                     'description:ntext',
                     'created_by',

@@ -4,10 +4,12 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\GroupThree;
+use backend\models\GroupTwo;
 use backend\models\GroupThreeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * GroupThreeController implements the CRUD actions for GroupThree model.
@@ -65,11 +67,14 @@ class GroupThreeController extends Controller
     {
         $model = new GroupThree();
 
+        $group_two_data = ArrayHelper::map(GroupTwo::find()->all(), 'id', 'title');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'group_two_data' => $group_two_data
             ]);
         }
     }

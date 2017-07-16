@@ -35,6 +35,8 @@ class GroupFour extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['group_three_id','title'],'required'],
+            [['title'],'unique'],
             [['group_three_id', 'created_by', 'updated_by'], 'integer'],
             [['description'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
@@ -50,7 +52,7 @@ class GroupFour extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'group_three_id' => Yii::t('app', 'Group Three ID'),
+            'group_three_id' => Yii::t('app', 'Group Three'),
             'title' => Yii::t('app', 'Title'),
             'description' => Yii::t('app', 'Description'),
             'created_by' => Yii::t('app', 'Created By'),

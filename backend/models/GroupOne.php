@@ -35,6 +35,8 @@ class GroupOne extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['title'],'required'],
+            [['title'],'unique'],
             [['description'], 'string'],
             [['create_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],

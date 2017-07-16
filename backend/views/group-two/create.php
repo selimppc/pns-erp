@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>     
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create User'), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage Users'), ['index'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create Group Two'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Group Two'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	    	<?= $this->render('_form', [
 			        'model' => $model,
+              'group_one_data' => $group_one_data
 			    ]) ?>
 
 	    </div>
