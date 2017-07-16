@@ -68,6 +68,8 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['product_code','title','class','group','currency_id','model','size','origin','sell_rate','cost_price','sell_uom','sell_uom_qty','stock_uom','stock_uom_qty','stock_type','supplier_id'],'required'],
+            [['product_code'],'unique'],
             [['description'], 'string'],
             [['class', 'group', 'category', 'currency_id', 'supplier_id', 'created_by', 'updated_by'], 'integer'],
             [['exchange_rate', 'sell_rate', 'cost_price', 'sell_uom_qty', 'purchase_uom_qty', 'sell_tax', 'stock_uom_qty'], 'number'],
@@ -96,7 +98,7 @@ class Product extends \yii\db\ActiveRecord
             'class' => Yii::t('app', 'Class'),
             'group' => Yii::t('app', 'Group'),
             'category' => Yii::t('app', 'Category'),
-            'currency_id' => Yii::t('app', 'Currency ID'),
+            'currency_id' => Yii::t('app', 'Currency'),
             'model' => Yii::t('app', 'Model'),
             'size' => Yii::t('app', 'Size'),
             'origin' => Yii::t('app', 'Origin'),
@@ -113,7 +115,7 @@ class Product extends \yii\db\ActiveRecord
             'pack_size' => Yii::t('app', 'Pack Size'),
             'stock_type' => Yii::t('app', 'Stock Type'),
             'generic' => Yii::t('app', 'Generic'),
-            'supplier_id' => Yii::t('app', 'Supplier ID'),
+            'supplier_id' => Yii::t('app', 'Supplier'),
             'manufacture_code' => Yii::t('app', 'Manufacture Code'),
             'max_level' => Yii::t('app', 'Max Level'),
             'min_level' => Yii::t('app', 'Min Level'),

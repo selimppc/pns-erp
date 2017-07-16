@@ -34,7 +34,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'web_url',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+    <div class="form-group form-material" data-plugin="formMaterial">
+
+        <?= $form->field($model, 'status')
+                    ->dropDownList(
+                        array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                        array ('class'=>'form-control') 
+                    ); ?>
+
+    </div>
 
     
 

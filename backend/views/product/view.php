@@ -60,7 +60,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'class',
             'group',
             'category',
-            'currency_id',
+            [
+                'label'  => 'Currency',
+                'value'  => $model->currency->title
+            ],
             'model',
             'size',
             'origin',
@@ -77,7 +80,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'pack_size',
             'stock_type',
             'generic',
-            'supplier_id',
+            [
+                'label'  => 'Supplier',
+                'value'  => $model->supplier->supplier_code
+            ],
             'manufacture_code',
             'max_level',
             'min_level',

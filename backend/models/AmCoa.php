@@ -55,6 +55,8 @@ class AmCoa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['account_code','title','account_type','group_one_id','group_two_id','group_three_id','group_four_id','branch_id','status'],'required'],
+            [['account_code'],'unique'],
             [['description'], 'string'],
             [['group_one_id', 'group_two_id', 'group_three_id', 'group_four_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
@@ -80,12 +82,12 @@ class AmCoa extends \yii\db\ActiveRecord
             'description' => Yii::t('app', 'Description'),
             'account_type' => Yii::t('app', 'Account Type'),
             'account_usage' => Yii::t('app', 'Account Usage'),
-            'group_one_id' => Yii::t('app', 'Group One ID'),
-            'group_two_id' => Yii::t('app', 'Group Two ID'),
-            'group_three_id' => Yii::t('app', 'Group Three ID'),
-            'group_four_id' => Yii::t('app', 'Group Four ID'),
+            'group_one_id' => Yii::t('app', 'Group One'),
+            'group_two_id' => Yii::t('app', 'Group Two'),
+            'group_three_id' => Yii::t('app', 'Group Three'),
+            'group_four_id' => Yii::t('app', 'Group Four'),
             'analyical_code' => Yii::t('app', 'Analyical Code'),
-            'branch_id' => Yii::t('app', 'Branch ID'),
+            'branch_id' => Yii::t('app', 'Branch'),
             'status' => Yii::t('app', 'Status'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),

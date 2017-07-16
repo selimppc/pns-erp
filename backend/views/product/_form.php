@@ -3,6 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use yii\helpers\ArrayHelper;
+use backend\models\Currency;
+use backend\models\Supplier;
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\Product */
 /* @var $form yii\widgets\ActiveForm */
@@ -28,8 +32,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'category',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
 
-    <?= $form->field($model, 'currency_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+    <div class="form-group form-material" data-plugin="formMaterial">
 
+        <?= $form->field($model, 'currency_id')
+                    ->dropDownList(
+                        ArrayHelper::map(Currency::find()->all(), 'id', 'title'),
+                         ['prompt'=>'-Select-','class'=>'form-control']
+                    ); ?>
+
+    </div>
+    
     <?= $form->field($model, 'model',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'size',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
@@ -62,7 +74,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'generic',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'supplier_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+    <div class="form-group form-material" data-plugin="formMaterial">
+
+        <?= $form->field($model, 'supplier_id')
+                    ->dropDownList(
+                        ArrayHelper::map(Supplier::find()->all(), 'id', 'supplier_code'),
+                         ['prompt'=>'-Select-','class'=>'form-control']
+                    ); ?>
+
+    </div>
 
     <?= $form->field($model, 'manufacture_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 

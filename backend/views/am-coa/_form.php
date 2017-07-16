@@ -3,6 +3,13 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use yii\helpers\ArrayHelper;
+use backend\models\GroupOne;
+use backend\models\GroupTwo;
+use backend\models\GroupThree;
+use backend\models\GroupFour;
+use backend\models\Branch;
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\AmCoa */
 /* @var $form yii\widgets\ActiveForm */
@@ -22,19 +29,67 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'account_usage',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'group_one_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+    <div class="form-group form-material" data-plugin="formMaterial">
 
-    <?= $form->field($model, 'group_two_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+        <?= $form->field($model, 'group_one_id')
+                    ->dropDownList(
+                        ArrayHelper::map(GroupOne::find()->all(), 'id', 'title'),
+                         ['prompt'=>'-Select-','class'=>'form-control']
+                    ); ?>
 
-    <?= $form->field($model, 'group_three_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+    </div>
 
-    <?= $form->field($model, 'group_four_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+    <div class="form-group form-material" data-plugin="formMaterial">
+
+        <?= $form->field($model, 'group_two_id')
+                    ->dropDownList(
+                        ArrayHelper::map(GroupTwo::find()->all(), 'id', 'title'),
+                         ['prompt'=>'-Select-','class'=>'form-control']
+                    ); ?>
+
+    </div>
+
+    <div class="form-group form-material" data-plugin="formMaterial">
+
+        <?= $form->field($model, 'group_three_id')
+                    ->dropDownList(
+                        ArrayHelper::map(GroupThree::find()->all(), 'id', 'title'),
+                         ['prompt'=>'-Select-','class'=>'form-control']
+                    ); ?>
+
+    </div>
+
+    <div class="form-group form-material" data-plugin="formMaterial">
+
+        <?= $form->field($model, 'group_four_id')
+                    ->dropDownList(
+                        ArrayHelper::map(GroupFour::find()->all(), 'id', 'title'),
+                         ['prompt'=>'-Select-','class'=>'form-control']
+                    ); ?>
+
+    </div>
 
     <?= $form->field($model, 'analyical_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'branch_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+    <div class="form-group form-material" data-plugin="formMaterial">
 
-    <?= $form->field($model, 'status',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'branch_id')
+                    ->dropDownList(
+                        ArrayHelper::map(Branch::find()->all(), 'id', 'title'),
+                         ['prompt'=>'-Select-','class'=>'form-control']
+                    ); ?>
+
+    </div>
+
+    <div class="form-group form-material" data-plugin="formMaterial">
+
+        <?= $form->field($model, 'status')
+                    ->dropDownList(
+                        array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                        array ('class'=>'form-control') 
+                    ); ?>
+
+    </div>
 
 
     <div class="form-group">

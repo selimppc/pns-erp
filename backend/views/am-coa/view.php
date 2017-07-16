@@ -57,12 +57,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'account_type',
             'account_usage',
-            'group_one_id',
-            'group_two_id',
-            'group_three_id',
-            'group_four_id',
+            [
+                'label'  => 'Group One',
+                'value'  => $model->groupOne->title
+            ],
+            [
+                'label'  => 'Group Two',
+                'value'  => $model->groupTwo->title
+            ],
+            [
+                'label'  => 'Group Three',
+                'value'  => $model->groupThree->title
+            ],
+           [
+                'label'  => 'Group Four',
+                'value'  => $model->groupFour->title
+            ],
             'analyical_code',
-            'branch_id',
+            [
+                'label'  => 'Branch',
+                'value'  => $model->branch->title
+            ],
             'status',
             'created_by',
             'updated_by',
