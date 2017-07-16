@@ -30,7 +30,7 @@
                   </a>
                 </li>   
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/user/index']); ?>">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/user']); ?>">
                     <span class="site-menu-title">User</span>
                   </a>
                 </li>              
@@ -62,7 +62,7 @@
                 </li>  
 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/customer']); ?>">
                     <span class="site-menu-title">Customer Master</span>
                   </a>
                 </li>  

@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <header class="panel-heading">
             <div class="panel-actions"></div>
-            <h3 class="panel-title">Update :: <?= Html::encode($this->title) ?></h3>
+            <h3 class="panel-title">View :: <?= Html::encode($this->title) ?></h3>
         </header>
 
         <div class="panel-body">
