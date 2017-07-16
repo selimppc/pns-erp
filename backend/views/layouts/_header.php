@@ -50,166 +50,147 @@
           </li>
           <li class="nav-item dropdown dropdown-fw dropdown-mega">
             <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="fade"
-            role="button">Mega <i class="icon md-chevron-down" aria-hidden="true"></i></a>
+            role="button">HW Menu <i class="icon md-chevron-down" aria-hidden="true"></i></a>
             <div class="dropdown-menu" role="menu">
               <div class="mega-content">
                 <div class="row">
-                  <div class="col-md-4">
-                    <h5>UI Kit</h5>
+                  <div class="col-md-2">
+                    <h5>Administration</h5>
                     <ul class="blocks-2">
                       <li class="mega-menu m-0">
                         <ul class="list-icons">
                           <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="advanced/animation.html">Animation</a>
+                            <a href="#" >Company Profile</a>
                           </li>
                           <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="uikit/buttons.html">Buttons</a>
+                            <a href="#">Roles</a>
                           </li>
                           <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="uikit/colors.html">Colors</a>
+                            <a href="<?= Url::toRoute(['/user']); ?>">User</a>
                           </li>
-                          <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="uikit/dropdowns.html">Dropdowns</a>
-                          </li>
-                          <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="uikit/icons.html">Icons</a>
-                          </li>
-                          <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="advanced/lightbox.html">Lightbox</a>
-                          </li>
+                       
                         </ul>
                       </li>
+                     
+                    </ul>
+                  </div>
+
+                  <div class="col-md-2">
+                    <h5>Master Setup</h5>
+                    <ul class="blocks-2">
                       <li class="mega-menu m-0">
                         <ul class="list-icons">
                           <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="uikit/modals.html">Modals</a>
+                            <a href="<?= Url::toRoute(['/product']); ?>" >Product Master</a>
                           </li>
                           <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="uikit/panel-structure.html">Panels</a>
+                            <a href="#">Service Master</a>
                           </li>
                           <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="structure/overlay.html">Overlay</a>
+                            <a href="<?= Url::toRoute(['/supplier']); ?>">Supplier Master</a>
+                          </li>
+                           <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="<?= Url::toRoute(['/customer']); ?>">Customer Master</a>
                           </li>
                           <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="uikit/tooltip-popover.html ">Tooltips</a>
+                            <a href="<?= Url::toRoute(['/branch']); ?>">Branch Master</a>
                           </li>
                           <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="advanced/scrollable.html">Scrollable</a>
+                            <a href="<?= Url::toRoute(['/currency']); ?>">Currency Master</a>
                           </li>
                           <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a
-                            href="uikit/typography.html">Typography</a>
+                            <a href="<?= Url::toRoute(['/settings']); ?>">Settings</a>
                           </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">Reports</a>
+                          </li>
+                       
                         </ul>
                       </li>
+                     
                     </ul>
                   </div>
-                  <div class="col-md-4">
-                    <h5>Media
-                      <span class="badge badge-pill badge-success">4</span>
-                    </h5>
-                    <ul class="blocks-3">
-                      <li>
-                        <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="<?=Url::base('')?>/admin-theme/global/photos/placeholder.png" alt="..." />
-                        </a>
+
+                  <div class="col-md-2">
+                    <h5>General Ledger</h5>
+                    <ul class="blocks-1">
+                      <li class="mega-menu m-0">
+                        <ul class="list-icons">
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="<?= Url::toRoute(['/am-coa']); ?>" >Chart of Accounts</a>
+                          </li>
+                       
+                        </ul>
                       </li>
-                      <li>
-                        <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="<?=Url::base('')?>/admin-theme/global/photos/placeholder.png" alt="..." />
-                        </a>
-                      </li>
-                      <li>
-                        <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="<?=Url::base('')?>/admin-theme/global/photos/placeholder.png" alt="..." />
-                        </a>
-                      </li>
-                      <li>
-                        <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="<?=Url::base('')?>/admin-theme/global/photos/placeholder.png" alt="..." />
-                        </a>
-                      </li>
-                      <li>
-                        <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="<?=Url::base('')?>/admin-theme/global/photos/placeholder.png" alt="..." />
-                        </a>
-                      </li>
-                      <li>
-                        <a class="thumbnail m-0" href="javascript:void(0)">
-                          <img class="w-full" src="<?=Url::base('')?>/admin-theme/global/photos/placeholder.png" alt="..." />
-                        </a>
-                      </li>
+                     
                     </ul>
                   </div>
-                  <div class="col-md-4">
-                    <h5 class="mb-0">Accordion</h5>
-                    <!-- Accordion -->
-                    <div class="panel-group panel-group-simple" id="siteMegaAccordion" aria-multiselectable="true"
-                    role="tablist">
-                      <div class="panel">
-                        <div class="panel-heading" id="siteMegaAccordionHeadingOne" role="tab">
-                          <a class="panel-title" data-toggle="collapse" href="#siteMegaCollapseOne" data-parent="#siteMegaAccordion"
-                          aria-expanded="false" aria-controls="siteMegaCollapseOne">
-                              Collapsible Group Item #1
-                            </a>
-                        </div>
-                        <div class="panel-collapse collapse" id="siteMegaCollapseOne" aria-labelledby="siteMegaAccordionHeadingOne"
-                        role="tabpanel">
-                          <div class="panel-body">
-                            De moveat laudatur vestra parum doloribus labitur sentire partes, eripuit praesenti
-                            congressus ostendit alienae, voluptati ornateque accusamus
-                            clamat reperietur convicia albucius.
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel">
-                        <div class="panel-heading" id="siteMegaAccordionHeadingTwo" role="tab">
-                          <a class="panel-title collapsed" data-toggle="collapse" href="#siteMegaCollapseTwo"
-                          data-parent="#siteMegaAccordion" aria-expanded="false"
-                          aria-controls="siteMegaCollapseTwo">
-                              Collapsible Group Item #2
-                            </a>
-                        </div>
-                        <div class="panel-collapse collapse" id="siteMegaCollapseTwo" aria-labelledby="siteMegaAccordionHeadingTwo"
-                        role="tabpanel">
-                          <div class="panel-body">
-                            Praestabiliorem. Pellat excruciant legantur ullum leniter vacare foris voluptate
-                            loco ignavi, credo videretur multoque choro fatemur
-                            mortis animus adoptionem, bello statuat expediunt naturales.
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel">
-                        <div class="panel-heading" id="siteMegaAccordionHeadingThree" role="tab">
-                          <a class="panel-title collapsed" data-toggle="collapse" href="#siteMegaCollapseThree"
-                          data-parent="#siteMegaAccordion" aria-expanded="false"
-                          aria-controls="siteMegaCollapseThree">
-                              Collapsible Group Item #3
-                            </a>
-                        </div>
-                        <div class="panel-collapse collapse" id="siteMegaCollapseThree" aria-labelledby="siteMegaAccordionHeadingThree"
-                        role="tabpanel">
-                          <div class="panel-body">
-                            Horum, antiquitate perciperet d conspectum locus obruamus animumque perspici probabis
-                            suscipere. Desiderat magnum, contenta poena desiderant
-                            concederetur menandri damna disputandum corporum.
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- End Accordion -->
+
+                  <div class="col-md-2">
+                    <h5>Purchase</h5>
+                    <ul class="blocks-1">
+                      <li class="mega-menu m-0">
+                        <ul class="list-icons">
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#" >Requisition</a>
+                          </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">Purchase Order</a>
+                          </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">Settings</a>
+                          </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">Reports</a>
+                          </li>
+                       
+                        </ul>
+                      </li>
+                     
+                    </ul>
                   </div>
+
+                  <div class="col-md-2">
+                    <h5>Inventory</h5>
+                    <ul class="blocks-2">
+                      <li class="mega-menu m-0">
+                        <ul class="list-icons">
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#" >GRN</a>
+                          </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">Stock View</a>
+                          </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">Stock Transfer</a>
+                          </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">Stock Receive</a>
+                          </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">Stock Adjustment</a>
+                          </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">Delivery Order</a>
+                          </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">IM to GL Interface</a>
+                          </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">Settings</a>
+                          </li>
+                          <li><i class="md-chevron-right" aria-hidden="true"></i>
+                            <a href="#">Reports</a>
+                          </li>
+                       
+                        </ul>
+                      </li>
+                     
+                    </ul>
+                  </div>
+
+
+                
                 </div>
               </div>
             </div>

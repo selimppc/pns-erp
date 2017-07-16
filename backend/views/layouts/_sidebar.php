@@ -68,13 +68,13 @@
                 </li>  
 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/branch']); ?>">
                     <span class="site-menu-title">Branch Master</span>
                   </a>
                 </li>  
 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/currency']); ?>">
                     <span class="site-menu-title">Currency Master</span>
                   </a>
                 </li>  

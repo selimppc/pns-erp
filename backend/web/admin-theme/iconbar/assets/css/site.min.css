@@ -27,3 +27,7 @@
     float: left;
     margin-right: 1%;
 }
+
+.list-icons>li i{
+	margin: 0 !important;
+}
