@@ -50,6 +50,9 @@ class Customer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['customer_code','name','group_one_id','phone','email','branch_id','status'],'required'],
+            [['customer_code'],'unique'],
+            [['email'],'email'],
             [['address'], 'string'],
             [['group_one_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['credit_limit'], 'number'],
@@ -74,13 +77,13 @@ class Customer extends \yii\db\ActiveRecord
             'api_id' => Yii::t('app', 'Api ID'),
             'address' => Yii::t('app', 'Address'),
             'terotorry' => Yii::t('app', 'Terotorry'),
-            'group_one_id' => Yii::t('app', 'Group One ID'),
+            'group_one_id' => Yii::t('app', 'Group One'),
             'type' => Yii::t('app', 'Type'),
             'cell' => Yii::t('app', 'Cell'),
             'phone' => Yii::t('app', 'Phone'),
             'fax' => Yii::t('app', 'Fax'),
             'email' => Yii::t('app', 'Email'),
-            'branch_id' => Yii::t('app', 'Branch ID'),
+            'branch_id' => Yii::t('app', 'Branch'),
             'market' => Yii::t('app', 'Market'),
             'sales_person' => Yii::t('app', 'Sales Person'),
             'credit_limit' => Yii::t('app', 'Credit Limit'),

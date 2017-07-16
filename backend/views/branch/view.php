@@ -54,7 +54,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'branch_code',
             'title',
-            'currency_id',
+            [
+                'label'  => 'Currency',
+                'value'  => $model->currency->title
+            ],
             'exchange_rate',
             'contact_person',
             'designation',

@@ -3,6 +3,8 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use yii\helpers\ArrayHelper;
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\Currency */
 /* @var $form yii\widgets\ActiveForm */
@@ -18,7 +20,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+    <div class="form-group form-material" data-plugin="formMaterial">
+
+    	<?= $form->field($model, 'status')
+                    ->dropDownList(
+                        array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                        array ('class'=>'form-control') 
+                    ); ?>
+
+    </div>
 
    
 

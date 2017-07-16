@@ -57,13 +57,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     'api_id',
                     'address:ntext',
                     'terotorry',
-                    'group_one_id',
+                     [
+                        'label'  => 'Group One',
+                        'value'  => $model->groupOne->title
+                    ],
                     'type',
                     'cell',
                     'phone',
                     'fax',
                     'email:email',
-                    'branch_id',
+                    [
+                        'label'  => 'Branch',
+                        'value'  => $model->branch->title
+                    ],
                     'market',
                     'sales_person',
                     'credit_limit',

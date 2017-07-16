@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use backend\models\Currency;
 
 /**
  * This is the model class for table "{{%company}}".
@@ -34,6 +35,8 @@ class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['title'],'required'],
+            [['title'],'unique'],
             [['description'], 'string'],
             [['created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
@@ -69,5 +72,13 @@ class Company extends \yii\db\ActiveRecord
     public static function find()
     {
         return new CompanyQuery(get_called_class());
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCurrency()
+    {
+        return $this->hasOne(Currency::className(), ['id' => 'currency_id']);
     }
 }

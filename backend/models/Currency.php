@@ -42,6 +42,8 @@ class Currency extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['currency_code','title','status'],'required'],
+            [['currency_code'],'unique'],
             [['exchange_rate'], 'number'],
             [['created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],

@@ -55,6 +55,8 @@ class Branch extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['branch_code','title','currency_id','exchange_rate','contact_person','designation','mailing_addess','phone','status'],'required'],
+            [['title'],'unique'],
             [['currency_id', 'created_by', 'updated_by'], 'integer'],
             [['exchange_rate'], 'number'],
             [['mailing_addess'], 'string'],

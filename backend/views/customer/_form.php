@@ -3,6 +3,10 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use yii\helpers\ArrayHelper;
+use backend\models\GroupOne;
+use backend\models\Branch;
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\Customer */
 /* @var $form yii\widgets\ActiveForm */
@@ -22,7 +26,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'terotorry',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'group_one_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+    <div class="form-group form-material" data-plugin="formMaterial">
+
+        <?= $form->field($model, 'group_one_id')
+                    ->dropDownList(
+                        ArrayHelper::map(GroupOne::find()->all(), 'id', 'title'),
+                         ['prompt'=>'-Select-','class'=>'form-control']
+                    ); ?>
+
+    </div>
 
     <?= $form->field($model, 'type',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
@@ -34,7 +46,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'branch_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+
+    <div class="form-group form-material" data-plugin="formMaterial">
+
+        <?= $form->field($model, 'branch_id')
+                    ->dropDownList(
+                        ArrayHelper::map(Branch::find()->all(), 'id', 'title'),
+                         ['prompt'=>'-Select-','class'=>'form-control']
+                    ); ?>
+
+    </div>
 
     <?= $form->field($model, 'market',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
@@ -44,7 +65,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'hub',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+    <div class="form-group form-material" data-plugin="formMaterial">
+
+        <?= $form->field($model, 'status')
+                    ->dropDownList(
+                        array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                        array ('class'=>'form-control') 
+                    ); ?>
+
+    </div>
 
     
 
