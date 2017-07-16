@@ -30,7 +30,7 @@
                   </a>
                 </li>   
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/user/index']); ?>">
                     <span class="site-menu-title">User</span>
                   </a>
                 </li>              
@@ -51,41 +51,41 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="layouts/grids.html">
+                  <a class="animsition-link" href="#">
                     <span class="site-menu-title">Service Master</span>
                   </a>
                 </li>     
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="layouts/grids.html">
+                  <a class="animsition-link" href="#">
                     <span class="site-menu-title">Supplier Master</span>
                   </a>
                 </li>  
 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="layouts/grids.html">
+                  <a class="animsition-link" href="#">
                     <span class="site-menu-title">Customer Master</span>
                   </a>
                 </li>  
 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="layouts/grids.html">
+                  <a class="animsition-link" href="#">
                     <span class="site-menu-title">Branch Master</span>
                   </a>
                 </li>  
 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="layouts/grids.html">
+                  <a class="animsition-link" href="#">
                     <span class="site-menu-title">Currency Master</span>
                   </a>
                 </li>  
 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="layouts/grids.html">
+                  <a class="animsition-link" href="#">
                     <span class="site-menu-title">Settings</span>
                   </a>
                 </li>  
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="layouts/grids.html">
+                  <a class="animsition-link" href="#">
                     <span class="site-menu-title">Reports</span>
                   </a>
                 </li>             
