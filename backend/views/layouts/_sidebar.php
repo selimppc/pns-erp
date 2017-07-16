@@ -46,7 +46,7 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/product/index']); ?>">
                     <span class="site-menu-title">Product Master</span>
                   </a>
                 </li>

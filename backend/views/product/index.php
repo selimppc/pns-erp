@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
@@ -10,32 +11,52 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('app', 'Products');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<div class="page-header">
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item active">Product</li>
+      </ol>
+     
+      <div class="middle-menu-bar">
+        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Products'), ['index'], ['class' => '']) ?>   
+        <?php
+          echo \yii\helpers\Html::a( 'Back', Yii::$app->request->referrer,['class' => 'back']);
+        ?>    
+      </div>
+</div>
+
+<div class="page-content">
+    <!-- Panel Basic -->
+    <div class="panel">
+
+      <header class="panel-heading">
+        <div class="panel-actions"></div>
+        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
+      </header>
+
+      <div class="panel-body">
+
+        <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            #'id',
             'product_code',
             'title',
-            'description:ntext',
-            'image',
+           # 'description:ntext',
+           # 'image',
             // 'thumb_image',
-            // 'class',
-            // 'group',
+             'class',
+             'group',
             // 'category',
             // 'currency_id',
-            // 'model',
-            // 'size',
+             'model',
+             'size',
             // 'origin',
             // 'exchange_rate',
             // 'sell_rate',
@@ -63,4 +84,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+<?php Pjax::end(); ?>
+
+      </div>
+
+    </div>
+
+</div>
+
