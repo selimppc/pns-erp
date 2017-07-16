@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $model app\models\User */
 
 $this->title = Yii::t('app', 'Create User');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', '<?= Html::encode($this->title) ?>'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -16,14 +16,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
-        <li class="breadcrumb-item active">Users</li>
+        <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>     
      
       <div class="middle-menu-bar">
         <?= Html::a(Yii::t('app', 'Create User'), ['create'], ['class' => '']) ?>   
         <?= Html::a(Yii::t('app', 'Manage Users'), ['index'], ['class' => '']) ?>   
         <?php
-          echo \yii\helpers\Html::a( 'Back', Yii::$app->request->referrer,['class' => 'back']);
+          echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
       </div>
 </div>
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			    ]) ?>
 
 	    </div>
-
+     </div> 
 </div>
      
       	

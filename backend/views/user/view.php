@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
-        <li class="breadcrumb-item active">Users</li>
+        <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
       
      
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]) ?>
         <?php
-          echo \yii\helpers\Html::a( 'Back', Yii::$app->request->referrer,['class' => 'back']);
+          echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
       </div>
 </div>
@@ -42,12 +42,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-    <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title">Update :: <?= Html::encode($this->title) ?></h3>
-    </header>
-     
-    <div class="panel-body">
+        <header class="panel-heading">
+            <div class="panel-actions"></div>
+            <h3 class="panel-title">View :: <?= Html::encode($this->title) ?></h3>
+        </header>
+         
+        <div class="panel-body">
 
 
         <?= DetailView::widget([
@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
 
+        </div>
+
     </div>
-
 </div>
-

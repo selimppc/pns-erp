@@ -1,5 +1,5 @@
 <?php
-
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -10,29 +10,55 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('app', 'Group Ones');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="group-one-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<div class="page-header">
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Group One'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
+      </ol>
+     
+      <div class="middle-menu-bar">
+        <?= Html::a(Yii::t('app', 'Create Group One'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Group Ones'), ['index'], ['class' => '']) ?>   
+        <?php
+          echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
+        ?>    
+      </div>
+</div>
 
-            'id',
-            'title',
-            'description:ntext',
-            'create_by',
-            'updated_by',
-            // 'created_at',
-            // 'updated_at',
+<div class="page-content">
+    <!-- Panel Basic -->
+    <div class="panel">
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-<?php Pjax::end(); ?></div>
+      <header class="panel-heading">
+        <div class="panel-actions"></div>
+        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
+      </header>
+     
+        <div class="panel-body">
+
+            <?php Pjax::begin(); ?>    <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+
+                   // 'id',
+                    'title',
+                    'description:ntext',
+                   // 'create_by',
+                    //'updated_by',
+                    // 'created_at',
+                    // 'updated_at',
+
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
+        <?php Pjax::end(); ?>
+
+        </div>
+    </div>
+</div>
+
+
