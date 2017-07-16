@@ -39,14 +39,14 @@
               </ul>
             </li>
             
-             <li class="site-menu-item has-sub">
+            <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
                 <i class="site-menu-icon md-settings" aria-hidden="true"></i>
                 <span class="site-menu-title">Master Setup</span>
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/product/index']); ?>">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/product']); ?>">
                     <span class="site-menu-title">Product Master</span>
                   </a>
                 </li>
@@ -56,7 +56,7 @@
                   </a>
                 </li>     
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/supplier']); ?>">
                     <span class="site-menu-title">Supplier Master</span>
                   </a>
                 </li>  
@@ -91,6 +91,20 @@
                 </li>             
                 
                 
+              </ul>
+            </li>
+
+            <li class="site-menu-item has-sub">
+              <a href="javascript:void(0)">
+                <i class="site-menu-icon md-border-all" aria-hidden="true"></i>
+                <span class="site-menu-title">General Ledger</span>
+              </a>
+              <ul class="site-menu-sub">
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/am-coa']); ?>">
+                    <span class="site-menu-title">Chart of Accounts</span>
+                  </a>
+                </li>
               </ul>
             </li>
 
