@@ -80,7 +80,7 @@
                 </li>  
 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/settings']); ?>">
                     <span class="site-menu-title">Settings</span>
                   </a>
                 </li>  

@@ -21,3 +21,9 @@
     color: #fff;
     border-radius: 4px;
 }
+
+.setting-column{
+	width: 32%;
+    float: left;
+    margin-right: 1%;
+}
