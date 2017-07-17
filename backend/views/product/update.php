@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
         <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => '']) ?>   
         <?= Html::a(Yii::t('app', 'Manage Products'), ['index'], ['class' => '']) ?>   
         <?php
-          echo \yii\helpers\Html::a( 'Back', Yii::$app->request->referrer,['class' => 'back']);
+          echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
       </div>
 </div>

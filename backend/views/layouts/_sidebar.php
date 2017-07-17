@@ -25,7 +25,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/rbac/role']); ?>">
                     <span class="site-menu-title">Roles</span>
                   </a>
                 </li>   
@@ -49,12 +49,7 @@
                   <a class="animsition-link" href="<?= Url::toRoute(['/product']); ?>">
                     <span class="site-menu-title">Product Master</span>
                   </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
-                    <span class="site-menu-title">Service Master</span>
-                  </a>
-                </li>     
+                </li>    
                 <li class="site-menu-item">
                   <a class="animsition-link" href="<?= Url::toRoute(['/supplier']); ?>">
                     <span class="site-menu-title">Supplier Master</span>

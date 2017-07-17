@@ -4,7 +4,7 @@
 .middle-menu-bar{
 	width: 100%;
 	display: inline-block;
-	background-color: #3f51b5;
+	background-color: #4085BB;
 	margin-top: 10px;
 	border-radius: 4px;
 }
@@ -15,6 +15,10 @@
     padding: 7px 20px;
     text-shadow: rgba(0,0,0,.15) 0 0 1px;
     display: inline-block;
+}
+
+.middle-menu-bar a:hover{
+	color: rgba(255,255,255,.7);
 }
 
 .middle-menu-bar a.back{
@@ -35,4 +39,13 @@
 
 .help-block{
 	color: red;
+}
+
+.create-role{
+	padding: 0;
+    display: inline-block;
+    margin-top: 0;
+    float: right;
+    font-size: 15px;
+    margin-left: 15px;
 }
