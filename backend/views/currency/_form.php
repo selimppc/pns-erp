@@ -14,21 +14,37 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'currency_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+    <div class="row">
 
-    <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
 
-    <?= $form->field($model, 'exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'currency_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group form-material" data-plugin="formMaterial">
+            <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    	<?= $form->field($model, 'status')
-                    ->dropDownList(
-                        array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
-                        array ('class'=>'form-control') 
-                    ); ?>
+        </div>
 
-    </div>
+        <div class="col-md-6">
+
+            <?= $form->field($model, 'exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'status')
+                            ->dropDownList(
+                                array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                                array ('class'=>'form-control') 
+                            ); ?>
+
+            </div>
+
+        </div>
+
+    </div>    
+
+    
+
+    
 
    
 

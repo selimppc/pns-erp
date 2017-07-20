@@ -15,44 +15,58 @@ use backend\models\Currency;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'branch_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+    <div class="row">
 
-    <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
 
-    <div class="form-group form-material" data-plugin="formMaterial">
+            <?= $form->field($model, 'branch_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'currency_id')
-                    ->dropDownList(
-                        ArrayHelper::map(Currency::find()->all(), 'id', 'title'),
-                         ['prompt'=>'-Select-','class'=>'form-control']
-                    ); ?>
+            <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    </div>
+            <?= $form->field($model, 'exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
 
-    <?= $form->field($model, 'contact_person',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'currency_id')
+                            ->dropDownList(
+                                ArrayHelper::map(Currency::find()->all(), 'id', 'title'),
+                                 ['prompt'=>'-Select-','class'=>'form-control']
+                            ); ?>
 
-    <?= $form->field($model, 'designation',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            </div>
 
-    <?= $form->field($model, 'mailing_addess',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textarea(['rows' => 6]) ?>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
 
-    <?= $form->field($model, 'phone',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'status')
+                            ->dropDownList(
+                                array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                                array ('class'=>'form-control') 
+                            ); ?>
 
-    <?= $form->field($model, 'fax',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            </div>
+            
+        </div>
 
-    <?= $form->field($model, 'cell',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+        <div class="col-md-6">
 
-    <div class="form-group form-material" data-plugin="formMaterial">
+            <?= $form->field($model, 'contact_person',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'status')
-                    ->dropDownList(
-                        array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
-                        array ('class'=>'form-control') 
-                    ); ?>
+            <?= $form->field($model, 'designation',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    </div>
+            <?= $form->field($model, 'mailing_addess',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
+            <?= $form->field($model, 'phone',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'fax',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'cell',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+        </div>
+
+
+    </div>    
+
+    
  
 
     <div class="form-group">

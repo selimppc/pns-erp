@@ -15,19 +15,33 @@ use backend\models\GroupThree;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <div class="form-group form-material" data-plugin="formMaterial">
+    <div class="row">
 
-		<?= $form->field($model, 'group_three_id')
-	                ->dropDownList(
-	                    ArrayHelper::map(GroupThree::find()->all(), 'id', 'title'),
-	                     ['prompt'=>'-Select-','class'=>'form-control']
-	                ); ?>
+        <div class="col-md-6">
 
-    </div>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
 
-    <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'group_three_id')
+                            ->dropDownList(
+                                ArrayHelper::map(GroupThree::find()->all(), 'id', 'title'),
+                                 ['prompt'=>'-Select-','class'=>'form-control']
+                            ); ?>
 
-    <?= $form->field($model, 'description',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textarea(['rows' => 6]) ?>
+            </div>
+
+            <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <?= $form->field($model, 'description',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textarea(['rows' => 4]) ?>
+
+        </div>
+
+    </div>    
+
+    
 
 
     <div class="form-group">

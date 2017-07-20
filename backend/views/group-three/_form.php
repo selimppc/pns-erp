@@ -15,20 +15,32 @@ use backend\models\GroupTwo;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <div class="row">
 
-    <div class="form-group form-material" data-plugin="formMaterial">
+        <div class="col-md-6">
 
-		<?= $form->field($model, 'group_two_id')
-	                ->dropDownList(
-	                    ArrayHelper::map(GroupTwo::find()->all(), 'id', 'title'),
-	                     ['prompt'=>'-Select-','class'=>'form-control']
-	                ); ?>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
 
-    </div>
+                <?= $form->field($model, 'group_two_id')
+                            ->dropDownList(
+                                ArrayHelper::map(GroupTwo::find()->all(), 'id', 'title'),
+                                 ['prompt'=>'-Select-','class'=>'form-control']
+                            ); ?>
 
-    <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            </div>
 
-    <?= $form->field($model, 'description',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <?= $form->field($model, 'description',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textarea(['rows' => 4]) ?>
+
+        </div>
+
+    </div>    
+
 
 
     <div class="form-group">
