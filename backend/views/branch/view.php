@@ -66,10 +66,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'fax',
             'cell',
             'status',
-            'created_by',
-            'updated_by',
-            'created_at',
-            'updated_at',
+           # 'created_by',
+           # 'updated_by',
+            #'created_at',
+            #'updated_at',
         ],
     ]) ?>
 

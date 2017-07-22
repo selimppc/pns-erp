@@ -79,10 +79,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'  => $model->branch->title
             ],
             'status',
-            'created_by',
-            'updated_by',
-            'created_at',
-            'updated_at',
+           # 'created_by',
+           # 'updated_by',
+           # 'created_at',
+            #'updated_at',
         ],
     ]) ?>
 

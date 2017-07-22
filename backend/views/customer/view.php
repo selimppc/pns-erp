@@ -75,10 +75,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'credit_limit',
                     'hub',
                     'status',
-                    'created_by',
-                    'updated_by',
-                    'created_at',
-                    'updated_at',
+                   # 'created_by',
+                    #'updated_by',
+                    #'created_at',
+                    #'updated_at',
                 ],
             ]) ?>
 

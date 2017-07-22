@@ -64,10 +64,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'email:email',
                     'web_url:url',
                     'status',
-                    'created_by',
-                    'updated_by',
-                    'created_at',
-                    'updated_at',
+                   # 'created_by',
+                   # 'updated_by',
+                   # 'created_at',
+                    #'updated_at',
                 ],
             ]) ?>
 
