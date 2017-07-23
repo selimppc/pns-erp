@@ -204,8 +204,8 @@
           <li class="nav-item dropdown">
             <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="scale-up" role="button">
-              <span class="avatar avatar-online">
-                <img src="<?=Url::base('')?>/admin-theme/global/portraits/5.jpg" alt="...">
+              <span class="avatar avatar-online" style="width:60px;margin-top:-5px;">
+                <img src="<?=Url::base('')?>/admin-theme/global/portraits/logo_pns_group.png" alt="...">
                 <i></i>
               </span>
             </a>
