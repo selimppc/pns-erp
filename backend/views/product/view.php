@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'  => 'Supplier',
                 'value'  => $model->supplier->supplier_code
             ],
-            'manufacture_code',
+            'manufacturer_code',
             'max_level',
             'min_level',
             're_order',

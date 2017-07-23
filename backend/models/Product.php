@@ -38,7 +38,7 @@ use yii\behaviors\BlameableBehavior;
  * @property string $stock_type
  * @property string $generic
  * @property integer $supplier_id
- * @property string $manufacture_code
+ * @property string $manufacturer_code
  * @property string $max_level
  * @property string $min_level
  * @property string $re_order
@@ -91,13 +91,13 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_code','title','class','group','currency_id','model','size','origin','sell_rate','cost_price','sell_uom','sell_uom_qty','stock_uom','stock_uom_qty','stock_type','supplier_id'],'required'],
+            [['product_code','title','class','group','currency_id','model','size','origin','sell_rate','cost_price','sell_uom','sell_uom_qty','stock_uom','stock_uom_qty','stock_type','supplier_id','purchase_uom','purchase_uom_qty','category'],'required'],
             [['product_code'],'unique'],
             [['description'], 'string'],
             [['class', 'group', 'category', 'currency_id', 'supplier_id', 'created_by', 'updated_by'], 'integer'],
             [['exchange_rate', 'sell_rate', 'cost_price', 'sell_uom_qty', 'purchase_uom_qty', 'sell_tax', 'stock_uom_qty'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
-            [['product_code', 'manufacture_code'], 'string', 'max' => 16],
+            [['product_code', 'manufacturer_code','manufacturer_year','machine_size','speed'], 'string', 'max' => 16],
             [['title', 'model', 'size', 'origin'], 'string', 'max' => 45],
             [['image', 'thumb_image'], 'string', 'max' => 64],
             [['sell_uom', 'purchase_uom', 'stock_uom', 'pack_size','generic', 'max_level', 'min_level', 're_order'], 'string', 'max' => 8],
@@ -139,7 +139,10 @@ class Product extends \yii\db\ActiveRecord
             'stock_type' => Yii::t('app', 'Product Stock Type'),
             'generic' => Yii::t('app', 'Product Generic'),
             'supplier_id' => Yii::t('app', 'Product Supplier'),
-            'manufacture_code' => Yii::t('app', 'Product Manufacture Code'),
+            'manufacturer_code' => Yii::t('app', 'Product Manufacture Code'),
+            'manufacturer_year' => Yii::t('app','Product Manufacturer Year'),
+            'speed' => Yii::t('app','Product Speed'),
+            'machine_size' => Yii::t('app','Product Machine Size'),
             'max_level' => Yii::t('app', 'Product Max Level'),
             'min_level' => Yii::t('app', 'Product Min Level'),
             're_order' => Yii::t('app', 'Product Re Order'),

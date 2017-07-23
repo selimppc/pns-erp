@@ -67,6 +67,30 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'origin',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
+            <?= $form->field($model, 'manufacturer_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'manufacturer_year',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'speed',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'machine_size',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'generic',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <div class="form-group form-material" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'stock_type')
+                            ->dropDownList(
+                                array ('stock'=>'Stock', 'non'=>'Non Stock'),
+                                array ('class'=>'form-control') 
+                            ); ?>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
             <?= $form->field($model, 'sell_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
@@ -82,11 +106,7 @@ use backend\models\CodesParam;
             <?= $form->field($model, 'sell_uom_qty',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
 
-            <?= $form->field($model, 'sell_tax',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>            
-
-        </div>
-
-        <div class="col-md-6">
+            <?= $form->field($model, 'sell_tax',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?> 
 
             <?= $form->field($model, 'cost_price',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
@@ -127,19 +147,7 @@ use backend\models\CodesParam;
             </div>
 
             <?= $form->field($model, 'exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
-
-            <div class="form-group form-material" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'stock_type')
-                            ->dropDownList(
-                                array ('stock'=>'Stock', 'non'=>'Non Stock'),
-                                array ('class'=>'form-control') 
-                            ); ?>
-
-            </div>
-
-            <?= $form->field($model, 'generic',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
-
+            
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
                 <?= $form->field($model, 'supplier_id')
@@ -149,8 +157,6 @@ use backend\models\CodesParam;
                             ); ?>
 
             </div>
-
-            <?= $form->field($model, 'manufacture_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'max_level',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 

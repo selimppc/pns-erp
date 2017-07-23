@@ -68,7 +68,7 @@ class Supplier extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['supplier_code','org_name','address','contct_person','phone','status'],'required'],
+            [['supplier_code','org_name','address','phone','status'],'required'],
             [['supplier_code'],'unique'],
             [['web_url'],'url'],
             [['address'], 'string'],
