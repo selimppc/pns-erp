@@ -57,9 +57,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'image',
             'thumb_image',
-            'class',
-            'group',
-            'category',
+            [
+                'label'  => 'Product Class',
+                'value'  => $model->product_class->title
+            ],
+            [
+                'label'  => 'Product Group',
+                'value'  => $model->product_group->title
+            ],
+            [
+                'label'  => 'Product Category',
+                'value'  => $model->product_category->title
+            ],           
             [
                 'label'  => 'Currency',
                 'value'  => $model->currency->title
@@ -70,12 +79,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'exchange_rate',
             'sell_rate',
             'cost_price',
-            'sell_uom',
+            [
+                'label'  => 'Product Sell Unit of measurement',
+                'value'  => $model->product_sell_uom->title
+            ],
             'sell_uom_qty',
-            'purchase_uom',
+            [
+                'label'  => 'Product purchase Unit of measurement',
+                'value'  => $model->product_purchase_uom->title
+            ],
             'purchase_uom_qty',
             'sell_tax',
-            'stock_uom',
+            [
+                'label'  => 'Product stock Unit of measurement',
+                'value'  => $model->product_stock_uom->title
+            ],
             'stock_uom_qty',
             'pack_size',
             'stock_type',

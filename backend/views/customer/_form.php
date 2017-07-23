@@ -22,8 +22,6 @@ use backend\models\Branch;
 
             <?= $form->field($model, 'customer_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'api_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
-
             <?= $form->field($model, 'terotorry',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'type',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
@@ -52,15 +50,9 @@ use backend\models\Branch;
 
             <?= $form->field($model, 'hub',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-            <div class="form-group form-material" data-plugin="formMaterial">
+            <?= $form->field($model, 'sales_person',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'status')
-                            ->dropDownList(
-                                array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
-                                array ('class'=>'form-control') 
-                            ); ?>
-
-            </div>
+            <?= $form->field($model, 'credit_limit',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
         </div>
 
@@ -78,9 +70,15 @@ use backend\models\Branch;
 
             <?= $form->field($model, 'email',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'sales_person',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <div class="form-group form-material" data-plugin="formMaterial">
 
-            <?= $form->field($model, 'credit_limit',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'status')
+                            ->dropDownList(
+                                array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                                array ('class'=>'form-control') 
+                            ); ?>
+
+            </div>
 
         </div>
 

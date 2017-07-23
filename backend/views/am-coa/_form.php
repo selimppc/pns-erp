@@ -29,11 +29,35 @@ use backend\models\Branch;
 
             <?= $form->field($model, 'description',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'account_type',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
 
-            <?= $form->field($model, 'account_usage',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'account_type')
+                            ->dropDownList(
+                                array (''=>'','Asset'=>'Asset', 'Liability'=>'Liability','Income' => 'Income','Expenses' => 'Expenses'),
+                                array ('class'=>'form-control') 
+                            ); ?>
 
-            <?= $form->field($model, 'analyical_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            </div>
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'account_usage')
+                            ->dropDownList(
+                                array (''=>'','Ledger'=>'Ledger', 'AP'=>'AP','AR' => 'AR'),
+                                array ('class'=>'form-control') 
+                            ); ?>
+
+            </div>
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'analyical_code')
+                            ->dropDownList(
+                                array (''=>'','Cash'=>'Cash', 'Non-Cash'=>'Non-Cash','Cheque' => 'Cheque','Bankers Draft'=>'Bankers Draft','Wire Transfer'=>'Wire Transfer','Letter of Credit'=>'Letter of Credit','Others'=>'Others'),
+                                array ('class'=>'form-control') 
+                            ); ?>
+
+            </div>
 
         </div>
 

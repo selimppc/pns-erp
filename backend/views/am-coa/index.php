@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\AmCoaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Am Coa');
+$this->title = Yii::t('app', 'Chart of Account');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Am Coa'), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage Am Coa'), ['index'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create Chart of Account'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Chart of Account'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( 'Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    

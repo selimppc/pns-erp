@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\AmCoa */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Am Coas'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Chart of Account'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
       
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Am Coa'), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage Am Coa'), ['index'], ['class' => '']) ?> 
+        <?= Html::a(Yii::t('app', 'Create Chart of Account'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Chart of Account'), ['index'], ['class' => '']) ?> 
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 
          <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [

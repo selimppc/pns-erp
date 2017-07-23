@@ -100,7 +100,7 @@ class Product extends \yii\db\ActiveRecord
             [['product_code', 'manufacture_code'], 'string', 'max' => 16],
             [['title', 'model', 'size', 'origin'], 'string', 'max' => 45],
             [['image', 'thumb_image'], 'string', 'max' => 64],
-            [['sell_uom', 'purchase_uom', 'stock_uom', 'pack_size', 'stock_type', 'generic', 'max_level', 'min_level', 're_order'], 'string', 'max' => 8],
+            [['sell_uom', 'purchase_uom', 'stock_uom', 'pack_size','generic', 'max_level', 'min_level', 're_order'], 'string', 'max' => 8],
             [['currency_id'], 'exist', 'skipOnError' => true, 'targetClass' => Currency::className(), 'targetAttribute' => ['currency_id' => 'id']],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Supplier::className(), 'targetAttribute' => ['supplier_id' => 'id']],
         ];
@@ -114,35 +114,35 @@ class Product extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'product_code' => Yii::t('app', 'Product Code'),
-            'title' => Yii::t('app', 'Title'),
-            'description' => Yii::t('app', 'Description'),
+            'title' => Yii::t('app', 'Product Title'),
+            'description' => Yii::t('app', 'Product Description'),
             'image' => Yii::t('app', 'Image'),
             'thumb_image' => Yii::t('app', 'Thumb Image'),
-            'class' => Yii::t('app', 'Class'),
-            'group' => Yii::t('app', 'Group'),
-            'category' => Yii::t('app', 'Category'),
-            'currency_id' => Yii::t('app', 'Currency'),
-            'model' => Yii::t('app', 'Model'),
-            'size' => Yii::t('app', 'Size'),
-            'origin' => Yii::t('app', 'Origin'),
-            'exchange_rate' => Yii::t('app', 'Exchange Rate'),
-            'sell_rate' => Yii::t('app', 'Sell Rate'),
-            'cost_price' => Yii::t('app', 'Cost Price'),
-            'sell_uom' => Yii::t('app', 'Sell Uom'),
-            'sell_uom_qty' => Yii::t('app', 'Sell Uom Qty'),
-            'purchase_uom' => Yii::t('app', 'Purchase Uom'),
-            'purchase_uom_qty' => Yii::t('app', 'Purchase Uom Qty'),
-            'sell_tax' => Yii::t('app', 'Sell Tax'),
-            'stock_uom' => Yii::t('app', 'Stock Uom'),
-            'stock_uom_qty' => Yii::t('app', 'Stock Uom Qty'),
-            'pack_size' => Yii::t('app', 'Pack Size'),
-            'stock_type' => Yii::t('app', 'Stock Type'),
-            'generic' => Yii::t('app', 'Generic'),
-            'supplier_id' => Yii::t('app', 'Supplier'),
-            'manufacture_code' => Yii::t('app', 'Manufacture Code'),
-            'max_level' => Yii::t('app', 'Max Level'),
-            'min_level' => Yii::t('app', 'Min Level'),
-            're_order' => Yii::t('app', 'Re Order'),
+            'class' => Yii::t('app', 'Product Class'),
+            'group' => Yii::t('app', 'Product Group'),
+            'category' => Yii::t('app', 'Product Category'),
+            'currency_id' => Yii::t('app', 'Product Currency'),
+            'model' => Yii::t('app', 'Product Model'),
+            'size' => Yii::t('app', 'Product Size'),
+            'origin' => Yii::t('app', 'Product Origin'),
+            'exchange_rate' => Yii::t('app', 'Product Exchange Rate'),
+            'sell_rate' => Yii::t('app', 'Product Sell Rate'),
+            'cost_price' => Yii::t('app', 'Product Cost Price'),
+            'sell_uom' => Yii::t('app', 'Product Sell Unit Of Measurement'),
+            'sell_uom_qty' => Yii::t('app', 'Product Sell Unit Of Measurement Qty'),
+            'purchase_uom' => Yii::t('app', 'Product Purchase Unit Of Measurement'),
+            'purchase_uom_qty' => Yii::t('app', 'Product Purchase Unit Of Measurement Qty'),
+            'sell_tax' => Yii::t('app', 'Product Sell Tax'),
+            'stock_uom' => Yii::t('app', 'Product Stock Unit Of Measurement'),
+            'stock_uom_qty' => Yii::t('app', 'Product Stock Unit Of Measurement Qty'),
+            'pack_size' => Yii::t('app', 'Product Pack Size'),
+            'stock_type' => Yii::t('app', 'Product Stock Type'),
+            'generic' => Yii::t('app', 'Product Generic'),
+            'supplier_id' => Yii::t('app', 'Product Supplier'),
+            'manufacture_code' => Yii::t('app', 'Product Manufacture Code'),
+            'max_level' => Yii::t('app', 'Product Max Level'),
+            'min_level' => Yii::t('app', 'Product Min Level'),
+            're_order' => Yii::t('app', 'Product Re Order'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
             'created_at' => Yii::t('app', 'Created At'),
@@ -196,6 +196,54 @@ class Product extends \yii\db\ActiveRecord
     public function getCurrency()
     {
         return $this->hasOne(Currency::className(), ['id' => 'currency_id']);
+    }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProduct_class()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'class']);
+    }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProduct_group()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'group']);
+    }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProduct_category()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'category']);
+    }
+
+      /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProduct_sell_uom()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'sell_uom']);
+    }
+
+       /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProduct_purchase_uom()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'purchase_uom']);
+    }
+
+       /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProduct_stock_uom()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'stock_uom']);
     }
 
     /**

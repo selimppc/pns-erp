@@ -8,7 +8,7 @@ use yii\helpers\Html;
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
     'modelClass' => 'Am Coa',
 ]) . $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Am Coas'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Chart of Account'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
@@ -21,8 +21,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
       </ol>     
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Am Coa'), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage Am Coa'), ['index'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create Chart of Account'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Chart of Account'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( 'Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
