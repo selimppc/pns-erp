@@ -93,7 +93,7 @@ class ProductSearch extends Product
             ->andFilterWhere(['like', 'pack_size', $this->pack_size])
             ->andFilterWhere(['like', 'stock_type', $this->stock_type])
             ->andFilterWhere(['like', 'generic', $this->generic])
-            ->andFilterWhere(['like', 'manufacture_code', $this->manufacture_code])
+            ->andFilterWhere(['like', 'manufacturer_code', $this->manufacturer_code])
             ->andFilterWhere(['like', 'max_level', $this->max_level])
             ->andFilterWhere(['like', 'min_level', $this->min_level])
             ->andFilterWhere(['like', 're_order', $this->re_order]);

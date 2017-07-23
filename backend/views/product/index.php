@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'stock_type',
             // 'generic',
             // 'supplier_id',
-            // 'manufacture_code',
+            // 'manufacturer_year',
             // 'max_level',
             // 'min_level',
             // 're_order',
