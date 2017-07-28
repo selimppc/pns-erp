@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "am_voucher_detail".
  *
@@ -31,6 +35,24 @@ use Yii;
  */
 class AmVoucherDetail extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -45,6 +67,7 @@ class AmVoucherDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['am_voucher_head_id','am_coa_id','currency_id','branch_id','exchange_rate','prime_amount','base_amount','status'],'required'],
             [['am_voucher_head_id', 'am_coa_id', 'am_sub_coa_id', 'currency_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['exchange_rate', 'prime_amount', 'base_amount'], 'number'],
             [['note'], 'string'],
@@ -65,14 +88,14 @@ class AmVoucherDetail extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'am_voucher_head_id' => 'Am Voucher Head ID',
-            'am_coa_id' => 'Am Coa ID',
-            'am_sub_coa_id' => 'Am Sub Coa ID',
-            'currency_id' => 'Currency ID',
+            'am_voucher_head_id' => 'Am Voucher Head',
+            'am_coa_id' => 'Am Coa',
+            'am_sub_coa_id' => 'Am Sub Coa',
+            'currency_id' => 'Currency',
             'exchange_rate' => 'Exchange Rate',
             'prime_amount' => 'Prime Amount',
             'base_amount' => 'Base Amount',
-            'branch_id' => 'Branch ID',
+            'branch_id' => 'Branch',
             'note' => 'Note',
             'status' => 'Status',
             'created_by' => 'Created By',

@@ -100,6 +100,11 @@
                     <span class="site-menu-title">Chart of Accounts</span>
                   </a>
                 </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/am-voucher-detail']); ?>">
+                    <span class="site-menu-title">Voucher</span>
+                  </a>
+                </li>
               </ul>
             </li>
 
