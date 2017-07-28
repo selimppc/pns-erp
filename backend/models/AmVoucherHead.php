@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "am_voucher_head".
  *
@@ -27,6 +31,24 @@ use Yii;
  */
 class AmVoucherHead extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -41,8 +63,9 @@ class AmVoucherHead extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['voucher_number','status','branch_id','date','year'],'required'],
             [['date', 'created_at', 'updated_at'], 'safe'],
-            [['year', 'period', 'branch_id', 'created_by', 'updated_by'], 'integer'],
+            [['date','year', 'period', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['note'], 'string'],
             [['voucher_number', 'status'], 'string', 'max' => 16],
             [['reference'], 'string', 'max' => 128],
@@ -62,7 +85,7 @@ class AmVoucherHead extends \yii\db\ActiveRecord
             'reference' => 'Reference',
             'year' => 'Year',
             'period' => 'Period',
-            'branch_id' => 'Branch ID',
+            'branch_id' => 'Branch',
             'note' => 'Note',
             'status' => 'Status',
             'created_by' => 'Created By',
