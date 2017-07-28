@@ -202,12 +202,14 @@
 
          
           <li class="nav-item dropdown">
-            <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
+            <a style="width: 75px;padding: 10px 0 0 0;" class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="scale-up" role="button">
-              <span class="avatar avatar-online" style="width:60px;margin-top:-5px;">
+              <span class="avatar avatar-online" style="width:50px;margin-top:-5px;">
                 <img src="<?=Url::base('')?>/admin-theme/global/portraits/logo_pns_group.png" alt="...">
-                <i></i>
+                
               </span>
+              <span style="width: 100%;display: inline-block;  text-transform: uppercase;letter-spacing: 2px;
+    font-size: 12px;">Admin</span>
             </a>
             <div class="dropdown-menu" role="menu">
               <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
@@ -401,12 +403,7 @@
               </div>
             </div>
           </li>
-          <li class="nav-item" id="toggleChat">
-            <a class="nav-link" data-toggle="site-sidebar" href="javascript:void(0)" title="Chat"
-            data-url="site-sidebar.tpl">
-              <i class="icon md-comment" aria-hidden="true"></i>
-            </a>
-          </li>
+         
         </ul>
         <!-- End Navbar Toolbar Right -->
       </div>
