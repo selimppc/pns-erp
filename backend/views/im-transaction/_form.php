@@ -3,61 +3,100 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use yii\helpers\ArrayHelper;
+use backend\models\Product;
+use backend\models\Branch;
+use backend\models\CodesParam;
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\ImTransaction */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="im-transaction-form">
-
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'transaction_number')->textInput(['maxlength' => true]) ?>
+    <div class="row">
 
-    <?= $form->field($model, 'product_id')->textInput() ?>
+        <div class="col-md-6">
 
-    <?= $form->field($model, 'branch_id')->textInput() ?>
+            <?= $form->field($model, 'transaction_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'batch_number')->textInput(['maxlength' => true]) ?>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
 
-    <?= $form->field($model, 'date')->textInput() ?>
+                <?= $form->field($model, 'branch_id')
+                            ->dropDownList(
+                                ArrayHelper::map(Branch::find()->all(), 'id', 'title'),
+                                 ['prompt'=>'-Select-','class'=>'form-control','onchange'=>'function()']
+                            ); ?>
 
-    <?= $form->field($model, 'expire_date')->textInput() ?>
+            </div>
 
-    <?= $form->field($model, 'uom')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'date',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
 
-    <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
 
-    <?= $form->field($model, 'sign')->dropDownList([ -1 => '-1', 1 => '1', ], ['prompt' => '']) ?>
+            <?= $form->field($model, 'uom')
+                        ->dropDownList(
+                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->all(), 'id', 'title'),
+                             ['prompt'=>'-Select-','class'=>'form-control floating']
+                        ); ?>
 
-    <?= $form->field($model, 'foreign_rate')->textInput(['maxlength' => true]) ?>
+            </div>
 
-    <?= $form->field($model, 'rate')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'sign',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList([ -1 => '-1', 1 => '1', ], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'total_price')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'base_value')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'base_value',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'reference_number')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'note',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textarea(['rows' => 4]) ?>
 
-    <?= $form->field($model, 'reference_row')->textInput(['maxlength' => true]) ?>
+        </div>
 
-    <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?>
+        <div class="col-md-6">
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
 
-    <?= $form->field($model, 'created_by')->textInput() ?>
+                <?= $form->field($model, 'product_id')
+                            ->dropDownList(
+                                ArrayHelper::map(Product::find()->all(), 'id', 'title'),
+                                 ['prompt'=>'-Select-','class'=>'form-control','onchange'=>'function()']
+                            ); ?>
 
-    <?= $form->field($model, 'updated_by')->textInput() ?>
+            </div>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+            <?= $form->field($model, 'batch_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+            <?= $form->field($model, 'expire_date',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+
+            <?= $form->field($model, 'quantity',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'foreign_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'total_price',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'reference_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'reference_row',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'status')
+                            ->dropDownList(
+                                array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                                array ('class'=>'form-control') 
+                            ); ?>
+
+            </div>
+            
+        </div>
+
+    </div>    
+
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect' : 'btn btn-primary waves-effect']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
-</div>

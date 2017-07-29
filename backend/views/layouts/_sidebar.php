@@ -105,6 +105,11 @@
                     <span class="site-menu-title">Voucher</span>
                   </a>
                 </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/im-transaction']); ?>">
+                    <span class="site-menu-title">Transaction</span>
+                  </a>
+                </li>
               </ul>
             </li>
 

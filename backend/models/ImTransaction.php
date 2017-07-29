@@ -4,6 +4,12 @@ namespace backend\models;
 
 use Yii;
 
+use backend\models\CodesParam;
+
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "{{%im_transaction}}".
  *
@@ -35,6 +41,25 @@ use Yii;
  */
 class ImTransaction extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -49,6 +74,7 @@ class ImTransaction extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['transaction_number','product_id','branch_id','batch_number','uom','quantity','base_value','foreign_rate','total_price'],'required'],
             [['product_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['date', 'expire_date', 'created_at', 'updated_at'], 'safe'],
             [['quantity', 'foreign_rate', 'rate', 'total_price', 'base_value'], 'number'],
@@ -69,8 +95,8 @@ class ImTransaction extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'transaction_number' => Yii::t('app', 'Transaction Number'),
-            'product_id' => Yii::t('app', 'Product ID'),
-            'branch_id' => Yii::t('app', 'Branch ID'),
+            'product_id' => Yii::t('app', 'Product'),
+            'branch_id' => Yii::t('app', 'Branch'),
             'batch_number' => Yii::t('app', 'Batch Number'),
             'date' => Yii::t('app', 'Date'),
             'expire_date' => Yii::t('app', 'Expire Date'),
@@ -106,6 +132,14 @@ class ImTransaction extends \yii\db\ActiveRecord
     public function getBranch()
     {
         return $this->hasOne(Branch::className(), ['id' => 'branch_id']);
+    }
+
+      /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTransactionUom()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'uom']);
     }
 
     /**
