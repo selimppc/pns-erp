@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "{{%im_adjust_head}}".
  *
@@ -28,6 +32,24 @@ use Yii;
  */
 class ImAdjustHead extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -42,6 +64,7 @@ class ImAdjustHead extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['transaction_no','date','confirm_date','currency_id','branch_id','voucher_number'],'required'],
             [['date', 'confirm_date', 'created_at', 'updated_at'], 'safe'],
             [['branch_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
             [['type'], 'string'],
@@ -62,10 +85,10 @@ class ImAdjustHead extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'transaction_no' => Yii::t('app', 'Transaction No'),
             'date' => Yii::t('app', 'Date'),
-            'branch_id' => Yii::t('app', 'Branch ID'),
+            'branch_id' => Yii::t('app', 'Branch'),
             'type' => Yii::t('app', 'Type'),
             'confirm_date' => Yii::t('app', 'Confirm Date'),
-            'currency_id' => Yii::t('app', 'Currency ID'),
+            'currency_id' => Yii::t('app', 'Currency'),
             'exchange_rate' => Yii::t('app', 'Exchange Rate'),
             'voucher_number' => Yii::t('app', 'Voucher Number'),
             'status' => Yii::t('app', 'Status'),

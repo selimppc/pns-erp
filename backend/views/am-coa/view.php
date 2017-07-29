@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]) ?>
         <?php
-          echo \yii\helpers\Html::a( 'Back', Yii::$app->request->referrer,['class' => 'back']);
+          echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
       </div>
 </div>

@@ -164,7 +164,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/im-adjust-detail']); ?>">
                     <span class="site-menu-title">Stock Adjustment</span>
                   </a>
                 </li>

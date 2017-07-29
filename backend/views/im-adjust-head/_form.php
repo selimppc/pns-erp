@@ -3,45 +3,82 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use yii\helpers\ArrayHelper;
+use backend\models\Branch;
+use backend\models\Currency;
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\ImAdjustHead */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="im-adjust-head-form">
+
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'transaction_no')->textInput(['maxlength' => true]) ?>
+    <div class="row">
 
-    <?= $form->field($model, 'date')->textInput() ?>
+        <div class="col-md-6">
 
-    <?= $form->field($model, 'branch_id')->textInput() ?>
+            <?= $form->field($model, 'transaction_no',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'type')->dropDownList([ 'positive' => 'Positive', ], ['prompt' => '']) ?>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
 
-    <?= $form->field($model, 'confirm_date')->textInput() ?>
+                <?= $form->field($model, 'branch_id')
+                            ->dropDownList(
+                                ArrayHelper::map(Branch::find()->all(), 'id', 'title'),
+                                 ['prompt'=>'-Select-','class'=>'form-control']
+                            ); ?>
 
-    <?= $form->field($model, 'currency_id')->textInput() ?>
+            </div>
 
-    <?= $form->field($model, 'exchange_rate')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'confirm_date',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
 
-    <?= $form->field($model, 'voucher_number')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'voucher_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_by')->textInput() ?>
+        </div>
 
-    <?= $form->field($model, 'updated_by')->textInput() ?>
+        <div class="col-md-6">
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+            <?= $form->field($model, 'date',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'type')->dropDownList([ 'positive' => 'Positive', ], ['prompt'=>'-Select-','class'=>'form-control']) ?>
+
+            </div>    
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'currency_id')
+                            ->dropDownList(
+                                ArrayHelper::map(Currency::find()->all(), 'id', 'title'),
+                                 ['prompt'=>'-Select-','class'=>'form-control']
+                            ); ?>
+
+            </div>
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'status')
+                            ->dropDownList(
+                                array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                                array ('class'=>'form-control') 
+                            ); ?>
+
+            </div>
+        </div>
+
+    </div>    
+
+
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect' : 'btn btn-primary waves-effect']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
-</div>
+
