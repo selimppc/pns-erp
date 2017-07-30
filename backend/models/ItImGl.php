@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "{{%it_im_gl}}".
  *
@@ -18,6 +22,23 @@ use Yii;
  */
 class ItImGl extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -32,6 +53,7 @@ class ItImGl extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['branch_id','dr_coa_id','cr_coa_id','transaction_code','group'],'required'],
             [['branch_id', 'dr_coa_id', 'cr_coa_id'], 'integer'],
             [['transaction_code', 'group'], 'string', 'max' => 16],
             [['branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branch::className(), 'targetAttribute' => ['branch_id' => 'id']],
@@ -45,11 +67,11 @@ class ItImGl extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'branch_id' => Yii::t('app', 'Branch ID'),
+            'branch_id' => Yii::t('app', 'Branch'),
             'transaction_code' => Yii::t('app', 'Transaction Code'),
             'group' => Yii::t('app', 'Group'),
-            'dr_coa_id' => Yii::t('app', 'Dr Coa ID'),
-            'cr_coa_id' => Yii::t('app', 'Cr Coa ID'),
+            'dr_coa_id' => Yii::t('app', 'Dr Coa'),
+            'cr_coa_id' => Yii::t('app', 'Cr Coa'),
         ];
     }
 

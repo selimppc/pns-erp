@@ -179,7 +179,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/it-im-gl']); ?>">
                     <span class="site-menu-title">IM to GL Interface</span>
                   </a>
                 </li>
