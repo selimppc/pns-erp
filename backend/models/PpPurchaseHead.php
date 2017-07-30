@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "{{%pp_purchase_head}}".
  *
@@ -33,6 +37,25 @@ use Yii;
  */
 class PpPurchaseHead extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -47,6 +70,7 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['supplier_id','branch_id','tax_rate','po_order_number'],'required'],
             [['date', 'delivery_date', 'created_at', 'updated_at'], 'safe'],
             [['supplier_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],
@@ -65,10 +89,10 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'po_order_number' => Yii::t('app', 'Po Order Number'),
             'date' => Yii::t('app', 'Date'),
-            'supplier_id' => Yii::t('app', 'Supplier ID'),
+            'supplier_id' => Yii::t('app', 'Supplier'),
             'pay_terms' => Yii::t('app', 'Pay Terms'),
             'delivery_date' => Yii::t('app', 'Delivery Date'),
-            'branch_id' => Yii::t('app', 'Branch ID'),
+            'branch_id' => Yii::t('app', 'Branch'),
             'tax_rate' => Yii::t('app', 'Tax Rate'),
             'tax_amount' => Yii::t('app', 'Tax Amount'),
             'discount_rate' => Yii::t('app', 'Discount Rate'),

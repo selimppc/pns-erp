@@ -125,7 +125,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/pp-purchase-head']); ?>">
                     <span class="site-menu-title">Purchase Order</span>
                   </a>
                 </li> 

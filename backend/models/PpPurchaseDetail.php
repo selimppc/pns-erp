@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "{{%pp_purchase_detail}}".
  *
@@ -30,6 +34,25 @@ use Yii;
  */
 class PpPurchaseDetail extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -44,6 +67,7 @@ class PpPurchaseDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['pp_purchase_head_id','product_id'],'required'],
             [['pp_purchase_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['quantity', 'grn_quantity', 'tax_rate', 'tax_amount', 'uom_quantity', 'unit_quantity', 'purchase_rate', 'row_amount'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
@@ -60,8 +84,8 @@ class PpPurchaseDetail extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'pp_purchase_head_id' => Yii::t('app', 'Pp Purchase Head ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'pp_purchase_head_id' => Yii::t('app', 'Pp Purchase Head'),
+            'product_id' => Yii::t('app', 'Product'),
             'quantity' => Yii::t('app', 'Quantity'),
             'grn_quantity' => Yii::t('app', 'Grn Quantity'),
             'tax_rate' => Yii::t('app', 'Tax Rate'),
@@ -93,6 +117,14 @@ class PpPurchaseDetail extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUomData()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'uom']);
     }
 
     /**

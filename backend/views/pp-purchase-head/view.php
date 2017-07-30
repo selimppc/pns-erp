@@ -1,5 +1,5 @@
 <?php
-
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -7,46 +7,74 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\PpPurchaseHead */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Pp Purchase Heads', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Purchase Heads', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pp-purchase-head-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="page-header">
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
+      </ol>
+      
+     
+      <div class="middle-menu-bar">
+        <?= Html::a(Yii::t('app', 'Create Purchase Heads'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Purchase Heads'), ['index'], ['class' => '']) ?> 
+        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'po_order_number',
-            'date',
-            'supplier_id',
-            'pay_terms',
-            'delivery_date',
-            'branch_id',
-            'tax_rate',
-            'tax_amount',
-            'discount_rate',
-            'discount_amount',
-            'prime_amount',
-            'net_amount',
-            'status',
-            'created_by',
-            'updated_by',
-            'created_at',
-            'updated_at',
-        ],
-    ]) ?>
-
+         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+                'class' => '',
+                'data' => [
+                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                    'method' => 'post',
+                ],
+            ]) ?>
+        <?php
+          echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
+        ?>    
+      </div>
 </div>
+
+<div class="page-content">
+    <!-- Panel Basic -->
+    <div class="panel">
+
+        <header class="panel-heading">
+            <div class="panel-actions"></div>
+            <h3 class="panel-title">View :: <?= Html::encode($this->title) ?></h3>
+        </header>
+         
+        <div class="panel-body">
+
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    'po_order_number',
+                    'date',
+                    [
+                        'label'  => 'Supplier',
+                        'value'  => $model->supplier->supplier_code
+                    ],
+                    'pay_terms',
+                    'delivery_date',
+                    [
+                        'label'  => 'Branch',
+                        'value'  => $model->branch->title
+                    ],
+                    'tax_rate',
+                    'tax_amount',
+                    'discount_rate',
+                    'discount_amount',
+                    'prime_amount',
+                    'net_amount',
+                    'status',
+                ],
+            ]) ?>
+
+        </div>
+
+    </div>
+</div>   
