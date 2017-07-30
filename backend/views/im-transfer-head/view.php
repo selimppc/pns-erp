@@ -1,5 +1,5 @@
 <?php
-
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -7,44 +7,78 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\ImTransferHead */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Im Transfer Heads', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Transfer Heads', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="im-transfer-head-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="page-header">
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
+      </ol>
+      
+     
+      <div class="middle-menu-bar">
+        <?= Html::a(Yii::t('app', 'Create Transfer Heads'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Transfer Heads'), ['index'], ['class' => '']) ?> 
+        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'transfer_number',
-            'date',
-            'confirm_date',
-            'note:ntext',
-            'from_branch_id',
-            'from_currency_id',
-            'from_exchange_rate',
-            'to_branch_id',
-            'to_currency_id',
-            'to_exchange_rate',
-            'status',
-            'created_by',
-            'updated_by',
-            'created_at',
-            'updated_at',
-        ],
-    ]) ?>
-
+         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+                'class' => '',
+                'data' => [
+                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                    'method' => 'post',
+                ],
+            ]) ?>
+        <?php
+          echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
+        ?>    
+      </div>
 </div>
+
+<div class="page-content">
+    <!-- Panel Basic -->
+    <div class="panel">
+
+        <header class="panel-heading">
+            <div class="panel-actions"></div>
+            <h3 class="panel-title">View :: <?= Html::encode($this->title) ?></h3>
+        </header>
+         
+        <div class="panel-body">
+
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    'transfer_number',
+                    'date',
+                    'confirm_date',
+                    'note:ntext',
+                    [
+                        'label'  => 'From Branch',
+                        'value'  => isset($model->fromBranch)?$model->fromBranch->title:''
+                    ],
+                    [
+                        'label'  => 'From Currency',
+                        'value'  => isset($model->fromCurrency)?$model->fromCurrency->title:''
+                    ],                  
+                    'from_exchange_rate',
+                     [
+                        'label'  => 'To Branch',
+                        'value'  => isset($model->toBranch)?$model->toBranch->title:''
+                    ],
+                    [
+                        'label'  => 'To Currency',
+                        'value'  => isset($model->toCurrency)?$model->toCurrency->title:''
+                    ],
+                    'to_exchange_rate',
+                    'status',
+                ],
+            ]) ?>
+
+        </div>
+
+    </div>
+</div>        

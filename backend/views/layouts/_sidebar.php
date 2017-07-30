@@ -159,7 +159,7 @@
                   </a>
                 </li> 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/im-transfer-head']); ?>">
                     <span class="site-menu-title">Stock Transfer</span>
                   </a>
                 </li> 

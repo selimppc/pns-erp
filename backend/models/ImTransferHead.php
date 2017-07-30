@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "{{%im_transfer_head}}".
  *
@@ -32,6 +36,25 @@ use Yii;
  */
 class ImTransferHead extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -46,6 +69,7 @@ class ImTransferHead extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['transfer_number','confirm_date','from_branch_id','from_currency_id','to_branch_id','to_currency_id','from_exchange_rate','to_exchange_rate'],'required'],
             [['date', 'confirm_date', 'created_at', 'updated_at'], 'safe'],
             [['note'], 'string'],
             [['from_branch_id', 'from_currency_id', 'to_branch_id', 'to_currency_id', 'created_by', 'updated_by'], 'integer'],

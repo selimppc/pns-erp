@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "{{%im_transfer_detail}}".
  *
@@ -23,6 +27,25 @@ use Yii;
  */
 class ImTransferDetail extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -37,6 +60,7 @@ class ImTransferDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['im_transfer_head_id','product_id','uom','quantity','rate'],'required'],
             [['im_transfer_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['quantity', 'rate'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
@@ -53,8 +77,8 @@ class ImTransferDetail extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'im_transfer_head_id' => Yii::t('app', 'Im Transfer Head ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'im_transfer_head_id' => Yii::t('app', 'Transfer Head'),
+            'product_id' => Yii::t('app', 'Product'),
             'uom' => Yii::t('app', 'Uom'),
             'quantity' => Yii::t('app', 'Quantity'),
             'rate' => Yii::t('app', 'Rate'),

@@ -1,21 +1,45 @@
 <?php
-
+use yii\helpers\Url;
 use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\ImTransferHead */
 
-$this->title = 'Create Im Transfer Head';
+$this->title = 'Create Transfer Head';
 $this->params['breadcrumbs'][] = ['label' => 'Im Transfer Heads', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="im-transfer-head-create">
+<div class="page-header">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
+      </ol>     
+     
+      <div class="middle-menu-bar">
+        <?= Html::a(Yii::t('app', 'Create Transfer Head'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Transfer Head'), ['index'], ['class' => '']) ?>   
+        <?php
+          echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
+        ?>    
+      </div>
+</div>
+<div class="page-content">
+    <!-- Panel Basic -->
+    <div class="panel">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+      <header class="panel-heading">
+        <div class="panel-actions"></div>
+        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
+      </header>
+     
+	    <div class="panel-body">
+
+	    	<?= $this->render('_form', [
+			        'model' => $model             
+			    ]) ?>
+
+	    </div>
 
 </div>
