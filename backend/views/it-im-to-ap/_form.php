@@ -3,35 +3,56 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use yii\helpers\ArrayHelper;
+use backend\models\AmCoa;
 /* @var $this yii\web\View */
 /* @var $model backend\models\ItImToAp */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="it-im-to-ap-form">
-
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'item_group')->textInput(['maxlength' => true]) ?>
+        <div class="row">
 
-    <?= $form->field($model, 'sub_group')->textInput(['maxlength' => true]) ?>
+            <div class="col-md-6">
 
-    <?= $form->field($model, 'dr_coa_id')->textInput() ?>
+                <?= $form->field($model, 'item_group')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+                <div class="form-group form-material floating" data-plugin="formMaterial">
 
-    <?= $form->field($model, 'created_by')->textInput() ?>
+                    <?= $form->field($model, 'dr_coa_id')
+                                ->dropDownList(
+                                    ArrayHelper::map(AmCoa::find()->all(), 'id', 'title'),
+                                     ['prompt'=>'-Select-','class'=>'form-control','onchange'=>'function()']
+                                ); ?>
 
-    <?= $form->field($model, 'updated_by')->textInput() ?>
+                </div>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+             
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+            </div>
+
+            <div class="col-md-6">
+
+                <?= $form->field($model, 'sub_group')->textInput(['maxlength' => true]) ?>
+
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                    <?= $form->field($model, 'status')
+                                ->dropDownList(
+                                    array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                                    array ('class'=>'form-control') 
+                                ); ?>
+
+                </div>
+
+            </div>
+
+        </div>    
+
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect' : 'btn btn-primary waves-effect']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
-</div>

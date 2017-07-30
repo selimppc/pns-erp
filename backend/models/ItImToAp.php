@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "{{%it_im_to_ap}}".
  *
@@ -21,6 +25,25 @@ use Yii;
  */
 class ItImToAp extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -35,6 +58,7 @@ class ItImToAp extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['dr_coa_id','item_group','sub_group'],'required'],
             [['dr_coa_id', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['item_group', 'sub_group', 'status'], 'string', 'max' => 16],
@@ -51,7 +75,7 @@ class ItImToAp extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'item_group' => Yii::t('app', 'Item Group'),
             'sub_group' => Yii::t('app', 'Sub Group'),
-            'dr_coa_id' => Yii::t('app', 'Dr Coa ID'),
+            'dr_coa_id' => Yii::t('app', 'Dr Coa'),
             'status' => Yii::t('app', 'Status'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
