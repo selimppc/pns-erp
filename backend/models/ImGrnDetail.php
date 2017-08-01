@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "{{%im_grn_detail}}".
  *
@@ -27,6 +31,25 @@ use Yii;
  */
 class ImGrnDetail extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -41,6 +64,7 @@ class ImGrnDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['im_grn_head_id','product_id','batch_number','uom','receive_quantity','cost_price','row_amount','quantity'],'required'],
             [['im_grn_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['expire_date', 'created_at', 'updated_at'], 'safe'],
             [['receive_quantity', 'cost_price', 'quantity', 'row_amount'], 'number'],
@@ -58,8 +82,8 @@ class ImGrnDetail extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'im_grn_head_id' => Yii::t('app', 'Im Grn Head ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'im_grn_head_id' => Yii::t('app', 'Im Grn Head'),
+            'product_id' => Yii::t('app', 'Product'),
             'batch_number' => Yii::t('app', 'Batch Number'),
             'expire_date' => Yii::t('app', 'Expire Date'),
             'receive_quantity' => Yii::t('app', 'Receive Quantity'),
@@ -80,6 +104,14 @@ class ImGrnDetail extends \yii\db\ActiveRecord
     public function getImGrnHead()
     {
         return $this->hasOne(ImGrnHead::className(), ['id' => 'im_grn_head_id']);
+    }
+
+      /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductUom()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'uom']);
     }
 
     /**

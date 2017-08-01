@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "{{%im_grn_head}}".
  *
@@ -38,6 +42,24 @@ use Yii;
  */
 class ImGrnHead extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -52,6 +74,7 @@ class ImGrnHead extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['pp_purchase_head_id','am_voucher_head_id','supplier_id','branch_id','currency_id','grn_number','tax_rate','tax_ammount','discount_rate','discount_amount','exchnage_rate','prime_amount','net_amount'],'required'],
             [['pp_purchase_head_id', 'am_voucher_head_id', 'supplier_id', 'branch_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
             [['date', 'created_at', 'updated_at'], 'safe'],
             [['tax_rate', 'tax_ammount', 'discount_rate', 'discount_amount', 'exchnage_rate', 'prime_amount', 'net_amount'], 'number'],
@@ -73,16 +96,16 @@ class ImGrnHead extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'grn_number' => Yii::t('app', 'Grn Number'),
             'pp_purchase_head_id' => Yii::t('app', 'Pp Purchase Head ID'),
-            'am_voucher_head_id' => Yii::t('app', 'Am Voucher Head ID'),
-            'supplier_id' => Yii::t('app', 'Supplier ID'),
+            'am_voucher_head_id' => Yii::t('app', 'Am Voucher Head'),
+            'supplier_id' => Yii::t('app', 'Supplier'),
             'date' => Yii::t('app', 'Date'),
             'pay_terms' => Yii::t('app', 'Pay Terms'),
-            'branch_id' => Yii::t('app', 'Branch ID'),
+            'branch_id' => Yii::t('app', 'Branch'),
             'tax_rate' => Yii::t('app', 'Tax Rate'),
-            'tax_ammount' => Yii::t('app', 'Tax Ammount'),
+            'tax_ammount' => Yii::t('app', 'Tax Amount'),
             'discount_rate' => Yii::t('app', 'Discount Rate'),
             'discount_amount' => Yii::t('app', 'Discount Amount'),
-            'currency_id' => Yii::t('app', 'Currency ID'),
+            'currency_id' => Yii::t('app', 'Currency'),
             'exchnage_rate' => Yii::t('app', 'Exchnage Rate'),
             'prime_amount' => Yii::t('app', 'Prime Amount'),
             'net_amount' => Yii::t('app', 'Net Amount'),
