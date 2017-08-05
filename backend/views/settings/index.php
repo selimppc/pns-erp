@@ -52,6 +52,7 @@
 	    	</div>
 
 	    	<div class="setting-column">
+	    		<h2>Group Master</h2>
 	    		<a href="<?= Url::toRoute(['/group-one']); ?>" class="btn btn-block btn-primary waves-effect">Group One</a>
 	    		<a href="<?= Url::toRoute(['/group-two']); ?>" class="btn btn-block btn-primary waves-effect">Group Two</a>
 	    		<a href="<?= Url::toRoute(['/group-three']); ?>" class="btn btn-block btn-primary waves-effect">Group Three</a>

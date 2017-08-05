@@ -75,6 +75,11 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'generic',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
+            
+        </div>
+
+        <div class="col-md-6">
+
             <div class="form-group form-material" data-plugin="formMaterial">
 
                 <?= $form->field($model, 'stock_type')
@@ -95,10 +100,7 @@ use backend\models\CodesParam;
 
             </div>
 
-        </div>
-
-        <div class="col-md-6">
-
+            
             <?= $form->field($model, 'sell_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
@@ -110,11 +112,6 @@ use backend\models\CodesParam;
                         ); ?>
 
             </div>
-
-            <?= $form->field($model, 'sell_uom_qty',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
-
-
-            <?= $form->field($model, 'sell_tax',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?> 
 
             <?= $form->field($model, 'cost_price',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
