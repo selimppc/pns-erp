@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use backend\models\GroupOne;
 use backend\models\Branch;
+use backend\models\CodesParam;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Customer */
@@ -28,12 +29,12 @@ use backend\models\Branch;
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
-                <?= $form->field($model, 'group_one_id')
-                            ->dropDownList(
-                                ArrayHelper::map(GroupOne::find()->all(), 'id', 'title'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
+                <?= $form->field($model, 'customer_group')
+                        ->dropDownList(
+                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Customer Group'])->all(), 'id', 'title'),
+                             ['class'=>'form-control floating']
+                        ); ?>
+                
             </div>
 
              <div class="form-group form-material floating" data-plugin="formMaterial">

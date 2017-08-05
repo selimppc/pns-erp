@@ -54,22 +54,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'customer_code',
                     'name',
+                    [
+                        'label'  => 'Branch',
+                        'value'  => isset($model->branch)?$model->branch->title:''
+                    ],
+                    [
+                        'label'  => 'Customer Group',
+                        'value'  => isset($model->customer_group_data)?$model->customer_group_data->title:''
+                    ],
                     'api_id',
                     'address:ntext',
                     'terotorry',
-                     [
-                        'label'  => 'Group One',
-                        'value'  => $model->groupOne->title
-                    ],
                     'type',
                     'cell',
                     'phone',
                     'fax',
-                    'email:email',
-                    [
-                        'label'  => 'Branch',
-                        'value'  => $model->branch->title
-                    ],
+                    'email:email',                    
                     'market',
                     'sales_person',
                     'credit_limit',

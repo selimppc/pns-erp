@@ -77,7 +77,7 @@ class Customer extends \yii\db\ActiveRecord
             [['customer_code'],'unique'],
             [['email'],'email'],
             [['address'], 'string'],
-            [['group_one_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
+            [['group_one_id','customer_group', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['credit_limit'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['customer_code', 'api_id', 'terotorry', 'type', 'cell', 'phone', 'fax', 'hub', 'status'], 'string', 'max' => 16],
@@ -133,6 +133,14 @@ class Customer extends \yii\db\ActiveRecord
     public function getBranch()
     {
         return $this->hasOne(Branch::className(), ['id' => 'branch_id']);
+    }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCustomer_group_data()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'customer_group']);
     }
 
     /**

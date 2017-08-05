@@ -77,7 +77,7 @@ class AmCoa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['account_code','title','account_type','group_one_id','group_two_id','group_three_id','group_four_id','branch_id','status'],'required'],
+            [['account_code','title','account_type','group_one_id','group_two_id','branch_id','status'],'required'],
             [['account_code'],'unique'],
             [['description'], 'string'],
             [['group_one_id', 'group_two_id', 'group_three_id', 'group_four_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],

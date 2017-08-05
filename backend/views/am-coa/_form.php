@@ -33,8 +33,8 @@ use backend\models\Branch;
 
                 <?= $form->field($model, 'account_type')
                             ->dropDownList(
-                                array (''=>'','Asset'=>'Asset', 'Liability'=>'Liability','Income' => 'Income','Expenses' => 'Expenses'),
-                                array ('class'=>'form-control') 
+                                array ('Asset'=>'Asset', 'Liability'=>'Liability','Income' => 'Income','Expenses' => 'Expenses'),
+                                array ('prompt'=>'-Select-','class'=>'form-control') 
                             ); ?>
 
             </div>
@@ -43,25 +43,27 @@ use backend\models\Branch;
 
                 <?= $form->field($model, 'account_usage')
                             ->dropDownList(
-                                array (''=>'','Ledger'=>'Ledger', 'AP'=>'AP','AR' => 'AR'),
-                                array ('class'=>'form-control') 
+                                array ('Ledger'=>'Ledger', 'AP'=>'AP','AR' => 'AR'),
+                                array ('prompt'=>'-Select-','class'=>'form-control') 
                             ); ?>
 
             </div>
+
+            
+        </div>
+
+        <div class="col-md-6">
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
                 <?= $form->field($model, 'analyical_code')
                             ->dropDownList(
-                                array (''=>'','Cash'=>'Cash', 'Non-Cash'=>'Non-Cash','Cheque' => 'Cheque','Bankers Draft'=>'Bankers Draft','Wire Transfer'=>'Wire Transfer','Letter of Credit'=>'Letter of Credit','Others'=>'Others'),
-                                array ('class'=>'form-control') 
+                                array ('Cash'=>'Cash', 'Non-Cash'=>'Non-Cash','Cheque' => 'Cheque','Bankers Draft'=>'Bankers Draft','Wire Transfer'=>'Wire Transfer','Letter of Credit'=>'Letter of Credit','Others'=>'Others'),
+                                array ('prompt'=>'-Select-','class'=>'form-control') 
                             ); ?>
 
             </div>
 
-        </div>
-
-        <div class="col-md-6">
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
@@ -78,26 +80,6 @@ use backend\models\Branch;
                 <?= $form->field($model, 'group_two_id')
                             ->dropDownList(
                                 ArrayHelper::map(GroupTwo::find()->all(), 'id', 'title'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'group_three_id')
-                            ->dropDownList(
-                                ArrayHelper::map(GroupThree::find()->all(), 'id', 'title'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'group_four_id')
-                            ->dropDownList(
-                                ArrayHelper::map(GroupFour::find()->all(), 'id', 'title'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 

@@ -59,24 +59,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'account_usage',
             [
                 'label'  => 'Group One',
-                'value'  => $model->groupOne->title
+                'value'  => isset($model->groupOne)?$model->groupOne->title:''
             ],
             [
                 'label'  => 'Group Two',
-                'value'  => $model->groupTwo->title
+                'value'  => isset($model->groupTwo)?$model->groupTwo->title:''
             ],
-            [
-                'label'  => 'Group Three',
-                'value'  => $model->groupThree->title
-            ],
-           [
-                'label'  => 'Group Four',
-                'value'  => $model->groupFour->title
-            ],
+            
             'analyical_code',
             [
                 'label'  => 'Branch',
-                'value'  => $model->branch->title
+                'value'  => isset($model->branch)?$model->branch->title:''
             ],
             'status',
            # 'created_by',
