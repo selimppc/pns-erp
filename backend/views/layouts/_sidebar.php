@@ -20,7 +20,7 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/company']); ?>">
                     <span class="site-menu-title">Company Profile</span>
                   </a>
                 </li>

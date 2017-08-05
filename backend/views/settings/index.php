@@ -33,21 +33,31 @@
 	    <div class="panel-body">
 
 	    	<div class="setting-column">
+	    		<h2>Product Master</h2>
+	    		<a href="<?= Url::toRoute(['/codes-param']); ?>" class="btn btn-block btn-primary waves-effect">Product Class Setup</a>
+	    		<a href="<?= Url::toRoute(['/codes-param']); ?>" class="btn btn-block btn-primary waves-effect">Product Group Setup</a>
+	    		<a href="<?= Url::toRoute(['/codes-param']); ?>" class="btn btn-block btn-primary waves-effect">Product Category Setup</a>
+	    		<a href="<?= Url::toRoute(['/codes-param']); ?>" class="btn btn-block btn-primary waves-effect">Unit of Measurement Setup</a>
+	    	</div>
+
+	    	<div class="setting-column">
+	    		<h2>Supplier Master</h2>
+	    		<a href="#" class="btn btn-block btn-primary waves-effect">Supplier Group Setup</a>
+	    	</div>
+
+	    	<div class="setting-column">
+	    		<h2>Customer Master</h2>
+	    		<a href="#" class="btn btn-block btn-primary waves-effect">Customer Group Setup</a>
+	    		<a href="#" class="btn btn-block btn-primary waves-effect">Customer Transaction No Setup</a>
+	    	</div>
+
+	    	<div class="setting-column">
 	    		<a href="<?= Url::toRoute(['/group-one']); ?>" class="btn btn-block btn-primary waves-effect">Group One</a>
 	    		<a href="<?= Url::toRoute(['/group-two']); ?>" class="btn btn-block btn-primary waves-effect">Group Two</a>
 	    		<a href="<?= Url::toRoute(['/group-three']); ?>" class="btn btn-block btn-primary waves-effect">Group Three</a>
 	    		<a href="<?= Url::toRoute(['/group-four']); ?>" class="btn btn-block btn-primary waves-effect">Group Four</a>
 	    	</div>
 
-	    	<div class="setting-column">
-	    		<a href="<?= Url::toRoute(['/codes-param']); ?>" class="btn btn-block btn-primary waves-effect">Codes Param</a>
-	    		<a href="<?= Url::toRoute(['/branch']); ?>" class="btn btn-block btn-primary waves-effect">Branch</a>
-	    		<a href="<?= Url::toRoute(['/company']); ?>" class="btn btn-block btn-primary waves-effect">Company</a>
-	    	</div>
-
-	    	<div class="setting-column">
-	    		<a href="<?= Url::toRoute(['/currency']); ?>" class="btn btn-block btn-primary waves-effect">Currency</a>
-	    	</div>
 
 	    </div>
 
