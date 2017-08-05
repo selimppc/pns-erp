@@ -146,7 +146,7 @@ use backend\models\CodesParam;
             <?= $form->field($model, 'currency_id')
                         ->dropDownList(
                             ArrayHelper::map(Currency::find()->all(), 'id', 'title'),
-                             ['prompt'=>'-Select-','class'=>'form-control floating']
+                             ['class'=>'form-control floating']
                         ); ?>
 
             </div>
