@@ -73,7 +73,7 @@ class Customer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_code','name','group_one_id','phone','email','branch_id','status'],'required'],
+            [['customer_code','name','branch_id','status'],'required'],
             [['customer_code'],'unique'],
             [['email'],'email'],
             [['address'], 'string'],
