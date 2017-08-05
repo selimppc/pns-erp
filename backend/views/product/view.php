@@ -59,19 +59,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'thumb_image',
             [
                 'label'  => 'Product Class',
-                'value'  => $model->product_class->title
+                'value'  => isset($model->product_class)?$model->product_class->title:''
             ],
             [
                 'label'  => 'Product Group',
-                'value'  => $model->product_group->title
+                'value'  => isset($model->product_group)?$model->product_group->title:''
             ],
             [
                 'label'  => 'Product Category',
-                'value'  => $model->product_category->title
+                'value'  => isset($model->product_category)?$model->product_category->title:''
             ],           
             [
                 'label'  => 'Currency',
-                'value'  => $model->currency->title
+                'value'  => isset($model->currency)?$model->currency->title:''
             ],
             'model',
             'size',
@@ -81,18 +81,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'cost_price',
             [
                 'label'  => 'Product Sell Unit of measurement',
-                'value'  => $model->product_sell_uom->title
+                'value'  => isset($model->product_sell_uom)?$model->product_sell_uom->title:''
             ],
             'sell_uom_qty',
             [
                 'label'  => 'Product purchase Unit of measurement',
-                'value'  => $model->product_purchase_uom->title
+                'value'  => isset($model->product_purchase_uom)?$model->product_purchase_uom->title:''
             ],
             'purchase_uom_qty',
             'sell_tax',
             [
                 'label'  => 'Product stock Unit of measurement',
-                'value'  => $model->product_stock_uom->title
+                'value'  => isset($model->product_stock_uom)?$model->product_stock_uom->title:''
             ],
             'stock_uom_qty',
             'pack_size',
@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'generic',
             [
                 'label'  => 'Supplier',
-                'value'  => $model->supplier->supplier_code
+                'value'  => isset($model->supplier)?$model->supplier->supplier_code:''
             ],
             'manufacturer_code',
             'max_level',

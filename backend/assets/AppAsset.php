@@ -36,6 +36,7 @@ class AppAsset extends AssetBundle
 
         'admin-theme/global/fonts/material-design/material-design.min.css',
         'admin-theme/global/fonts/brand-icons/brand-icons.min.css',
+        'admin-theme/global/css/custom.css',
 
         'http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic',
 

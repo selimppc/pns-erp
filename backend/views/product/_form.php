@@ -27,16 +27,14 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'description',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'image',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
-
-            <?= $form->field($model, 'thumb_image',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
             <?= $form->field($model, 'class')
                         ->dropDownList(
                             ArrayHelper::map(CodesParam::find()->where(['type'=>'Product Class'])->all(), 'id', 'title'),
-                             ['prompt'=>'-Select-','class'=>'form-control floating']
+                             ['class'=>'form-control floating']
                         ); ?>
 
             </div>
@@ -83,6 +81,16 @@ use backend\models\CodesParam;
                             ->dropDownList(
                                 array ('stock'=>'Stock', 'non'=>'Non Stock'),
                                 array ('class'=>'form-control') 
+                            ); ?>
+
+            </div>
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'supplier_id')
+                            ->dropDownList(
+                                ArrayHelper::map(Supplier::find()->all(), 'id', 'supplier_code'),
+                                 ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 
             </div>
@@ -148,16 +156,6 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
             
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'supplier_id')
-                            ->dropDownList(
-                                ArrayHelper::map(Supplier::find()->all(), 'id', 'supplier_code'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
             <?= $form->field($model, 'max_level',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'min_level',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>            

@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <div class="panel-body">
 
-        <?= GridView::widget([
+        <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -84,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
+<?php Pjax::end(); ?>
 
       </div>
 

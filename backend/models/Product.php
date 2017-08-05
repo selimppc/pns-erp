@@ -91,7 +91,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_code','title','class','group','currency_id','model','size','origin','sell_rate','cost_price','sell_uom','sell_uom_qty','stock_uom','stock_uom_qty','stock_type','supplier_id','purchase_uom','purchase_uom_qty','category'],'required'],
+            [['product_code','title','class','group','currency_id','model','size','origin','sell_rate','cost_price','stock_type'],'required'],
             [['product_code'],'unique'],
             [['description'], 'string'],
             [['class', 'group', 'category', 'currency_id', 'supplier_id', 'created_by', 'updated_by'], 'integer'],
