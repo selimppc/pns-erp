@@ -47,41 +47,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
             #'id',
             'product_code',
-            'title',
-           # 'description:ntext',
-           # 'image',
-            // 'thumb_image',
-             'class',
-             'group',
-            // 'category',
-            // 'currency_id',
+            'title',           
              'model',
              'size',
-            // 'origin',
-            // 'exchange_rate',
-            // 'sell_rate',
-            // 'cost_price',
-            // 'sell_uom',
-            // 'sell_uom_qty',
-            // 'purchase_uom',
-            // 'purchase_uom_qty',
-            // 'sell_tax',
-            // 'stock_uom',
-            // 'stock_uom_qty',
-            // 'pack_size',
-            // 'stock_type',
-            // 'generic',
-            // 'supplier_id',
-            // 'manufacturer_year',
-            // 'max_level',
-            // 'min_level',
-            // 're_order',
-            // 'created_by',
-            // 'updated_by',
-            // 'created_at',
-            // 'updated_at',
+             'origin',
+             [
+               'label' => 'Currency',
+               'value' => function ($model) {
+                   return isset($model->currency)?$model->currency->currency_code:'';
+               }
+             ],
+            
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+            'header' => 'Action',
+            'class' => 'yii\grid\ActionColumn'
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?>
