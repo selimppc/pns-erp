@@ -119,11 +119,7 @@
                 <span class="site-menu-title">Purchase</span>
               </a>
               <ul class="site-menu-sub">
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
-                    <span class="site-menu-title">Requisition</span>
-                  </a>
-                </li>
+                
                 <li class="site-menu-item">
                   <a class="animsition-link" href="<?= Url::toRoute(['/pp-purchase-head']); ?>">
                     <span class="site-menu-title">Purchase Order</span>
