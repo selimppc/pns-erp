@@ -24,7 +24,7 @@ form div.required label.control-label:after {
     width: 90%;
     float: left;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background: #4085BB;
     border-radius: 2px;
     font-size: 16px;

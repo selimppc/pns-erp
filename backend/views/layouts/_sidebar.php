@@ -80,7 +80,7 @@
                   </a>
                 </li>  
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/master-report']); ?>">
                     <span class="site-menu-title">Reports</span>
                   </a>
                 </li>             
@@ -110,6 +110,16 @@
                     <span class="site-menu-title">Transaction</span>
                   </a>
                 </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/general-ledger-settings']); ?>">
+                    <span class="site-menu-title">Settings</span>
+                  </a>
+                </li>  
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/general-ledger-report']); ?>">
+                    <span class="site-menu-title">Reports</span>
+                  </a>
+                </li> 
               </ul>
             </li>
 
@@ -126,12 +136,12 @@
                   </a>
                 </li> 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/purchase-settings']); ?>">
                     <span class="site-menu-title">Settings</span>
                   </a>
                 </li> 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/purchase-report']); ?>">
                     <span class="site-menu-title">Reports</span>
                   </a>
                 </li>
@@ -180,12 +190,12 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/inventory-settings']); ?>">
                     <span class="site-menu-title">Settings</span>
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/inventory-report']); ?>">
                     <span class="site-menu-title">Reports</span>
                   </a>
                 </li>

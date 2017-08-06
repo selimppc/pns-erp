@@ -102,7 +102,7 @@
                             <a href="<?= Url::toRoute(['/settings']); ?>">Settings</a>
                           </li>
                           <li><i class="md-chevron-right" aria-hidden="true"></i>
-                            <a href="#">Reports</a>
+                            <a href="<?= Url::toRoute(['/master-report']); ?>">Reports</a>
                           </li>
                        
                         </ul>
