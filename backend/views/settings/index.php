@@ -42,7 +42,7 @@
 
 	    	<div class="setting-column">
 	    		<h2>Supplier Master</h2>
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">Supplier Group Setup</a>
+	    		<a href="<?= Url::toRoute(['/codes-param/codes-params-option','type' => 'Supplier Group']); ?>" class="btn btn-block btn-primary waves-effect">Supplier Group Setup</a>
 	    	</div>
 
 	    	<div class="setting-column">

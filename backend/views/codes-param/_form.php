@@ -17,7 +17,7 @@ use backend\models\AmCoa;
 
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-12">
 
             <?= $form->field($model, 'type',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => $model->type]) ?>
 
@@ -27,55 +27,14 @@ use backend\models\AmCoa;
 
             <?= $form->field($model, 'long',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'percentage',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
-
-        </div>
-
-        <div class="col-md-6">
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'am_coa_id')
-                            ->dropDownList(
-                                ArrayHelper::map(AmCoa::find()->all(), 'id', 'title'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'am_coa_cr_id')
-                            ->dropDownList(
-                                ArrayHelper::map(AmCoa::find()->all(), 'id', 'title'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'am_coa_dr_id')
-                            ->dropDownList(
-                                ArrayHelper::map(AmCoa::find()->all(), 'id', 'title'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-            <?= $form->field($model, 'am_coa_tax_id',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'status')
+            <?= $form->field($model, 'status')
                             ->dropDownList(
                                 array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
                                 array ('class'=>'form-control') 
                             ); ?>
 
-            </div>
-
         </div>
+
 
     </div> 
 

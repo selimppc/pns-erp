@@ -67,11 +67,11 @@ class CodesParam extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type','code','title','am_coa_id','am_coa_cr_id','am_coa_dr_id','status'],'required'],
+            [['type','code','title','status'],'required'],
             [['title'],'unique'],
             [['am_coa_id', 'am_coa_cr_id', 'am_coa_dr_id', 'am_coa_tax_id', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['type', 'code', 'long'], 'string', 'max' => 16],
+            [['type', 'code', 'long'], 'string'],
             [['title'], 'string', 'max' => 45],
             [['percentage', 'status'], 'string', 'max' => 8],
             [['am_coa_id'], 'exist', 'skipOnError' => true, 'targetClass' => AmCoa::className(), 'targetAttribute' => ['am_coa_id' => 'id']],
@@ -94,7 +94,7 @@ class CodesParam extends \yii\db\ActiveRecord
             'am_coa_id' => Yii::t('app', 'Am Coa'),
             'am_coa_cr_id' => Yii::t('app', 'Am Coa Cr'),
             'am_coa_dr_id' => Yii::t('app', 'Am Coa Dr'),
-            'long' => Yii::t('app', 'Long'),
+            'long' => Yii::t('app', 'Description'),
             'percentage' => Yii::t('app', 'Percentage'),
             'am_coa_tax_id' => Yii::t('app', 'Am Coa Tax'),
             'status' => Yii::t('app', 'Status'),

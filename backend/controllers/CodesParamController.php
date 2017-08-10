@@ -69,10 +69,10 @@ class CodesParamController extends Controller
 
         $model = $this->findModel($id);
 
-        $model->type = 'Product Class';
+        $model->type = $type;
 
         $searchModel = new CodesParamSearch();
-        $searchModel->type = 'Product Class';
+        $searchModel->type = $type;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 
@@ -96,12 +96,12 @@ class CodesParamController extends Controller
 
     }
 
-    public function actionViewCodesParams($id)
+    public function actionViewCodesParams($id,$type)
     {
         $model = $this->findModel($id);
 
         $searchModel = new CodesParamSearch();
-        $searchModel->type = 'Product Class';
+        $searchModel->type = $type;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('view_codes_params', [
