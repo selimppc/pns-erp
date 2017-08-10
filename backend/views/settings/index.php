@@ -34,10 +34,10 @@
 
 	    	<div class="setting-column">
 	    		<h2>Product Master</h2>
-	    		<a href="<?= Url::toRoute(['/codes-param']); ?>" class="btn btn-block btn-primary waves-effect">Product Class Setup</a>
-	    		<a href="<?= Url::toRoute(['/codes-param']); ?>" class="btn btn-block btn-primary waves-effect">Product Group Setup</a>
-	    		<a href="<?= Url::toRoute(['/codes-param']); ?>" class="btn btn-block btn-primary waves-effect">Product Category Setup</a>
-	    		<a href="<?= Url::toRoute(['/codes-param']); ?>" class="btn btn-block btn-primary waves-effect">Unit of Measurement Setup</a>
+	    		<a href="<?= Url::toRoute(['/codes-param/codes-params-option','type' => 'Product Class']); ?>" class="btn btn-block btn-primary waves-effect">Product Class Setup</a>
+	    		<a href="<?= Url::toRoute(['/codes-param/codes-params-option','type' => 'Product Group']); ?>" class="btn btn-block btn-primary waves-effect">Product Group Setup</a>
+	    		<a href="<?= Url::toRoute(['/codes-param/codes-params-option','type' => 'Product Category']); ?>" class="btn btn-block btn-primary waves-effect">Product Category Setup</a>
+	    		<a href="<?= Url::toRoute(['/codes-param/codes-params-option','type' => 'Unit Of Measurement']); ?>" class="btn btn-block btn-primary waves-effect">Unit of Measurement Setup</a>
 	    	</div>
 
 	    	<div class="setting-column">
@@ -47,7 +47,7 @@
 
 	    	<div class="setting-column">
 	    		<h2>Customer Master</h2>
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">Customer Group Setup</a>
+	    		<a href="<?= Url::toRoute(['/codes-param/codes-params-option','type' => 'Customer Group']); ?>" class="btn btn-block btn-primary waves-effect">Customer Group Setup</a>
 	    		<a href="#" class="btn btn-block btn-primary waves-effect">Customer Transaction No Setup</a>
 	    	</div>
 

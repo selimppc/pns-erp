@@ -31,3 +31,15 @@ form div.required label.control-label:after {
     box-shadow: 5px 3px 5px #aaa;
     border-radius: 3px;
 }
+
+.form-width-45{
+    width: 45%;
+}
+
+.pull-left{
+    float: left;
+}
+
+.pull-right{
+    float: right;
+}

@@ -15,8 +15,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+
+        <li class="breadcrumb-item"><a>Master Setup</a></li>
+
+        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/settings']); ?>">Settings</a></li>
+
+        <li class="breadcrumb-item"><a>Group Master</a></li>
+
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
-      </ol>     
+      </ol>    
      
       <div class="middle-menu-bar">
         <?= Html::a(Yii::t('app', 'Create Group One'), ['create'], ['class' => '']) ?>   

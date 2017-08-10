@@ -29,6 +29,89 @@ class CodesParamController extends Controller
         ];
     }
 
+
+
+    public function actionCodesParamsOption($type){
+
+        $model = new CodesParam();
+
+        $model->type = $type;
+
+        $searchModel = new CodesParamSearch();
+        $searchModel->type = $type;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            return $this->render('codes_params_option', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model
+            ]);
+
+        } else {
+
+            return $this->render('codes_params_option', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model
+            ]);
+        }
+
+        
+
+    }
+
+
+    public function actionUpdateCodesParams($id,$type){
+
+        $model = $this->findModel($id);
+
+        $model->type = 'Product Class';
+
+        $searchModel = new CodesParamSearch();
+        $searchModel->type = 'Product Class';
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
+            return $this->render('codes_params_option', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model
+            ]);
+
+        } else {
+            
+            return $this->render('codes_params_option', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model
+            ]);
+
+        }
+
+    }
+
+    public function actionViewCodesParams($id)
+    {
+        $model = $this->findModel($id);
+
+        $searchModel = new CodesParamSearch();
+        $searchModel->type = 'Product Class';
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('view_codes_params', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model' => $model
+        ]);
+    }
+
+
     /**
      * Lists all CodesParam models.
      * @return mixed

@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\GroupOneSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Group Ones');
+$this->title = Yii::t('app', 'Group One');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -15,8 +15,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+
+        <li class="breadcrumb-item"><a>Master Setup</a></li>
+
+        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/settings']); ?>">Settings</a></li>
+
+        <li class="breadcrumb-item"><a>Group Master</a></li>
+
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
+
+      
      
       <div class="middle-menu-bar">
         <?= Html::a(Yii::t('app', 'Create Group One'), ['create'], ['class' => '']) ?>   
@@ -44,15 +53,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                   // 'id',
                     'title',
                     'description:ntext',
-                   // 'create_by',
-                    //'updated_by',
-                    // 'created_at',
-                    // 'updated_at',
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                      'class' => 'yii\grid\ActionColumn',
+                      'template' => '{view} {update} ',
+                    ],
                 ],
             ]); ?>
         <?php Pjax::end(); ?>

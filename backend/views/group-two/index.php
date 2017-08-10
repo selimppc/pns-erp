@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\GroupTwoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Group Twos');
+$this->title = Yii::t('app', 'Group Two');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -15,11 +15,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+
+        <li class="breadcrumb-item"><a>Master Setup</a></li>
+
+        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/settings']); ?>">Settings</a></li>
+
+        <li class="breadcrumb-item"><a>Group Master</a></li>
+
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Group Twos'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create Group Two'), ['create'], ['class' => '']) ?>   
         <?= Html::a(Yii::t('app', 'Manage Group Twos'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -60,7 +67,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'created_at',
                     // 'updated_at',
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                      'class' => 'yii\grid\ActionColumn',
+                      'template' => '{view} {update} ',
+                    ],
                 ],
             ]); ?>
         <?php Pjax::end(); ?>

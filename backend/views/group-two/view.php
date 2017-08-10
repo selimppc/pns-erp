@@ -15,22 +15,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+
+        <li class="breadcrumb-item"><a>Master Setup</a></li>
+
+        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/settings']); ?>">Settings</a></li>
+
+        <li class="breadcrumb-item"><a>Group Master</a></li>
+
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
       
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create GroupTwo'), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage GroupTwo'), ['index'], ['class' => '']) ?> 
+        <?= Html::a(Yii::t('app', 'Create Group Two'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Group Two'), ['index'], ['class' => '']) ?> 
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 
-         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => '',
-                'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
