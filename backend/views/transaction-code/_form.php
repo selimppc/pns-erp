@@ -12,25 +12,40 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <div class="row">
 
-    <?= $form->field($model, 'branch_id')->textInput() ?>
+        <div class="col-md-12">
 
-    <?= $form->field($model, 'last_number')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'type',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
 
-    <?= $form->field($model, 'increment')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
 
-    <?= $form->field($model, 'created_by')->textInput() ?>
+            <?= $form->field($model, 'last_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'updated_by')->textInput() ?>
+            <?= $form->field($model, 'increment',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+                <?= $form->field($model, 'status')
+                            ->dropDownList(
+                                array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                                array ('class'=>'form-control') 
+                            ); ?>
+
+                </div>
+
+        </div>
+
+
+    </div>        
+
+
+    
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn-primary waves-effect' : 'btn-primary waves-effect']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

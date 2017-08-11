@@ -103,7 +103,7 @@ use backend\models\Currency;
                                 array ('class'=>'form-control') 
                             ); ?>
 
-            </div>
+                </div>
 
             </div>
 

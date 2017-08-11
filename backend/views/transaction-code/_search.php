@@ -17,8 +17,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'trn_code') ?>
-
     <?= $form->field($model, 'branch_id') ?>
 
     <?= $form->field($model, 'last_number') ?>

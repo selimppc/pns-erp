@@ -35,9 +35,11 @@ class TransactionCode extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['type','code','title','last_number','increment','status'],'required'],
             [['branch_id', 'created_by', 'updated_by'], 'integer'],
             [['last_number', 'increment'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
+            [['code'], 'string', 'max' => 4,'min' => 4],
             [[ 'status'], 'string', 'max' => 8],
             [['branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branch::className(), 'targetAttribute' => ['branch_id' => 'id']],
         ];
@@ -50,6 +52,9 @@ class TransactionCode extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'type' => Yii::t('app', 'Type'),
+            'code' => Yii::t('app', 'Transaction code'),
+            'title' => Yii::t('app', 'Title'),
             'branch_id' => Yii::t('app', 'Branch ID'),
             'last_number' => Yii::t('app', 'Last Number'),
             'increment' => Yii::t('app', 'Increment'),
