@@ -35,7 +35,7 @@
 	    	<div class="setting-column">
 	    		
 	    		<a href="#" class="btn btn-block btn-primary waves-effect">Group of Chart of Accounts</a>
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">Voucher Transaction Number</a>
+	    		<a href="<?= Url::toRoute(['/transaction-code','type' => 'VOUCHER NUMBER']); ?>" class="btn btn-block btn-primary waves-effect">Voucher Transaction Number</a>
 	    		
 	    	</div>
 

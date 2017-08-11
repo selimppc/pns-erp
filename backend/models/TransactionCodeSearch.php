@@ -19,7 +19,7 @@ class TransactionCodeSearch extends TransactionCode
     {
         return [
             [['id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
-            [['status', 'created_at', 'updated_at'], 'safe'],
+            [['status','code','type','created_at', 'updated_at'], 'safe'],
             [['last_number', 'increment'], 'number'],
         ];
     }
@@ -62,6 +62,8 @@ class TransactionCodeSearch extends TransactionCode
         $query->andFilterWhere([
             'id' => $this->id,
             'branch_id' => $this->branch_id,
+            'code' => $this->code,
+            'type' => $this->type,
             'last_number' => $this->last_number,
             'increment' => $this->increment,
             'created_by' => $this->created_by,

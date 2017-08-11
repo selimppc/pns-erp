@@ -48,7 +48,7 @@
 	    	<div class="setting-column">
 	    		<h2>Customer Master</h2>
 	    		<a href="<?= Url::toRoute(['/codes-param/codes-params-option','type' => 'Customer Group']); ?>" class="btn btn-block btn-primary waves-effect">Customer Group Setup</a>
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">Customer Transaction No Setup</a>
+	    		<a href="<?= Url::toRoute(['/transaction-code','type' => 'CUSTOMER TRN NUMBER']); ?>" class="btn btn-block btn-primary waves-effect">Customer Transaction No Setup</a>
 	    	</div>
 
 	    	<div class="setting-column">

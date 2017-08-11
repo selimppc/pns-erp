@@ -33,15 +33,41 @@ class TransactionCodeController extends Controller
      * Lists all TransactionCode models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($type)
     {
+        $model = new TransactionCode();
+
+        $model->type = $type;
+        $model->last_number = '0';
+        $model->increment = '1';
+
         $searchModel = new TransactionCodeSearch();
+        $searchModel->type = $type;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $model = new TransactionCode();
+            $model->last_number = '0';
+            $model->increment = '1';
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model
+            ]);
+
+        }else{
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model
+            ]);
+
+        }
+
+        
     }
 
     /**
@@ -49,11 +75,22 @@ class TransactionCodeController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($id,$type)
     {
+
+        $model = $this->findModel($id);
+
+        $searchModel = new TransactionCodeSearch();
+        $searchModel->type = $type;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model
+            ]);
+
+        
     }
 
     /**
@@ -61,16 +98,39 @@ class TransactionCodeController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($type)
     {
         $model = new TransactionCode();
 
+        $model->type = $type;
+        $model->last_number = '0';
+        $model->increment = '1';
+
+        $searchModel = new TransactionCodeSearch();
+        $searchModel->type = $type;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
+            
+            $model = new TransactionCode();
+            $model->type = $type;
+            $model->last_number = '0';
+            $model->increment = '1';
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model
             ]);
+
+        } else {
+            
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model
+            ]);
+
         }
     }
 
@@ -80,16 +140,32 @@ class TransactionCodeController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$type)
     {
         $model = $this->findModel($id);
 
+        $model->type = $type;
+
+        $searchModel = new TransactionCodeSearch();
+        $searchModel->type = $type;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
+            
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model
             ]);
+
+        } else {
+            
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model' => $model
+            ]);
+
         }
     }
 

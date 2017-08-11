@@ -34,10 +34,10 @@
 
 	    	<div class="setting-column">
 	    		
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">GRN Number Setup</a>
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">IM Transaction</a>
-          <a href="#" class="btn btn-block btn-primary waves-effect">IM Transfer Number</a>
-          <a href="#" class="btn btn-block btn-primary waves-effect">IM Adjustment Transaction Number</a>
+	    		<a href="<?= Url::toRoute(['/transaction-code','type' => 'GRN NUMBER']); ?>" class="btn btn-block btn-primary waves-effect">GRN Number Setup</a>
+	    		<a href="<?= Url::toRoute(['/transaction-code','type' => 'IM TRANSACTION']); ?>" class="btn btn-block btn-primary waves-effect">IM Transaction</a>
+          <a href="<?= Url::toRoute(['/transaction-code','type' => 'IM Transfer Number']); ?>" class="btn btn-block btn-primary waves-effect">IM Transfer Number</a>
+          <a href="<?= Url::toRoute(['/transaction-code','type' => 'ADJUSTMENT NUMBER']); ?>" class="btn btn-block btn-primary waves-effect">IM Adjustment Transaction Number</a>
 	    		
 	    	</div>
 

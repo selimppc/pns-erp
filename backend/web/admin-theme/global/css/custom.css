@@ -36,6 +36,14 @@ form div.required label.control-label:after {
     width: 45%;
 }
 
+.form-width-35{
+    width: 35%;
+}
+
+.form-width-55{
+    width: 55%;
+}
+
 .pull-left{
     float: left;
 }

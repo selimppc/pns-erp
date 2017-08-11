@@ -34,8 +34,8 @@
 
 	    	<div class="setting-column">
 	    		
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">Requisition Number</a>
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">Purchase Order Number</a>
+	    		<a href="<?= Url::toRoute(['/transaction-code','type' => 'REQUISITION NUMBER']); ?>" class="btn btn-block btn-primary waves-effect">Requisition Number</a>
+	    		<a href="<?= Url::toRoute(['/transaction-code','type' => 'PURCHASE ORDER NUMBER']); ?>" class="btn btn-block btn-primary waves-effect">Purchase Order Number</a>
 	    		
 	    	</div>
 

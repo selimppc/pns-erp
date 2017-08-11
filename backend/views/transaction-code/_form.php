@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
         <div class="col-md-12">
 
-            <?= $form->field($model, 'type',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+            <?= $form->field($model, 'type',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['readonly' => $model->type]) ?>
 
             <?= $form->field($model, 'code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
 
