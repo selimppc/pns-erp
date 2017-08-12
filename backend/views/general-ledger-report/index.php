@@ -35,7 +35,7 @@
 	    	<div class="setting-column">
 	    		
 	    		<a href="<?= Url::toRoute(['/report/consolidated-trial-balance']); ?>" class="btn btn-block btn-primary waves-effect">Consolidated Trial Balance</a>
-	    		<a href="<?= Url::toRoute(['/report/trial-balance-for-aLL']); ?>" class="btn btn-block btn-primary waves-effect">Trial Balance for ALL</a>
+	    		<a href="<?= Url::toRoute(['/report/trial-balance-all']); ?>" class="btn btn-block btn-primary waves-effect">Trial Balance for ALL</a>
           <a href="<?= Url::toRoute(['/report/chart-of-account-list']); ?>" class="btn btn-block btn-primary waves-effect">Chart of Account List</a>
           <a href="<?= Url::toRoute(['/report/journal-transaction']); ?>" class="btn btn-block btn-primary waves-effect">Journal Transaction</a>
 	    		
