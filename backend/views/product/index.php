@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Master Setup</li>
         <li class="breadcrumb-item active">Product</li>
       </ol>
      
@@ -46,8 +47,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             #'id',
-            'product_code',
-            'title',           
+            [
+              'attribute' => 'product_code',
+              'format' => 'raw',
+              'value' => function ($model) {
+                  return Html::a($model->product_code, ['/product/view', 'id' => $model->id]);
+              },
+           ], 
+           [
+              'attribute' => 'title',
+              'format' => 'raw',
+              'value' => function ($model) {
+                  return Html::a($model->title, ['/product/view', 'id' => $model->id]);
+              },
+           ],                   
              'model',
              'size',
              'origin',
@@ -58,10 +71,21 @@ $this->params['breadcrumbs'][] = $this->title;
                }
              ],
             
-
-            [
-            'header' => 'Action',
-            'class' => 'yii\grid\ActionColumn'
+             [
+                'header' => 'Action',
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} ',
+                'buttons' => [
+                  'update' => function ($url,$model) {
+                      $url =  $url;
+                      return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                    },
+                    'view' => function ($url,$model) {
+                      $url =  $url;
+                      return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                    },
+                  
+                ],
             ],
         ],
     ]); ?>

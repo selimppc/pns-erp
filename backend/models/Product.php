@@ -201,6 +201,19 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(Currency::className(), ['id' => 'currency_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreatedBy()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
+     public function getUpdatedBy()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
      /**
      * @return \yii\db\ActiveQuery
      */

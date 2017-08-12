@@ -97,3 +97,7 @@ form div.required label.control-label:after {
 .kv-date-calendar .glyphicon-calendar{
         margin-left: -7px;
 }
+
+.table td:hover a{
+    text-decoration: underline;
+}

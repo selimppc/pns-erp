@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Master Setup</li>
+        <li class="breadcrumb-item">View</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
       
@@ -24,13 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Manage Products'), ['index'], ['class' => '']) ?> 
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 
-         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => '',
-                'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -55,8 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'product_code',
             'title',
             'description:ntext',
-            'image',
-            'thumb_image',
+            
             [
                 'label'  => 'Product Class',
                 'value'  => isset($model->product_class)?$model->product_class->title:''
@@ -65,51 +59,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'  => 'Product Group',
                 'value'  => isset($model->product_group)?$model->product_group->title:''
             ],
-            [
-                'label'  => 'Product Category',
-                'value'  => isset($model->product_category)?$model->product_category->title:''
-            ],           
+                     
             [
                 'label'  => 'Currency',
                 'value'  => isset($model->currency)?$model->currency->title:''
             ],
+            'origin', 
+            'stock_type', 
             'model',
-            'size',
-            'origin',
-            'exchange_rate',
-            'sell_rate',
-            'cost_price',
+            'size', 
             [
-                'label'  => 'Product Sell Unit of measurement',
-                'value'  => isset($model->product_sell_uom)?$model->product_sell_uom->title:''
+                'label'  => 'Created By',
+                'value'  => isset($model->createdBy)?$model->createdBy->email:''
             ],
-            'sell_uom_qty',
             [
-                'label'  => 'Product purchase Unit of measurement',
-                'value'  => isset($model->product_purchase_uom)?$model->product_purchase_uom->title:''
-            ],
-            'purchase_uom_qty',
-            'sell_tax',
-            [
-                'label'  => 'Product stock Unit of measurement',
-                'value'  => isset($model->product_stock_uom)?$model->product_stock_uom->title:''
-            ],
-            'stock_uom_qty',
-            'pack_size',
-            'stock_type',
-            'generic',
-            [
-                'label'  => 'Supplier',
-                'value'  => isset($model->supplier)?$model->supplier->supplier_code:''
-            ],
-            'manufacturer_code',
-            'max_level',
-            'min_level',
-            're_order',
-           # 'created_by',
-           # 'updated_by',
-            #'created_at',
-            #'updated_at',
+                'label'  => 'Updated By',
+                'value'  => isset($model->updatedBy)?$model->updatedBy->email:''
+            ],             
+            'created_at',
+            'updated_at',
         ],
     ]) ?>
 

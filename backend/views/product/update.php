@@ -17,7 +17,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
-        <li class="breadcrumb-item active">Users</li>
+        <li class="breadcrumb-item">Master Setup</li>
+        <li class="breadcrumb-item">Update</li>
+        <li class="breadcrumb-item active"><?=$this->title?></li>
       </ol>     
      
       <div class="middle-menu-bar">
