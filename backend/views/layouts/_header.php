@@ -14,12 +14,14 @@
       data-toggle="collapse">
         <i class="icon md-more" aria-hidden="true"></i>
       </button>
-      <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
-        <a href="<?=Url::base('')?>">
+      <a href="<?=Url::base('')?>">
+        <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">          
           <img class="navbar-brand-logo" src="<?=Url::base('')?>/admin-theme/iconbar/assets/images/logo@2x.png" title="Remark">
           <span class="navbar-brand-text hidden-xs-down"> ERP</span>
-        </a>
-      </div>
+          
+        </div>
+      </a>
+
       <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-search"
       data-toggle="collapse">
         <span class="sr-only">Toggle Search</span>
