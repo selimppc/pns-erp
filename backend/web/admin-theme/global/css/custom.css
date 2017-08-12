@@ -6,6 +6,10 @@ form div.required label.control-label:after {
 	top: 8px;
 }
 
+.navbar-brand-text{
+    color: #fff;
+}
+
 .setting-column h2{
 	text-align: center;
     background: #FFCCFF;

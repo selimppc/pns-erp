@@ -15,8 +15,10 @@
         <i class="icon md-more" aria-hidden="true"></i>
       </button>
       <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
-        <img class="navbar-brand-logo" src="<?=Url::base('')?>/admin-theme/iconbar/assets/images/logo@2x.png" title="Remark">
-        <span class="navbar-brand-text hidden-xs-down"> ERP</span>
+        <a href="<?=Url::base('')?>">
+          <img class="navbar-brand-logo" src="<?=Url::base('')?>/admin-theme/iconbar/assets/images/logo@2x.png" title="Remark">
+          <span class="navbar-brand-text hidden-xs-down"> ERP</span>
+        </a>
       </div>
       <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-search"
       data-toggle="collapse">
@@ -202,7 +204,7 @@
 
          
           <li class="nav-item dropdown">
-            <a style="width: 75px;padding: 10px 0 0 0;" class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
+            <a style="width: 75px;padding: 10px 0 0 0;" class="nav-link navbar-avatar" data-toggle="dropdown" href="<?=Url::base('')?>" aria-expanded="false"
             data-animation="scale-up" role="button">
               <span class="avatar avatar-online" style="width:50px;margin-top:-5px;">
                 <img src="<?=Url::base('')?>/admin-theme/global/portraits/logo_pns_group.png" alt="...">
