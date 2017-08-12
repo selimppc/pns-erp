@@ -1,9 +1,10 @@
-<?php
+	<?php
 	use yii\helpers\Url;	
 	use yii\helpers\Html;
 	use yii\widgets\ActiveForm;
 	use backend\models\Customer;
 	use backend\models\Branch;
+	use backend\models\Product;
 	use yii\helpers\ArrayHelper;
 	use kartik\date\DatePicker;
 
@@ -43,7 +44,7 @@
 
 	  		<div class="row">
 
-	  			<div class="col-md-4">
+	  			<div class="col-md-3">
 		    		<div class="form-group form-material" data-plugin="formMaterial">
 
 		                <?= $form->field($model, 'branch')
@@ -55,7 +56,7 @@
 		            </div>	
 	            </div>
 
-	  			<div class="col-md-4">
+	  			<div class="col-md-3">
 
 	  				<?php
 			    		echo '<label>From Date</label>';
@@ -72,7 +73,7 @@
 
 	  			</div>
 
-	  			<div class="col-md-4">
+	  			<div class="col-md-3">
 
 	  				<?php
 			    		echo '<label>To Date</label>';
@@ -88,6 +89,18 @@
 			    	?>
 
 	  			</div>
+
+	  			<div class="col-md-3">
+		    		<div class="form-group form-material" data-plugin="formMaterial">
+
+		                <?= $form->field($model, 'product')
+			                        ->dropDownList(
+			                            ArrayHelper::map(Product::find()->all(), 'id', 'title'),
+			                             ['class'=>'form-control floating','prompt'=>'-Select Product-',]
+			                        ); ?>
+
+		            </div>	
+	            </div>
 
 	  		</div>
 

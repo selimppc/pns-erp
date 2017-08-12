@@ -1,9 +1,10 @@
-<?php
+	<?php
 	use yii\helpers\Url;	
 	use yii\helpers\Html;
 	use yii\widgets\ActiveForm;
 	use backend\models\Customer;
 	use backend\models\Branch;
+	use backend\models\Product;
 	use yii\helpers\ArrayHelper;
 	use kartik\date\DatePicker;
 
@@ -58,7 +59,7 @@
 	  			<div class="col-md-4">
 
 	  				<?php
-			    		echo '<label>From Date</label>';
+			    		echo '<label>Date</label>';
 						echo DatePicker::widget([
 							'name' => 'from_date', 
 							'value' => date('Y-m-d'),
@@ -72,22 +73,6 @@
 
 	  			</div>
 
-	  			<div class="col-md-4">
-
-	  				<?php
-			    		echo '<label>To Date</label>';
-						echo DatePicker::widget([
-							'name' => 'to_date', 
-							'value' => date('Y-m-d'),
-							'options' => ['placeholder' => 'Select issue date ...'],
-							'pluginOptions' => [
-								'format' => 'yyyy-m-dd',
-								'todayHighlight' => true
-							]
-						]);
-			    	?>
-
-	  			</div>
 
 	  		</div>
 

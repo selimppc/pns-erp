@@ -14,11 +14,15 @@ class BranchMaster extends \yii\db\ActiveRecord
 	public $branch;
 	public $from_date;
 	public $to_date;
+    public $year;
+    public $month;
+    public $report_type;
+    public $product;
 
 	public function rules()
     {
         return [           
-            [['branch','from_date','to_date'], 'safe'],            
+            [['branch','from_date','to_date','year','month','report_type','product'], 'safe'],            
         ];
     }
 
@@ -27,7 +31,11 @@ class BranchMaster extends \yii\db\ActiveRecord
         return [
             'branch'  => 'Branch',
             'from_date' => 'From Date',
-            'to_date' => 'To Date'
+            'to_date' => 'To Date',
+            'year' => 'Year',
+            'month' => 'Month',
+            'report_type' => 'Report Type',
+            'product' => 'Product'
         ];
     }
 
