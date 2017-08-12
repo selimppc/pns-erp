@@ -34,11 +34,11 @@
 
 	    	<div class="setting-column">
 	    		
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">Item Ledger</a>
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">Inventory Movement</a>
-          <a href="#" class="btn btn-block btn-primary waves-effect">Stock Dispatch</a>
-          <a href="#" class="btn btn-block btn-primary waves-effect">Stock Balance</a>
-          <a href="#" class="btn btn-block btn-primary waves-effect">Stock Balance after Adjustment</a>
+	    		<a href="<?= Url::toRoute(['/report/item-ledger']); ?>" class="btn btn-block btn-primary waves-effect">Item Ledger</a>
+	    		<a href="<?= Url::toRoute(['/report/inventory-movement']); ?>" class="btn btn-block btn-primary waves-effect">Inventory Movement</a>
+          <a href="<?= Url::toRoute(['/report/stock-dispatch']); ?>" class="btn btn-block btn-primary waves-effect">Stock Dispatch</a>
+          <a href="<?= Url::toRoute(['/report/stock-balance']); ?>" class="btn btn-block btn-primary waves-effect">Stock Balance</a>
+          <a href="<?= Url::toRoute(['/report/stock-balance-after-adjustment']); ?>" class="btn btn-block btn-primary waves-effect">Stock Balance after Adjustment</a>
 	    		
 	    	</div>
 

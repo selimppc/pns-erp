@@ -34,9 +34,9 @@
 
       	<div class="setting-column">
 
-      		<a href="#" class="btn btn-block btn-primary waves-effect">Product List Report</a>
+      		<a href="<?= Url::toRoute(['/report/product-list']); ?>" class="btn btn-block btn-primary waves-effect">Product List Report</a>
 
-      		<a href="#" class="btn btn-block btn-primary waves-effect">Customer Ledger Report</a>
+      		<a href="<?= Url::toRoute(['/report/customer-ledger-report']); ?>" class="btn btn-block btn-primary waves-effect">Customer Ledger Report</a>
 
       	</div>
 

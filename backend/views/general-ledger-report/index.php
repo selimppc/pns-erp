@@ -34,17 +34,17 @@
 
 	    	<div class="setting-column">
 	    		
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">Consolidated Trial Balance</a>
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">Trial Balance for ALL</a>
-          <a href="#" class="btn btn-block btn-primary waves-effect">Chart of Account List</a>
-          <a href="#" class="btn btn-block btn-primary waves-effect">Journal Transaction</a>
+	    		<a href="<?= Url::toRoute(['/report/consolidated-trial-balance']); ?>" class="btn btn-block btn-primary waves-effect">Consolidated Trial Balance</a>
+	    		<a href="<?= Url::toRoute(['/report/trial-balance-for-aLL']); ?>" class="btn btn-block btn-primary waves-effect">Trial Balance for ALL</a>
+          <a href="<?= Url::toRoute(['/report/chart-of-account-list']); ?>" class="btn btn-block btn-primary waves-effect">Chart of Account List</a>
+          <a href="<?= Url::toRoute(['/report/journal-transaction']); ?>" class="btn btn-block btn-primary waves-effect">Journal Transaction</a>
 	    		
 	    	</div>
 
         <div class="setting-column">
           
-          <a href="#" class="btn btn-block btn-primary waves-effect">Balance Sheet</a>
-          <a href="#" class="btn btn-block btn-primary waves-effect">Profit & Loss</a>
+          <a href="<?= Url::toRoute(['/report/balance-sheet']); ?>" class="btn btn-block btn-primary waves-effect">Balance Sheet</a>
+          <a href="<?= Url::toRoute(['/report/profit-loss']); ?>" class="btn btn-block btn-primary waves-effect">Profit & Loss</a>
           
         </div>
 

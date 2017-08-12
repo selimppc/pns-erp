@@ -34,7 +34,7 @@
 
 	    	<div class="setting-column">
 	    		
-	    		<a href="#" class="btn btn-block btn-primary waves-effect">Purchase Order Report</a>
+	    		<a href="<?= Url::toRoute(['/report/purchase-order-report']); ?>" class="btn btn-block btn-primary waves-effect">Purchase Order Report</a>
 	    		
 	    	</div>
 
