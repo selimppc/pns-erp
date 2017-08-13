@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Settings</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
       
@@ -71,7 +72,13 @@ $this->params['breadcrumbs'][] = $this->title;
                   'columns' => [
                       ['class' => 'yii\grid\SerialColumn'],
                       'type',
-                      'code',                     
+                      [
+                        'attribute' => 'code',
+                        'format' => 'raw',
+                        'value' => function ($model) {
+                            return Html::a($model->code, ['/transaction-code/view', 'id' => $model->id,'type' => $model->type]);
+                        },
+                      ],                     
                       'last_number',
                       'increment',
                       

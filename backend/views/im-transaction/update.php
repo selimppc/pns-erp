@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">General Ledger</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>     
      

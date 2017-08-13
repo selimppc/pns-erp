@@ -22,8 +22,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
         <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/settings']); ?>">Settings</a></li>
 
-        <li class="breadcrumb-item"><a>Group Master</a></li>
-
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>    
      

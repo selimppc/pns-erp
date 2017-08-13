@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">General Ledger</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      
@@ -43,31 +44,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-
-                    'id',
+                    
                     'transaction_number',
                     'product_id',
                     'branch_id',
                     'batch_number',
-                    // 'date',
-                    // 'expire_date',
-                    // 'uom',
-                    // 'quantity',
-                    // 'sign',
-                    // 'foreign_rate',
-                    // 'rate',
-                    // 'total_price',
-                    // 'base_value',
-                    // 'reference_number',
-                    // 'reference_row',
-                    // 'note:ntext',
-                    // 'status',
-                    // 'created_by',
-                    // 'updated_by',
-                    // 'created_at',
-                    // 'updated_at',
-
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'header' => 'Action',
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} ',
+                        'buttons' => [
+                          'update' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                            },
+                            'view' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                            },
+                          
+                        ],
+                    ],
                 ],
             ]); ?>
 

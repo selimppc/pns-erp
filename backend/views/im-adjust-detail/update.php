@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\ImAdjustDetail */
 
-$this->title = 'Update Adjust Detail: ' . $model->id;
+$this->title = 'Update Stock Adjustment: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Im Adjust Details', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
@@ -14,13 +14,14 @@ $this->params['breadcrumbs'][] = 'Update';
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Inventory</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>     
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Adjust Detail'), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage Adjust Detail'), ['index'], ['class' => '']) ?>
-        <?= Html::a(Yii::t('app', 'Create Adjust Head'), ['/im-adjust-head'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create Stock Adjustment'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Stock Adjustment'), ['index'], ['class' => '']) ?>
+        <?= Html::a(Yii::t('app', 'Create Stock Adjustment Head'), ['/im-adjust-head'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    

@@ -20,13 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/settings']); ?>">Settings</a></li>
 
-        <li class="breadcrumb-item"><a>Group Master</a></li>
-
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Group Fours'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create Group Four'), ['create'], ['class' => '']) ?>   
         <?= Html::a(Yii::t('app', 'Manage Group Fours'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -60,7 +58,13 @@ $this->params['breadcrumbs'][] = $this->title;
                       return $data->groupThree->title;
                   },
                 ],
-                'title',
+                [
+                  'attribute' => 'title',
+                  'format' => 'raw',
+                  'value' => function ($model) {
+                        return Html::a($model->title, ['/group-four/view', 'id' => $model->id]);
+                    },
+                ],
                 'description:ntext',
 
                 [

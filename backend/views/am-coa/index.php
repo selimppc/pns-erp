@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">General Ledger</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      
@@ -49,7 +50,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     //'id',
                     'account_code',
-                    'title',
+                    [
+                      'attribute' => 'title',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return Html::a($model->title, ['/am-coa/view', 'id' => $model->id]);
+                      },
+                    ],
                     'description:ntext',
                     'account_type',
                     // 'account_usage',
@@ -65,7 +72,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'created_at',
                     // 'updated_at',
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'header' => 'Action',
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} ',
+                        'buttons' => [
+                          'update' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                            },
+                            'view' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                            },
+                          
+                        ],
+                    ],
                 ],
             ]); ?>
         <?php Pjax::end(); ?>

@@ -33,7 +33,7 @@ class TransactionCodeController extends Controller
      * Lists all TransactionCode models.
      * @return mixed
      */
-    public function actionIndex($type)
+    public function actionIndex($type='')
     {
         $model = new TransactionCode();
 
@@ -75,7 +75,7 @@ class TransactionCodeController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id,$type)
+    public function actionView($id,$type='')
     {
 
         $model = $this->findModel($id);
@@ -98,7 +98,7 @@ class TransactionCodeController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($type)
+    public function actionCreate($type='')
     {
         $model = new TransactionCode();
 
@@ -140,7 +140,7 @@ class TransactionCodeController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id,$type)
+    public function actionUpdate($id,$type='')
     {
         $model = $this->findModel($id);
 

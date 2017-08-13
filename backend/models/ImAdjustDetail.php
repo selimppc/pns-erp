@@ -80,8 +80,8 @@ class ImAdjustDetail extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'im_adjust_head_id' => Yii::t('app', 'Im Adjust Head ID'),
-            'product_id' => Yii::t('app', 'Product ID'),
+            'im_adjust_head_id' => Yii::t('app', 'Stock Adjustment Head'),
+            'product_id' => Yii::t('app', 'Product'),
             'batch_number' => Yii::t('app', 'Batch Number'),
             'expire_date' => Yii::t('app', 'Expire Date'),
             'uom' => Yii::t('app', 'Uom'),

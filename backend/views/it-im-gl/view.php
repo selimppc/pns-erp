@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\ItImGl */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Im Gls', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'IM to GL', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -15,22 +15,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Inventory</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
       
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Im Gls'), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage Im Gls'), ['index'], ['class' => '']) ?> 
+        <?= Html::a(Yii::t('app', 'Create IM to GL'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage IM to GL'), ['index'], ['class' => '']) ?> 
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 
-         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => '',
-                'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    

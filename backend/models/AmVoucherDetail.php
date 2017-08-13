@@ -88,9 +88,9 @@ class AmVoucherDetail extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'am_voucher_head_id' => 'Am Voucher Head',
-            'am_coa_id' => 'Am Coa',
-            'am_sub_coa_id' => 'Am Sub Coa',
+            'am_voucher_head_id' => 'Voucher Head',
+            'am_coa_id' => 'Coa',
+            'am_sub_coa_id' => 'Sub Coa',
             'currency_id' => 'Currency',
             'exchange_rate' => 'Exchange Rate',
             'prime_amount' => 'Prime Amount',

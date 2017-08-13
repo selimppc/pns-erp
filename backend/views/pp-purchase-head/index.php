@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\PpPurchaseHeadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Purchase Heads';
+$this->title = 'Purchase Order';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -15,12 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Purchase</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Purchase Heads'), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage Purchase Heads'), ['index'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create '.$this->title), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage '.$this->title), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -43,27 +44,29 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-
-                'id',
+               
                 'po_order_number',
                 'date',
                 'supplier_id',
                 'pay_terms',
-                // 'delivery_date',
-                // 'branch_id',
-                // 'tax_rate',
-                // 'tax_amount',
-                // 'discount_rate',
-                // 'discount_amount',
-                // 'prime_amount',
-                // 'net_amount',
-                // 'status',
-                // 'created_by',
-                // 'updated_by',
-                // 'created_at',
-                // 'updated_at',
+                
 
-                ['class' => 'yii\grid\ActionColumn'],
+                [
+                    'header' => 'Action',
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{view} {update} ',
+                    'buttons' => [
+                      'update' => function ($url,$model) {
+                          $url =  $url;
+                          return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                        },
+                        'view' => function ($url,$model) {
+                          $url =  $url;
+                          return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                        },
+                      
+                    ],
+                ],
             ],
         ]); ?>
 

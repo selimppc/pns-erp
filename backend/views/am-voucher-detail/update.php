@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\AmVoucherDetail */
 
-$this->title = 'Update Am Voucher Detail: ' . $model->id;
+$this->title = 'Update Voucher: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Am Voucher Details', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">General Ledger</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      

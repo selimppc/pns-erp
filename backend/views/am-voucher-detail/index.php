@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\AmVoucherDetailSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Voucher Details';
+$this->title = 'Voucher';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -15,12 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">General Ledger</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Voucher Details'), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage Voucher Details'), ['index'], ['class' => '']) ?> 
+        <?= Html::a(Yii::t('app', 'Create Voucher'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Voucher'), ['index'], ['class' => '']) ?> 
 
         <?= Html::a(Yii::t('app', 'Create Voucher Head'), ['/am-voucher-head'], ['class' => '']) ?>   
         <?php
@@ -45,24 +46,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-
-                    'id',
+                   
                     'am_voucher_head_id',
                     'am_coa_id',
                     'am_sub_coa_id',
                     'currency_id',
-                    // 'exchange_rate',
-                    // 'prime_amount',
-                    // 'base_amount',
-                    // 'branch_id',
-                    // 'note:ntext',
-                    // 'status',
-                    // 'created_by',
-                    // 'updated_by',
-                    // 'created_at',
-                    // 'updated_at',
+                    
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'header' => 'Action',
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} ',
+                        'buttons' => [
+                          'update' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                            },
+                            'view' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                            },
+                          
+                        ],
+                    ],
                 ],
             ]); ?>
 

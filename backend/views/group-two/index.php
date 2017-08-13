@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('app', 'Group Two');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?> 
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -19,8 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <li class="breadcrumb-item"><a>Master Setup</a></li>
 
         <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/settings']); ?>">Settings</a></li>
-
-        <li class="breadcrumb-item"><a>Group Master</a></li>
 
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
@@ -45,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
      
       <div class="panel-body">
 
-        <?php Pjax::begin(); ?> 
+        
               <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
@@ -60,7 +58,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $data->groupOne->title;
                         },
                     ],
-                    'title',
+                    [
+                      'attribute' => 'title',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                            return Html::a($model->title, ['/group-four/view', 'id' => $model->id]);
+                        },
+                    ],
                     'description:ntext',
                     //'created_by',
                     // 'updated_by',
@@ -73,9 +77,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ]); ?>
-        <?php Pjax::end(); ?>
+        
 
       </div>
 
     </div>
 </div>
+<?php Pjax::end(); ?>

@@ -19,11 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
 
-        <li class="breadcrumb-item"><a>Master Setup</a></li>
-
         <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/settings']); ?>">Settings</a></li>
-
-        <li class="breadcrumb-item"><a>Product Master</a></li>
 
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
@@ -78,8 +74,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
                   
-                    'code',
-                    'title',
+                    [
+                      'attribute' => 'code',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return Html::a($model->code, ['/codes-param/view-codes-params', 'id' => $model->id,'type' => $model->type]);
+                      },
+                    ],
+                    [
+                      'attribute' => 'title',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return Html::a($model->title, ['/codes-param/view-codes-params', 'id' => $model->id,'type' => $model->type]);
+                      },
+                    ],
                     'long',                   
 
                     [

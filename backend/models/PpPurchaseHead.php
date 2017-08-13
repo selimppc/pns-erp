@@ -87,7 +87,7 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'po_order_number' => Yii::t('app', 'Po Order Number'),
+            'po_order_number' => Yii::t('app', 'Purchase Order Number'),
             'date' => Yii::t('app', 'Date'),
             'supplier_id' => Yii::t('app', 'Supplier'),
             'pay_terms' => Yii::t('app', 'Pay Terms'),

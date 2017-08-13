@@ -70,8 +70,8 @@ class ItImGl extends \yii\db\ActiveRecord
             'branch_id' => Yii::t('app', 'Branch'),
             'transaction_code' => Yii::t('app', 'Transaction Code'),
             'group' => Yii::t('app', 'Group'),
-            'dr_coa_id' => Yii::t('app', 'Dr Coa'),
-            'cr_coa_id' => Yii::t('app', 'Cr Coa'),
+            'dr_coa_id' => Yii::t('app', 'Debit A/C'),
+            'cr_coa_id' => Yii::t('app', 'Credit A/C'),
         ];
     }
 
