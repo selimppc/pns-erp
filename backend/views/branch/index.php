@@ -14,11 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Master Setup</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Branches'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create Branch'), ['create'], ['class' => '']) ?>   
         <?= Html::a(Yii::t('app', 'Manage Branches'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -43,30 +44,46 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                   // 'id',
-                    'branch_code',
-                    'title',
+                    [
+                      'attribute' => 'branch_code',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return Html::a($model->branch_code, ['/branch/view', 'id' => $model->id]);
+                      },
+                    ],
+                    [
+                      'attribute' => 'title',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return Html::a($model->title, ['/branch/view', 'id' => $model->id]);
+                      },
+                    ],                    
+                    
                     [
                      'label'=>'Currency',
                      'format' => 'raw',
                      'value'=>function ($data) {
                           return $data->currency->title;
                       },
-                    ],
-                   // 'exchange_rate',
-                    // 'contact_person',
-                    // 'designation',
-                    // 'mailing_addess:ntext',
-                    // 'phone',
-                    // 'fax',
-                    // 'cell',
+                    ],                   
                      'status',
-                    // 'created_by',
-                    // 'updated_by',
-                    // 'created_at',
-                    // 'updated_at',
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'header' => 'Action',
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} ',
+                        'buttons' => [
+                          'update' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                            },
+                            'view' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                            },
+                          
+                        ],
+                    ],
                 ],
             ]); ?>
         <?php Pjax::end(); ?>
