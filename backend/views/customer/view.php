@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Master Setup</li>
+        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/customer']); ?>">Customer</a></li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
       
@@ -24,13 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Manage Customers'), ['index'], ['class' => '']) ?> 
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 
-         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => '',
-                'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -57,28 +52,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'label'  => 'Branch',
                         'value'  => isset($model->branch)?$model->branch->title:''
+                    ],                    
+                    'status',
+                    [
+                        'label'  => 'Created By',
+                        'value'  => isset($model->createdBy)?$model->createdBy->email:''
                     ],
                     [
-                        'label'  => 'Customer Group',
-                        'value'  => isset($model->customer_group_data)?$model->customer_group_data->title:''
-                    ],
-                    'api_id',
-                    'address:ntext',
-                    'terotorry',
-                    'type',
-                    'cell',
-                    'phone',
-                    'fax',
-                    'email:email',                    
-                    'market',
-                    'sales_person',
-                    'credit_limit',
-                    'hub',
-                    'status',
-                   # 'created_by',
-                    #'updated_by',
-                    #'created_at',
-                    #'updated_at',
+                        'label'  => 'Updated By',
+                        'value'  => isset($model->updatedBy)?$model->updatedBy->email:''
+                    ], 
+                    'created_at',
+                    'updated_at',
                 ],
             ]) ?>
 

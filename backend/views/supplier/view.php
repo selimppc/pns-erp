@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
         <li class="breadcrumb-item">Master Setup</li>
-        <li class="breadcrumb-item">Supplier</li>
+        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/supplier']); ?>">Supplier</a></li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
       

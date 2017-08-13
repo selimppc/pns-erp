@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Master Setup</li>        
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      
@@ -45,30 +46,41 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                   // 'id',
-                    'customer_code',
-                    'name',
-                   // 'api_id',
-                   // 'address:ntext',
-                    // 'terotorry',
-                    // 'group_one_id',
-                    // 'type',
-                    // 'cell',
-                    // 'phone',
-                    // 'fax',
-                    // 'email:email',
-                    // 'branch_id',
-                    // 'market',
-                    // 'sales_person',
-                    // 'credit_limit',
-                    // 'hub',
-                     'status',
-                    // 'created_by',
-                    // 'updated_by',
-                    // 'created_at',
-                    // 'updated_at',
+                   [
+                      'attribute' => 'customer_code',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return Html::a($model->customer_code, ['/customer/view', 'id' => $model->id]);
+                      },
+                   ],
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                   [
+                      'attribute' => 'name',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return Html::a($model->name, ['/customer/view', 'id' => $model->id]);
+                      },
+                   ],
+                   
+                     'status',
+                   
+
+                    [
+                        'header' => 'Action',
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} ',
+                        'buttons' => [
+                          'update' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                            },
+                            'view' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                            },
+                          
+                        ],
+                    ],
                 ],
             ]); ?>
         <?php Pjax::end(); ?>
