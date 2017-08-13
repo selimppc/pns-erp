@@ -15,11 +15,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Master Steup</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Suppliers'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create Supplier'), ['create'], ['class' => '']) ?>   
         <?= Html::a(Yii::t('app', 'Manage Suppliers'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -44,26 +45,35 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-
-                   // 'id',
-                    'supplier_code',
+                  
+                    [
+                      'attribute' => 'supplier_code',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return Html::a($model->supplier_code, ['/supplier/view', 'id' => $model->id]);
+                      },
+                    ],
+                   
                     'org_name',
-                    'address:ntext',
-                   // 'state',
-                    // 'zip',
-                    // 'contct_person',
-                    // 'phone',
-                    // 'fax',
-                    // 'cell',
-                    // 'email:email',
-                    // 'web_url:url',
-                     'status',
-                    // 'created_by',
-                    // 'updated_by',
-                    // 'created_at',
-                    // 'updated_at',
-
-                    ['class' => 'yii\grid\ActionColumn'],
+                    'address:ntext',                   
+                    'status',                    
+                    [
+                        'header' => 'Action',
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} ',
+                        'buttons' => [
+                          'update' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                            },
+                            'view' => function ($url,$model) {
+                              $url =  $url;
+                              return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                            },
+                          
+                        ],
+                    ],
+                    
                 ],
             ]); ?>
         <?php Pjax::end(); ?>

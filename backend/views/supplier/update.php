@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Supplier */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
+$this->title = Yii::t('app', 'Update :: {modelClass}: ', [
     'modelClass' => 'Supplier',
 ]) . $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Suppliers'), 'url' => ['index']];
@@ -18,6 +18,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Master Setup</li>
+        <li class="breadcrumb-item">Supplier</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      

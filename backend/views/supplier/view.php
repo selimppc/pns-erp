@@ -15,22 +15,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <li class="breadcrumb-item">Master Setup</li>
+        <li class="breadcrumb-item">Supplier</li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
       
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Suppliers'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create Supplier'), ['create'], ['class' => '']) ?>   
         <?= Html::a(Yii::t('app', 'Manage Suppliers'), ['index'], ['class' => '']) ?> 
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 
-         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => '',
-                'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -54,20 +49,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'supplier_code',
                     'org_name',
-                    'address:ntext',
-                    'state',
-                    'zip',
-                    'contct_person',
-                    'phone',
-                    'fax',
-                    'cell',
-                    'email:email',
-                    'web_url:url',
+                    'address:ntext',                    
                     'status',
-                   # 'created_by',
-                   # 'updated_by',
-                   # 'created_at',
-                    #'updated_at',
+                    [
+                        'label'  => 'Created By',
+                        'value'  => isset($model->createdBy)?$model->createdBy->email:''
+                    ],
+                    [
+                        'label'  => 'Updated By',
+                        'value'  => isset($model->updatedBy)?$model->updatedBy->email:''
+                    ], 
+                    'created_at',
+                    'updated_at',
                 ],
             ]) ?>
 
