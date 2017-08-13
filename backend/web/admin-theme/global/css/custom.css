@@ -1,3 +1,6 @@
+ .breadcrumb,.breadcrumb-item.active,.breadcrumb-item a{
+    color: #4B0082;
+ }
 form div.required label.control-label:after {
 	content: " * ";
 	color: red;
