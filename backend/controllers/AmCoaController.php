@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\AmCoa;
 use backend\models\AmCoaSearch;
+use backend\models\TransactionCode;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

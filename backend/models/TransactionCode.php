@@ -91,6 +91,17 @@ class TransactionCode extends \yii\db\ActiveRecord
         ];
     }
 
+    public function generate_transaction_number($type='',$last_number='',$increment=''){
+
+        $number = str_pad($last_number+$increment,8,"0",STR_PAD_LEFT);
+
+        $invoice_number = $type.$number;
+
+        return $invoice_number;
+
+
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
