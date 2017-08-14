@@ -34,7 +34,7 @@ class SettingsController extends Controller
      */
     public function actionIndex()
     {
-      
+      #Yii::$app->params['global_message'];
 
         return $this->render('index');
     }
