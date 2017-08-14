@@ -2,12 +2,21 @@
 
 namespace backend\controllers;
 
+
 use Yii;
-use backend\models\PpPurchaseHead;
-use backend\models\PpPurchaseHeadSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use yii\web\NotFoundHttpException;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
+use backend\models\Model;
+use yii\web\Controller;
+
+
+use backend\models\PpPurchaseHead;
+use backend\models\PpPurchaseDetail;
+use backend\models\PpPurchaseHeadSearch;
+
 
 /**
  * PpPurchaseHeadController implements the CRUD actions for PpPurchaseHead model.
@@ -63,7 +72,7 @@ class PpPurchaseHeadController extends Controller
      */
     public function actionCreate()
     {
-        $model = new PpPurchaseHead();
+        /*$model = new PpPurchaseHead();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -71,7 +80,49 @@ class PpPurchaseHeadController extends Controller
             return $this->render('create', [
                 'model' => $model,
             ]);
+        }*/
+
+        $modelPurchaseHead = new PpPurchaseHead;
+        $modelsPurchaseDetail = [new PpPurchaseDetail];
+
+        if ($modelPurchaseHead->load(Yii::$app->request->post())) {
+
+            $modelsPurchaseDetail = Model::createMultiple(PpPurchaseDetail::classname());
+            Model::loadMultiple($modelsPurchaseDetail, Yii::$app->request->post());
+
+            // validate all models
+            $valid = $modelPurchaseHead->validate();
+            $valid = Model::validateMultiple($modelsPurchaseDetail) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+
+                try {
+                    if ($flag = $modelPurchaseHead->save(false)) {
+                        foreach ($modelsPurchaseDetail as $modelPurchaseDetail) {
+                            $modelPurchaseDetail->pp_purchase_head_id = $modelPurchaseHead->id;
+                            if (! ($flag = $modelPurchaseDetail->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelPurchaseHead->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
         }
+
+        return $this->render('create', [
+            'modelPurchaseHead' => $modelPurchaseHead,
+            'modelsPurchaseDetail' => (empty($modelsPurchaseDetail)) ? [new PpPurchaseDetail] : $modelsPurchaseDetail
+        ]);
+
     }
 
     /**
@@ -82,7 +133,7 @@ class PpPurchaseHeadController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        /*$model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -90,7 +141,53 @@ class PpPurchaseHeadController extends Controller
             return $this->render('update', [
                 'model' => $model,
             ]);
+        }*/
+
+
+        $modelPurchaseHead = $this->findModel($id);
+        $modelsPurchaseDetail = $modelPurchaseHead->ppPurchaseDetails;
+
+        if ($modelPurchaseHead->load(Yii::$app->request->post())) {
+
+            $oldIDs = ArrayHelper::map($modelsPurchaseDetail, 'id', 'id');
+            $modelsPurchaseDetail = Model::createMultiple(PpPurchaseDetail::classname(), $modelsPurchaseDetail);
+            Model::loadMultiple($modelsPurchaseDetail, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsPurchaseDetail, 'id', 'id')));
+
+            // validate all models
+            $valid = $modelPurchaseHead->validate();
+            $valid = Model::validateMultiple($modelsPurchaseDetail) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $modelPurchaseHead->save(false)) {
+                        if (!empty($deletedIDs)) {
+                            PpPurchaseDetail::deleteAll(['id' => $deletedIDs]);
+                        }
+                        foreach ($modelsPurchaseDetail as $modelPurchaseDetail) {
+                            $modelPurchaseDetail->pp_purchase_head_id = $modelPurchaseHead->id;
+                            if (! ($flag = $modelPurchaseDetail->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelPurchaseHead->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
         }
+
+        return $this->render('update', [
+            'modelPurchaseHead' => $modelPurchaseHead,
+            'modelsPurchaseDetail' => (empty($modelsPurchaseDetail)) ? [new PpPurchaseDetail] : $modelsPurchaseDetail
+        ]);
+
     }
 
     /**
@@ -101,7 +198,17 @@ class PpPurchaseHeadController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if($model){
+
+            $transaction_details = PpPurchaseDetail::deleteAll(['pp_purchase_head_id' => $id]);
+
+            if($transaction_details){
+                $model->delete();
+            }
+
+        }
 
         return $this->redirect(['index']);
     }

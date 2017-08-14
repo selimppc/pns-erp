@@ -67,7 +67,7 @@ class PpPurchaseDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pp_purchase_head_id','product_id'],'required'],
+            [['product_id'],'required'],
             [['pp_purchase_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['quantity', 'grn_quantity', 'tax_rate', 'tax_amount', 'uom_quantity', 'unit_quantity', 'purchase_rate', 'row_amount'], 'number'],
             [['created_at', 'updated_at'], 'safe'],

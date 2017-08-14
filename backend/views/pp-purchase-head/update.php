@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\PpPurchaseHead */
 
-$this->title = 'Update Purchase Order: ' . $model->id;
+$this->title = 'Update Purchase Order: ' . $modelPurchaseHead->id;
 $this->params['breadcrumbs'][] = ['label' => 'Pp Purchase Heads', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $modelPurchaseHead->id, 'url' => ['view', 'id' => $modelPurchaseHead->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 
@@ -41,7 +41,8 @@ $this->params['breadcrumbs'][] = 'Update';
 	    <div class="panel-body">
 
 	    	<?= $this->render('_form', [
-			        'model' => $model             
+              'modelPurchaseHead' => $modelPurchaseHead,
+              'modelsPurchaseDetail' => $modelsPurchaseDetail             
 			    ]) ?>
 
 	    </div>

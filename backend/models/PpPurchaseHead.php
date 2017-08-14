@@ -70,7 +70,8 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['supplier_id','branch_id','tax_rate','po_order_number'],'required'],
+           # [['supplier_id','branch_id','tax_rate','po_order_number'],'required'],
+            [['po_order_number'],'required'],
             [['date', 'delivery_date', 'created_at', 'updated_at'], 'safe'],
             [['supplier_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],
@@ -122,6 +123,8 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
     {
         return $this->hasMany(PpPurchaseDetail::className(), ['pp_purchase_head_id' => 'id']);
     }
+
+    
 
     /**
      * @return \yii\db\ActiveQuery
