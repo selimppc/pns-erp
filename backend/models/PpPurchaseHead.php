@@ -71,7 +71,7 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
     {
         return [
            # [['supplier_id','branch_id','tax_rate','po_order_number'],'required'],
-            [['po_order_number','date','delivery_date','supplier_id','pay_terms','branch_id','tax_rate','tax_amount','discount_rate','discount_amount','prime_amount','net_amount'],'required'],
+            [['po_order_number','date','delivery_date','supplier_id','pay_terms','branch_id'],'required'],
             [['date', 'delivery_date', 'created_at', 'updated_at'], 'safe'],
             [['supplier_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],

@@ -67,7 +67,7 @@ class PpPurchaseDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-             [['product_id','quantity','grn_quantity','uom','uom_quantity','purchase_rate'],'required'],
+             [['product_id','quantity','uom','uom_quantity','purchase_rate'],'required'],
            # [['product_id'],'required'],
             [['pp_purchase_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['quantity', 'grn_quantity', 'tax_rate', 'tax_amount', 'unit_quantity', 'purchase_rate', 'row_amount'], 'number'],
@@ -91,7 +91,7 @@ class PpPurchaseDetail extends \yii\db\ActiveRecord
             'grn_quantity' => Yii::t('app', 'Grn Quantity'),
             'tax_rate' => Yii::t('app', 'Tax Rate'),
             'tax_amount' => Yii::t('app', 'Tax Amount'),
-            'uom' => Yii::t('app', 'Uom'),
+            'uom' => Yii::t('app', 'Unit of Measurment'),
             'uom_quantity' => Yii::t('app', 'Uom Quantity'),
             'unit_quantity' => Yii::t('app', 'Unit Quantity'),
             'purchase_rate' => Yii::t('app', 'Purchase Rate'),

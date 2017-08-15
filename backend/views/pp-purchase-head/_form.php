@@ -47,7 +47,10 @@ $this->registerJs($js);
 
                     echo $form->field($modelPurchaseHead, 'date')->widget(DatePicker::classname(), [
                             'value' => date('Y-m-d'),
-                            'options' => ['placeholder' => 'Enter Date ...'],
+                            'options' => [
+                                'placeholder' => 'Enter Date ...',
+                                'value' => date('Y-m-d'),
+                            ],
                             'pluginOptions' => [
                                 'autoclose'=>true,
                                 'format' => 'yyyy-m-dd',
@@ -94,7 +97,10 @@ $this->registerJs($js);
 
                     echo $form->field($modelPurchaseHead, 'delivery_date')->widget(DatePicker::classname(), [
                             'value' => date('Y-m-d'),
-                            'options' => ['placeholder' => 'Enter Date ...'],
+                            'options' => [
+                                    'placeholder' => 'Enter Date ...',
+                                    'value' => date('Y-m-d'),
+                            ],
                             'pluginOptions' => [
                                 'autoclose'=>true,
                                 'format' => 'yyyy-m-dd',
@@ -121,29 +127,7 @@ $this->registerJs($js);
 
             </div>
 
-            <div class="col-md-2">
-             <?= $form->field($modelPurchaseHead, 'tax_rate')->textInput(['maxlength' => true]) ?>
-            </div> 
-
-            <div class="col-md-2">
-             <?= $form->field($modelPurchaseHead, 'tax_amount')->textInput(['maxlength' => true]) ?>
-            </div> 
-
-            <div class="col-md-2">
-             <?= $form->field($modelPurchaseHead, 'discount_rate')->textInput(['maxlength' => true]) ?>
-            </div> 
-
-            <div class="col-md-2">
-             <?= $form->field($modelPurchaseHead, 'discount_amount')->textInput(['maxlength' => true]) ?>
-            </div> 
-
-            <div class="col-md-2">
-             <?= $form->field($modelPurchaseHead, 'prime_amount')->textInput(['maxlength' => true]) ?>
-            </div> 
-
-            <div class="col-md-2">
-             <?= $form->field($modelPurchaseHead, 'net_amount')->textInput(['maxlength' => true]) ?>
-            </div> 
+            
 
 
 
@@ -162,7 +146,6 @@ $this->registerJs($js);
                 'formFields' => [
                     'product_id',
                     'quantity',
-                    'grn_quantity',
                     'uom',
                     'uom_quantity',
                     'purchase_rate'
@@ -203,10 +186,6 @@ $this->registerJs($js);
 
                         <div class="col-md-2">
                             <?= $form->field($modelPurchaseDetail, "[{$index}]quantity")->textInput(['maxlength' => true]) ?>
-                        </div>
-
-                        <div class="col-md-2">
-                            <?= $form->field($modelPurchaseDetail, "[{$index}]grn_quantity")->textInput(['maxlength' => true]) ?>
                         </div>
 
                         <div class="col-md-2">
