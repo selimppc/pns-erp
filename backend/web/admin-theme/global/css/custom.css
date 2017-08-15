@@ -104,3 +104,19 @@ form div.required label.control-label:after {
 .table td:hover a{
     text-decoration: underline;
 }
+
+.table a{
+    color: #4B0082;
+}
+
+.dynamicform_wrapper .panel-default>.panel-heading{
+    padding: 5px 10px;
+}
+
+.dynamicform_wrapper .panel{
+    margin-top: 30px;
+}
+
+.dynamicform_wrapper .panel-body{
+    padding: 10px;
+}

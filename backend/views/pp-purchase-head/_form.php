@@ -7,6 +7,8 @@ use wbraganca\dynamicform\DynamicFormWidget;
 use yii\helpers\ArrayHelper;
 use backend\models\Supplier;
 use backend\models\Branch;
+use backend\models\Product;
+use kartik\date\DatePicker;
 
 
 /* @var $this yii\web\View */
@@ -34,49 +36,195 @@ $this->registerJs($js);
 
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
 
+        <div class="row">
+            <div class="col-md-2">
+             <?= $form->field($modelPurchaseHead, 'po_order_number')->textInput(['maxlength' => true,'readonly' => 1]) ?>
+            </div> 
 
-         <?= $form->field($modelPurchaseHead, 'po_order_number')->textInput(['maxlength' => true]) ?>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <?php
+
+                    echo $form->field($modelPurchaseHead, 'date')->widget(DatePicker::classname(), [
+                            'value' => date('Y-m-d'),
+                            'options' => ['placeholder' => 'Enter Date ...'],
+                            'pluginOptions' => [
+                                'autoclose'=>true,
+                                'format' => 'yyyy-m-dd',
+                                'todayHighlight' => true
+                            ]
+                        ]);
+
+                        
+                    ?>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                    <?= $form->field($modelPurchaseHead, 'supplier_id')
+                                ->dropDownList(
+                                    ArrayHelper::map(Supplier::find()->all(), 'id', 'supplier_code'),
+                                     ['prompt'=>'-Select-','class'=>'form-control']
+                                ); ?>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-2">
+
+                <div class="form-group form-material" data-plugin="formMaterial">
+
+                    <?= $form->field($modelPurchaseHead, 'pay_terms')
+                                ->dropDownList(
+                                    array ('Cash'=>'Cash', 'Credit'=>'Credit'),
+                                    array ('class'=>'form-control') 
+                                ); ?>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <?php
+
+                    echo $form->field($modelPurchaseHead, 'delivery_date')->widget(DatePicker::classname(), [
+                            'value' => date('Y-m-d'),
+                            'options' => ['placeholder' => 'Enter Date ...'],
+                            'pluginOptions' => [
+                                'autoclose'=>true,
+                                'format' => 'yyyy-m-dd',
+                                'todayHighlight' => true
+                            ]
+                        ]);
+
+                        
+                    ?>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                    <?= $form->field($modelPurchaseHead, 'branch_id')
+                                ->dropDownList(
+                                    ArrayHelper::map(Branch::find()->all(), 'id', 'branch_code'),
+                                     ['prompt'=>'-Select-','class'=>'form-control']
+                                ); ?>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-2">
+             <?= $form->field($modelPurchaseHead, 'tax_rate')->textInput(['maxlength' => true]) ?>
+            </div> 
+
+            <div class="col-md-2">
+             <?= $form->field($modelPurchaseHead, 'tax_amount')->textInput(['maxlength' => true]) ?>
+            </div> 
+
+            <div class="col-md-2">
+             <?= $form->field($modelPurchaseHead, 'discount_rate')->textInput(['maxlength' => true]) ?>
+            </div> 
+
+            <div class="col-md-2">
+             <?= $form->field($modelPurchaseHead, 'discount_amount')->textInput(['maxlength' => true]) ?>
+            </div> 
+
+            <div class="col-md-2">
+             <?= $form->field($modelPurchaseHead, 'prime_amount')->textInput(['maxlength' => true]) ?>
+            </div> 
+
+            <div class="col-md-2">
+             <?= $form->field($modelPurchaseHead, 'net_amount')->textInput(['maxlength' => true]) ?>
+            </div> 
+
+
+
+        </div>
 
          <?php DynamicFormWidget::begin([
                 'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
                 'widgetBody' => '.container-items', // required: css class selector
                 'widgetItem' => '.item', // required: css class
-                'limit' => 4, // the maximum times, an element can be cloned (default 999)
-                'min' => 0, // 0 or 1 (default 1)
+                'limit' => 10, // the maximum times, an element can be cloned (default 999)
+                'min' => 1, // 0 or 1 (default 1)
                 'insertButton' => '.add-item', // css class
                 'deleteButton' => '.remove-item', // css class
                 'model' => $modelsPurchaseDetail[0],
                 'formId' => 'dynamic-form',
                 'formFields' => [
                     'product_id',
+                    'quantity',
+                    'grn_quantity',
+                    'uom',
+                    'uom_quantity',
+                    'purchase_rate'
                 ],
             ]); 
         ?>
 
             <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-envelope"></i> Address Book
-            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="fa fa-plus"></i> Add address</button>
+            <i class="fa fa-envelope"></i> Purchase Order Details
+            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="icon md-plus" aria-hidden="true"></i> </button>
             <div class="clearfix"></div>
         </div>
         <div class="panel-body container-items"><!-- widgetContainer -->
             <?php foreach ($modelsPurchaseDetail as $index => $modelPurchaseDetail): ?>
-                <div class="item panel panel-default"><!-- widgetBody -->
-                    <div class="panel-heading">
-                        <span class="panel-title-address">Address: <?= ($index + 1) ?></span>
-                        <button type="button" class="pull-right remove-item btn btn-danger btn-xs"><i class="fa fa-minus"></i></button>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="panel-body">
-                        <?php
-                            // necessary for update action.
-                            if (!$modelPurchaseDetail->isNewRecord) {
-                                echo Html::activeHiddenInput($modelPurchaseDetail, "[{$index}]id");
-                            }
-                        ?>
-                        <?= $form->field($modelPurchaseDetail, "[{$index}]product_id")->textInput(['maxlength' => true]) ?>
+                <div class="item"><!-- widgetBody -->
+
+                     <button type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i></button>
+                    <?php
+                        // necessary for update action.
+                        if (!$modelPurchaseDetail->isNewRecord) {
+                            echo Html::activeHiddenInput($modelPurchaseDetail, "[{$index}]id");
+                        }
+                    ?>
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                                <?= $form->field($modelPurchaseDetail, "[{$index}]product_id")
+                                            ->dropDownList(
+                                                ArrayHelper::map(Product::find()->all(), 'id', 'title'),
+                                                 ['prompt'=>'-Select-','class'=>'form-control']
+                                            ); ?>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]quantity")->textInput(['maxlength' => true]) ?>
+                        </div>
+
+                        <div class="col-md-2">
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]grn_quantity")->textInput(['maxlength' => true]) ?>
+                        </div>
+
+                        <div class="col-md-2">
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom")->textInput(['maxlength' => true]) ?>
+                        </div>
+
+                        <div class="col-md-2">
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom_quantity")->textInput(['maxlength' => true]) ?>
+                        </div>
+
+                        <div class="col-md-2">
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]purchase_rate")->textInput(['maxlength' => true]) ?>
+                        </div>
+
+                        
 
                     </div>
+
                 </div>
             <?php endforeach; ?>
         </div>

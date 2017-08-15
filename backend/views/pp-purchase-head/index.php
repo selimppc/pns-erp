@@ -16,7 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
         <li class="breadcrumb-item">Purchase</li>
-        <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
+
+        <li class="breadcrumb-item active"><a href="<?= Url::toRoute(['/pp-purchase-head']); ?>"><?= Html::encode($this->title) ?></a></li>
       </ol>
      
       <div class="middle-menu-bar">
@@ -44,10 +45,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-               
-                'po_order_number',
+                [
+                  'attribute' => 'po_order_number',
+                  'format' => 'raw',
+                  'value' => function ($model) {
+                      return Html::a($model->po_order_number, ['/pp-purchase-head/view', 'id' => $model->id]);
+                  },
+                ],
                 'date',
-                'supplier_id',
+                'delivery_date',
                 'pay_terms',
                 
                 

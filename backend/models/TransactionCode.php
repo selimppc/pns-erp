@@ -59,13 +59,12 @@ class TransactionCode extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type','code','title','last_number','increment','status'],'required'],
+            [['type','code','title','last_number','increment'],'required'],
             [['code'],'unique'],
             [['branch_id', 'created_by', 'updated_by'], 'integer'],
             [['last_number', 'increment'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['code'], 'string', 'max' => 4,'min' => 4],
-            [[ 'status'], 'string', 'max' => 8],
             [['branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branch::className(), 'targetAttribute' => ['branch_id' => 'id']],
         ];
     }

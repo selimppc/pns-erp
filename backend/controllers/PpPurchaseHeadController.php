@@ -16,6 +16,7 @@ use yii\web\Controller;
 use backend\models\PpPurchaseHead;
 use backend\models\PpPurchaseDetail;
 use backend\models\PpPurchaseHeadSearch;
+use backend\models\TransactionCode;
 
 
 /**
@@ -82,8 +83,26 @@ class PpPurchaseHeadController extends Controller
             ]);
         }*/
 
+        // generate purchase Order Number
+
+        $po_transaction_data = TransactionCode::find()->where(['code' => 'PO--'])->one();
+
+        $po_order_number = '';
+        if(!empty($po_transaction_data)){
+            $po_order_number = TransactionCode::generate_transaction_number($po_transaction_data->code,$po_transaction_data->last_number,$po_transaction_data->increment);
+        }
+        
+
         $modelPurchaseHead = new PpPurchaseHead;
         $modelsPurchaseDetail = [new PpPurchaseDetail];
+
+        $modelPurchaseHead->po_order_number = $po_order_number; 
+        $modelPurchaseHead->tax_rate ='0.00';
+        $modelPurchaseHead->tax_amount ='0.00';
+        $modelPurchaseHead->discount_rate ='0.00';
+        $modelPurchaseHead->discount_amount ='0.00';
+        $modelPurchaseHead->prime_amount ='0.00';
+        $modelPurchaseHead->net_amount ='0.00';
 
         if ($modelPurchaseHead->load(Yii::$app->request->post())) {
 
@@ -98,6 +117,7 @@ class PpPurchaseHeadController extends Controller
                 $transaction = \Yii::$app->db->beginTransaction();
 
                 try {
+                    $modelPurchaseHead->status = 'open';
                     if ($flag = $modelPurchaseHead->save(false)) {
                         foreach ($modelsPurchaseDetail as $modelPurchaseDetail) {
                             $modelPurchaseDetail->pp_purchase_head_id = $modelPurchaseHead->id;
@@ -109,6 +129,30 @@ class PpPurchaseHeadController extends Controller
                     }
 
                     if ($flag) {
+
+                        // Update transaction code data
+                        $po_transaction_data = TransactionCode::find()->where(['code' => 'PO--'])->one();
+
+                        $po_transaction_data->last_number = $po_transaction_data->last_number + $po_transaction_data->increment;
+
+
+                       $valid = $po_transaction_data->validate();
+
+                       if(!$valid){
+                        print_r($po_transaction_data->getErrors());
+                        exit();
+                       }
+
+                        if($po_transaction_data->save()){
+                            echo 'yes';
+                        }else{
+                            echo 'no';
+                        }
+                        
+
+
+
+
                         $transaction->commit();
                         return $this->redirect(['view', 'id' => $modelPurchaseHead->id]);
                     }

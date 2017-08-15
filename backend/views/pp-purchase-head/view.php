@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\PpPurchaseHead */
 
-$this->title = $model->id;
+$this->title = $model->po_order_number;
 $this->params['breadcrumbs'][] = ['label' => 'Purchase Order', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
         <li class="breadcrumb-item">Purchase</li>
+        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/pp-purchase-head']); ?>">Purchase Order</a></li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
       
