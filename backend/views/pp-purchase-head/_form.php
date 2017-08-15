@@ -98,8 +98,8 @@ $this->registerJs($js);
                     echo $form->field($modelPurchaseHead, 'delivery_date')->widget(DatePicker::classname(), [
                             'value' => date('Y-m-d'),
                             'options' => [
-                                    'placeholder' => 'Enter Date ...',
-                                    'value' => date('Y-m-d'),
+                                'placeholder' => 'Enter Date ...',
+                                'value' => date('Y-m-d',strtotime('+1 days')) ,
                             ],
                             'pluginOptions' => [
                                 'autoclose'=>true,
