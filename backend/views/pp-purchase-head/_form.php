@@ -38,11 +38,11 @@ $this->registerJs($js);
 
         <div class="row">
             <div class="col-md-2">
-             <?= $form->field($modelPurchaseHead, 'po_order_number')->textInput(['maxlength' => true,'readonly' => 1]) ?>
+             <?= $form->field($modelPurchaseHead, 'po_order_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => 1]) ?>
             </div> 
 
             <div class="col-md-2">
-                <div class="form-group">
+                <div class="form-group form-material floating" data-plugin="formMaterial">
                     <?php
 
                     echo $form->field($modelPurchaseHead, 'date')->widget(DatePicker::classname(), [
@@ -92,7 +92,7 @@ $this->registerJs($js);
             </div>
 
             <div class="col-md-2">
-                <div class="form-group">
+                <div class="form-group form-material floating" data-plugin="formMaterial">
                     <?php
 
                     echo $form->field($modelPurchaseHead, 'delivery_date')->widget(DatePicker::classname(), [
@@ -185,19 +185,19 @@ $this->registerJs($js);
                         </div>
 
                         <div class="col-md-2">
-                            <?= $form->field($modelPurchaseDetail, "[{$index}]quantity")->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($modelPurchaseDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
                         </div>
 
                         <div class="col-md-2">
-                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom")->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
                         </div>
 
                         <div class="col-md-2">
-                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom_quantity")->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
                         </div>
 
                         <div class="col-md-2">
-                            <?= $form->field($modelPurchaseDetail, "[{$index}]purchase_rate")->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]purchase_rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
                         </div>
 
                         
