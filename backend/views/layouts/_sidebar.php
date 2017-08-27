@@ -131,7 +131,7 @@
               <ul class="site-menu-sub">
                 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/pp-purchase-head']); ?>">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/purchase-order']); ?>">
                     <span class="site-menu-title">Purchase Order</span>
                   </a>
                 </li> 

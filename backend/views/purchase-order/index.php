@@ -53,6 +53,13 @@ $this->params['breadcrumbs'][] = $this->title;
                   },
                 ],
                 'date',
+                [
+                 'label' => 'Supplier',
+                 'value' => function ($model) {
+                     return isset($model->supplier)?$model->supplier->supplier_code:'';
+                 }
+               ],
+                
                 'delivery_date',
                 'pay_terms',
                 

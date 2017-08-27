@@ -22,7 +22,7 @@ use backend\models\TransactionCode;
 /**
  * PpPurchaseHeadController implements the CRUD actions for PpPurchaseHead model.
  */
-class PpPurchaseHeadController extends Controller
+class PurchaseOrderController extends Controller
 {
     /**
      * @inheritdoc
