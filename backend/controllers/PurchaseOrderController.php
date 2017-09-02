@@ -84,12 +84,11 @@ class PurchaseOrderController extends Controller
         }*/
 
         // generate purchase Order Number
-
-        $po_transaction_data = TransactionCode::find()->where(['code' => 'PO--'])->one();
-
-        $po_order_number = '';
-        if(!empty($po_transaction_data)){
-            $po_order_number = TransactionCode::generate_transaction_number($po_transaction_data->code,$po_transaction_data->last_number,$po_transaction_data->increment);
+               
+        $po_order_number = TransactionCode::generate_transaction_number('PO--');
+        
+        if(empty($po_order_number)){
+            $po_order_number = '';
         }
         
 
@@ -131,28 +130,14 @@ class PurchaseOrderController extends Controller
                     if ($flag) {
 
                         // Update transaction code data
-                        $po_transaction_data = TransactionCode::find()->where(['code' => 'PO--'])->one();
+                        $update_transaction = TransactionCode::update_transaction_number('PO--');
 
-                        $po_transaction_data->last_number = $po_transaction_data->last_number + $po_transaction_data->increment;
-
-
-                       $valid = $po_transaction_data->validate();
-
-                       if(!$valid){
-                        print_r($po_transaction_data->getErrors());
-                        exit();
-                       }
-
-                        if($po_transaction_data->save()){
-                            echo 'yes';
+                        if($update_transaction){
+                            echo 'successfully updated';
                         }else{
-                            echo 'no';
+                            echo 'successfully not updated';
                         }
                         
-
-
-
-
                         $transaction->commit();
                         return $this->redirect(['view', 'id' => $modelPurchaseHead->id]);
                     }

@@ -90,9 +90,12 @@ class TransactionCode extends \yii\db\ActiveRecord
         ];
     }
 
-    public function generate_transaction_number($type='',$last_number='',$increment=''){
+    // Generate Transaction Number :: Parameter is code
+    public function generate_transaction_number($type=''){
 
-        $number = str_pad($last_number+$increment,8,"0",STR_PAD_LEFT);
+        $transaction_data = TransactionCode::find()->where(['code' => $type])->one();
+
+        $number = str_pad($transaction_data->last_number+$transaction_data->increment,8,"0",STR_PAD_LEFT);
 
         $invoice_number = $type.$number;
 
@@ -100,6 +103,31 @@ class TransactionCode extends \yii\db\ActiveRecord
 
 
     }
+
+
+    // Update Transaction Number :: Parameter is code
+    public function update_transaction_number($type=''){
+
+        $po_transaction_data = TransactionCode::find()->where(['code' => $type])->one();
+
+        $po_transaction_data->last_number = $po_transaction_data->last_number + $po_transaction_data->increment;
+
+
+       $valid = $po_transaction_data->validate();
+
+       if(!$valid){
+        print_r($po_transaction_data->getErrors());
+        exit();
+       }
+
+        if($po_transaction_data->save()){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery
