@@ -47,9 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
                 [
                   'attribute' => 'po_order_number',
+                  'label' => 'Purchase Order No',
                   'format' => 'raw',
                   'value' => function ($model) {
-                      return Html::a($model->po_order_number, ['/pp-purchase-head/view', 'id' => $model->id]);
+                      return Html::a($model->po_order_number, ['/purchase-order/view', 'id' => $model->id]);
                   },
                 ],
                 'date',
@@ -59,27 +60,68 @@ $this->params['breadcrumbs'][] = $this->title;
                      return isset($model->supplier)?$model->supplier->supplier_code:'';
                  }
                ],
-                
+               'pay_terms',                
                 'delivery_date',
-                'pay_terms',
-                
-                
+                [
+                 'label' => 'Delivery to Branch',
+                 'value' => function ($model) {
+                     return isset($model->branch)?$model->branch->title:'';
+                 }
+               ],
+                [
+                  'label' => 'Status',
+                  'value' => function ($model){
+                    return ucfirst($model->status);
+                  }
+                ],
                 [
                     'header' => 'Action',
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{view} {update} ',
+                    'template' => '{view} {update}{approved}',
                     'buttons' => [
                       'update' => function ($url,$model) {
                           $url =  $url;
-                          return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url);
+                          return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-pencil" title="Update"></span>', $url):'';
                         },
                         'view' => function ($url,$model) {
                           $url =  $url;
-                          return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url);
+                          return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-eye-open" title="View"></span>', $url):'';
                         },
+                        'approved' => function ($url, $model) {
+                              return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-ok" title="Approved"></span>', ['purchase-order/approved', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to approved this purchased order?") ']):'';
+                          },
                       
                     ],
                 ],
+
+                [
+                    'header' => 'Cancel Purchase Order',
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{cancel}',
+                    'buttons' => [
+                        'cancel' => function ($url, $model) {
+                              return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-ban-circle" title="Cancel"></span>', ['purchase-order/cancel', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']):'';
+                          },
+                      
+                    ],
+                ],
+
+                [
+                    'header' => 'Reports',
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{pdf}{xlsx}',
+                    'buttons' => [
+                        'pdf' => function ($url, $model) {
+                              return $model->status == 'open'?Html::a('<span id="action-btn-pdf" class="action-btn-2" title="PDF">&nbsp;</span>', ['purchase-order/cancel', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']):'';
+                          },
+
+                          'xlsx' => function ($url, $model) {
+                              return $model->status == 'open'?Html::a('<span id="action-btn-xls" class="action-btn-2" title="XLSX">&nbsp;</span>', ['purchase-order/cancel', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']):'';
+                          },
+                      
+                    ],
+                ],
+
             ],
         ]); ?>
 

@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use backend\models\Supplier;
 use backend\models\Branch;
 use backend\models\Product;
+use backend\models\CodesParam;
 use kartik\date\DatePicker;
 
 
@@ -189,7 +190,12 @@ $this->registerJs($js);
                         </div>
 
                         <div class="col-md-2">
-                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+                            
+
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
+                                    ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->all(), 'id', 'title'),
+                                     ['prompt'=>'-Select-','class'=>'form-control floating']
+                                ) ?>
                         </div>
 
                         <div class="col-md-2">

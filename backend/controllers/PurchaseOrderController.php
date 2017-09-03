@@ -61,9 +61,22 @@ class PurchaseOrderController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+
+        if(!empty($model)){
+
+            $purchased_order_details = PpPurchaseDetail::find()->where(['pp_purchase_head_id' => $id])->all();
+
+
+            return $this->render('view', [
+                'model' => $model,
+                'purchased_order_details' => $purchased_order_details
+            ]);
+
+        }else{
+            return $this->redirect(['index']);
+        }
+        
     }
 
     /**
@@ -237,6 +250,53 @@ class PurchaseOrderController extends Controller
                 $model->delete();
             }
 
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionApproved($id)
+    {
+        $model = $this->findModel($id);
+
+        if($model){
+
+            $model->status = 'approved';
+
+            $valid = $model->validate();
+            if($valid){
+                $model->save();    
+            }else{
+                print_r($model->getErrors());
+                exit();
+            }
+            
+
+           
+        }
+
+        return $this->redirect(['index']);
+    }
+
+
+    public function actionCancel($id)
+    {
+        $model = $this->findModel($id);
+
+        if($model){
+
+            $model->status = 'cancel';
+
+            $valid = $model->validate();
+            if($valid){
+                $model->save();    
+            }else{
+                print_r($model->getErrors());
+                exit();
+            }
+            
+
+           
         }
 
         return $this->redirect(['index']);
