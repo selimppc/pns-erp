@@ -17,17 +17,10 @@ use backend\models\CodesParam;
 
     <div class="row">
 
-        <div class="col-md-6">
 
-            <div class="form-group form-material floating" data-plugin="formMaterial">
+        <div class="col-md-12">
 
-                <?= $form->field($model, 'im_grn_head_id')
-                            ->dropDownList(
-                                ArrayHelper::map(ImGrnHead::find()->all(), 'id', 'grn_number'),
-                                 ['prompt'=>'-Select-','class'=>'form-control','onchange'=>'function()']
-                            ); ?>
-
-            </div>
+            <?= $form->field($model, 'grn_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
@@ -39,6 +32,11 @@ use backend\models\CodesParam;
 
             </div>
 
+            <?= $form->field($model, 'batch_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'expire_date',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
+
+
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
             <?= $form->field($model, 'uom')
@@ -49,13 +47,7 @@ use backend\models\CodesParam;
 
             </div>
 
-            <?= $form->field($model, 'batch_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
-
-            <?= $form->field($model, 'expire_date',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
-
-        </div>
-
-        <div class="col-md-6">
+            
 
             
 
@@ -72,7 +64,7 @@ use backend\models\CodesParam;
     </div>    
 
 
-    <div class="form-group">
+    <div class="form-group" style="margin-top: 20px;">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn-primary waves-effect' : 'btn-primary waves-effect']) ?>
     </div>
 

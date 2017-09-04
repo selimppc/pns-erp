@@ -53,6 +53,14 @@ form div.required label.control-label:after {
     width: 35%;
 }
 
+.form-width-30{
+    width: 30%;
+}
+
+.form-width-60{
+    width: 60%;
+}
+
 .form-width-55{
     width: 55%;
 }
@@ -131,4 +139,46 @@ form div.required label.control-label:after {
 
 .dynamicform_wrapper .panel-body{
     padding: 10px;
+}
+
+.grid-view h1{
+    background: #FFCCFF;
+    padding: 7px;
+    width: 100%;
+    font-size: 18px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.grid-view h2{
+    font-size: 18px;
+}
+
+.grid-view table.items {
+    background: white;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px #D0E3EF solid;
+}
+
+.grid-view table.items th, .grid-view table.items td {
+    font-size: 0.9em;
+    border: 1px white solid;
+    padding: 0.7em;
+}
+
+.grid-view table.items th {
+    color: white;
+    background: none repeat scroll 0 0 #3C89BD;
+    text-align: left;
+    padding: 11px;
+}
+
+.grid-view table.items tr.odd {
+    background: none repeat scroll 0 0 #F4F3F1;
+}
+
+
+.form-group{
+    margin-bottom: 0;
 }

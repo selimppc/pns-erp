@@ -85,8 +85,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'template' => '{create_grn}',
                     'buttons' => [
                      
-                        'create_grn' => function ($url, $model) {
-                              return Html::a('<span class="glyphicon glyphicon-open-file" title="Create GRN"></span>', ['grn/create-grn', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to create this GRN?") ']);
+                        'create_grn' => function ($url, $model) use ($grn_transaction_number) {
+                              return Html::a('<span class="glyphicon glyphicon-open-file" title="Create GRN"></span>', ['grn/create-grn', 'po' => $model->po_order_number,'grn' => $grn_transaction_number], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to create this GRN?") ']);
                           },
                       
                     ],

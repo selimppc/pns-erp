@@ -19,7 +19,7 @@ use backend\models\Currency;
 
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-12">
 
                 <?= $form->field($model, 'grn_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
@@ -41,7 +41,7 @@ use backend\models\Currency;
 
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-12">
 
                 <?= $form->field($model, 'date',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput() ?>
 

@@ -31,7 +31,7 @@ use yii\behaviors\BlameableBehavior;
  */
 class ImGrnDetail extends \yii\db\ActiveRecord
 {
-
+    public $grn_number;
     public function behaviors()
     {
         return [
@@ -64,7 +64,7 @@ class ImGrnDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['im_grn_head_id','product_id','batch_number','uom','receive_quantity','cost_price','row_amount','quantity'],'required'],
+            [['grn_number','im_grn_head_id','product_id','batch_number','uom','receive_quantity','cost_price','row_amount','quantity'],'required'],
             [['im_grn_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['expire_date', 'created_at', 'updated_at'], 'safe'],
             [['receive_quantity', 'cost_price', 'quantity', 'row_amount'], 'number'],
@@ -81,6 +81,7 @@ class ImGrnDetail extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'grn_number' => Yii::t('app','GRN Number'),
             'id' => Yii::t('app', 'ID'),
             'im_grn_head_id' => Yii::t('app', 'Im Grn Head'),
             'product_id' => Yii::t('app', 'Product'),
