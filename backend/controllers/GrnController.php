@@ -9,10 +9,15 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use backend\models\PpPurchaseHead;
+use backend\models\PpPurchaseDetail;
+use backend\models\PpPurchaseHeadSearch;
+use backend\models\TransactionCode;
+
 /**
  * ImGrnHeadController implements the CRUD actions for ImGrnHead model.
  */
-class ImGrnHeadController extends Controller
+class GrnController extends Controller
 {
     /**
      * @inheritdoc
@@ -27,6 +32,18 @@ class ImGrnHeadController extends Controller
                 ],
             ],
         ];
+    }
+
+    public function actionGrnHistory(){
+
+        $searchModel = new PpPurchaseHeadSearch();
+        $searchModel->status = 'approved';
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('grnhistory',[
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider
+            ]);
     }
 
     /**

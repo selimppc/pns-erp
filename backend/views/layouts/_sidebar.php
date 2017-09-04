@@ -155,7 +155,7 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/im-grn-head']); ?>">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/grn/grn-history']); ?>">
                     <span class="site-menu-title">GRN</span>
                   </a>
                 </li>
