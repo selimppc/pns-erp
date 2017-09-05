@@ -5,7 +5,10 @@ namespace backend\controllers;
 use Yii;
 use backend\models\ImGrnHead;
 use backend\models\ImGrnHeadSearch;
+
 use backend\models\ImGrnDetail;
+use backend\models\ImGrnDetailSearch;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -58,7 +61,7 @@ class GrnController extends Controller
             ]);
     }
 
-    public function actionCreateGrn($po='',$grn=''){
+    public function actionCreateGrn($po='',$grn='',$id=''){
 
         $purchased_order = PpPurchaseHead::find()->where(['po_order_number' => $po])->one();
 
@@ -71,13 +74,73 @@ class GrnController extends Controller
         $grn_head = ImGrnHead::find()->where(['grn_number' => $grn])->one();
 
         if(!empty($grn_head)){
+
+            // get Grn Details Data
             $grn_details = ImGrnDetail::find()->where(['im_grn_head_id'=>$grn_head->id])->all();
+
         }else{
             $grn_details = '';
+
+            // save new GRN Data
+            $grn_head = new ImGrnHead();
+            $grn_head->grn_number = $grn;
+            $grn_head->status = 'open';
+            $grn_head->pp_purchase_head_id = $purchased_order->id;
+            $grn_head->supplier_id = $purchased_order->supplier_id;
+            $grn_head->date = $purchased_order->date;
+            $grn_head->pay_terms = $purchased_order->pay_terms;
+            $grn_head->branch_id = $purchased_order->branch_id;
+            $grn_head->prime_amount = $purchased_order->prime_amount;
+            $grn_head->net_amount = $purchased_order->net_amount;
+
+            $grn_head->save();
+
+            // Generate Transaction Code
+            $grn_transaction_number = TransactionCode::update_transaction_number('GRN-');
         }
         
 
         $model = new ImGrnDetail();
+        $model->grn_number = $grn;
+
+        if(!empty($id)){
+            $transaction_details = PpPurchaseDetail::find()->where(['id'=>$id])->one();
+
+            $transaction_head = PpPurchaseHead::find()->where(['id'=>$transaction_details->pp_purchase_head_id])->one();
+
+            if(!empty($transaction_details)){
+
+                // Set up Grn Details data
+                $model->product_id = $transaction_details->product_id;
+                $model->expire_date = $transaction_head->delivery_date;
+                $model->uom = $transaction_details->uom;
+                $model->quantity = $transaction_details->uom_quantity;
+                $model->receive_quantity = $transaction_details->quantity;
+                $model->cost_price = number_format($transaction_details->purchase_rate,2);
+                $model->row_amount = number_format($transaction_details->purchase_rate * $transaction_details->quantity,2);                
+            }
+
+            // Grn Details Data Save
+           
+            if ($model->load(Yii::$app->request->post())) {
+                $model->im_grn_head_id = $grn_head->id;
+                $valid = $model->validate();
+                if($valid){
+                    $model->save(); 
+
+                    $model = new ImGrnDetail();
+                    $model->grn_number = $grn; 
+
+                    return $this->redirect(['grn/create-grn','po' => $po,'grn' => $grn]);  
+                }else{
+                    print_r($model->getErrors());
+                    exit();
+                }
+                
+
+            }
+
+        }
 
         return $this->render('create_grn',[
                 'po' => $po,
@@ -86,6 +149,56 @@ class GrnController extends Controller
                 'grn_details' => $grn_details,
                 'model' => $model
             ]);
+
+    }
+
+    public function actionDeleteGrn($po='',$grn='',$id=''){
+
+        $grn_details = ImGrnDetail::find()->where(['id'=>$id])->one();
+
+        if(!empty($grn_details)){
+
+            $grn_details->delete();
+
+        }
+
+        return $this->redirect(['grn/create-grn','po' => $po,'grn' => $grn]);
+    }
+
+
+    public function actionManageGrn(){
+
+        $searchModel = new ImGrnHeadSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionConfirmGrn($id){
+
+        $model = ImGrnHead::find()->where(['id' => $id])->one();
+
+        if($model){
+
+            $model->status = 'confirmed';
+
+            $valid = $model->validate();
+            if($valid){
+                $model->save();    
+            }else{
+                print_r($model->getErrors());
+                exit();
+            }
+            
+
+           
+        }
+
+        return $this->redirect(['index']);
 
     }
 
@@ -111,8 +224,18 @@ class GrnController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+
+        $model = ImGrnHead::find()->where(['id'=>$id])->one();
+
+        $searchModel = new ImGrnDetailSearch();
+        $searchModel->im_grn_head_id = $id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+
+        return $this->render('/im-grn-detail/index', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

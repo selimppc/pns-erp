@@ -64,7 +64,7 @@ class ImGrnDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['grn_number','im_grn_head_id','product_id','batch_number','uom','receive_quantity','cost_price','row_amount','quantity'],'required'],
+            [['im_grn_head_id','product_id','batch_number','uom','receive_quantity','cost_price','row_amount','quantity'],'required'],
             [['im_grn_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['expire_date', 'created_at', 'updated_at'], 'safe'],
             [['receive_quantity', 'cost_price', 'quantity', 'row_amount'], 'number'],
@@ -90,8 +90,8 @@ class ImGrnDetail extends \yii\db\ActiveRecord
             'receive_quantity' => Yii::t('app', 'Receive Quantity'),
             'cost_price' => Yii::t('app', 'Cost Price'),
             'uom' => Yii::t('app', 'Uom'),
-            'quantity' => Yii::t('app', 'Quantity'),
-            'row_amount' => Yii::t('app', 'Row Amount'),
+            'quantity' => Yii::t('app', 'UOM Quantity'),
+            'row_amount' => Yii::t('app', 'Total Amount'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
             'created_at' => Yii::t('app', 'Created At'),

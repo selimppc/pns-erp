@@ -74,7 +74,7 @@ class ImGrnHead extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pp_purchase_head_id','am_voucher_head_id','supplier_id','branch_id','currency_id','grn_number','tax_rate','tax_ammount','discount_rate','discount_amount','exchnage_rate','prime_amount','net_amount'],'required'],
+            [['grn_number','pp_purchase_head_id','supplier_id','date','pay_terms','branch_id'],'required'],
             [['pp_purchase_head_id', 'am_voucher_head_id', 'supplier_id', 'branch_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
             [['date', 'created_at', 'updated_at'], 'safe'],
             [['tax_rate', 'tax_ammount', 'discount_rate', 'discount_amount', 'exchnage_rate', 'prime_amount', 'net_amount'], 'number'],
@@ -95,7 +95,7 @@ class ImGrnHead extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'grn_number' => Yii::t('app', 'GRN Number'),
-            'pp_purchase_head_id' => Yii::t('app', 'Purchase Head '),
+            'pp_purchase_head_id' => Yii::t('app', 'Purchase Order Number '),
             'am_voucher_head_id' => Yii::t('app', 'Voucher'),
             'supplier_id' => Yii::t('app', 'Supplier'),
             'date' => Yii::t('app', 'Date'),

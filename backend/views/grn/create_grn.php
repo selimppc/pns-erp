@@ -80,7 +80,10 @@ $this->params['breadcrumbs'][] = $this->title;
                       {
                     ?>
                       <tr class="odd">
-                          <td><?=isset($pp_details->product)?$pp_details->product->title:'';?></td>
+                          <td>
+                            <?= Html::a(Yii::t('app', 'Manage '.isset($pp_details->product)?$pp_details->product->title:''), ['create-grn','po'=>$po,'grn'=>$grn,'id'=>$pp_details->id], ['class' => '']) ?> 
+                            
+                            </td>
                           <td><?=isset($pp_details->uomData)?$pp_details->uomData->title:'';?></td>
                           <td><?=$pp_details->uom_quantity?></td>
                           <td><?=$pp_details->quantity?></td>
@@ -117,15 +120,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php
                   if(!empty($grn_details)){
                   foreach($grn_details as $details){
+
                 ?>
                     <tr>
-                      <td><?=$details->product_id?></td>
+                      <td>
+                        <?=isset($details->product)?$details->product->title:''?>
+                      </td>
                       <td><?=$details->expire_date?></td>
                       <td><?=$details->receive_quantity?></td>
-                      <td><?=$details->cost_price?></td>
-                      <td><?=$details->uom?></td>
-                      <td><?=$details->row_amount?></td>
-                      <td></td>
+                      <td><?=number_format($details->cost_price,2)?></td>
+                      <td><?=isset($details->productUom)?$details->productUom->title:'';?></td>
+                      <td><?=number_format($details->row_amount,2)?></td>
+                      <td>
+                        <?=Html::a('<span class="glyphicon glyphicon-trash" title="Delete"></span>', ['grn/delete-grn','po'=>$po,'grn' => $grn ,'id' => $details->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") '])?>
+                      </td>
                     </tr>
                 <?php 
                     }

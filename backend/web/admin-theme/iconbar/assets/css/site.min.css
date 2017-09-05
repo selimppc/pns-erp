@@ -4,12 +4,6 @@
 select.form-control:not([size]):not([multiple]){
 	height: 32px !important;
 }
-
-.form-material.floating+.form-material.floating{
-	margin-bottom: 0;
-}
-
-
 .site-menu-title{
 	font-size: 15px;
 }

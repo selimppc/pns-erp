@@ -20,7 +20,7 @@ use backend\models\CodesParam;
 
         <div class="col-md-12">
 
-            <?= $form->field($model, 'grn_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'grn_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => $model->grn_number]) ?>
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
@@ -45,18 +45,14 @@ use backend\models\CodesParam;
                              ['prompt'=>'-Select-','class'=>'form-control floating']
                         ); ?>
 
-            </div>
-
-            
-
-            
-
-            <?= $form->field($model, 'cost_price',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            </div>            
 
             <?= $form->field($model, 'quantity',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'receive_quantity',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>            
 
+            <?= $form->field($model, 'cost_price',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            
             <?= $form->field($model, 'row_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
         </div>
