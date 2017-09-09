@@ -18,7 +18,7 @@ class AmVoucherDetailSearch extends AmVoucherDetail
     public function rules()
     {
         return [
-            [['id', 'am_voucher_head_id', 'am_coa_id', 'am_sub_coa_id', 'currency_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'am_voucher_head_id', 'am_coa_id', 'currency_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['exchange_rate', 'prime_amount', 'base_amount'], 'number'],
             [['note', 'status', 'created_at', 'updated_at'], 'safe'],
         ];
@@ -63,7 +63,7 @@ class AmVoucherDetailSearch extends AmVoucherDetail
             'id' => $this->id,
             'am_voucher_head_id' => $this->am_voucher_head_id,
             'am_coa_id' => $this->am_coa_id,
-            'am_sub_coa_id' => $this->am_sub_coa_id,
+            #'am_sub_coa_id' => $this->am_sub_coa_id,
             'currency_id' => $this->currency_id,
             'exchange_rate' => $this->exchange_rate,
             'prime_amount' => $this->prime_amount,
