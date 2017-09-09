@@ -12,6 +12,7 @@ use backend\models\ImGrnDetailSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
 
 use backend\models\PpPurchaseHead;
 use backend\models\PpPurchaseDetail;
@@ -63,10 +64,78 @@ class GrnController extends Controller
 
     public function actionCreateGrn($po='',$grn='',$id=''){
 
+        // Purchase Order Data
         $purchased_order = PpPurchaseHead::find()->where(['po_order_number' => $po])->one();
 
         if(!empty($purchased_order)){
             $purchased_order_details = PpPurchaseDetail::find()->where(['pp_purchase_head_id' => $purchased_order->id])->all();    
+        }else{
+            $purchased_order_details = '';
+        }
+
+        // Update GRN Transaction Code
+        TransactionCode::update_transaction_number('GRN-');
+
+        // Generate GRN Transaction Code
+        $grn = TransactionCode::generate_transaction_number('GRN-');
+        
+        if(empty($grn)){
+            $grn = '';
+        }
+
+        // save GRN Head Data
+        $grn_head = new ImGrnHead();
+        $grn_head->grn_number = $grn;
+        $grn_head->status = 'created';
+        $grn_head->pp_purchase_head_id = $purchased_order->id;
+        $grn_head->supplier_id = $purchased_order->supplier_id;
+        $grn_head->date = $purchased_order->date;
+        $grn_head->pay_terms = $purchased_order->pay_terms;
+        $grn_head->branch_id = $purchased_order->branch_id;
+        $grn_head->prime_amount = $purchased_order->prime_amount;
+        $grn_head->net_amount = $purchased_order->net_amount;
+
+        $grn_head->save();
+
+
+        return $this->redirect(array('grn/generate-grn', 'po' => $po, 'grn' => $grn, 'id' => $id));
+        
+        
+
+    }
+
+    public function actionGenerateGrn($po='',$grn='',$id=''){
+
+        
+        // Purchase Order Data
+        $purchased_order = PpPurchaseHead::find()->where(['po_order_number' => $po])->one();
+
+        if(!empty($purchased_order)){
+            $purchased_order_details = PpPurchaseDetail::find()->where(['pp_purchase_head_id' => $purchased_order->id])->all(); 
+
+            /*$query = new Query;
+            $query  ->select(['pp_purchase_detail.id as id',
+                'pp_purchase_detail.product_id as product_id',
+                'product.title as product_title',
+                'pp_purchase_detail.uom as uom',
+                'codes_param.title as uom_title',
+                'pp_purchase_detail.uom_quantity as uom_quantity',
+                'pp_purchase_detail.quantity as quantity',
+                'pp_purchase_detail.purchase_rate as purchase_rate'
+               ])  
+                ->from('pp_purchase_detail')
+                ->where(['pp_purchase_detail.pp_purchase_head_id'=>$purchased_order->id])
+                ->leftJoin('im_grn_head', 'im_grn_head.pp_purchase_head_id = pp_purchase_detail.pp_purchase_head_id')
+                ->InnerJoin('im_grn_detail', 'im_grn_detail.im_grn_head_id = im_grn_head.id')
+                ->InnerJoin('product', 'product.id = pp_purchase_detail.product_id')
+                ->InnerJoin('codes_param', 'codes_param.id = pp_purchase_detail.uom')
+                ->distinct();
+                
+        $command = $query->createCommand();
+        $purchased_order_details = $command->queryAll();*/
+
+
+
         }else{
             $purchased_order_details = '';
         }
@@ -81,22 +150,6 @@ class GrnController extends Controller
         }else{
             $grn_details = '';
 
-            // save new GRN Data
-            $grn_head = new ImGrnHead();
-            $grn_head->grn_number = $grn;
-            $grn_head->status = 'open';
-            $grn_head->pp_purchase_head_id = $purchased_order->id;
-            $grn_head->supplier_id = $purchased_order->supplier_id;
-            $grn_head->date = $purchased_order->date;
-            $grn_head->pay_terms = $purchased_order->pay_terms;
-            $grn_head->branch_id = $purchased_order->branch_id;
-            $grn_head->prime_amount = $purchased_order->prime_amount;
-            $grn_head->net_amount = $purchased_order->net_amount;
-
-            $grn_head->save();
-
-            // Generate Transaction Code
-            $grn_transaction_number = TransactionCode::update_transaction_number('GRN-');
         }
         
 
@@ -126,12 +179,15 @@ class GrnController extends Controller
                 $model->im_grn_head_id = $grn_head->id;
                 $valid = $model->validate();
                 if($valid){
+
+                    $model->row_amount = number_format($transaction_details->purchase_rate * $model->quantity,2);
+
                     $model->save(); 
 
                     $model = new ImGrnDetail();
                     $model->grn_number = $grn; 
 
-                    return $this->redirect(['grn/create-grn','po' => $po,'grn' => $grn]);  
+                    return $this->redirect(['grn/generate-grn','po' => $po,'grn' => $grn]);  
                 }else{
                     print_r($model->getErrors());
                     exit();
@@ -162,7 +218,7 @@ class GrnController extends Controller
 
         }
 
-        return $this->redirect(['grn/create-grn','po' => $po,'grn' => $grn]);
+        return $this->redirect(['grn/generate-grn','po' => $po,'grn' => $grn]);
     }
 
 

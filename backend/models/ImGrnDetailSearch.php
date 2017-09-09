@@ -40,9 +40,17 @@ class ImGrnDetailSearch extends ImGrnDetail
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$grn_head_id='',$status='')
     {
-        $query = ImGrnDetail::find();
+
+        if($status == 'confirmed'){
+            $query = ImGrnDetail::find()->where([
+            'im_grn_head_id' =>$grn_head_id,
+            ]);
+        }else{
+            $query = ImGrnDetail::find();
+        }
+        
 
         // add conditions that should always apply here
 

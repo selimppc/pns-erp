@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'header' => 'Action',
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{view} {update}{approved}',
+                    'template' => '{view} {update}',
                     'buttons' => [
                       'update' => function ($url,$model) {
                           $url =  $url;
@@ -87,22 +87,22 @@ $this->params['breadcrumbs'][] = $this->title;
                           $url =  $url;
                           return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-eye-open" title="View"></span>', $url):'';
                         },
-                        'approved' => function ($url, $model) {
-                              return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-ok" title="Approved"></span>', ['purchase-order/approved', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to approved this purchased order?") ']):'';
-                          },
+                        
                       
                     ],
                 ],
 
                 [
-                    'header' => 'Cancel Purchase Order',
+                    'header' => 'Approved / Cancel Purchase Order',
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{cancel}',
+                    'template' => '{approved}{cancel}',
                     'buttons' => [
                         'cancel' => function ($url, $model) {
-                              return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-ban-circle" title="Cancel"></span>', ['purchase-order/cancel', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']):'';
+                              return $model->status == 'open'?Html::a(' | Cancel', ['purchase-order/cancel', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']):'';
                           },
-                      
+                          'approved' => function ($url, $model) {
+                              return $model->status == 'open'?Html::a('Approved', ['purchase-order/approved', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to approved this purchased order?") ']):'';
+                          },
                     ],
                 ],
 

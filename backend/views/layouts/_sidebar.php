@@ -160,7 +160,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/stock-view']); ?>">
                     <span class="site-menu-title">Stock View</span>
                   </a>
                 </li> 

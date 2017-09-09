@@ -7,6 +7,8 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\behaviors\BlameableBehavior;
+use backend\models\ImGrnHead;
+use backend\models\ImGrnDetail;
 
 /**
  * This is the model class for table "{{%pp_purchase_detail}}".
@@ -70,7 +72,7 @@ class PpPurchaseDetail extends \yii\db\ActiveRecord
              [['product_id','quantity','uom','uom_quantity','purchase_rate'],'required'],
            # [['product_id'],'required'],
             [['pp_purchase_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
-            [['quantity', 'grn_quantity', 'tax_rate', 'tax_amount', 'unit_quantity', 'purchase_rate', 'row_amount'], 'number'],
+            [['quantity', 'uom_quantity','grn_quantity', 'tax_rate', 'tax_amount', 'unit_quantity', 'purchase_rate', 'row_amount'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['uom', 'status'], 'string', 'max' => 16],
             [['pp_purchase_head_id'], 'exist', 'skipOnError' => true, 'targetClass' => PpPurchaseHead::className(), 'targetAttribute' => ['pp_purchase_head_id' => 'id']],
@@ -104,6 +106,7 @@ class PpPurchaseDetail extends \yii\db\ActiveRecord
         ];
     }
 
+   
     /**
      * @return \yii\db\ActiveQuery
      */

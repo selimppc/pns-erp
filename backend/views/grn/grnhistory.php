@@ -2,6 +2,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use backend\models\ImGrnHead;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImGrnHeadSearch */
@@ -76,7 +77,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                   'label' => 'PO Status',
                   'value' => function ($model){
-                    return ucfirst($model->status);
+
+                    $grn_data_exists = ImGrnHead::find()->where(['pp_purchase_head_id'=>$model->id])->one();
+
+                    if(empty($grn_data_exists)){
+                      return ucfirst($model->status);
+                    }else{
+                      return ucfirst('GRN '.$grn_data_exists->status);
+                    }
+                    
                   }
                 ],
                 [
@@ -86,7 +95,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' => [
                      
                         'create_grn' => function ($url, $model) use ($grn_transaction_number) {
-                              return Html::a('<span class="glyphicon glyphicon-open-file" title="Create GRN"></span>', ['grn/create-grn', 'po' => $model->po_order_number,'grn' => $grn_transaction_number], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to create this GRN?") ']);
+
+                              $grn_data_exists = ImGrnHead::find()->where(['pp_purchase_head_id'=>$model->id])->one();
+
+                              if(empty($grn_data_exists)){
+
+                                return Html::a('Create GRN', ['grn/create-grn', 'po' => $model->po_order_number,'grn' => $grn_transaction_number], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to create this GRN?") ']);
+                                  
+                              }
+                              
                           },
                       
                     ],

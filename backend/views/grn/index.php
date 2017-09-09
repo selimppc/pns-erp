@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       'attribute' => 'status',
                       'label' => 'Status',
                       'value' => function ($model){
-                        return ucfirst($model->status);
+                        return ucfirst('GRN '. $model->status);
                       }
                     ],
 
@@ -108,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' => [
                       
                         'confirm_grn' => function ($url, $model) {
-                              return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-open-file" title="Confirm GRN"></span>', ['grn/confirm-grn', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to Confirm this GRN?") ']):'';
+                              return $model->status == 'created'?Html::a('Approved GRN', ['grn/confirm-grn', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to Confirm this GRN?") ']):'';
                           },
                       
                     ],
