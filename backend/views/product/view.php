@@ -2,6 +2,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Product */
@@ -10,7 +11,7 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?> 
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -33,13 +34,34 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <div class="page-content">
-    <!-- Panel Basic -->
+                <!-- Panel Basic -->
     <div class="panel">
 
-    <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title">Update :: <?= Html::encode($this->title) ?></h3>
-    </header>
+    <?php 
+        if(Yii::$app->session->hasFlash('success')){
+    ?>
+        <div class="alert alert-success">
+          <?= Yii::$app->session->getFlash('success'); ?>
+        </div>
+    <?php 
+        }
+    ?>
+
+    <?php 
+        if(Yii::$app->session->hasFlash('error')){
+    ?>
+        <div class="alert alert-danger">
+          <?= Yii::$app->session->getFlash('error'); ?>
+        </div>
+    <?php 
+        }
+    ?>
+
+    <div id="flag_desc">
+        <div id="flag_desc_text">
+            <b>View</b> :: <?= Html::encode($this->title) ?>
+        </div>
+    </div>      
      
     <div class="panel-body">
 
@@ -85,3 +107,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
+<?php Pjax::end(); ?>

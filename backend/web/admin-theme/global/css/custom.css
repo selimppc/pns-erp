@@ -1,3 +1,6 @@
+.panel-body{
+    padding-top: 10px;
+}
  .breadcrumb,.breadcrumb-item.active,.breadcrumb-item a{
     color: #4B0082;
  }
@@ -190,5 +193,27 @@ form div.required label.control-label:after {
 }
 
 .panel-body .header label{
+    font-weight: 700;
+}
+
+#flag_desc {
+    background: thistle;
+    line-height: 20px;
+    padding: 10px;
+    width: 96%;
+    display: inline-block;
+    box-shadow: 10px 3px 5px #aaa;
+    border-radius: 5px;
+    margin-left: 2%;
+    margin-top: 1%;
+}
+
+#flag_desc_text {
+    width: 95%;
+    float: left;
+    font-size: 15px;
+}
+
+#flag_desc_text b{
     font-weight: 700;
 }
