@@ -61,7 +61,7 @@ use backend\models\CodesParam;
 
 
     <div class="form-group" style="margin-top: 20px;">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn-primary waves-effect' : 'btn-primary waves-effect']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Save Changes' : 'Save Changes', ['class' => $model->isNewRecord ? 'btn-primary waves-effect' : 'btn-primary waves-effect']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

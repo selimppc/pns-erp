@@ -38,56 +38,54 @@ $this->params['breadcrumbs'][] = $this->title;
      
       <div class="panel-body">
 
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Product Code</th>
+                  <th>Product Name</th>
+                  <th>Batch Number</th>
+                  <th>Expiry Date</th>
+                  <th>Branch</th>
+                  <th>Stock Rate</th>
+                  <th>Unit</th>
+                  <th>Transfer Quantity</th>
+                  <th>Sell Quantity</th>
+                  <th>Stock Quantity</th>
+                  <th>Available Quantity</th>
+                </tr>
+              </thead>
 
-                    [
-                      'attribute' => 'product_id',
-                      'label' => 'Product Name',
-                      'format' => 'raw',
-                      'value' => function ($model) {
-                          return isset($model->product)?$model->product->title:'';
-                      },
-                    ],
-                    'batch_number',
-                    'expire_date',
-                    'receive_quantity',
-                    [
-                      'attribute' => 'cost_price',
-                      'label' => 'Cost Price',
-                      'format' => 'raw',
-                      'value' => function ($model) {
-                          return number_format($model->cost_price,2);
-                      },
-                    ],
-                    [
-                      'attribute' => 'uom',
-                      'label' => 'UOM',
-                      'format' => 'raw',
-                      'value' => function ($model) {
-                          return isset($model->productUom)?$model->productUom->title:'';
-                      },
-                    ],
-                    'quantity',
-                    [
-                      'attribute' => 'row_amount',
-                      'label' => 'Total Amount',
-                      'format' => 'raw',
-                      'value' => function ($model) {
-                          return number_format($model->row_amount,2);
-                      },
-                    ],
-                    // 'created_by',
-                    // 'updated_by',
-                    // 'created_at',
-                    // 'updated_at',
+              <tbody>
+                  <?php
+                    if(!empty($models)){
+                      $count = 1;
+                      foreach($models as $data){
+                  ?>
+                      <tr>
+                        <td><?=$count?></td>
+                        <td><?=$data->product_code?></td>
+                        <td><?=$data->title?></td>
+                        <td><?=$data->batch_number?></td>
+                        <td><?=$data->date?></td>
+                        <td><?=$data->branch_name?></td>
+                        <td><?=$data->cost_price?></td>
+                        <td></td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td><?=$data->quantity?></td>
+                        <td><?=$data->quantity?></td>
+                      </tr>
 
-                    //['class' => 'yii\grid\ActionColumn'],
-                ],
-            ]); ?>
+                  <?php      
+                    $count++;
+                      }
+                    }else{
+                      echo 'Stock Not Available';
+                    }
+                  ?>
+              </tbody>
+            </table>
 
       </div>
 

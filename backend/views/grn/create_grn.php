@@ -2,6 +2,9 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
+
+use backend\models\ImGrnDetail;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImGrnHeadSearch */
@@ -11,6 +14,7 @@ $this->title = 'Create GRN';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?php Pjax::begin(); ?> 
 
 <div class="page-header">
 
@@ -65,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
               <table class="items">
                   <thead>
                     <tr>
+                      <th>Product Code</th>
                       <th>Product Name</th>
                       <th>Unit of Measurement</th>
                       <th>UOM Quantity</th>
@@ -78,12 +83,43 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php
                       foreach($purchased_order_details as $pp_details)
                       {
+
+                        $already_added_grn = ImGrnDetail::grn_data($grn,$pp_details->product_id);
+
+                        if(!empty($already_added_grn)){
+
+                        if($pp_details->quantity > $already_added_grn->receive_quantity){
+
+                          $orignal_quantity = $pp_details->quantity - $already_added_grn->receive_quantity;
                     ?>
                       <tr class="odd">
                           <td>
-                            <?= Html::a(Yii::t('app', 'Manage '.isset($pp_details->product)?$pp_details->product->title:''), ['create-grn','po'=>$po,'grn'=>$grn,'id'=>$pp_details->id], ['class' => '']) ?> 
+                            <?= Html::a(Yii::t('app', 'Manage '.isset($pp_details->product_code)?$pp_details->product_code:''), ['generate-grn','po'=>$po,'grn'=>$grn,'id'=>$pp_details->product_id], ['class' => '']) ?> 
                             
-                            </td>
+                          </td>
+                          <td>
+                              <?=$pp_details->title?>
+                          </td>
+                          <td><?=isset($pp_details->uomData)?$pp_details->uomData->title:'';?></td>
+                          <td><?=$pp_details->uom_quantity?></td>
+                          <td><?=$orignal_quantity?></td>
+                          <td><?=number_format($pp_details->purchase_rate,2)?></td>
+                          <td><?=number_format($pp_details->purchase_rate * $orignal_quantity,2)?></td>
+                      </tr>
+
+                    <?php                       
+                          }
+                        }else{
+                    ?>
+                    
+                      <tr class="odd">
+                          <td>
+                            <?= Html::a(Yii::t('app', 'Manage '.isset($pp_details->product_code)?$pp_details->product_code:''), ['generate-grn','po'=>$po,'grn'=>$grn,'id'=>$pp_details->product_id], ['class' => '']) ?> 
+                            
+                          </td>
+                          <td>
+                              <?=$pp_details->title?>
+                          </td>
                           <td><?=isset($pp_details->uomData)?$pp_details->uomData->title:'';?></td>
                           <td><?=$pp_details->uom_quantity?></td>
                           <td><?=$pp_details->quantity?></td>
@@ -91,7 +127,8 @@ $this->params['breadcrumbs'][] = $this->title;
                           <td><?=number_format($pp_details->purchase_rate * $pp_details->purchase_rate,2)?></td>
                       </tr>
 
-                    <?php                       
+                    <?php      
+                        }
                       }
                     ?>
                   </tbody>
@@ -148,3 +185,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
       </div>
 </div>        
+
+<?php Pjax::end(); ?>

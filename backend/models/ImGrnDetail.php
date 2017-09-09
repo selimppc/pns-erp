@@ -99,6 +99,22 @@ class ImGrnDetail extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function grn_data($grn='',$product_id=''){
+
+        $grn_head = ImGrnHead::find()->where(['grn_number' => $grn])->one();
+
+        if(!empty($grn_head)){
+
+            $grn_details = ImGrnDetail::find()->where(['im_grn_head_id'=>$grn_head->id])->andWhere(['product_id' => $product_id])->one();
+
+            return $grn_details;
+
+        }else{
+            return '';
+        }
+
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

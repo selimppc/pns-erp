@@ -9,6 +9,8 @@ use backend\models\ImGrnHeadSearch;
 use backend\models\ImGrnDetail;
 use backend\models\ImGrnDetailSearch;
 
+use backend\models\VwPurchaseDetail;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -106,12 +108,13 @@ class GrnController extends Controller
 
     public function actionGenerateGrn($po='',$grn='',$id=''){
 
-        
         // Purchase Order Data
         $purchased_order = PpPurchaseHead::find()->where(['po_order_number' => $po])->one();
 
         if(!empty($purchased_order)){
             $purchased_order_details = PpPurchaseDetail::find()->where(['pp_purchase_head_id' => $purchased_order->id])->all(); 
+
+            $purchased_order_details = VwPurchaseDetail::find()->where(['pp_purchase_head_id' => $purchased_order])->all();
 
             /*$query = new Query;
             $query  ->select(['pp_purchase_detail.id as id',
@@ -157,9 +160,12 @@ class GrnController extends Controller
         $model->grn_number = $grn;
 
         if(!empty($id)){
-            $transaction_details = PpPurchaseDetail::find()->where(['id'=>$id])->one();
 
-            $transaction_head = PpPurchaseHead::find()->where(['id'=>$transaction_details->pp_purchase_head_id])->one();
+            $transaction_head = PpPurchaseHead::find()->where(['po_order_number'=>$po])->one();
+
+            $transaction_details = PpPurchaseDetail::find()->where(['product_id'=>$id])->andWhere(['pp_purchase_head_id'=>$transaction_head->id])->one();
+
+            
 
             if(!empty($transaction_details)){
 
