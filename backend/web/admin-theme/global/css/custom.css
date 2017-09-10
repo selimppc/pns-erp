@@ -229,3 +229,7 @@ form div.required label.control-label:after {
 .table td, .table th {
     font-size: 13px !important;
 }
+
+.form-material .form-control, select.form-control:not([size]):not([multiple]) {
+    font-size: 13px !important;
+}
