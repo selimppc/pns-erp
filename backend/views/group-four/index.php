@@ -11,73 +11,78 @@ $this->title = Yii::t('app', 'Group Fours');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="page-header">
+<?php Pjax::begin(); ?>   
+  <div class="page-header">
 
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
 
-        <li class="breadcrumb-item"><a>Master Setup</a></li>
+          <li class="breadcrumb-item"><a>Master Setup</a></li>
 
-        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/settings']); ?>">Settings</a></li>
+          <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/settings']); ?>">Settings</a></li>
 
-        <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
-      </ol>
-     
-      <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Add New Group Four'), ['create'], ['class' => '']) ?>
-        <?= Html::a(Yii::t('app', 'Manage Group Fours'), ['index'], ['class' => '']) ?>   
-        <?php
-          echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
-        ?>    
-      </div>
-</div>
+          <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
+        </ol>
+       
+        <div class="middle-menu-bar">
+          <?= Html::a(Yii::t('app', 'Add New Group Four'), ['create'], ['class' => '']) ?>
+          <?= Html::a(Yii::t('app', 'Manage Group Fours'), ['index'], ['class' => '']) ?>   
+          <?php
+            echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
+          ?>    
+        </div>
+  </div>
 
-<div class="page-content">
-    <!-- Panel Basic -->
-    <div class="panel">
+  <div class="page-content">
+      <!-- Panel Basic -->
+      <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
-     
-      <div class="panel-body">
+        <div id="flag_desc">
+            <div id="flag_desc_text">
+                <?php
+                    if(isset(\Yii::$app->params['group_four_index']) && !empty(\Yii::$app->params['group_four_index'])){
+                      echo \Yii::$app->params['group_four_index'];
+                    }
+                ?>
+            </div>
+        </div>
+       
+        <div class="panel-body">
 
-        <?php Pjax::begin(); ?>   
+          <?= GridView::widget([
+              'dataProvider' => $dataProvider,
+              'filterModel' => $searchModel,
+              'columns' => [
+                  ['class' => 'yii\grid\SerialColumn'],
+                  'id',
 
-        <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-                'id',
-
-                [
-                 'label'=>'Group Three',
-                 'format' => 'raw',
-                 'value'=>function ($data) {
-                      return $data->groupThree->title;
-                  },
-                ],
-                [
-                  'attribute' => 'title',
-                  'format' => 'raw',
-                  'value' => function ($model) {
-                        return Html::a($model->title, ['/group-four/view', 'id' => $model->id]);
+                  [
+                   'label'=>'Group Three',
+                   'format' => 'raw',
+                   'value'=>function ($data) {
+                        return $data->groupThree->title;
                     },
-                ],
-                'description:ntext',
+                  ],
+                  [
+                    'attribute' => 'title',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                          return Html::a($model->title, ['/group-four/view', 'id' => $model->id]);
+                      },
+                  ],
+                  'description:ntext',
 
-                [
-                  'class' => 'yii\grid\ActionColumn',
-                  'template' => '{view} {update} ',
-                ],
-            ],
-        ]); ?>
-        <?php Pjax::end(); ?>
+                  [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{view} {update} ',
+                  ],
+              ],
+          ]); ?>
+
+
+        </div>
 
       </div>
+  </div>      
 
-    </div>
-</div>      
-
+<?php Pjax::end(); ?>

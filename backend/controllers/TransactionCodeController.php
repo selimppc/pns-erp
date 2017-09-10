@@ -35,6 +35,13 @@ class TransactionCodeController extends Controller
      */
     public function actionIndex($type='')
     {
+
+        if(isset(\Yii::$app->params[$type]) && !empty(\Yii::$app->params[$type])){            
+            $transaction_code_help_text =\Yii::$app->params[$type];
+        }else{
+            $transaction_code_help_text = '';
+        }
+
         $model = new TransactionCode();
 
         $model->type = $type;
@@ -54,7 +61,8 @@ class TransactionCodeController extends Controller
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'model' => $model
+                'model' => $model,
+                'transaction_code_help_text' => $transaction_code_help_text
             ]);
 
         }else{
@@ -62,7 +70,8 @@ class TransactionCodeController extends Controller
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'model' => $model
+                'model' => $model,
+                'transaction_code_help_text' => $transaction_code_help_text
             ]);
 
         }
@@ -78,6 +87,13 @@ class TransactionCodeController extends Controller
     public function actionView($id,$type='')
     {
 
+        if(isset(\Yii::$app->params[$type]) && !empty(\Yii::$app->params[$type])){            
+            $transaction_code_help_text =\Yii::$app->params[$type];
+        }else{
+            $transaction_code_help_text = '';
+        }
+
+
         $model = $this->findModel($id);
 
         $searchModel = new TransactionCodeSearch();
@@ -87,7 +103,8 @@ class TransactionCodeController extends Controller
         return $this->render('view', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'model' => $model
+                'model' => $model,
+                'transaction_code_help_text' => $transaction_code_help_text
             ]);
 
         
@@ -100,6 +117,13 @@ class TransactionCodeController extends Controller
      */
     public function actionCreate($type='')
     {
+
+        if(isset(\Yii::$app->params[$type]) && !empty(\Yii::$app->params[$type])){            
+            $transaction_code_help_text =\Yii::$app->params[$type];
+        }else{
+            $transaction_code_help_text = '';
+        }
+
         $model = new TransactionCode();
 
         $model->type = $type;
@@ -117,10 +141,14 @@ class TransactionCodeController extends Controller
             $model->last_number = '0';
             $model->increment = '1';
 
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'model' => $model
+                'model' => $model,
+                'transaction_code_help_text' => $transaction_code_help_text
             ]);
 
         } else {
@@ -128,7 +156,8 @@ class TransactionCodeController extends Controller
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'model' => $model
+                'model' => $model,
+                'transaction_code_help_text' => $transaction_code_help_text
             ]);
 
         }
@@ -142,6 +171,12 @@ class TransactionCodeController extends Controller
      */
     public function actionUpdate($id,$type='')
     {
+        if(isset(\Yii::$app->params[$type]) && !empty(\Yii::$app->params[$type])){            
+            $transaction_code_help_text =\Yii::$app->params[$type];
+        }else{
+            $transaction_code_help_text = '';
+        }
+
         $model = $this->findModel($id);
 
         $model->type = $type;
@@ -152,10 +187,14 @@ class TransactionCodeController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'model' => $model
+                'model' => $model,
+                'transaction_code_help_text' => $transaction_code_help_text
             ]);
 
         } else {
@@ -163,7 +202,8 @@ class TransactionCodeController extends Controller
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'model' => $model
+                'model' => $model,
+                'transaction_code_help_text' => $transaction_code_help_text
             ]);
 
         }

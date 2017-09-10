@@ -1,10 +1,13 @@
 <?php
 	use yii\helpers\Url;
 	use yii\helpers\Html;
+	use yii\widgets\Pjax;
 
 	$this->title = Yii::t('app', 'Settings');
 	$this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php Pjax::begin(); ?> 
 
 <div class="page-header">
 
@@ -25,11 +28,18 @@
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
-     
+    	<div id="flag_desc">
+          <div id="flag_desc_text">
+              <?php
+
+              	if(isset(\Yii::$app->params['settings']) && !empty(\Yii::$app->params['settings'])){
+              		echo \Yii::$app->params['settings'];
+              	}
+              	
+              ?>
+          </div>
+      	</div>
+      
 	    <div class="panel-body">
 
 	    	<div class="setting-column">
@@ -64,3 +74,4 @@
 
     </div>
 </div>
+<?php Pjax::end(); ?>

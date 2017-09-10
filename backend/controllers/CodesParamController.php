@@ -33,6 +33,13 @@ class CodesParamController extends Controller
 
     public function actionCodesParamsOption($type){
 
+        if(isset(\Yii::$app->params[$type]) && !empty(\Yii::$app->params[$type])){
+            
+            $codes_params_help_text =\Yii::$app->params[$type];
+        }else{
+            $codes_params_help_text = '';
+        }
+
         $model = new CodesParam();
 
         $model->type = $type;
@@ -45,10 +52,14 @@ class CodesParamController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
             return $this->render('codes_params_option', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'model' => $model
+                'model' => $model,
+                'codes_params_help_text' => $codes_params_help_text
             ]);
 
         } else {
@@ -56,7 +67,8 @@ class CodesParamController extends Controller
             return $this->render('codes_params_option', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'model' => $model
+                'model' => $model,
+                'codes_params_help_text' => $codes_params_help_text
             ]);
         }
 
@@ -66,6 +78,12 @@ class CodesParamController extends Controller
 
 
     public function actionUpdateCodesParams($id,$type){
+
+        if(isset(\Yii::$app->params[$type]) && !empty(\Yii::$app->params[$type])){            
+            $codes_params_help_text =\Yii::$app->params[$type];
+        }else{
+            $codes_params_help_text = '';
+        }
 
         $model = $this->findModel($id);
 
@@ -77,11 +95,15 @@ class CodesParamController extends Controller
 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
             
             return $this->render('codes_params_option', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'model' => $model
+                'model' => $model,
+                'codes_params_help_text' => $codes_params_help_text
             ]);
 
         } else {
@@ -89,7 +111,8 @@ class CodesParamController extends Controller
             return $this->render('codes_params_option', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
-                'model' => $model
+                'model' => $model,
+                'codes_params_help_text' => $codes_params_help_text
             ]);
 
         }

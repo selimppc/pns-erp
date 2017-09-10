@@ -18,5 +18,37 @@ return [
 
     'branch_master_create' => '<b>New Branch Master:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Save”.</b> Fields marked with (*) are mandatory. You can go back to your homescreen to view branch information(s) by clicking the menu tab <b>“Manage Branch Master”.</b>',
 
-    'currency_master_index' => '<b>Manage Currency Manage:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Add New Currency”.</b> Now you will be able to view the currency details table on your right-hand side. By clicking the icon under <b>“Action”</b> column will allow you to update the specific data.'
+    'currency_master_index' => '<b>Manage Currency Manage:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Add New Currency”.</b> Now you will be able to view the currency details table on your right-hand side. By clicking the icon under <b>“Action”</b> column will allow you to update the specific data.',
+
+    'settings' => '<b>Master Settings:</b> This screen facilities information flow between all business functions.',
+
+    'Product Class' => '<b>Product Class setup:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Enter Product Class”.</b> Fields marked with (*) are mandatory. You can go back to your home screen to view all business setup tool(s) by clicking the menu tab <b>“Back to Settings”.</b> Action buttons will allow you to update and delete.',
+
+    'Product Group' => '<b>Product Group Setup: </b>In this screen, all of the required fields need to be filled before clicking the button <b>“Enter Product Group”.</b> Fields marked with (*) are mandatory. You can go back to your home screen to view all business setup tool(s) by clicking the menu tab “Back to Settings”. By clicking the icons under <b>“Action”</b> column will allow you to update and delete the specific data.',
+
+    'Product Category' => '<b>Product Category Setup:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Enter Product Category”.</b> Fields marked with (*) are mandatory. You can go back to your home screen to view all business setup tool(s) by clicking the menu tab <b>“Back to Settings”.</b> By clicking the icons under <b>“Action”</b> column will allow you to update and delete the specific data.',
+
+    'Unit Of Measurement' => '<b>Unit of Measurement Setup:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Enter Unit of Measurement”.</b> Fields marked with (*) are mandatory. You can go back to your home screen to view all business setup tool(s) by clicking the menu tab <b>“Back to Settings”.</b> By clicking the icons under <b>“Action”</b> column will allow you to update and delete the specific data.',
+
+    'Supplier Group' => '<b>Supplier Group Setup:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Enter Supplier Group”.</b> Fields marked with (*) are mandatory. You can go back to your home screen to view all business setup tool(s) by clicking the menu tab <b>“Back to Settings”.</b> By clicking the icons under <b>“Action”</b> column will allow you to update and delete the specific data.',
+
+    'group_one_index' => '',
+
+    'group_one_create' => '',
+
+    'group_two_index' => '',
+
+    'group_two_create' => '',
+
+    'group_three_index' => '',
+
+    'group_three_create' => '',
+
+    'group_four_index' => '',
+
+    'group_four_create' => '',
+
+    'Customer Group' => '<b>Customer Group Setup:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Enter Customer Group”.</b> Fields marked with (*) are mandatory. You can go back to your home screen to view all business setup tool(s) by clicking the menu tab <b>“Back to Settings”.</b> By clicking the icons under <b>“Action”</b> column will allow you to update and delete the specific data.',
+
+    'CUSTOMER TRN NUMBER' => '<b>Customer Transaction No Setup:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Enter Customer TRN No”.</b> Fields marked with (*) are mandatory. You can go back to your home screen to view all business setup tool(s) by clicking the menu tab <b>“Back to Settings”.</b>'
 ];

@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\widgets\Pjax;
 
 
 /* @var $this yii\web\View */
@@ -10,6 +11,7 @@ $this->title = 'Create Transaction Code';
 $this->params['breadcrumbs'][] = ['label' => 'Transaction Codes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php Pjax::begin(); ?> 
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -30,10 +32,31 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
+      <?php 
+            if(Yii::$app->session->hasFlash('success')){
+        ?>
+            <div class="alert alert-success">
+              <?= Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+        <?php 
+            if(Yii::$app->session->hasFlash('error')){
+        ?>
+            <div class="alert alert-danger">
+              <?= Yii::$app->session->getFlash('error'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+      <div id="flag_desc">
+        <div id="flag_desc_text">
+            <?=isset($transaction_code_help_text)?$transaction_code_help_text:''?>
+        </div>
+      </div>
      
 	    <div class="panel-body">
 
@@ -44,3 +67,4 @@ $this->params['breadcrumbs'][] = $this->title;
 	    </div>
 
 </div>
+<?php Pjax::end(); ?>

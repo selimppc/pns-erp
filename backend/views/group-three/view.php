@@ -2,6 +2,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\GroupThree */
@@ -10,7 +11,7 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Group Threes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?> 
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -41,6 +42,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
+        <?php 
+            if(Yii::$app->session->hasFlash('success')){
+        ?>
+            <div class="alert alert-success">
+              <?= Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+        <?php 
+            if(Yii::$app->session->hasFlash('error')){
+        ?>
+            <div class="alert alert-danger">
+              <?= Yii::$app->session->getFlash('error'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+        <div id="flag_desc">
+          <div id="flag_desc_text">
+              <b>View :: </b><?= Html::encode($this->title) ?>
+          </div>
+        </div>
+
         <div class="panel-body">
 
               <?= DetailView::widget([
@@ -64,3 +91,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </div>
 </div>
+<?php Pjax::end(); ?>

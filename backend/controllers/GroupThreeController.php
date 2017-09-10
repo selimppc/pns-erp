@@ -70,6 +70,10 @@ class GroupThreeController extends Controller
         $group_two_data = ArrayHelper::map(GroupTwo::find()->all(), 'id', 'title');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -90,6 +94,10 @@ class GroupThreeController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
