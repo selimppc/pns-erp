@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                       'view' => function ($url,$model) {
                           $url =  $url;
-                          return $model->status == 'open'?Html::a('<span class="btn btn-xs btn-info">Show </span>', $url):'';
+                          return $model->status != 'cancel'?Html::a('<span class="btn btn-xs btn-info">Show </span>', $url):'';
                         },
                         
                       

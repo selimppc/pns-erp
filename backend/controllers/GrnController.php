@@ -181,7 +181,8 @@ class GrnController extends Controller
 
             // Grn Details Data Save
            
-            if ($model->load(Yii::$app->request->post())) {
+            if ($model->load(Yii::$app->request->post()))
+            {
                 $model->im_grn_head_id = $grn_head->id;
                 $valid = $model->validate();
                 if($valid){
