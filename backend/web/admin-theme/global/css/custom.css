@@ -217,3 +217,15 @@ form div.required label.control-label:after {
 #flag_desc_text b{
     font-weight: 700;
 }
+
+
+/*  --- form-control */
+.form-control{
+    padding: 3px !important;
+    height: 25px !important;
+    font-size: 12px !important;
+}
+
+.table td, .table th {
+    font-size: 13px !important;
+}
