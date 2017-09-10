@@ -1,18 +1,19 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Currency */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
+$this->title = Yii::t('app', '{modelClass} ', [
     'modelClass' => 'Currency',
 ]) . $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Currencies'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-
+<?php Pjax::begin(); ?>  
 <div class="page-header">
       
       <ol class="breadcrumb">
@@ -38,10 +39,11 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"> <?= Html::encode($this->title) ?></h3>
-      </header>
+      <div id="flag_desc">
+        <div id="flag_desc_text">
+              <b>View ::</b> <?= Html::encode($this->title) ?>
+        </div>
+      </div>
      
 	    <div class="panel-body">
 
@@ -52,3 +54,4 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 	    </div>
 
 </div>
+<?php Pjax::end(); ?>

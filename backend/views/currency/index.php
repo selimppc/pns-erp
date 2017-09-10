@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('app', 'Currency');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?>  
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -32,14 +32,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
+      <div id="flag_desc">
+          <div id="flag_desc_text">
+              <?=\Yii::$app->params['currency_master_index']?>
+          </div>
+      </div>
      
       <div class="panel-body">
 
-            <?php Pjax::begin(); ?>  
+            
               <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
@@ -87,9 +88,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ]); ?>
-        <?php Pjax::end(); ?>
+        
 
       </div>
 
     </div>
 </div>      
+<?php Pjax::end(); ?>
