@@ -50,5 +50,11 @@ return [
 
     'Customer Group' => '<b>Customer Group Setup:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Enter Customer Group”.</b> Fields marked with (*) are mandatory. You can go back to your home screen to view all business setup tool(s) by clicking the menu tab <b>“Back to Settings”.</b> By clicking the icons under <b>“Action”</b> column will allow you to update and delete the specific data.',
 
-    'CUSTOMER TRN NUMBER' => '<b>Customer Transaction No Setup:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Enter Customer TRN No”.</b> Fields marked with (*) are mandatory. You can go back to your home screen to view all business setup tool(s) by clicking the menu tab <b>“Back to Settings”.</b>'
+    'CUSTOMER TRN NUMBER' => '<b>Customer Transaction No Setup:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Enter Customer TRN No”.</b> Fields marked with (*) are mandatory. You can go back to your home screen to view all business setup tool(s) by clicking the menu tab <b>“Back to Settings”.</b>',
+
+    'master_report' => 'In this screen, you have the access & view to Master Setup Reports',
+
+    'report_product_list' => '<b>Product List Report :</b> In this screen select product class &product group to report in pdf or xls click <b>PDF or XLS</b> respectively. *** Data Posting to GL is necessary for viewing and result. You can go back to the Report Tools to view all Report tools by clicking the menu tab <b>“<< Back to Report”.</b>',
+
+    'report_customer_ledger_report' => '<b>Customer Ledger Report :</b> Select customer and input desire dates, from and to. To view report in pdf or xls click on <b>"PDF" or "XLS"</b> . *** Data Posting to GL is necessary for viewing and result. You can go back to the <b>Report Tools</b> to view all Report tools by clicking the menu tab <b>“ << Back to Report”.</b>'
 ];

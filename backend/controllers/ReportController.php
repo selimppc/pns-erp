@@ -37,20 +37,34 @@ class ReportController extends Controller
 
     public function actionProductList(){
 
+        if(isset(\Yii::$app->params['report_product_list']) && !empty(\Yii::$app->params['report_product_list'])){
+                    $report_help_text = \Yii::$app->params['report_product_list'];
+        }else{
+            $report_help_text = '';
+        }
+
     	$model = new ProductMaster();
 
     	return $this->render('product_list',[
-    			'model' => $model
+    			'model' => $model,
+                'report_help_text' => $report_help_text
     		]);
     }
 
 
     public function actionCustomerLedgerReport(){
 
+        if(isset(\Yii::$app->params['report_customer_ledger_report']) && !empty(\Yii::$app->params['report_customer_ledger_report'])){
+                    $report_help_text = \Yii::$app->params['report_customer_ledger_report'];
+        }else{
+            $report_help_text = '';
+        }
+
     	$model = new CustomerMaster();
 
     	return $this->render('customer_list',[
-    			'model' => $model
+    			'model' => $model,
+                'report_help_text' => $report_help_text
     		]);
 
     }

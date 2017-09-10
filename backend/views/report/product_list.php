@@ -30,10 +30,11 @@
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
+      <div id="flag_desc">
+          <div id="flag_desc_text">
+              <?=isset($report_help_text)?$report_help_text:''?>
+          </div>
+      </div>
      
 	    <div class="panel-body">
 
