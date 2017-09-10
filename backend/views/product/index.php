@@ -36,7 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
       <div id="flag_desc">
           <div id="flag_desc_text">
               <?=\Yii::$app->params['product_master_index']?>
-              
           </div>
       </div>
 
