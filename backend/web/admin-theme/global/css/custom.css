@@ -18,6 +18,14 @@ form div.required label.control-label:after {
 	top: 8px;
 }
 
+form div label.control-label:after{
+    content: " * ";
+    color: #fff;
+    font-size: 22px;
+    position: relative;
+    top: 8px;
+}
+
 .navbar-brand-text{
     color: #fff;
 }

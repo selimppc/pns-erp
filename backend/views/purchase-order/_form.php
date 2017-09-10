@@ -7,6 +7,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
 use yii\helpers\ArrayHelper;
 use backend\models\Supplier;
 use backend\models\Branch;
+use backend\models\Currency;
 use backend\models\Product;
 use backend\models\CodesParam;
 use kartik\date\DatePicker;
@@ -128,8 +129,36 @@ $this->registerJs($js);
 
             </div>
 
-            
+            <div class="col-md-2">
 
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                    <?= $form->field($modelPurchaseHead, 'currency_id')
+                                ->dropDownList(
+                                    ArrayHelper::map(Currency::find()->all(), 'id', 'currency_code'),
+                                     ['prompt'=>'-Select-','class'=>'form-control']
+                                ); ?>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-2">
+
+                <?= $form->field($modelPurchaseHead, 'exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            </div>
+
+            <div class="col-md-2">
+
+                <?= $form->field($modelPurchaseHead, 'discount_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            </div>
+
+            
+            <div class="col-md-2">
+             <?= $form->field($modelPurchaseHead, 'status',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => 1]) ?>
+            </div> 
 
 
         </div>

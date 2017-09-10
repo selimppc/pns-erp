@@ -92,6 +92,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     <th>Payment Terms</th>
                     <th>Delivery Date</th>
                     <th>Branch</th>
+                    <th>Currency</th>
+                    <th>Exchange Rate</th>
+                    <th>Discount Rate</th>
+                    <th>Status</th>
                 </tr>
 
                 <tr>
@@ -101,6 +105,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td><?=$model->pay_terms?></td>
                     <td><?=$model->delivery_date?></td>
                     <td><?=isset($model->branch)?$model->branch->title:''?></td>
+                    <td><?=isset($model->currency)?$model->currency->currency_code:''?></td>
+                    <td><?=$model->exchange_rate?></td>
+                    <td><?=$model->discount_rate?></td>
+                    <td><?=ucfirst($model->status)?></td>
                 </tr>
                 
             </table>
@@ -122,7 +130,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>Quantity</th>
                             <th>Unit of Measurment</th>
                             <th>UOM Quantity</th>
-                            <th>Purchased Rate</th>    
+                            <th>Purchased Rate</th> 
+                            <th>Line Total</th>   
                         </tr>
 
                         <?php
@@ -151,8 +160,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </td>
 
                                     <td>
-                                        <?=$po_details->purchase_rate?>
+                                        <?=number_format($po_details->purchase_rate,2)?>
                                             
+                                    </td>
+
+                                    <td>
+                                        <?=number_format($po_details->purchase_rate*$po_details->quantity,2)?>
                                     </td>
                                 </tr>
                         <?php

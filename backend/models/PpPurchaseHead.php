@@ -71,7 +71,7 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
     {
         return [
            # [['supplier_id','branch_id','tax_rate','po_order_number'],'required'],
-            [['po_order_number','date','delivery_date','supplier_id','pay_terms','branch_id'],'required'],
+            [['po_order_number','date','delivery_date','supplier_id','pay_terms','branch_id','currency_id','exchange_rate'],'required'],
             [['date', 'delivery_date', 'created_at', 'updated_at'], 'safe'],
             [['supplier_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],
@@ -88,6 +88,8 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'currency_id' => Yii::t('app', 'Currency'),
+            'exchange_rate' => Yii::t('app', 'Exchange Rate'),
             'po_order_number' => Yii::t('app', 'PO No'),
             'date' => Yii::t('app', 'Date'),
             'supplier_id' => Yii::t('app', 'Supplier'),
@@ -96,10 +98,10 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
             'branch_id' => Yii::t('app', 'Branch'),
             'tax_rate' => Yii::t('app', 'Tax Rate'),
             'tax_amount' => Yii::t('app', 'Tax Amount'),
-            'discount_rate' => Yii::t('app', 'Discount Rate'),
+            'discount_rate' => Yii::t('app', 'Discount Rate (%)'),
             'discount_amount' => Yii::t('app', 'Discount Amount'),
             'prime_amount' => Yii::t('app', 'Prime Amount'),
-            'net_amount' => Yii::t('app', 'Net Amount'),
+            'net_amount' => Yii::t('app', 'Total Amount'),
             'status' => Yii::t('app', 'Status'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
@@ -140,6 +142,14 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
     public function getBranch()
     {
         return $this->hasOne(Branch::className(), ['id' => 'branch_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCurrency()
+    {
+        return $this->hasOne(Currency::className(), ['id' => 'currency_id']);
     }
 
     /**

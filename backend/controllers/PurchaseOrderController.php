@@ -109,6 +109,7 @@ class PurchaseOrderController extends Controller
         $modelsPurchaseDetail = [new PpPurchaseDetail];
 
         $modelPurchaseHead->po_order_number = $po_order_number; 
+        $modelPurchaseHead->status = 'open'; 
         $modelPurchaseHead->tax_rate ='0.00';
         $modelPurchaseHead->tax_amount ='0.00';
         $modelPurchaseHead->discount_rate ='0.00';
