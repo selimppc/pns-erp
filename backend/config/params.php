@@ -62,5 +62,9 @@ return [
 
     'purchase_order_create' => '<b>New Purchase Order :</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Add Purchase Header”.</b> Fields marked with (*) are mandatory. You can go back to your homescreen to view Requisition Header’s information by clicking the menu tab <b>“Manage Purchase Order”.</b> Also you can add new voucher details on existing Voucher by clicking the link under <b>“Purchase Order Number”</b> column; this link will redirect you to voucher detail page. <b>Action</b> buttons will allow you to update and delete.',
 
-    'purchase_order_view' => 'In this screen you can only view purchase details information. You can go back to Purchase Header to view all Voucher Header information at a glance by clicking the menu tab <b>"<< Back to Purchase Header".</b>'
+    'purchase_order_view' => 'In this screen you can only view purchase details information. You can go back to Purchase Header to view all Voucher Header information at a glance by clicking the menu tab <b>"<< Back to Purchase Header".</b>',
+
+    'am_coa_index' => '<b>Chart of Account History:</b> This screen will allow you to view the overall Chart of Account’s detail; you can search specific data by selecting any title columns. You can also open a data entry screen to input new Chart of Account(s) by clicking the Menu tab <b>“New Chart of Accounts”</b>',
+
+    'am_coa_create' => '<b>New Chart of Account:</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Add New A/C”.</b> Fields marked with (*) are mandatory. You can go back to your homescreen to view Chart of Account(s) by clicking the menu tab <b>“Manage Chart of Account”.</b>'
 ];

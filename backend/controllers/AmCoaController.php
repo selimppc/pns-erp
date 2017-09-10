@@ -67,6 +67,10 @@ class AmCoaController extends Controller
         $model = new AmCoa();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -86,6 +90,10 @@ class AmCoaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\AmCoa */
@@ -12,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Chart of Account'), 
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-
+<?php Pjax::begin(); ?> 
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -50,3 +51,4 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
     </div>
 
 </div>
+<?php Pjax::end(); ?>

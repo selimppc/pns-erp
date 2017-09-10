@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\AmCoa */
@@ -11,7 +11,7 @@ $this->title = Yii::t('app', 'Create Chart of Account');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Chart of Account'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?> 
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -33,10 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-    	<header class="panel-heading">
-            <div class="panel-actions"></div>
-            <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-        </header>
+    	 <div id="flag_desc">
+          <div id="flag_desc_text">
+              <?php
+                  if(isset(\Yii::$app->params['am_coa_create']) && !empty(\Yii::$app->params['am_coa_create'])){
+                    echo \Yii::$app->params['am_coa_create'];
+                  }
+              ?>
+          </div>
+        </div>
 
         <div class="panel-body">
 
@@ -49,3 +54,4 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 </div>
+<?php Pjax::end(); ?>
