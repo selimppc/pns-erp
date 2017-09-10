@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
+               # ['class' => 'yii\grid\SerialColumn'],
                 'id',
                 [
                   'attribute' => 'po_order_number',

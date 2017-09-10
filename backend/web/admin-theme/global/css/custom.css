@@ -221,7 +221,7 @@ form div.required label.control-label:after {
 
 /*  --- form-control */
 .form-control{
-    padding: 3px !important;
+    padding: 3px 10px !important;
     height: 25px !important;
     font-size: 12px !important;
 }
@@ -253,6 +253,11 @@ label{
 a.btn{
     color: white !important;
 }
+
+.kv-date-calendar {
+    padding: 0 20px;
+}
+
 /*.site-menu>.site-menu-item>.site-menu-sub{
     height: auto !important;
 }
