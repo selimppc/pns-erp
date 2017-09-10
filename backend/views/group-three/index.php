@@ -48,34 +48,38 @@ $this->params['breadcrumbs'][] = $this->title;
      
       <div class="panel-body">
 
-        <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-          #  ['class' => 'yii\grid\SerialColumn'],
-            'id',
-            [
-               'label'=>'Group Two',
-               'format' => 'raw',
-               'value'=>function ($data) {
-                    return $data->groupTwo->title;
-                },
+        <div class="table-responsive">
+
+            <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+              #  ['class' => 'yii\grid\SerialColumn'],
+                'id',
+                [
+                   'label'=>'Group Two',
+                   'format' => 'raw',
+                   'value'=>function ($data) {
+                        return $data->groupTwo->title;
+                    },
+                ],
+                [
+                  'attribute' => 'title',
+                  'format' => 'raw',
+                  'value' => function ($model) {
+                        return Html::a($model->title, ['/group-four/view', 'id' => $model->id]);
+                    },
+                ],
+                'description:ntext',
+                
+                [
+                  'class' => 'yii\grid\ActionColumn',
+                  'template' => '{view} {update} ',
+                ],
             ],
-            [
-              'attribute' => 'title',
-              'format' => 'raw',
-              'value' => function ($model) {
-                    return Html::a($model->title, ['/group-four/view', 'id' => $model->id]);
-                },
-            ],
-            'description:ntext',
-            
-            [
-              'class' => 'yii\grid\ActionColumn',
-              'template' => '{view} {update} ',
-            ],
-        ],
-    ]); ?>
+        ]); ?>
+
+        </div>
 
 
       </div>

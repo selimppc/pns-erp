@@ -38,6 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
      
       <div class="panel-body">
 
+        <div class="table-responsive">
+
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
@@ -87,6 +89,8 @@ $this->params['breadcrumbs'][] = $this->title;
               </tbody>
             </table>
 
+          </div>
+          
       </div>
 
     </div>

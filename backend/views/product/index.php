@@ -41,57 +41,58 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <div class="panel-body">
 
-        
-         <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-           # ['class' => 'yii\grid\SerialColumn'],
+        <div class="table-responsive">
+            <?= GridView::widget([
+              'dataProvider' => $dataProvider,
+              'filterModel' => $searchModel,
+              'columns' => [
+                 # ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            [
-              'attribute' => 'product_code',
-              'format' => 'raw',
-              'value' => function ($model) {
-                  return Html::a($model->product_code, ['/product/view', 'id' => $model->id]);
-              },
-           ], 
-           [
-              'attribute' => 'title',
-              'format' => 'raw',
-              'value' => function ($model) {
-                  return Html::a($model->title, ['/product/view', 'id' => $model->id]);
-              },
-           ],                   
-             'model',
-             'size',
-             'origin',
-             [
-               'label' => 'Currency',
-               'value' => function ($model) {
-                   return isset($model->currency)?$model->currency->currency_code:'';
-               }
-             ],
-            
-             [
-                'header' => 'Action',
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} ',
-                'buttons' => [
-                  'update' => function ($url,$model) {
-                      $url =  $url;
-                      return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                  'id',
+                  [
+                    'attribute' => 'product_code',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return Html::a($model->product_code, ['/product/view', 'id' => $model->id]);
                     },
-                    'view' => function ($url,$model) {
-                      $url =  $url;
-                      return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                 ], 
+                 [
+                    'attribute' => 'title',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return Html::a($model->title, ['/product/view', 'id' => $model->id]);
                     },
+                 ],                   
+                   'model',
+                   'size',
+                   'origin',
+                   [
+                     'label' => 'Currency',
+                     'value' => function ($model) {
+                         return isset($model->currency)?$model->currency->currency_code:'';
+                     }
+                   ],
                   
-                ],
-            ],
-        ],
-    ]); ?>
+                   [
+                      'header' => 'Action',
+                      'class' => 'yii\grid\ActionColumn',
+                      'template' => '{view} {update} ',
+                      'buttons' => [
+                        'update' => function ($url,$model) {
+                            $url =  $url;
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                          },
+                          'view' => function ($url,$model) {
+                            $url =  $url;
+                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                          },
+                        
+                      ],
+                  ],
+              ],
+          ]); ?>
 
+          </div>
 
       </div>
 

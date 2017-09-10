@@ -38,6 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
      
       <div class="panel-body">
 
+        <div class="table-responsive">
+
             <?php Pjax::begin(); ?>    <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
@@ -64,6 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]); ?>
         <?php Pjax::end(); ?>
+        </div>
 
       </div>
     </div>

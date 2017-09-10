@@ -49,37 +49,38 @@ $this->params['breadcrumbs'][] = $this->title;
        
         <div class="panel-body">
 
-          <?= GridView::widget([
-              'dataProvider' => $dataProvider,
-              'filterModel' => $searchModel,
-              'columns' => [
-                  #['class' => 'yii\grid\SerialColumn'],
-                  'id',
+          <div class="table-responsive">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    #['class' => 'yii\grid\SerialColumn'],
+                    'id',
 
-                  [
-                   'label'=>'Group Three',
-                   'format' => 'raw',
-                   'value'=>function ($data) {
-                        return $data->groupThree->title;
-                    },
-                  ],
-                  [
-                    'attribute' => 'title',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                          return Html::a($model->title, ['/group-four/view', 'id' => $model->id]);
+                    [
+                     'label'=>'Group Three',
+                     'format' => 'raw',
+                     'value'=>function ($data) {
+                          return $data->groupThree->title;
                       },
-                  ],
-                  'description:ntext',
+                    ],
+                    [
+                      'attribute' => 'title',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                            return Html::a($model->title, ['/group-four/view', 'id' => $model->id]);
+                        },
+                    ],
+                    'description:ntext',
 
-                  [
-                    'class' => 'yii\grid\ActionColumn',
-                    'template' => '{view} {update} ',
-                  ],
-              ],
-          ]); ?>
+                    [
+                      'class' => 'yii\grid\ActionColumn',
+                      'template' => '{view} {update} ',
+                    ],
+                ],
+            ]); ?>
 
-
+            </div>
         </div>
 
       </div>

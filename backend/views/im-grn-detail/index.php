@@ -43,6 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
      
       <div class="panel-body">
 
+        <div class="table-responsive">
+
           <div class="header-container">
             <div class="header">
               <label>PO NO:</label>
@@ -115,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     //['class' => 'yii\grid\ActionColumn'],
                 ],
             ]); ?>
-
+          </div>
       </div>
 
     </div>

@@ -38,30 +38,34 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="panel-body">
 
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
+            <div class="table-responsive">
 
-                    'id',
-                    'transaction_no',
-                    'date',
-                    'branch_id',
-                    'type',
-                    // 'confirm_date',
-                    // 'currency_id',
-                    // 'exchange_rate',
-                    // 'voucher_number',
-                    // 'status',
-                    // 'created_by',
-                    // 'updated_by',
-                    // 'created_at',
-                    // 'updated_at',
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'filterModel' => $searchModel,
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
 
-                    ['class' => 'yii\grid\ActionColumn'],
-                ],
-            ]); ?>
+                        'id',
+                        'transaction_no',
+                        'date',
+                        'branch_id',
+                        'type',
+                        // 'confirm_date',
+                        // 'currency_id',
+                        // 'exchange_rate',
+                        // 'voucher_number',
+                        // 'status',
+                        // 'created_by',
+                        // 'updated_by',
+                        // 'created_at',
+                        // 'updated_at',
+
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]); ?>
+
+            </div>
 
         </div>
 
