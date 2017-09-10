@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                   // 'id',
+                   'id',
                     [
                        'label'=>'Group One',
                        'format' => 'raw',

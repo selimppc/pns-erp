@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                    //'id',
+                    'id',
                     'account_code',
                     [
                       'attribute' => 'title',
@@ -59,17 +59,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'description:ntext',
                     'account_type',
-                    // 'account_usage',
+                    'account_usage',
                     // 'group_one_id',
                     // 'group_two_id',
                     // 'group_three_id',
                     // 'group_four_id',
-                    // 'analyical_code',
-                    // 'branch_id',
-                    // 'status',
+                    'analyical_code',
+                    'branch_id',
+                    'status',
                     // 'created_by',
                     // 'updated_by',
-                    // 'created_at',
+                    'created_at',
                     // 'updated_at',
 
                     [

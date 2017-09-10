@@ -57,6 +57,31 @@ class AmCoaSearch extends AmCoa
             return $dataProvider;
         }
 
+
+        /**
+         * Setup your sorting attributes
+         * Note: This is setup before the $this->load($params)
+         * statement below
+         */
+
+        $dataProvider->setSort([
+            'attributes' => [
+                'id' => [
+                    'asc' => ['id' => SORT_ASC],
+                    'desc' => ['id' => SORT_DESC],
+                    'default' => SORT_DESC
+                ],
+                /*'name' => [
+                    'asc' => ['date' => SORT_ASC],
+                    'desc' => ['date' => SORT_DESC],
+                    'default' => SORT_ASC,
+                ],*/
+            ],
+            'defaultOrder' => [
+                'id' => SORT_DESC
+            ]
+        ]);
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,

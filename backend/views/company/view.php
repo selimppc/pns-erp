@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'web_url:url',
                    # 'created_by',
                    # 'updated_by',
-                   # 'created_at',
+                   'created_at',
                    # 'updated_at',
                 ],
             ]) ?>
