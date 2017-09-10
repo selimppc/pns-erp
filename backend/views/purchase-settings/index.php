@@ -1,11 +1,12 @@
 <?php
 	use yii\helpers\Url;
 	use yii\helpers\Html;
+  use yii\widgets\Pjax;
 
 	$this->title = Yii::t('app', 'Purchase Settings');
 	$this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?> 
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -25,10 +26,15 @@
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
+      <div id="flag_desc">
+          <div id="flag_desc_text">
+              <?php
+                if(isset(\Yii::$app->params['purchase_settings']) && !empty(\Yii::$app->params['purchase_settings'])){
+                  echo \Yii::$app->params['purchase_settings'];
+                }
+              ?>              
+          </div>
+      </div>
      
 	    <div class="panel-body">
 
@@ -42,4 +48,4 @@
 	    </div>
 	</div>
 </div>	    
-
+<?php Pjax::end(); ?>

@@ -84,5 +84,11 @@ return [
 
     'report_balance_sheet' => '<b>Balance Sheet:</b> Select Year, Month, Branch and Report Type. To view report in <b>pdf or xls</b> click on "PDF" or "XLS" . *** Data Posting to GL is necessary for viewing and result. You can go back to the Report Tools to view all <b>Report tools</b> by clicking the menu tab <b>“ << Back to Report”</b>.',
 
-    'report_profit_loss' => '<b>Profit & Loss :</b> Select Year, Month, Branch and Report Type. To view report in <b>pdf or xls</b> click on "PDF" or "XLS" . *** Data Posting to GL is necessary for viewing and result. You can go back to the <b>Report Tools</b> to view all Report tools by clicking the menu tab <b>“ << Back to Report”</b>.'
+    'report_profit_loss' => '<b>Profit & Loss :</b> Select Year, Month, Branch and Report Type. To view report in <b>pdf or xls</b> click on "PDF" or "XLS" . *** Data Posting to GL is necessary for viewing and result. You can go back to the <b>Report Tools</b> to view all Report tools by clicking the menu tab <b>“ << Back to Report”</b>.',
+
+    'purchase_settings' => '<b>Purchase Setup Tools :</b> This screen facilities information flow between all Purchase functions. By clicking the tab options will navigate to desired screen.',
+
+    'REQUISITION NUMBER' => 'In this screen you need to fill in all the fields, before clicking the button <b>"Enter Requisition No"</b>, a Requisition detail has been created on your right hand side table, under <b>Requisition No Details</b>. You can go back to the Settings for viewing all Purchase Setup tools by clicking the menu tab <b>“<< Back to Settings”.</b>',
+
+    'PURCHASE ORDER NUMBER' => 'Create New Purchase Order'
 ];

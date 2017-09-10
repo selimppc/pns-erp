@@ -7,11 +7,12 @@
 	use backend\models\Product;
 	use yii\helpers\ArrayHelper;
 	use kartik\date\DatePicker;
+	use yii\widgets\Pjax;
 
 	$this->title = Yii::t('app', $title);
 	$this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?> 
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -118,3 +119,4 @@
 
 	</div>
 </div>	  
+<?php Pjax::end(); ?>

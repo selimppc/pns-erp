@@ -4,11 +4,12 @@
 	use yii\widgets\ActiveForm;
 	use backend\models\CodesParam;
 	use yii\helpers\ArrayHelper;
+	use yii\widgets\Pjax;
 
 	$this->title = Yii::t('app', 'Product List');
 	$this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?>
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -71,3 +72,4 @@
 
 	</div>
 </div>	    
+<?php Pjax::end(); ?>
