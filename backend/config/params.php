@@ -8,5 +8,9 @@ return [
 
     'supplier_master_index' => '<b>Manage Supplier Master:</b> This screen will allow you to view the overall supplier’s detail; you can search specific data by selecting any title columns. By clicking the icons under <b>“Action”</b> column will allow you to update and delete the specific data. You can also open a data entry screen to input new supplier Information(s) by clicking the Menu tab <b>“New Supplier Master”</b>',
 
-    'supplier_master_create' => '<b>New Supplier Master:</b> In this screen, all of the required fields need to be filled before clicking the button “Save”. Fields marked with (*) are mandatory. You can go back to your homescreen to view supplier information(s) by clicking the menu tab <b>“Manage Supplier Master”.</b>'
+    'supplier_master_create' => '<b>New Supplier Master:</b> In this screen, all of the required fields need to be filled before clicking the button “Save”. Fields marked with (*) are mandatory. You can go back to your homescreen to view supplier information(s) by clicking the menu tab <b>“Manage Supplier Master”.</b>',
+
+    'customer_master_index' => '<b>Manage Customer Master:</b> This screen will allow you to view the overall customer’s detail; you can search specific data by selecting any title columns. By clicking the icons under <b>“Action”</b> column will allow you to update and delete the specific data. You can also open a data entry screen to input new customer Information(s) by clicking the Menu tab <b>“New Customer”</b>',
+
+    'customer_master_create' => '<b>New Customer :</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Save”.</b> Fields marked with (*) are mandatory. You can go back to your homescreen to view customer information(s) by clicking the menu tab <b>“Manage Customer”.</b>'
 ];
