@@ -150,6 +150,10 @@ class PurchaseOrderController extends Controller
                         }else{
                             echo 'successfully not updated';
                         }
+
+                        // Set success data
+                        \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
                         
                         $transaction->commit();
                         return $this->redirect(['view', 'id' => $modelPurchaseHead->id]);
@@ -217,6 +221,10 @@ class PurchaseOrderController extends Controller
                     }
                     if ($flag) {
                         $transaction->commit();
+
+                        // Set success data
+                        \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+
                         return $this->redirect(['view', 'id' => $modelPurchaseHead->id]);
                     }
                 } catch (Exception $e) {

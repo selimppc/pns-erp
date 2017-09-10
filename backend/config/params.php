@@ -56,5 +56,11 @@ return [
 
     'report_product_list' => '<b>Product List Report :</b> In this screen select product class &product group to report in pdf or xls click <b>PDF or XLS</b> respectively. *** Data Posting to GL is necessary for viewing and result. You can go back to the Report Tools to view all Report tools by clicking the menu tab <b>“<< Back to Report”.</b>',
 
-    'report_customer_ledger_report' => '<b>Customer Ledger Report :</b> Select customer and input desire dates, from and to. To view report in pdf or xls click on <b>"PDF" or "XLS"</b> . *** Data Posting to GL is necessary for viewing and result. You can go back to the <b>Report Tools</b> to view all Report tools by clicking the menu tab <b>“ << Back to Report”.</b>'
+    'report_customer_ledger_report' => '<b>Customer Ledger Report :</b> Select customer and input desire dates, from and to. To view report in pdf or xls click on <b>"PDF" or "XLS"</b> . *** Data Posting to GL is necessary for viewing and result. You can go back to the <b>Report Tools</b> to view all Report tools by clicking the menu tab <b>“ << Back to Report”.</b>',
+
+    'purchase_order_index' => '<b>Manage Purchase Order Header :</b> This screen will allow you to view the overall Purchase Order Header’s detail; you can search specific data by selecting any title columns. By clicking the icons under <b>“Action”</b> column will allow you to update and delete. You can also open a data entry screen to input new Reverse Entry’s Information by clicking the Menu tab <b>“New Purchase Order Header”.</b> Also you can cancel Purchase Order by clicking the icon of <b>“Cancel Purchase Order”</b> under the <b>” Cancel Purchase Order”</b> column.',
+
+    'purchase_order_create' => '<b>New Purchase Order :</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Add Purchase Header”.</b> Fields marked with (*) are mandatory. You can go back to your homescreen to view Requisition Header’s information by clicking the menu tab <b>“Manage Purchase Order”.</b> Also you can add new voucher details on existing Voucher by clicking the link under <b>“Purchase Order Number”</b> column; this link will redirect you to voucher detail page. <b>Action</b> buttons will allow you to update and delete.',
+
+    'purchase_order_view' => 'In this screen you can only view purchase details information. You can go back to Purchase Header to view all Voucher Header information at a glance by clicking the menu tab <b>"<< Back to Purchase Header".</b>'
 ];

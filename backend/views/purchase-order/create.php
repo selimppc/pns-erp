@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\widgets\Pjax;
 
 
 /* @var $this yii\web\View */
@@ -11,7 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Pp Purchase Heads', 'url' => ['ind
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-
+<?php Pjax::begin(); ?> 
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -23,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
      
       <div class="middle-menu-bar">
         <?= Html::a(Yii::t('app', 'Create '.$this->title), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage '.$this->title), ['index'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage Purchase Order'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -34,10 +35,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
+      <div id="flag_desc">
+          <div id="flag_desc_text">
+              <?php
+                if(isset(\Yii::$app->params['purchase_order_create']) && !empty(\Yii::$app->params['purchase_order_create'])){
+                  echo \Yii::$app->params['purchase_order_create'];
+                }
+              ?>              
+          </div>
+      </div>
      
 	    <div class="panel-body">
 
@@ -49,3 +55,5 @@ $this->params['breadcrumbs'][] = $this->title;
 	    </div>
 
 </div>
+
+<?php Pjax::end(); ?>
