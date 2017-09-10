@@ -267,6 +267,10 @@ a.btn{
     padding: 0 20px;
 }
 
+.site-menu>.site-menu-item>a.logout{
+    padding: 0;
+}
+
 /*.site-menu>.site-menu-item>.site-menu-sub{
     height: auto !important;
 }

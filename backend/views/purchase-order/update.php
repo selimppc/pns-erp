@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = 'Update';
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
         <li class="breadcrumb-item">Purchase</li>
-        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/pp-purchase-head']); ?>">Purchase Order</a></li>
+        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/purchase-order']); ?>">Purchase Order</a></li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
      

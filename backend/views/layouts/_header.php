@@ -206,7 +206,8 @@
 
          
           <li class="nav-item dropdown">
-            <a style="width: 75px;padding: 10px 0 0 0;" class="nav-link navbar-avatar" data-toggle="dropdown" href="<?=Url::base('')?>" aria-expanded="false"
+            <a style="width: 75px;padding: 10px 0 0 0;text-align: center;
+    margin-top: 5px;" class="nav-link navbar-avatar" data-toggle="dropdown" href="<?=Url::base('')?>" aria-expanded="false"
             data-animation="scale-up" role="button">
               <span class="avatar avatar-online" style="width:50px;margin-top:-5px;">
                 <img src="<?=Url::base('')?>/admin-theme/global/portraits/logo_pns_group.png" alt="...">
