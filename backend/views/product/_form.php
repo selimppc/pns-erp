@@ -21,9 +21,16 @@ use backend\models\CodesParam;
 
     <div class="row">
 
+
+
+
         <div class="col-md-6">
 
-            <?= $form->field($model, 'product_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'product_code',
+                ['options' => [
+                    'class' => 'form-group form-material floating',
+                    'data-plugin' => 'formMaterial'
+                ]])->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 

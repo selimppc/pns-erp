@@ -232,4 +232,12 @@ form div.required label.control-label:after {
 
 .form-material .form-control, select.form-control:not([size]):not([multiple]) {
     font-size: 13px !important;
+    border-radius: 3px !important;
+    border-bottom: 1px solid #efefef !important;
+}
+.form-material .form-control, .form-material .form-control.focus, .form-material .form-control:focus {
+    border-radius: 3px !important;
+}
+label{
+    font-size: 13px;
 }
