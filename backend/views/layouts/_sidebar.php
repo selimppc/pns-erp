@@ -101,12 +101,12 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/am-voucher-detail']); ?>">
+                  <a class="animsition-link" href="#">
                     <span class="site-menu-title">Voucher</span>
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/im-transaction']); ?>">
+                  <a class="animsition-link" href="#">
                     <span class="site-menu-title">Transaction</span>
                   </a>
                 </li>

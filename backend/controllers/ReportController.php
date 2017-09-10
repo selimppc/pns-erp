@@ -71,18 +71,31 @@ class ReportController extends Controller
 
     public function actionConsolidatedTrialBalance(){
 
+        if(isset(\Yii::$app->params['consolidated_trial_balance']) && !empty(\Yii::$app->params['consolidated_trial_balance'])){
+                    $report_help_text = \Yii::$app->params['consolidated_trial_balance'];
+        }else{
+            $report_help_text = '';
+        }
+
     	$model = new BranchMaster();
 
     	$title = 'Consolidated Trial Balance';
 
     	return $this->render('consolidated_trial_balance',[
     			'model' => $model,
-    			'title' => $title
+    			'title' => $title,
+                'report_help_text' => $report_help_text
     		]);
 
     }
 
     public function actionTrialBalanceAll(){
+
+        if(isset(\Yii::$app->params['trial_balance_all']) && !empty(\Yii::$app->params['trial_balance_all'])){
+                    $report_help_text = \Yii::$app->params['trial_balance_all'];
+        }else{
+            $report_help_text = '';
+        }
     	
     	$model = new BranchMaster();
 
@@ -90,32 +103,53 @@ class ReportController extends Controller
 
     	return $this->render('consolidated_trial_balance',[
     			'model' => $model,
-    			'title' => $title
+    			'title' => $title,
+                'report_help_text' => $report_help_text
     		]);
 
     }
 
     public function actionChartOfAccountList(){
 
+        if(isset(\Yii::$app->params['report_chart_of_account_list']) && !empty(\Yii::$app->params['report_chart_of_account_list'])){
+                    $report_help_text = \Yii::$app->params['report_chart_of_account_list'];
+        }else{
+            $report_help_text = '';
+        }
+
     	$model = new Chartofaccounts();
 
     	return $this->render('chart_of_account_list',[
-    			'model' => $model
+    			'model' => $model,
+                'report_help_text' => $report_help_text
     		]);
 
     }
 
     public function actionJournalTransaction(){
 
+        if(isset(\Yii::$app->params['report_journal_transaction']) && !empty(\Yii::$app->params['report_journal_transaction'])){
+                    $report_help_text = \Yii::$app->params['report_journal_transaction'];
+        }else{
+            $report_help_text = '';
+        }
+
     	$model = new Transaction();
 
     	return $this->render('transaction',[
-    			'model' => $model
+    			'model' => $model,
+                'report_help_text' => $report_help_text
     		]);
 
     }
 
     public function actionBalanceSheet(){
+
+        if(isset(\Yii::$app->params['report_balance_sheet']) && !empty(\Yii::$app->params['report_balance_sheet'])){
+                    $report_help_text = \Yii::$app->params['report_balance_sheet'];
+        }else{
+            $report_help_text = '';
+        }
 
     	$model = new BranchMaster();
 
@@ -123,12 +157,19 @@ class ReportController extends Controller
 
     	return $this->render('balance_sheet',[
     			'model' => $model,
-    			'title' => $title
+    			'title' => $title,
+                'report_help_text' => $report_help_text
     		]);
 
     }
 
     public function actionProfitLoss(){
+
+        if(isset(\Yii::$app->params['report_profit_loss']) && !empty(\Yii::$app->params['report_profit_loss'])){
+                    $report_help_text = \Yii::$app->params['report_profit_loss'];
+        }else{
+            $report_help_text = '';
+        }
 
     	$model = new BranchMaster();
 
@@ -136,7 +177,8 @@ class ReportController extends Controller
 
     	return $this->render('balance_sheet',[
     			'model' => $model,
-    			'title' => $title
+    			'title' => $title,
+                'report_help_text' => $report_help_text
     		]);
 
     }
