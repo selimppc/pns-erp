@@ -165,11 +165,11 @@ $this->params['breadcrumbs'][] = $this->title;
                       </td>
                       <td><?=$details->expire_date?></td>
                       <td><?=$details->receive_quantity?></td>
-                      <td><?=number_format($details->cost_price,2)?></td>
+                      <td><?=number_format($details->cost_price,3)?></td>
                       <td><?=isset($details->productUom)?$details->productUom->title:'';?></td>
-                      <td><?=number_format($details->row_amount,2)?></td>
+                      <td><?=number_format($details->row_amount,3)?></td>
                       <td>
-                        <?=Html::a('<span class="glyphicon glyphicon-trash" title="Delete"></span>', ['grn/delete-grn','po'=>$po,'grn' => $grn ,'id' => $details->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") '])?>
+                        <?=Html::a('<span class="glyphicon glyphicon-trash" title="Delete"></span>', ['grn/delete-grn','po'=>$po,'grn' => $grn ,'id' => $details->id], ["class"=>"btn btn-xs btn-danger","data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") '])?>
                       </td>
                     </tr>
                 <?php 

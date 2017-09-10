@@ -23,8 +23,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
       </ol>     
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Customer'), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage Customers'), ['index'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Customer'), ['create'], ['class' => '']) ?>
+        <?= Html::a(Yii::t('app', 'Manage Customers'), ['index'], ['class' => '']) ?>
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    

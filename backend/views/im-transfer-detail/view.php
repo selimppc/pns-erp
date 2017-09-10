@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
       
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Transfer Details'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Transfer Details'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Transfer Details'), ['index'], ['class' => '']) ?> 
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 

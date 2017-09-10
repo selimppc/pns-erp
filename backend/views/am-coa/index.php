@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Chart of Account'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Chart of Account'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Chart of Account'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                    //'id',
+                    'id',
                     'account_code',
                     [
                       'attribute' => 'title',
@@ -59,17 +59,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'description:ntext',
                     'account_type',
-                    // 'account_usage',
+                    'account_usage',
                     // 'group_one_id',
                     // 'group_two_id',
                     // 'group_three_id',
                     // 'group_four_id',
-                    // 'analyical_code',
-                    // 'branch_id',
-                    // 'status',
+                    'analyical_code',
+                    'branch_id',
+                    [
+                        'label' => 'Status',
+                        'value' => function ($model){
+                            return ucfirst($model->status);
+                        }
+                    ],
                     // 'created_by',
                     // 'updated_by',
-                    // 'created_at',
+                    'created_at',
                     // 'updated_at',
 
                     [

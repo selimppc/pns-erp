@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'GRN History'), ['/grn/grn-history'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'GRN History (PO Lists)'), ['/grn/grn-history'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage GRN'), ['/grn/manage-grn'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                               if(empty($grn_data_exists)){
 
-                                return Html::a('Create GRN', ['grn/create-grn', 'po' => $model->po_order_number,'grn' => $grn_transaction_number], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to create this GRN?") ']);
+                                return Html::a('Create GRN', ['grn/create-grn', 'po' => $model->po_order_number,'grn' => $grn_transaction_number], ["class"=>"btn btn-xs btn-success", "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to create this GRN?") ']);
                                   
                               }
                               

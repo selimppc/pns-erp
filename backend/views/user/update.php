@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create User'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New User'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Users'), ['index'], ['class' => '']) ?>  
 
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [

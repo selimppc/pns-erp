@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
       
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Company'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Company'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Companies'), ['index'], ['class' => '']) ?> 
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 
@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'web_url:url',
                    # 'created_by',
                    # 'updated_by',
-                   # 'created_at',
+                   'created_at',
                    # 'updated_at',
                 ],
             ]) ?>

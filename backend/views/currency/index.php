@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Currency'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Currency'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Currency'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-
+                    'id',
                     [
                       'attribute' => 'currency_code',
                       'format' => 'raw',
@@ -62,7 +62,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'title',
                     'exchange_rate',
-                    'status',
+                    [
+                        'label' => 'Status',
+                        'value' => function ($model){
+                            return ucfirst($model->status);
+                        }
+                    ],
 
                     [
                         'header' => 'Action',

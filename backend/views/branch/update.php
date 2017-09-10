@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Branch'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Branch'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Branches'), ['index'], ['class' => '']) ?>
              
         <?php

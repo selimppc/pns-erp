@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <td><?=$data->batch_number?></td>
                         <td><?=$data->date?></td>
                         <td><?=$data->branch_name?></td>
-                        <td><?=$data->cost_price?></td>
+                        <td><?= number_format($data->cost_price, 3)?></td>
                         <td></td>
                         <td>0</td>
                         <td>0</td>

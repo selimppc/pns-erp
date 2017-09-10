@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Company'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Company'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Companies'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -45,15 +45,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                   // 'id',
+                    'id',
                     'title',
                     'description:ntext',
                     //'image',
                     //'thumb_image',
-                    // 'web_url:url',
+                    'web_url:url',
                     // 'created_by',
                     // 'updated_by',
-                    // 'created_at',
+                    'created_at',
                     // 'updated_at',
 
                     ['class' => 'yii\grid\ActionColumn'],

@@ -21,9 +21,16 @@ use backend\models\CodesParam;
 
     <div class="row">
 
+
+
+
         <div class="col-md-6">
 
-            <?= $form->field($model, 'product_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'product_code',
+                ['options' => [
+                    'class' => 'form-group form-material floating',
+                    'data-plugin' => 'formMaterial'
+                ]])->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
@@ -172,7 +179,7 @@ use backend\models\CodesParam;
     
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect' : 'btn btn-primary waves-effect']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Save Changes') : Yii::t('app', 'Save Changes'), ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect' : 'btn btn-primary waves-effect']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

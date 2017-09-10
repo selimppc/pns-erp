@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'GRN History'), ['/grn/grn-history'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'GRN History (PO Lists)'), ['/grn/grn-history'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage GRN'), ['/grn/manage-grn'], ['class' => '']) ?>    
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-
+                    'id',
                     [
                       'attribute' => 'grn_number',
                       'label' => 'GRN Number',
@@ -108,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' => [
                       
                         'confirm_grn' => function ($url, $model) {
-                              return $model->status == 'created'?Html::a('Approved GRN', ['grn/confirm-grn', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to Confirm this GRN?") ']):'';
+                              return $model->status == 'created'?Html::a('Approved GRN', ['grn/confirm-grn', 'id' => $model->id], ["class"=>"btn btn-xs btn-success", "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to Confirm this GRN?") ']):'';
                           },
                       
                     ],

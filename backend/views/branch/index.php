@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Branch'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Branch'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Branches'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -65,8 +65,13 @@ $this->params['breadcrumbs'][] = $this->title;
                      'value'=>function ($data) {
                           return $data->currency->title;
                       },
-                    ],                   
-                     'status',
+                    ],
+                    [
+                        'label' => 'Status',
+                        'value' => function ($model){
+                            return ucfirst($model->status);
+                        }
+                    ],
 
                     [
                         'header' => 'Action',

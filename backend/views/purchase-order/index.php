@@ -45,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
+                'id',
                 [
                   'attribute' => 'po_order_number',
                   'label' => 'Purchase Order No',
@@ -81,11 +82,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' => [
                       'update' => function ($url,$model) {
                           $url =  $url;
-                          return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-pencil" title="Update"></span>', $url):'';
+                          return $model->status == 'open'?Html::a('<span class="btn btn-xs btn-primary" title="Update">Edit </span>', $url):'';
                         },
-                        'view' => function ($url,$model) {
+                      'view' => function ($url,$model) {
                           $url =  $url;
-                          return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-eye-open" title="View"></span>', $url):'';
+                          return $model->status == 'open'?Html::a('<span class="btn btn-xs btn-info">Show </span>', $url):'';
                         },
                         
                       
@@ -93,15 +94,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
 
                 [
-                    'header' => 'Approved / Cancel Purchase Order',
+                    'header' => 'Approve / Cancel PO',
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{approved}{cancel}',
+                    'template' => '{approved} {cancel}',
                     'buttons' => [
                         'cancel' => function ($url, $model) {
-                              return $model->status == 'open'?Html::a(' | Cancel', ['purchase-order/cancel', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']):'';
+                              return $model->status == 'open'?Html::a('Cancel', ['purchase-order/cancel', 'id' => $model->id], ['class' => 'btn btn-xs btn-danger', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']):'';
                           },
-                          'approved' => function ($url, $model) {
-                              return $model->status == 'open'?Html::a('Approved', ['purchase-order/approved', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to approved this purchased order?") ']):'';
+                        'approved' => function ($url, $model) {
+                              return $model->status == 'open'?Html::a('Approve', ['purchase-order/approved', 'id' => $model->id ], ['class' => 'btn btn-xs btn-success', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to approved this purchased order?") ']):'';
                           },
                     ],
                 ],
