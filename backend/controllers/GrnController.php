@@ -175,8 +175,8 @@ class GrnController extends Controller
                 $model->uom = $transaction_details->uom;
                 $model->quantity = $transaction_details->uom_quantity;
                 $model->receive_quantity = $transaction_details->quantity;
-                $model->cost_price = number_format($transaction_details->purchase_rate,2);
-                $model->row_amount = number_format($transaction_details->purchase_rate * $transaction_details->quantity,2);                
+                $model->cost_price = $transaction_details->purchase_rate;
+                $model->row_amount = $transaction_details->purchase_rate * $transaction_details->quantity;                
             }
 
             // Grn Details Data Save
@@ -188,7 +188,7 @@ class GrnController extends Controller
                 $valid = $model->validate();
                 if($valid){
 
-                    $model->row_amount = number_format($transaction_details->purchase_rate * $model->quantity,2);
+                    $model->row_amount = $transaction_details->purchase_rate * $model->quantity;
 
                     $model->save(); 
 
