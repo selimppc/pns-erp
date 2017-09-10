@@ -65,8 +65,13 @@ $this->params['breadcrumbs'][] = $this->title;
                      'value'=>function ($data) {
                           return $data->currency->title;
                       },
-                    ],                   
-                     'status',
+                    ],
+                    [
+                        'label' => 'Status',
+                        'value' => function ($model){
+                            return ucfirst($model->status);
+                        }
+                    ],
 
                     [
                         'header' => 'Action',

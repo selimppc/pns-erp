@@ -66,7 +66,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'group_four_id',
                     'analyical_code',
                     'branch_id',
-                    'status',
+                    [
+                        'label' => 'Status',
+                        'value' => function ($model){
+                            return ucfirst($model->status);
+                        }
+                    ],
                     // 'created_by',
                     // 'updated_by',
                     'created_at',

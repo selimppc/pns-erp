@@ -108,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' => [
                       
                         'confirm_grn' => function ($url, $model) {
-                              return $model->status == 'created'?Html::a('Approved GRN', ['grn/confirm-grn', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to Confirm this GRN?") ']):'';
+                              return $model->status == 'created'?Html::a('Approved GRN', ['grn/confirm-grn', 'id' => $model->id], ["class"=>"btn btn-xs btn-success", "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to Confirm this GRN?") ']):'';
                           },
                       
                     ],

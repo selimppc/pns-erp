@@ -62,8 +62,13 @@ $this->params['breadcrumbs'][] = $this->title;
                           return Html::a($model->name, ['/customer/view', 'id' => $model->id]);
                       },
                    ],
-                   
-                     'status',
+
+                    [
+                        'label' => 'Status',
+                        'value' => function ($model){
+                            return ucfirst($model->status);
+                        }
+                    ],
                    
 
                     [

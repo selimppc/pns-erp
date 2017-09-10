@@ -56,8 +56,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                    
                     'org_name',
-                    'address:ntext',                   
-                    'status',                    
+                    'address:ntext',
+                    [
+                        'label' => 'Status',
+                        'value' => function ($model){
+                            return ucfirst($model->status);
+                        }
+                    ],
                     [
                         'header' => 'Action',
                         'class' => 'yii\grid\ActionColumn',

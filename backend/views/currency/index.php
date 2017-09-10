@@ -62,7 +62,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'title',
                     'exchange_rate',
-                    'status',
+                    [
+                        'label' => 'Status',
+                        'value' => function ($model){
+                            return ucfirst($model->status);
+                        }
+                    ],
 
                     [
                         'header' => 'Action',
