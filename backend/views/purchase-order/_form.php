@@ -219,7 +219,7 @@ $this->registerJs($js);
        <?php DynamicFormWidget::end(); ?>
 
 
-        <?= Html::submitButton($modelPurchaseDetail->isNewRecord ? 'Create' : 'Update', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton($modelPurchaseDetail->isNewRecord ? 'Save Changes' : 'Save Changes', ['class' => 'btn btn-primary']) ?>
 
 
 

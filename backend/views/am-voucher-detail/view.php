@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
       
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Voucher'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Voucher'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Voucher'), ['index'], ['class' => '']) ?> 
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 

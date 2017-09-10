@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Voucher Heads'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Voucher Heads'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Voucher Heads'), ['index'], ['class' => '']) ?>   
         <?= Html::a(Yii::t('app', 'Create Voucher Head'), ['/am-voucher-head'], ['class' => '']) ?>  
         <?php

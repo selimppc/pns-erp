@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
       </ol>     
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Chart of Account'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Chart of Account'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Chart of Account'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( 'Back', Yii::$app->request->referrer,['class' => 'back']);

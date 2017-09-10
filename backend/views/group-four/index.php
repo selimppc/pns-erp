@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Group Four'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Group Four'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Group Fours'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);

@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Transfer Details'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Transfer Details'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Transfer Details'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);

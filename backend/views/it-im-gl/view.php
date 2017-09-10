@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
       
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create IM to GL'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New IM to GL'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage IM to GL'), ['index'], ['class' => '']) ?> 
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 

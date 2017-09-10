@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create Currency'), ['create'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Currency'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Currency'), ['index'], ['class' => '']) ?>  
 
              
