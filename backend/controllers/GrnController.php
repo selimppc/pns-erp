@@ -80,7 +80,7 @@ class GrnController extends Controller
 
         // Generate GRN Transaction Code
         $grn = TransactionCode::generate_transaction_number('GRN-');
-        
+
         if(empty($grn)){
             $grn = '';
         }
@@ -88,7 +88,7 @@ class GrnController extends Controller
         // save GRN Head Data
         $grn_head = new ImGrnHead();
         $grn_head->grn_number = $grn;
-        $grn_head->status = 'created';
+        $grn_head->status = 'open';
         $grn_head->pp_purchase_head_id = $purchased_order->id;
         $grn_head->supplier_id = $purchased_order->supplier_id;
         $grn_head->date = $purchased_order->date;
@@ -114,7 +114,7 @@ class GrnController extends Controller
         if(!empty($purchased_order)){
             $purchased_order_details = PpPurchaseDetail::find()->where(['pp_purchase_head_id' => $purchased_order->id])->all(); 
 
-            $purchased_order_details = VwPurchaseDetail::find()->where(['pp_purchase_head_id' => $purchased_order])->all();
+            $purchased_order_details = VwPurchaseDetail::find()->where(['pp_purchase_head_id' => $purchased_order->id])->all();
 
             /*$query = new Query;
             $query  ->select(['pp_purchase_detail.id as id',
@@ -184,6 +184,7 @@ class GrnController extends Controller
             if ($model->load(Yii::$app->request->post()))
             {
                 $model->im_grn_head_id = $grn_head->id;
+
                 $valid = $model->validate();
                 if($valid){
 
@@ -193,6 +194,9 @@ class GrnController extends Controller
 
                     $model = new ImGrnDetail();
                     $model->grn_number = $grn; 
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
 
                     return $this->redirect(['grn/generate-grn','po' => $po,'grn' => $grn]);  
                 }else{
@@ -220,6 +224,9 @@ class GrnController extends Controller
         $grn_details = ImGrnDetail::find()->where(['id'=>$id])->one();
 
         if(!empty($grn_details)){
+
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Deleted');
 
             $grn_details->delete();
 
@@ -251,6 +258,10 @@ class GrnController extends Controller
 
             $valid = $model->validate();
             if($valid){
+
+                // Set success data
+                \Yii::$app->getSession()->setFlash('success', 'Successfully Confirm GRN');
+
                 $model->save();    
             }else{
                 print_r($model->getErrors());

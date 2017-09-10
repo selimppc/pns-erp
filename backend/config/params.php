@@ -90,5 +90,11 @@ return [
 
     'REQUISITION NUMBER' => 'In this screen you need to fill in all the fields, before clicking the button <b>"Enter Requisition No"</b>, a Requisition detail has been created on your right hand side table, under <b>Requisition No Details</b>. You can go back to the Settings for viewing all Purchase Setup tools by clicking the menu tab <b>“<< Back to Settings”.</b>',
 
-    'PURCHASE ORDER NUMBER' => 'Create New Purchase Order'
+    'PURCHASE ORDER NUMBER' => 'Create New Purchase Order',
+
+    'create_grn' => '<b>New GRN Detail:</b> In this screen you will be able to add new data regarding the selected <b>GRN</b>. To add data click on the product code link under the column <b>Product Code</b> from the right-top table. After filling the necessary fields click on the button <b>"Enter GRN Detail".</b> A GRN detail has been added in the table at bottom-right corner. Go back to GRN click on the menu tab <b>"Manage GRN"</b>',
+
+    'grn_history' => '<b>Create GRN from Purchase Order:</b> In this screen you will be able to view all purchase order history for creating <b>GRN.</b> To create new GRN, click on the button <b>"Create GRN"</b> under <b>"Action"</b> column. You can also view the reports by clicking the link under <b>PO Number</b> column. To view <b>GRN</b> history with details click on the menu tab <b>"Manage GRN"</b>',
+
+    'manage_grn' => '<b>GRN :</b> This screen will allow you to view the overall GRN’s detail; you can search specific data by selecting any title columns. You can also confirm GRN by clicking the <b>Confirm</b> button under the <b>Action</b> column. And you can go to the detail page for each <b>GRN</b> by clicking the link under the <b>GRN Number</b> column. The link will redirect you to detail page to view or add new details. To view the GRN history click the menu tab <b>"GRN History".</b>'
 ];

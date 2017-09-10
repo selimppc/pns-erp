@@ -274,6 +274,10 @@ class PurchaseOrderController extends Controller
 
             $valid = $model->validate();
             if($valid){
+
+                // Set success data
+                \Yii::$app->getSession()->setFlash('success', 'Successfully Approved');
+
                 $model->save();    
             }else{
                 print_r($model->getErrors());
@@ -298,6 +302,10 @@ class PurchaseOrderController extends Controller
 
             $valid = $model->validate();
             if($valid){
+
+                // Set success data
+                \Yii::$app->getSession()->setFlash('success', 'Successfully Cancel');
+
                 $model->save();    
             }else{
                 print_r($model->getErrors());

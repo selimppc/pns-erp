@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'GRN History'), ['/grn/grn-history'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'GRN History (PO Lists)'), ['/grn/grn-history'], ['class' => '']) ?>   
         <?= Html::a(Yii::t('app', 'Manage GRN'), ['/grn/manage-grn'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -42,10 +42,35 @@ $this->params['breadcrumbs'][] = $this->title;
       <!-- Panel Basic -->
       <div class="panel">
 
-        <header class="panel-heading">
-          <div class="panel-actions"></div>
-          <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-        </header>
+        <?php 
+            if(Yii::$app->session->hasFlash('success')){
+        ?>
+            <div class="alert alert-success">
+              <?= Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+        <?php 
+            if(Yii::$app->session->hasFlash('error')){
+        ?>
+            <div class="alert alert-danger">
+              <?= Yii::$app->session->getFlash('error'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+        <div id="flag_desc">
+            <div id="flag_desc_text">
+                <?php
+                    if(isset(\Yii::$app->params['create_grn']) && !empty(\Yii::$app->params['create_grn'])){
+                      echo \Yii::$app->params['create_grn'];
+                    }
+                ?>
+            </div>
+        </div>
        
         <div class="panel-body">
 

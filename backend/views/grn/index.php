@@ -38,10 +38,35 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
+        <?php 
+            if(Yii::$app->session->hasFlash('success')){
+        ?>
+            <div class="alert alert-success">
+              <?= Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+        <?php 
+            if(Yii::$app->session->hasFlash('error')){
+        ?>
+            <div class="alert alert-danger">
+              <?= Yii::$app->session->getFlash('error'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+      <div id="flag_desc">
+            <div id="flag_desc_text">
+                <?php
+                    if(isset(\Yii::$app->params['manage_grn']) && !empty(\Yii::$app->params['manage_grn'])){
+                      echo \Yii::$app->params['manage_grn'];
+                    }
+                ?>
+            </div>
+        </div>
      
       <div class="panel-body">
 
@@ -97,7 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       'attribute' => 'status',
                       'label' => 'Status',
                       'value' => function ($model){
-                        return ucfirst('GRN '. $model->status);
+                        return ucfirst('Grn '. $model->status);
                       }
                     ],
 
@@ -108,7 +133,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' => [
                       
                         'confirm_grn' => function ($url, $model) {
-                              return $model->status == 'created'?Html::a('Approved GRN', ['grn/confirm-grn', 'id' => $model->id], ["class"=>"btn btn-xs btn-success", "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to Confirm this GRN?") ']):'';
+                              return $model->status == 'open'?Html::a('Approved GRN', ['grn/confirm-grn', 'id' => $model->id], ["class"=>"btn btn-xs btn-success", "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to Confirm this GRN?") ']):'';
                           },
                       
                     ],

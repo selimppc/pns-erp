@@ -34,10 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
+      <div id="flag_desc">
+            <div id="flag_desc_text">
+                <?php
+                    if(isset(\Yii::$app->params['grn_history']) && !empty(\Yii::$app->params['grn_history'])){
+                      echo \Yii::$app->params['grn_history'];
+                    }
+                ?>
+            </div>
+        </div>
      
       <div class="panel-body">
       	
@@ -56,18 +61,21 @@ $this->params['breadcrumbs'][] = $this->title;
                   },
                 ],
                 [
-                 'label' => 'Supplier Id',
+                 'attribute' => 'supplier_id',
+                 'label' => 'Supplier',
                  'value' => function ($model) {
                      return isset($model->supplier)?$model->supplier->supplier_code:'';
                  }
                ],
                [
-                 'label' => 'Supplier Organization Name',
+                 'attribute' => 'supplier_id',
+                 'label' => 'Supplier Name',
                  'value' => function ($model) {
                      return isset($model->supplier)?$model->supplier->org_name:'';
                  }
                ],
                 [
+                 'attribute' => 'date',
                  'label' => 'Order Date',
                  'value' => function ($model) {
                      return $model->date;
@@ -84,7 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     if(empty($grn_data_exists)){
                       return ucfirst($model->status);
                     }else{
-                      return ucfirst('GRN '.$grn_data_exists->status);
+                      return ucfirst('Grn '.$grn_data_exists->status);
                     }
                     
                   }
