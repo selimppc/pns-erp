@@ -10,7 +10,8 @@
     border-top: 1px solid rgba(0,0,0,.05);
     border-bottom: 1px solid rgba(0,0,0,.05);
  }
-form div.required label.control-label:after {
+form div.required label.control-label:after,
+form div label.control-label.only-label:after {
 	content: " * ";
 	color: red;
 	font-size: 22px;

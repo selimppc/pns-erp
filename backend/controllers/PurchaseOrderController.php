@@ -159,7 +159,7 @@ class PurchaseOrderController extends Controller
                         $transaction->commit();
                         return $this->redirect(['view', 'id' => $modelPurchaseHead->id]);
                     }
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     $transaction->rollBack();
                 }
             }
@@ -228,7 +228,7 @@ class PurchaseOrderController extends Controller
 
                         return $this->redirect(['view', 'id' => $modelPurchaseHead->id]);
                     }
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     $transaction->rollBack();
                 }
             }

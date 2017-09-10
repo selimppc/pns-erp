@@ -186,10 +186,27 @@ $this->registerJs($js);
             <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-envelope"></i> Purchase Order Details
-            <button type="button" class="pull-right add-item btn btn-success btn-xs"><i class="icon md-plus" aria-hidden="true"></i> </button>
+            
             <div class="clearfix"></div>
         </div>
         <div class="panel-body container-items"><!-- widgetContainer -->
+            <div style="width: 100%;display: inline-block;">
+                <div class="col-md-2">
+                    <label class="control-label only-label" for="">Product</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label only-label" for="">Quantity</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label only-label" for="">Unit of Measurement</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label only-label" for="">UOM Quantity</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label only-label" for="">Purchase Rate</label>
+                </div>
+            </div>
             <?php foreach ($modelsPurchaseDetail as $index => $modelPurchaseDetail): ?>
                 <div class="item"><!-- widgetBody -->
 
@@ -209,13 +226,13 @@ $this->registerJs($js);
                                             ->dropDownList(
                                                 ArrayHelper::map(Product::find()->all(), 'id', 'title'),
                                                  ['prompt'=>'-Select-','class'=>'form-control']
-                                            ); ?>
+                                            )->label(false); ?>
 
                             </div>
                         </div>
 
                         <div class="col-md-2">
-                            <?= $form->field($modelPurchaseDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($modelPurchaseDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                         </div>
 
                         <div class="col-md-2">
@@ -224,15 +241,15 @@ $this->registerJs($js);
                             <?= $form->field($modelPurchaseDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
                                     ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->all(), 'id', 'title'),
                                      ['prompt'=>'-Select-','class'=>'form-control floating']
-                                ) ?>
+                                )->label(false) ?>
                         </div>
 
                         <div class="col-md-2">
-                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                         </div>
 
                         <div class="col-md-2">
-                            <?= $form->field($modelPurchaseDetail, "[{$index}]purchase_rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]purchase_rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                         </div>
 
                         
@@ -241,7 +258,12 @@ $this->registerJs($js);
 
                 </div>
             <?php endforeach; ?>
+
         </div>
+
+        <div style="margin-left: 15px;width: 100%;display: inline-block;   margin-bottom: 10px;">
+            <button type="button" class="pull-left add-item btn btn-success btn-xs"><i class="icon md-plus" aria-hidden="true"></i> Add more </button>
+        </div>    
     </div>
 
 
