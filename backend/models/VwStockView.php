@@ -17,5 +17,17 @@ class VwStockView extends \yii\db\ActiveRecord
     {
         return '{{%vw_stock_view}}';
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'title' => Yii::t('app', 'Product Name'),
+            'date'  => Yii::t('app', 'Expiry Date'),
+            'cost_price' => Yii::t('app', 'Stock Rate')
+        ];
+    }
 }
 

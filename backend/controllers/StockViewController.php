@@ -9,6 +9,7 @@ use backend\models\ImGrnHead;
 use backend\models\ImGrnDetailSearch;
 
 use backend\models\VwStockView;
+use backend\models\VwStockViewSearch;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -37,8 +38,13 @@ class StockViewController extends Controller{
 
         $models = VwStockView::find()->where(['status' => 'confirmed'])->all();
 
+        $searchModel = new VwStockViewSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('index', [
-            'models' => $models
+            'models' => $models,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
 
     }
