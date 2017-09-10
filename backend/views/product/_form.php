@@ -15,7 +15,7 @@ use backend\models\CodesParam;
 
 
 
-<div class="product-form">
+<div class="product-form form-two-column">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -89,7 +89,7 @@ use backend\models\CodesParam;
 
         <div class="col-md-6">
 
-            <div class="form-group form-material" data-plugin="formMaterial">
+            <div class="form-group form-material floating" data-plugin="formMaterial">
 
                 <?= $form->field($model, 'stock_type')
                             ->dropDownList(
@@ -179,7 +179,7 @@ use backend\models\CodesParam;
     
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Save Changes') : Yii::t('app', 'Save Changes'), ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect' : 'btn btn-primary waves-effect']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Save Changes') : Yii::t('app', 'Save Changes'), ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect form-two-column' : 'btn btn-primary waves-effect form-two-column']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

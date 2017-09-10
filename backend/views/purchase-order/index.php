@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 $this->title = 'Purchase Order';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?php Pjax::begin(); ?> 
+
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -171,4 +171,3 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </div>
 </div>      
-<?php Pjax::end(); ?>

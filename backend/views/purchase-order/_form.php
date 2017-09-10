@@ -210,7 +210,7 @@ $this->registerJs($js);
             <?php foreach ($modelsPurchaseDetail as $index => $modelPurchaseDetail): ?>
                 <div class="item"><!-- widgetBody -->
 
-                     <button type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i></button>
+                     <button type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i> Remove</button>
                     <?php
                         // necessary for update action.
                         if (!$modelPurchaseDetail->isNewRecord) {

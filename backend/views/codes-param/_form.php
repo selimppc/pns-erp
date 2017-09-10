@@ -11,7 +11,7 @@ use backend\models\AmCoa;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="codes-param-form">
+<div class="codes-param-form form-two-column">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -40,8 +40,8 @@ use backend\models\AmCoa;
 
     
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Save Changes') : Yii::t('app', 'Save Changes'), ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect' : 'btn btn-primary waves-effect']) ?>
+    <div class="form-group" style="margin-top: 10px;">
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Save Changes') : Yii::t('app', 'Save Changes'), ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect pull-right' : 'btn btn-primary waves-effect pull-right']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

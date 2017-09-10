@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="transaction-code-form">
+<div class="transaction-code-form form-two-column">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -45,7 +45,7 @@ use yii\widgets\ActiveForm;
     
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Save Changes' : 'Save Changes', ['class' => $model->isNewRecord ? 'btn-primary waves-effect' : 'btn-primary waves-effect']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Save Changes' : 'Save Changes', ['class' => $model->isNewRecord ? 'btn-primary waves-effect pull-right' : 'btn-primary waves-effect pull-right']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

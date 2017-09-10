@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
        
         <div class="panel-body">
 
-            <div class="form-width-35 pull-left">
+            <div class="form-width-40 pull-left">
 
               <?= $this->render('_form', [
                   'model' => $model,

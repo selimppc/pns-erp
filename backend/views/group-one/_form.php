@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="group-one-form">
+<div class="group-one-form ">
 
     <?php $form = ActiveForm::begin(); ?>
 

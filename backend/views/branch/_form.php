@@ -11,7 +11,7 @@ use backend\models\Currency;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="branch-form">
+<div class="branch-form form-two-column">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -70,7 +70,7 @@ use backend\models\Currency;
  
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Save Changes') : Yii::t('app', 'Save Changes'), ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect' : 'btn btn-primary waves-effect']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Save Changes') : Yii::t('app', 'Save Changes'), ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect pull-right' : 'btn btn-primary waves-effect pull-right']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

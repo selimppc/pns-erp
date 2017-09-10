@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
      
       <div class="panel-body">
 
-          <div class="form-width-45 pull-left">
+          <div class="form-width-40 pull-left">
 
             <?= $this->render('_form', [
                 'model' => $model,
@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
           </div>
 
-          <div class="form-width-45 pull-right">
+          <div class="form-width-55 pull-right">
 
                <?= GridView::widget([
                 'dataProvider' => $dataProvider,

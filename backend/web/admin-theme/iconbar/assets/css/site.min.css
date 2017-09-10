@@ -2,7 +2,12 @@
 
 .form-material .form-control,
 select.form-control:not([size]):not([multiple]){
-	height: 32px !important;
+	height: 28px !important;
+}
+
+.form-material.floating{
+	width: 100%;
+	display: inline-block;
 }
 .site-menu-title{
 	font-size: 15px;
@@ -48,7 +53,11 @@ select.form-control:not([size]):not([multiple]){
 }
 
 .help-block{
-	color: red;
+	color: red;	
+}
+
+.form-two-column .help-block{
+	text-align: right;
 }
 
 .create-role{
@@ -61,7 +70,6 @@ select.form-control:not([size]):not([multiple]){
 }
 
 .form-group.field-product-currency_id,
-.form-group.field-product-supplier_id,
 .form-group.field-customer-group_one_id,
 .form-group.field-customer-branch_id,
 .form-group.field-branch-currency_id,

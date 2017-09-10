@@ -12,7 +12,7 @@ use backend\models\CodesParam;
 /* @var $model backend\models\ImGrnDetail */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<div class="form-two-column">
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
@@ -61,7 +61,8 @@ use backend\models\CodesParam;
 
 
     <div class="form-group" style="margin-top: 20px;">
-        <?= Html::submitButton($model->isNewRecord ? 'Save Changes' : 'Save Changes', ['class' => $model->isNewRecord ? 'btn-primary waves-effect' : 'btn-primary waves-effect']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Save Changes' : 'Save Changes', ['class' => $model->isNewRecord ? 'btn-primary waves-effect pull-right' : 'btn-primary waves-effect pull-right']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+</div>

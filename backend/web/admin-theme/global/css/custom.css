@@ -61,6 +61,14 @@ form div label.control-label:after{
     width: 45%;
 }
 
+.form-width-50{
+    width: 50%;
+}
+
+.form-width-40{
+    width: 40%;
+}
+
 .form-width-35{
     width: 35%;
 }
@@ -284,3 +292,25 @@ a.btn{
 .site-menu>.site-menu-item>.site-menu-sub .site-menu-item>a:active{
     background: none;
 }*/
+
+.form-group{
+    margin-bottom: 0;
+}
+
+.form-two-column label{
+    width: 40%;
+    float: left;
+    text-align: right;
+    padding-right: 15px;
+    line-height: 1.1;
+}
+
+.form-two-column input{
+    width: 60%;
+    float: left;
+}
+
+.form-two-column select{
+    width: 60%;
+    float: left;
+}
