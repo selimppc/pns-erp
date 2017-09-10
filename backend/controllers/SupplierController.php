@@ -66,6 +66,10 @@ class SupplierController extends Controller
         $model = new Supplier();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -85,6 +89,10 @@ class SupplierController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+            
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -101,7 +109,12 @@ class SupplierController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if($model->delete()){
+            // Set success data
+            \Yii::$app->getSession()->setFlash('error', 'Successfully Deleted');
+        }
 
         return $this->redirect(['index']);
     }
