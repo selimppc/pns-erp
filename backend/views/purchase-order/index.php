@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
         <li class="breadcrumb-item">Purchase</li>
 
-        <li class="breadcrumb-item active"><a href="<?= Url::toRoute(['/pp-purchase-head']); ?>"><?= Html::encode($this->title) ?></a></li>
+        <li class="breadcrumb-item active"><a href="<?= Url::toRoute(['/purchase-order']); ?>"><?= Html::encode($this->title) ?></a></li>
       </ol>
      
       <div class="middle-menu-bar">
