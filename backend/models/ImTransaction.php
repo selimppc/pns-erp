@@ -76,7 +76,7 @@ class ImTransaction extends \yii\db\ActiveRecord
         return [
             [['transaction_number','product_id','branch_id','batch_number','uom','quantity','base_value','foreign_rate','total_price'],'required'],
             [['product_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
-            [['date', 'expire_date', 'created_at', 'updated_at'], 'safe'],
+            [['date', 'expire_date', 'created_at', 'updated_at', 'supplier_id'], 'safe'],
             [['quantity', 'foreign_rate', 'rate', 'total_price', 'base_value'], 'number'],
             [['sign', 'note'], 'string'],
             [['transaction_number', 'reference_number', 'reference_row', 'status'], 'string', 'max' => 16],
@@ -96,6 +96,7 @@ class ImTransaction extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'transaction_number' => Yii::t('app', 'Transaction Number'),
             'product_id' => Yii::t('app', 'Product'),
+            'supplier_id' => Yii:t('app', 'Supplier'),
             'branch_id' => Yii::t('app', 'Branch'),
             'batch_number' => Yii::t('app', 'Batch Number'),
             'date' => Yii::t('app', 'Date'),
