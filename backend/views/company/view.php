@@ -2,6 +2,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Company */
@@ -10,7 +11,7 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Companies'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?>
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -24,13 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Manage Companies'), ['index'], ['class' => '']) ?> 
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 
-         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => '',
-                'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
+        
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -41,10 +36,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-        <header class="panel-heading">
-            <div class="panel-actions"></div>
-            <h3 class="panel-title">View :: <?= Html::encode($this->title) ?></h3>
-        </header>
+        <?php 
+            if(Yii::$app->session->hasFlash('success')){
+        ?>
+            <div class="alert alert-success">
+              <?= Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+        <?php 
+            if(Yii::$app->session->hasFlash('error')){
+        ?>
+            <div class="alert alert-danger">
+              <?= Yii::$app->session->getFlash('error'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+        <div id="flag_desc">
+          <div id="flag_desc_text">
+              <b>View ::</b> <?= Html::encode($this->title) ?>
+          </div>
+        </div>
+
          
         <div class="panel-body">
 
@@ -59,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'web_url:url',
                    # 'created_by',
                    # 'updated_by',
-                   'created_at',
+                   #'created_at',
                    # 'updated_at',
                 ],
             ]) ?>
@@ -68,3 +85,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </div>
 </div>        
+<?php Pjax::end(); ?>

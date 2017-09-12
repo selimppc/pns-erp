@@ -34,7 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <div id="flag_desc">
           <div id="flag_desc_text">
-              <?=\Yii::$app->params['currency_master_index']?>
+              <?php
+                if(isset(\Yii::$app->params['currency_master_index']) && !empty(\Yii::$app->params['currency_master_index'])){
+                  echo \Yii::$app->params['currency_master_index'];
+                }
+              ?>              
           </div>
       </div>
      

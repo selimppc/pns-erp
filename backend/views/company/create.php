@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
-
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Company */
@@ -10,7 +10,7 @@ $this->title = Yii::t('app', 'Create Company');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Companies'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?>
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -30,10 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
+      <div id="flag_desc">
+          <div id="flag_desc_text">
+              <?php
+                if(isset(\Yii::$app->params['companies_create']) && !empty(\Yii::$app->params['companies_create'])){
+                  echo \Yii::$app->params['companies_create'];
+                }
+              ?>              
+          </div>
+      </div>
      
 	    <div class="panel-body">
 
@@ -45,3 +50,4 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>  
 
 </div>
+<?php Pjax::end(); ?>
