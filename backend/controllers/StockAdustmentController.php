@@ -10,9 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ImAdjustHeadController implements the CRUD actions for ImAdjustHead model.
+ * StockAdustmentController implements the CRUD actions for ImAdjustHead model.
  */
-class ImAdjustHeadController extends Controller
+class StockAdustmentController extends Controller
 {
     /**
      * @inheritdoc

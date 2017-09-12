@@ -2,13 +2,13 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\ImTransferHead */
 
-$this->title = 'Update Stock Transfer: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Im Transfer Heads', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Create Stock Transfer';
+$this->params['breadcrumbs'][] = ['label' => 'Stock Transfer', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-header">
 
@@ -30,15 +30,21 @@ $this->params['breadcrumbs'][] = 'Update';
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
+      <div id="flag_desc">
+          <div id="flag_desc_text">
+              <?php
+                if(isset(\Yii::$app->params['stock_transfer_create']) && !empty(\Yii::$app->params['stock_transfer_create'])){
+                  echo \Yii::$app->params['stock_transfer_create'];
+                }
+              ?>              
+          </div>
+      </div>,
      
 	    <div class="panel-body">
 
 	    	<?= $this->render('_form', [
-			        'model' => $model             
+			        'modelTransferHead' => $modelTransferHead,
+              'modelsTransferDetail' => $modelsTransferDetail             
 			    ]) ?>
 
 	    </div>

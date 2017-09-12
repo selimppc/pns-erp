@@ -106,5 +106,7 @@ return [
 
     'users_index' => '',
 
-    'users_create' => ''
+    'users_create' => '',
+
+    'stock_transfer_create' => '<b>New Transfer Header : </b>In this screen, all of the required fields need to be filled before clicking the button <b>“Add Transfer Header”.</b> Fields marked with (*) are mandatory. You can go back to your homescreen to view Transfer Header’s information by clicking the menu tab <b>“Manage Transfer Header”.</b> Also you can add new voucher details on existing Transfer by clicking the link under <b>“Transfer Number”</b> column; this link will redirect you to Transfer detail page. <b>Action</b> buttons will allow you to update and delete.'
 ];

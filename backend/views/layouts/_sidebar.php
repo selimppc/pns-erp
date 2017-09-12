@@ -165,7 +165,7 @@
                   </a>
                 </li> 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/im-transfer-head']); ?>">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/stock-transfer']); ?>">
                     <span class="site-menu-title">Stock Transfer</span>
                   </a>
                 </li> 
@@ -175,7 +175,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/im-adjust-detail']); ?>">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/stock-adustment']); ?>">
                     <span class="site-menu-title">Stock Adjustment</span>
                   </a>
                 </li>

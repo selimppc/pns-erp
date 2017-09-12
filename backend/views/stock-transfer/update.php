@@ -2,13 +2,13 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model backend\models\ImTransferHead */
 
-$this->title = 'Create Stock Transfer';
-$this->params['breadcrumbs'][] = ['label' => 'Stock Transfer', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Update Stock Transfer: ' . $modelTransferHead->id;
+$this->params['breadcrumbs'][] = ['label' => 'Im Transfer Heads', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $modelTransferHead->id, 'url' => ['view', 'id' => $modelTransferHead->id]];
+$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="page-header">
 
@@ -38,7 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	    <div class="panel-body">
 
 	    	<?= $this->render('_form', [
-			        'model' => $model             
+			        'modelTransferHead' => $modelTransferHead,
+              'modelsTransferDetail' => $modelsTransferDetail             
 			    ]) ?>
 
 	    </div>

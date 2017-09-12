@@ -50,7 +50,39 @@ $this->params['breadcrumbs'][] = $this->title;
             'transfer_number',
             'date',
             'confirm_date',
-            'note:ntext',
+            [
+               'attribute' => 'from_branch_id',  
+               'label' => 'From Branch',
+               'value' => function ($model) {
+                   return isset($model->fromBranch)?$model->fromBranch->title:'';
+               }
+            ],
+
+            [
+               'attribute' => 'from_currency_id',  
+               'label' => 'From Currency',
+               'value' => function ($model) {
+                   return isset($model->fromCurrency)?$model->fromCurrency->title:'';
+               }
+            ],                       
+            'from_exchange_rate',
+            [
+               'attribute' => 'tp_branch_id',  
+               'label' => 'To Branch',
+               'value' => function ($model) {
+                   return isset($model->toBranch)?$model->toBranch->title:'';
+               }
+            ],
+
+            [
+               'attribute' => 'to_currency_id',  
+               'label' => 'Top Currency',
+               'value' => function ($model) {
+                   return isset($model->toCurrency)?$model->toCurrency->title:'';
+               }
+            ], 
+            'to_exchange_rate',
+            'status',
 
             [
                 'header' => 'Action',
@@ -59,11 +91,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                   'update' => function ($url,$model) {
                       $url =  $url;
-                      return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                      return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_self']);
                     },
                     'view' => function ($url,$model) {
                       $url =  $url;
-                      return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                      return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_self']);
                     },
                   
                 ],

@@ -183,7 +183,7 @@ $this->registerJs($js);
             ]); 
         ?>
 
-            <div class="panel panel-default">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-envelope"></i> Purchase Order Details
             

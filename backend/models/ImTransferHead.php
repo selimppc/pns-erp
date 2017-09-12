@@ -90,8 +90,8 @@ class ImTransferHead extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'transfer_number' => Yii::t('app', 'Transfer Number'),
-            'date' => Yii::t('app', 'Date'),
-            'confirm_date' => Yii::t('app', 'Confirm Date'),
+            'date' => Yii::t('app', 'Transfer Issue Date'),
+            'confirm_date' => Yii::t('app', 'Transfer Confirm Date'),
             'note' => Yii::t('app', 'Note'),
             'from_branch_id' => Yii::t('app', 'From Branch'),
             'from_currency_id' => Yii::t('app', 'From Currency'),
