@@ -20,7 +20,13 @@ use yii\widgets\ActiveForm;
 
         	<?= $form->field($model, 'username',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-        	<?= $form->field($model, 'password',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->passwordInput(['maxlength' => true]) ?>
+            <?php
+                if($model->isNewRecord){
+            ?>
+        	   <?= $form->field($model, 'password',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->passwordInput(['maxlength' => true]) ?>
+            <?php 
+                }
+            ?>
 
         </div>
 

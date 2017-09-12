@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('app', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
+<?php Pjax::begin(); ?>
 <div class="page-header">
 
       <ol class="breadcrumb">
@@ -32,10 +32,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
+      <div id="flag_desc">
+          <div id="flag_desc_text">
+              <?php
+                if(isset(\Yii::$app->params['users_index']) && !empty(\Yii::$app->params['users_index'])){
+                  echo \Yii::$app->params['users_index'];
+                }
+              ?>              
+          </div>
+      </div>
      
       <div class="panel-body">
 
@@ -43,20 +48,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+           # ['class' => 'yii\grid\SerialColumn'],
             'id',
 
             'username',
             'email:email',
 
            [
-    'class' => 'yii\grid\ActionColumn',
-    'visibleButtons' => [
-        'view' => function ($model, $key, $index) {
-            return $model->status === 1 ? false : true;
-         }
-    ]
-]
+              'header' => 'Action',
+              'class' => 'yii\grid\ActionColumn',
+              'template' => '{view} {update} ',
+              'buttons' => [
+                'update' => function ($url,$model) {
+                    $url =  $url;
+                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                  },
+                  'view' => function ($url,$model) {
+                    $url =  $url;
+                    return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                  },
+                
+              ],
+          ],
         ],
     ]); ?>
 
@@ -67,3 +80,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
+<?php Pjax::end(); ?>

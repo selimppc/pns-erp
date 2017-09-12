@@ -73,6 +73,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['first_name', 'last_name', 'username', 'email', 'status','password'], 'required','on'=>'create'],
+            [['first_name', 'last_name', 'username', 'email', 'status'], 'required','on'=>'update'],
             [['email'], 'required','on'=>'forgot_password'],
             [['password','repeat_password'], 'required','on'=>'reset_password'],
 

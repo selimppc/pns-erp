@@ -93,6 +93,9 @@ class UserController extends Controller
                 {
                     $transaction->commit();
 
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
 
@@ -118,7 +121,13 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
+        $model->scenario = 'create';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

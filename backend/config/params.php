@@ -102,5 +102,9 @@ return [
 
     'companies_index' => '',
 
-    'companies_create' => ''
+    'companies_create' => '',
+
+    'users_index' => '',
+
+    'users_create' => ''
 ];
