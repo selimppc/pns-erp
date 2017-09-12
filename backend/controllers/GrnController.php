@@ -251,12 +251,20 @@ class GrnController extends Controller
     public function actionConfirmGrn($id){
 
         $model = ImGrnHead::find()->where(['id' => $id])->one();
+        $im_grn_head_id = $id;
 
+        $sql = sprintf("call sp_im_confirm_grn(%s,'%s')",
+                     $im_grn_head_id,
+                     $user_id = Yii::$app->user->id
+                    );
+            $command  = Yii::$app->db->createCommand($sql);
+            $result = $command->queryOne();
+            
         if($model){
 
-            $model->status = 'confirmed';
+            // $model->status = 'confirmed';
 
-            $valid = $model->validate();
+            /*$valid = $model->validate();
             if($valid){
 
                 // Set success data
@@ -266,7 +274,7 @@ class GrnController extends Controller
             }else{
                 print_r($model->getErrors());
                 exit();
-            }
+            }*/
             
 
            
