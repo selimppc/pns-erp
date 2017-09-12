@@ -150,6 +150,52 @@ class UserController extends Controller
     }
 
     /**
+     * Password Change an existing User model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionChangePassword()
+    {
+        $user_id = Yii::$app->user->identity->id;
+            
+        $model = User::find()->where(['id' => $user_id])->one();
+        $model->scenario = 'change_password';
+
+        if ($model->load(Yii::$app->request->post()) ) {
+
+                $valid_data = $model->validate();
+
+                if($valid_data){
+                    $model->password = Yii::$app->security->generatePasswordHash($model->new_password);
+                    $model->repeat_password = $model->new_password;
+                    
+
+                    if($model->save()){
+                        
+                        // Set success data
+                        \Yii::$app->getSession()->setFlash('success', 'Password has been SUCCESSFULLY changed');
+
+                    }else{
+
+                        // Set error data
+                        \Yii::$app->getSession()->setFlash('error', 'Somethings went wrong...');
+                        
+                    }
+                }else{
+                    
+                    // Set success data
+                        \Yii::$app->getSession()->setFlash('error', 'Somethings went wrong...');
+                         
+                }
+            }
+
+            return $this->render('change_password', [
+                'model' => $model,
+            ]);
+    }
+
+    /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

@@ -56,6 +56,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     public $repeat_password;
+    public $new_password;
+    public $current_password;
     public $roles;
 
     /**
@@ -80,7 +82,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
             [['username', 'email', 'password', 'password_reset_token', 'last_access', 'image'], 'string', 'max' => 255],
             [['first_name', 'last_name', 'auth_key', 'password_reset_token', 'last_access'], 'string', 'max' => 64],
-            ['repeat_password', 'compare', 'compareAttribute'=>'password' ],
+            #['repeat_password', 'compare', 'compareAttribute'=>'password' ],
+            
+            [['current_password','new_password', 'repeat_password'], 'required' , 'on' => 'change_password'],
+            ['repeat_password', 'compare', 'compareAttribute'=>'new_password','on'=>'change_password'],
+            ['current_password', 'findPasswords', 'on' => 'change_password'],
             [['first_name', 'last_name', 'username', 'email', 'password','password_reset_token', 'last_access','auth_key', 'roles'],'safe']
         ];
 
@@ -125,7 +131,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     ##TODO:: Login Process Functions ##
 
+    public function findPasswords($attribute, $params)
+    {
+        $user = self::find()->where(['id'=>Yii::$app->user->identity->id])->one();
 
+        if (!$user->validatePassword($this->current_password)){
+            $this->addError($attribute, 'Current Password Invalid.');
+        }else{
+            $this->clearErrors($attribute);
+        }
+    }
 
     /** INCLUDE USER LOGIN VALIDATION FUNCTIONS**/
     /**
