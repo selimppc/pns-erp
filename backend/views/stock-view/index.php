@@ -52,52 +52,42 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 #['class' => 'yii\grid\SerialColumn'],
 
-                'product_code',
-                'title',
+                [
+                    'attribute' => 'product_id',
+                    'label' => 'Product Code',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return isset($model->product)?$model->product->product_code:'';
+                    },
+                ],
+                'product_title',
                 'batch_number',
-                'date',
-                'branch_name',
-                'branch_code',
-                'cost_price',
+                'expire_date',
                 [
-                    'label' => 'Unit',
+                    'attribute' => 'branch_id',
+                    'label' => 'Branch',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        return '';
+                        return isset($model->branch)?$model->branch->title:'';
                     },
                 ],
-
+                'sell_rate',
+                'sell_tax',
+                'im_rate',
                 [
-                    'label' => 'Transfer Quantity',
+                    'attribute' => 'uom',
+                    'label' => 'UOM',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        return '';
+                        return isset($model->productUom)?$model->productUom->title:'';
                     },
                 ],
-
-                [
-                    'label' => 'Sell Quantity',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return '';
-                    },
-                ],
-                
-                [
-                    'label' => 'Stock Quantity',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return $model->quantity;
-                    },
-                ],
-
-                 [
-                    'label' => 'Available Quantity',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return $model->quantity;
-                    },
-                ],
+                'issueQty',
+                'saleQty',
+                'inhandQty',
+                'available',
+               
+               
                 #['class' => 'yii\grid\ActionColumn'],
             ],
         ]); ?>

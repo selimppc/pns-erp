@@ -8,8 +8,8 @@ use backend\models\ImGrnDetail;
 use backend\models\ImGrnHead;
 use backend\models\ImGrnDetailSearch;
 
-use backend\models\VwStockView;
-use backend\models\VwStockViewSearch;
+use backend\models\VwImStockView;
+use backend\models\VwImStockViewSearch;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -36,9 +36,9 @@ class StockViewController extends Controller{
 
     public function actionIndex(){
 
-        $models = VwStockView::find()->where(['status' => 'confirmed'])->all();
+        $models = VwImStockView::find()->all();
 
-        $searchModel = new VwStockViewSearch();
+        $searchModel = new VwImStockViewSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
