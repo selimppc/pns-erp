@@ -252,12 +252,6 @@ class GrnController extends Controller
 
         $model = ImGrnHead::find()->where(['id' => $id])->one();
         $im_grn_head_id = $id;
-
-
-        $result = \Yii::$app->db->createCommand("CALL sp_im_confirm_grn(:grn_head_id, :user_id)") 
-                      ->bindValue(':grn_head_id' , $im_grn_head_id )
-                      ->bindValue(':user_id', Yii::$app->user->id)
-                      ->execute();    
             
         if($model){
 
@@ -275,6 +269,10 @@ class GrnController extends Controller
                 exit();
             }*/
             
+             $result = \Yii::$app->db->createCommand("CALL sp_im_confirm_grn(:grn_head_id, :user_id)") 
+                      ->bindValue(':grn_head_id' , $im_grn_head_id )
+                      ->bindValue(':user_id', Yii::$app->user->id)
+                      ->execute(); 
 
            
         }
