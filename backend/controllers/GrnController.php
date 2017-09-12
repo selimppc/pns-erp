@@ -253,12 +253,11 @@ class GrnController extends Controller
         $model = ImGrnHead::find()->where(['id' => $id])->one();
         $im_grn_head_id = $id;
 
-        $sql = sprintf("call sp_im_confirm_grn(%s,'%s')",
-                     $im_grn_head_id,
-                     $user_id = Yii::$app->user->id
-                    );
-            $command  = Yii::$app->db->createCommand($sql);
-            $result = $command->queryOne();
+
+        $result = \Yii::$app->db->createCommand("CALL sp_im_confirm_grn(:grn_head_id, :user_id)") 
+                      ->bindValue(':grn_head_id' , $im_grn_head_id )
+                      ->bindValue(':user_id', Yii::$app->user->id)
+                      ->execute();    
             
         if($model){
 
