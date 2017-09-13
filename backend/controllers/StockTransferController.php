@@ -60,9 +60,20 @@ class StockTransferController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+
+        if(!empty($model)){
+
+            $transfer_details = ImTransferDetail::find()->where(['im_transfer_head_id'=>$model->id])->all();
+
+            return $this->render('view', [
+                'model' => $model,
+                'transfer_details' => $transfer_details
+            ]);
+
+        }
+
+        
     }
 
     /**
@@ -206,9 +217,56 @@ class StockTransferController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionCancel($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if($model){
+
+            $model->status = 'cancel';
+
+            $valid = $model->validate();
+            if($valid){
+
+                // Set success data
+                \Yii::$app->getSession()->setFlash('success', 'Successfully Cancel');
+
+                $model->save();    
+            }else{
+                print_r($model->getErrors());
+                exit();
+            }
+            
+
+           
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionConfirmDispatch($id)
+    {
+        $model = $this->findModel($id);
+
+        if($model){
+
+            $model->status = 'dispatch';
+
+            $valid = $model->validate();
+            if($valid){
+
+                // Set success data
+                \Yii::$app->getSession()->setFlash('success', 'Successfully Dispatch');
+
+                $model->save();    
+            }else{
+                print_r($model->getErrors());
+                exit();
+            }
+            
+
+           
+        }
 
         return $this->redirect(['index']);
     }

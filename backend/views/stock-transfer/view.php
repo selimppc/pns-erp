@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\ImTransferHead */
 
-$this->title = $model->id;
+$this->title = $model->transfer_number;
 $this->params['breadcrumbs'][] = ['label' => 'Stock Transfer', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
         <li class="breadcrumb-item">Inventory</li>
+        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/stock-transfer']); ?>">Stock Transfer</a></li>
         <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
       </ol>
       
@@ -23,7 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
       <div class="middle-menu-bar">
         <?= Html::a(Yii::t('app', 'Add New Stock Transfer'), ['create'], ['class' => '']) ?>
         <?= Html::a(Yii::t('app', 'Manage Stock Transfer'), ['index'], ['class' => '']) ?> 
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
+
+        <?= $model->status=='open'?Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']):''; ?> 
 
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
@@ -35,42 +37,114 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-        <header class="panel-heading">
-            <div class="panel-actions"></div>
-            <h3 class="panel-title">View :: <?= Html::encode($this->title) ?></h3>
-        </header>
+        <?php 
+            if(Yii::$app->session->hasFlash('success')){
+        ?>
+            <div class="alert alert-success">
+              <?= Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+        <?php 
+            if(Yii::$app->session->hasFlash('error')){
+        ?>
+            <div class="alert alert-danger">
+              <?= Yii::$app->session->getFlash('error'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+        <div id="flag_desc">
+          <div id="flag_desc_text">
+              Transfer Detail according to Transfer NO # <?=$model->transfer_number?>         
+          </div>
+      </div>
          
         <div class="panel-body">
 
-            <?= DetailView::widget([
-                'model' => $model,
-                'attributes' => [
-                    'id',
-                    'transfer_number',
-                    'date',
-                    'confirm_date',
-                    'note:ntext',
-                    [
-                        'label'  => 'From Branch',
-                        'value'  => isset($model->fromBranch)?$model->fromBranch->title:''
-                    ],
-                    [
-                        'label'  => 'From Currency',
-                        'value'  => isset($model->fromCurrency)?$model->fromCurrency->title:''
-                    ],                  
-                    'from_exchange_rate',
-                     [
-                        'label'  => 'To Branch',
-                        'value'  => isset($model->toBranch)?$model->toBranch->title:''
-                    ],
-                    [
-                        'label'  => 'To Currency',
-                        'value'  => isset($model->toCurrency)?$model->toCurrency->title:''
-                    ],
-                    'to_exchange_rate',
-                    'status',
-                ],
-            ]) ?>
+            <table class="table table-striped table-bordered detail-view">
+                <tr>
+                    <th>Transfer Issue Date</th>
+                    <th>Transfer Confirm Date</th>
+                    <th>Note</th>
+                    <th>From Branch</th>
+                    <th>From Currency</th>
+                    <th>From Exchange Rate</th>
+                    <th>To Branch</th>
+                    <th>To Currency</th>
+                    <th>To Exchange Rate</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td><?=$model->date?></td>
+                    <td><?=$model->confirm_date?></td>
+                    <td><?=$model->note?></td>
+                    <td><?=isset($model->fromBranch)?$model->fromBranch->title:''?></td>
+                    <td><?=isset($model->fromCurrency)?$model->fromCurrency->title:''?></td>
+                    <td><?=$model->from_exchange_rate?></td>
+                    <td><?=isset($model->toBranch)?$model->toBranch->title:''?></td>
+                    <td><?=isset($model->toCurrency)?$model->toCurrency->title:''?></td>
+                    <td><?=$model->to_exchange_rate?></td>
+                    <td><?=$model->status?></td>
+                </tr>
+            </table>
+
+
+            <?php
+                if(!empty($transfer_details)){
+            ?>
+
+                <div class="panel panel-default">
+
+                    <div class="panel-heading" style="padding: 5px 10px">
+                        <i class="fa fa-envelope"></i> Stock Transfer Details                       
+                    </div>
+
+                    <table class="table table-striped table-bordered detail-view">
+
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Unit of Measurment</th>                            
+                            <th>Purchased Rate</th> 
+                        </tr>
+
+                        <?php
+                            foreach($transfer_details as $transfer){
+                        ?>
+                                
+                                <tr>
+                                    <td>
+                                        <?=isset($transfer->product)?$transfer->product->title:''?>
+                                    </td>
+                                    <td>
+                                        <?=$transfer->quantity?>
+                                    </td>
+                                    <td>
+                                        <?=isset($transfer->uomData)?$transfer->uomData->title:''?>
+                                    </td>
+                                    <td>
+                                        <?=$transfer->rate?>
+                                    </td>
+                                </tr>
+
+                        <?php        
+                            }
+                        ?>
+
+                    </table>
+
+                </div>
+
+            <?php 
+                }
+            ?>
+
+            
 
         </div>
 

@@ -105,6 +105,14 @@ class ImTransferDetail extends \yii\db\ActiveRecord
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUomData()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'uom']);
+    }
+
     /**
      * @inheritdoc
      * @return ImTransferDetailQuery the active query used by this AR class.

@@ -32,10 +32,35 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Panel Basic -->
     <div class="panel">
 
-      <header class="panel-heading">
-        <div class="panel-actions"></div>
-        <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-      </header>
+      <?php 
+            if(Yii::$app->session->hasFlash('success')){
+        ?>
+            <div class="alert alert-success">
+              <?= Yii::$app->session->getFlash('success'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+        <?php 
+            if(Yii::$app->session->hasFlash('error')){
+        ?>
+            <div class="alert alert-danger">
+              <?= Yii::$app->session->getFlash('error'); ?>
+            </div>
+        <?php 
+            }
+        ?>
+
+      <div id="flag_desc">
+          <div id="flag_desc_text">
+              <?php
+                if(isset(\Yii::$app->params['stock_transfer_index']) && !empty(\Yii::$app->params['stock_transfer_index'])){
+                  echo \Yii::$app->params['stock_transfer_index'];
+                }
+              ?>              
+          </div>
+      </div>
      
       <div class="panel-body">
 
@@ -45,9 +70,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'transfer_number',
+            #['class' => 'yii\grid\SerialColumn'],
+            'id',
+            [
+              'attribute' => 'transfer_number',
+              'label' => 'Transfer Number',
+              'format' => 'raw',
+              'value' => function ($model) {
+                  return Html::a($model->transfer_number, ['/stock-transfer/view', 'id' => $model->id]);
+              },
+            ],
             'date',
             'confirm_date',
             [
@@ -82,7 +114,13 @@ $this->params['breadcrumbs'][] = $this->title;
                }
             ], 
             'to_exchange_rate',
-            'status',
+            [
+              'attribute' => 'status',
+              'label' => 'Status',
+              'value' => function ($model){
+                return ucfirst($model->status);
+              }
+            ],
 
             [
                 'header' => 'Action',
@@ -91,13 +129,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                   'update' => function ($url,$model) {
                       $url =  $url;
-                      return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_self']);
+                      return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_self']):'';
                     },
                     'view' => function ($url,$model) {
                       $url =  $url;
                       return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_self']);
                     },
                   
+                ],
+            ],
+
+            [
+                'header' => 'Confirm Dispatch',
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{confirm_dispatch} {cancel}',
+                'buttons' => [
+                    'confirm_dispatch' => function ($url, $model) {
+                          return $model->status == 'open'?Html::a('Confirm', ['stock-transfer/confirm-dispatch', 'id' => $model->id], ['class' => 'btn btn-xs btn-success', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to confirm this dispatch?") ']):'';
+                    },
+                    'cancel' => function ($url, $model) {
+                          return $model->status == 'open'?Html::a('Cancel', ['stock-transfer/cancel', 'id' => $model->id], ['class' => 'btn btn-xs btn-danger', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this order?") ']):'';
+                    },
                 ],
             ],
         ],
