@@ -129,11 +129,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                   'update' => function ($url,$model) {
                       $url =  $url;
-                      return $model->status == 'open'?Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_self']):'';
+                      return $model->status == 'open'?Html::a('<span class="btn btn-xs btn-primary" title="Update">Edit </span>', $url):'';
                     },
                     'view' => function ($url,$model) {
                       $url =  $url;
-                      return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_self']);
+                      return $model->status != 'cancel'?Html::a('<span class="btn btn-xs btn-info">Show </span>', $url):'';
                     },
                   
                 ],

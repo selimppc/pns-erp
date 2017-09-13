@@ -62,7 +62,8 @@ class ImAdjustDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['im_adjust_head_id','product_id','batch_number','expire_date','uom','quantity','stock_rate'],'required'],
+            // [['product_id','batch_number','expire_date','uom','quantity','stock_rate'],'required'],
+            [['product_id'],'required'],
             [['im_adjust_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['expire_date', 'created_at', 'updated_at'], 'safe'],
             [['quantity', 'stock_rate'], 'number'],
@@ -94,12 +95,24 @@ class ImAdjustDetail extends \yii\db\ActiveRecord
         ];
     }
 
+    
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getImAdjustHead()
     {
         return $this->hasOne(ImAdjustHead::className(), ['id' => 'im_adjust_head_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUomData()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'uom']);
     }
 
     /**

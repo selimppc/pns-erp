@@ -64,13 +64,14 @@ class ImAdjustHead extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['transaction_no','date','confirm_date','currency_id','branch_id','voucher_number'],'required'],
+            [['transaction_no','date','confirm_date','currency_id','branch_id'],'required'],
+           /* [['transaction_no','date','confirm_date'],'required'],*/
             [['date', 'confirm_date', 'created_at', 'updated_at'], 'safe'],
             [['branch_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
             [['type'], 'string'],
             [['exchange_rate'], 'number'],
             [['transaction_no', 'voucher_number'], 'string', 'max' => 16],
-            [['status'], 'string', 'max' => 8],
+          
             [['branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branch::className(), 'targetAttribute' => ['branch_id' => 'id']],
             [['currency_id'], 'exist', 'skipOnError' => true, 'targetClass' => Currency::className(), 'targetAttribute' => ['currency_id' => 'id']],
         ];
@@ -86,7 +87,7 @@ class ImAdjustHead extends \yii\db\ActiveRecord
             'transaction_no' => Yii::t('app', 'Transaction No'),
             'date' => Yii::t('app', 'Date'),
             'branch_id' => Yii::t('app', 'Branch'),
-            'type' => Yii::t('app', 'Type'),
+            'type' => Yii::t('app', 'Adjustment Type'),
             'confirm_date' => Yii::t('app', 'Confirm Date'),
             'currency_id' => Yii::t('app', 'Currency'),
             'exchange_rate' => Yii::t('app', 'Exchange Rate'),

@@ -5,9 +5,16 @@ namespace backend\controllers;
 use Yii;
 use backend\models\ImAdjustHead;
 use backend\models\ImAdjustHeadSearch;
+
+use backend\models\ImAdjustDetail;
+
+use backend\models\TransactionCode;
+use backend\models\Model;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * StockAdustmentController implements the CRUD actions for ImAdjustHead model.
@@ -51,9 +58,18 @@ class StockAdustmentController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+
+        if(!empty($model)){
+
+            $adjustment_details = ImAdjustDetail::find()->where(['im_adjust_head_id'=> $model->id])->all();
+
+            return $this->render('view', [
+                'model' => $model,
+                'adjustment_details' => $adjustment_details
+            ]);    
+        }
+        
     }
 
     /**
@@ -61,17 +77,82 @@ class StockAdustmentController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+     /**
+     * Creates a new ImTransferHead model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+     public function actionCreate()
     {
-        $model = new ImAdjustHead();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        
+        // generate purchase Order Number
+               
+        $adjustment_number = TransactionCode::generate_transaction_number('AD--');
+        
+        if(empty($adjustment_number)){
+            $adjustment_number = '';
         }
+        
+
+        $modelAdjustmentHead = new ImAdjustHead;
+        $modelsAdjustmentDetail = [new ImAdjustDetail];
+
+        $modelAdjustmentHead->transaction_no = $adjustment_number; 
+        $modelAdjustmentHead->status = 'open'; 
+        
+        if ($modelAdjustmentHead->load(Yii::$app->request->post())) {
+
+            $modelsAdjustmentDetail = Model::createMultiple(ImAdjustDetail::classname());
+            Model::loadMultiple($modelsAdjustmentDetail, Yii::$app->request->post());
+
+            // validate all models
+            $valid = $modelAdjustmentHead->validate();
+            $valid = Model::validateMultiple($modelsAdjustmentDetail) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+
+                try {
+                    $modelAdjustmentHead->status = 'open';
+                    if ($flag = $modelAdjustmentHead->save(false)) {
+                        foreach ($modelsAdjustmentDetail as $modelAdjustmentDetail) {
+                            $modelAdjustmentDetail->im_adjust_head_id = $modelAdjustmentHead->id;
+                            if (! ($flag = $modelAdjustmentDetail->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+
+                    if ($flag) {
+
+                        // Update transaction code data
+                        $update_transaction = TransactionCode::update_transaction_number('AD--');
+
+                        if($update_transaction){
+                            echo 'successfully updated';
+                        }else{
+                            echo 'successfully not updated';
+                        }
+
+                        // Set success data
+                        \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
+                        
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelAdjustmentHead->id]);
+                    }
+                } catch (\Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        }
+
+        return $this->render('create', [
+            'modelAdjustmentHead' => $modelAdjustmentHead,
+            'modelsAdjustmentDetail' => (empty($modelsAdjustmentDetail)) ? [new ImAdjustDetail] : $modelsAdjustmentDetail
+        ]);
+
     }
 
     /**
@@ -82,15 +163,53 @@ class StockAdustmentController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $modelAdjustmentHead = $this->findModel($id);
+        $modelsAdjustmentDetail = $modelAdjustmentHead->imAdjustDetails;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if ($modelAdjustmentHead->load(Yii::$app->request->post())) {
+
+            $oldIDs = ArrayHelper::map($modelsAdjustmentDetail, 'id', 'id');
+            $modelsAdjustmentDetail = Model::createMultiple(ImAdjustDetail::classname(), $modelsAdjustmentDetail);
+            Model::loadMultiple($modelsAdjustmentDetail, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsAdjustmentDetail, 'id', 'id')));
+
+            // validate all models
+            $valid = $modelAdjustmentHead->validate();
+            $valid = Model::validateMultiple($modelsAdjustmentDetail) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $modelAdjustmentHead->save(false)) {
+                        if (!empty($deletedIDs)) {
+                            ImAdjustDetail::deleteAll(['id' => $deletedIDs]);
+                        }
+                        foreach ($modelsAdjustmentDetail as $modelAdjustmentDetail) {
+                            $modelAdjustmentDetail->im_adjust_head_id = $modelAdjustmentHead->id;
+                            if (! ($flag = $modelAdjustmentDetail->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+
+                        // Set success data
+                        \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+
+                        return $this->redirect(['view', 'id' => $modelAdjustmentHead->id]);
+                    }
+                } catch (\Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
         }
+
+        return $this->render('update', [
+            'modelAdjustmentHead' => $modelAdjustmentHead,
+            'modelsAdjustmentDetail' => (empty($modelsAdjustmentDetail)) ? [new ImAdjustDetail] : $modelsAdjustmentDetail
+        ]);
     }
 
     /**
@@ -102,6 +221,34 @@ class StockAdustmentController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+
+    public function actionConfirmAdjustment($id)
+    {
+        $model = $this->findModel($id);
+
+        if($model){
+
+            $model->status = 'confirm';
+
+            $valid = $model->validate();
+            if($valid){
+
+                // Set success data
+                \Yii::$app->getSession()->setFlash('success', 'Successfully Confirmed');
+
+                $model->save();    
+            }else{
+                print_r($model->getErrors());
+                exit();
+            }
+            
+
+           
+        }
 
         return $this->redirect(['index']);
     }
