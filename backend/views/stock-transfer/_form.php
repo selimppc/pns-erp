@@ -40,10 +40,6 @@ $this->registerJs($js);
 
     <div class="row">
 
-        <div class="col-md-12">
-            <h2 style="background: #FFCCFF;padding: 7px;width: 100%;font-weight: 500;
-    border-radius: 5px;font-size: 15px;">Enter Transfer Header Information</h2>
-        </div>
 
         <div class="col-md-2">
          <?= $form->field($modelTransferHead, 'transfer_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => 1]) ?>
@@ -99,90 +95,94 @@ $this->registerJs($js);
 
         </div>
 
-
-        <div class="col-md-12">
-            <h2 style="background: #FFCCFF;padding: 7px;width: 100%;font-weight: 500;
-    border-radius: 5px;font-size: 15px;">Store, from where the stock will transfer</h2>
-        </div>
-
-
-        <div class="col-md-2">
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($modelTransferHead, 'from_branch_id')
-                            ->dropDownList(
-                                ArrayHelper::map(Branch::find()->all(), 'id', 'branch_code'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-2">
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($modelTransferHead, 'from_currency_id')
-                            ->dropDownList(
-                                ArrayHelper::map(Currency::find()->all(), 'id', 'currency_code'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-        </div>    
-
-        <div class="col-md-2">
-
-            <?= $form->field($modelTransferHead, 'from_exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
-
-        </div>
-
-
-        <div class="col-md-12">
-            <h2 style="background: #FFCCFF;padding: 7px;width: 100%;font-weight: 500;border-radius: 5px;font-size: 15px;">Store, Where To transfer</h2>
-        </div>
-
-
-        <div class="col-md-2">
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($modelTransferHead, 'to_branch_id')
-                            ->dropDownList(
-                                ArrayHelper::map(Branch::find()->all(), 'id', 'branch_code'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-2">
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($modelTransferHead, 'to_currency_id')
-                            ->dropDownList(
-                                ArrayHelper::map(Currency::find()->all(), 'id', 'currency_code'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-        </div>    
-
-        <div class="col-md-2">
-
-            <?= $form->field($modelTransferHead, 'to_exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
-
-        </div>
-
         <div class="col-md-2">
             <?= $form->field($modelTransferHead, 'status',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => 1]) ?>
         </div> 
+
+
+        <div class="col-md-6">
+            <h2 style="background: #FFCCFF;padding: 7px;width: 100%;font-weight: 500;
+    border-radius: 5px;font-size: 15px;">Store, from where the stock will transfer</h2>
+
+
+            <div class="col-md-4">
+
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                    <?= $form->field($modelTransferHead, 'from_branch_id')
+                                ->dropDownList(
+                                    ArrayHelper::map(Branch::find()->all(), 'id', 'branch_code'),
+                                     ['prompt'=>'-Select-','class'=>'form-control']
+                                ); ?>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                    <?= $form->field($modelTransferHead, 'from_currency_id')
+                                ->dropDownList(
+                                    ArrayHelper::map(Currency::find()->all(), 'id', 'currency_code'),
+                                     ['prompt'=>'-Select-','class'=>'form-control']
+                                ); ?>
+
+                </div>
+
+            </div>    
+
+            <div class="col-md-4">
+
+                <?= $form->field($modelTransferHead, 'from_exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            </div>
+        </div>
+
+
+        
+
+
+        <div class="col-md-6">
+            <h2 style="background: #FFCCFF;padding: 7px;width: 100%;font-weight: 500;border-radius: 5px;font-size: 15px;">Store, Where To transfer</h2>
+
+            <div class="col-md-4">
+
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                    <?= $form->field($modelTransferHead, 'to_branch_id')
+                                ->dropDownList(
+                                    ArrayHelper::map(Branch::find()->all(), 'id', 'branch_code'),
+                                     ['prompt'=>'-Select-','class'=>'form-control']
+                                ); ?>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                    <?= $form->field($modelTransferHead, 'to_currency_id')
+                                ->dropDownList(
+                                    ArrayHelper::map(Currency::find()->all(), 'id', 'currency_code'),
+                                     ['prompt'=>'-Select-','class'=>'form-control']
+                                ); ?>
+
+                </div>
+
+            </div>    
+
+            <div class="col-md-4">
+
+                <?= $form->field($modelTransferHead, 'to_exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            </div>
+
+        </div>
+
 
 
     </div>
