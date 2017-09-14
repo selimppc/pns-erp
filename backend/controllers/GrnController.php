@@ -311,7 +311,7 @@ class GrnController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 
-        return $this->render('/im-grn-detail/index', [
+        return $this->render('/grn-detail/index', [
             'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
