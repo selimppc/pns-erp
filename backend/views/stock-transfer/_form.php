@@ -13,6 +13,8 @@ use backend\models\Product;
 use backend\models\CodesParam;
 use kartik\date\DatePicker;
 
+use kartik\select2\Select2;
+
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\PpPurchaseHead */
@@ -218,7 +220,7 @@ $this->registerJs($js);
             <div class="panel-body container-items"><!-- widgetContainer -->
 
                 <div style="width: 100%;display: inline-block;">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <label class="control-label only-label" for="">Product</label>
                     </div>
                     <div class="col-md-2">
@@ -246,14 +248,23 @@ $this->registerJs($js);
 
                         <div class="row">
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
-                                    <?= $form->field($modelTransferDetail, "[{$index}]product_id")
-                                                ->dropDownList(
-                                                    ArrayHelper::map(Product::find()->all(), 'id', 'title'),
-                                                     ['prompt'=>'-Select-','class'=>'form-control']
-                                                )->label(false); ?>
+                                    <?php
+
+                                        echo $form->field($modelTransferDetail, "[{$index}]product_id")->widget(Select2::classname(), [
+                                            'data' => Product::get_product_list(),
+                                            'language' => '',
+                                            'options' => ['placeholder' => 'Select a product ...'],
+                                            'pluginOptions' => [
+                                                'allowClear' => true,
+                                                'classs' => 'form-group form-material floating',
+                                                'data-plugin' => 'formMaterial'
+                                            ],
+                                        ])->label(false);
+
+                                    ?>
 
                                 </div>
                             </div>
@@ -339,6 +350,14 @@ $this->registerJs($js);
             });
 
         });
+
+
+        window.initSelect2Loading = function(id, optVar){
+            initS2Loading(id, optVar)
+        };
+        window.initSelect2DropStyle = function(id, kvClose, ev){
+            initS2Loading(id, kvClose, ev)
+        };
 
      ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
 ?>

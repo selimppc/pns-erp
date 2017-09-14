@@ -153,6 +153,25 @@ class Product extends \yii\db\ActiveRecord
         ];
     }
 
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+
+    public static function get_product_list() {
+        $options = [];
+        $product_q = Product::find()->all();
+        
+        if(!empty($product_q)){
+            foreach ($product_q as $key => $value) {
+                $options[$value->id] = $value->title;
+
+            }
+        }        
+
+        return $options;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

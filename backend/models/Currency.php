@@ -102,6 +102,20 @@ class Currency extends \yii\db\ActiveRecord
         return $this->hasMany(AmVoucherDetail::className(), ['currency_id' => 'id']);
     }
 
+    public static function get_currency() {
+        $options = [];
+        $currency_q = Currency::find()->where(['status' => 'active'])->all();
+        
+        if(!empty($currency_q)){
+            foreach ($currency_q as $key => $value) {
+                $options[$value->id] = $value->title;
+
+            }
+        }        
+
+        return $options;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

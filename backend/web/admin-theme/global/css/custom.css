@@ -314,3 +314,22 @@ a.btn{
     width: 60%;
     float: left;
 }
+
+
+.select2-container--krajee .select2-selection--single .select2-selection__arrow{
+    height: 26px !important;
+}
+
+.select2-container--krajee .select2-selection--single{
+    height: 28px !important;
+    padding: 3px 24px 6px 10px;
+}
+
+.form-group.field-imgrndetail-product_id .select2-container--krajee{
+    width: 60%!important;
+    float: right;
+}
+
+.form-group.field-imgrndetail-product_id{
+    margin-top: -15px;
+}

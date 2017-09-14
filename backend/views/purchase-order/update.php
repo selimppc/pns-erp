@@ -12,7 +12,6 @@ $this->params['breadcrumbs'][] = ['label' => $modelPurchaseHead->id, 'url' => ['
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 
-<?php Pjax::begin(); ?> 
 
 <div class="page-header">
 
@@ -52,5 +51,3 @@ $this->params['breadcrumbs'][] = 'Update';
 
 </div>
 
-
-<?php Pjax::end(); ?>

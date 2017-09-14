@@ -13,6 +13,8 @@ use backend\models\Product;
 use backend\models\CodesParam;
 use kartik\date\DatePicker;
 
+use kartik\select2\Select2;
+
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\PpPurchaseHead */
@@ -217,11 +219,20 @@ $this->registerJs($js);
                             <div class="col-md-2">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
-                                    <?= $form->field($modelAdjustmentDetail, "[{$index}]product_id")
-                                                ->dropDownList(
-                                                    ArrayHelper::map(Product::find()->all(), 'id', 'title'),
-                                                     ['prompt'=>'-Select-','class'=>'form-control']
-                                                )->label(false); ?>
+                                    <?php
+
+                                        echo $form->field($modelAdjustmentDetail, "[{$index}]product_id")->widget(Select2::classname(), [
+                                            'data' => Product::get_product_list(),
+                                            'language' => '',
+                                            'options' => ['placeholder' => 'Select product'],
+                                            'pluginOptions' => [
+                                                'allowClear' => true,
+                                                'classs' => 'form-group form-material floating',
+                                                'data-plugin' => 'formMaterial'
+                                            ],
+                                        ])->label(false);
+
+                                    ?>
 
                                 </div>
                             </div>
@@ -310,6 +321,13 @@ $this->registerJs($js);
             });
 
         });
+
+        window.initSelect2Loading = function(id, optVar){
+            initS2Loading(id, optVar)
+        };
+        window.initSelect2DropStyle = function(id, kvClose, ev){
+            initS2Loading(id, kvClose, ev)
+        };
 
      ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
 ?>
