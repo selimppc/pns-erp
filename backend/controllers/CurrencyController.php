@@ -8,6 +8,7 @@ use backend\models\CurrencySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * CurrencyController implements the CRUD actions for Currency model.
@@ -100,6 +101,38 @@ class CurrencyController extends Controller
             ]);
         }
     }
+
+     /**
+     * Get exchange rate an existing Currency model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+
+     public function actionFindCurrencyRate(){
+        if (Yii::$app->request->isAjax) {
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $session = Yii::$app->session;
+            $response = [];
+
+            $currency_id = $_POST['currency'];
+
+            $currency_data = Currency::find()->where(['id' => $currency_id])->one();
+
+            if(!empty($currency_data)){
+                $response['exchange_rate'] = $currency_data->exchange_rate;
+                $response['result'] = 'success';
+            }else{
+                $response['result'] = 'error';
+            }
+
+            return $response;
+
+
+
+        }
+     }
 
     /**
      * Deletes an existing Currency model.

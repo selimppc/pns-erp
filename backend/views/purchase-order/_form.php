@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
 
@@ -275,3 +276,32 @@ $this->registerJs($js);
 
 
     <?php ActiveForm::end(); ?>
+
+
+<?php
+    
+    $this->registerJs("
+
+        $('#pppurchasehead-currency_id').change(function (e) {
+            var currency = $('#pppurchasehead-currency_id').val();
+
+            $.ajax({
+                type : 'POST',
+                dataType : 'json',
+                url : '".Url::toRoute('currency/find-currency-rate')."',
+                data: {currency:currency},
+                beforeSend : function( request ){
+                    
+                },
+                success : function( data )
+                    {   
+                        if(data.result == 'success'){                            
+                            $('#pppurchasehead-exchange_rate').val(data.exchange_rate);
+                        }
+                    }
+            });
+
+        });
+
+     ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
+?>

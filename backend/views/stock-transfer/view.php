@@ -70,8 +70,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <th>Transfer Issue Date</th>
                     <th>Transfer Confirm Date</th>
                     <th>Note</th>
-                    <th style="background-color: #ddd;border-bottom: 1px solid rgba(0, 0, 0, 0.06);border-right:1px solid rgba(0, 0, 0, 0.06);;">From Branch</th>
-                    <th style="background-color: #ddd;border-bottom: 1px solid rgba(0, 0, 0, 0.06);border-right: 1px solid rgba(0, 0, 0, 0.06);;">From Currency</th>
+                    <th style="background-color: #ddd;border-bottom: 1px solid rgba(0, 0, 0, 0.06);border-right:1px solid rgba(0, 0, 0, 0.06);">From Branch</th>
+                    <th style="background-color: #ddd;border-bottom: 1px solid rgba(0, 0, 0, 0.06);border-right: 1px solid rgba(0, 0, 0, 0.06);">From Currency</th>
                     <th style="background-color: #ddd;border-bottom: 1px solid rgba(0, 0, 0, 0.06);">From Exchange Rate</th>
                     <th style="background: #eee;">To Branch</th>
                     <th style="background: #eee;">To Currency</th>
@@ -83,8 +83,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td><?=$model->date?></td>
                     <td><?=$model->confirm_date?></td>
                     <td><?=$model->note?></td>
-                    <td style="background-color: #ddd;"><?=isset($model->fromBranch)?$model->fromBranch->title:''?></td>
-                    <td style="background-color: #ddd;"><?=isset($model->fromCurrency)?$model->fromCurrency->title:''?></td>
+                    <td style="background-color: #ddd;border-right:1px solid rgba(0, 0, 0, 0.06);"><?=isset($model->fromBranch)?$model->fromBranch->title:''?></td>
+                    <td style="background-color: #ddd;border-right:1px solid rgba(0, 0, 0, 0.06);"><?=isset($model->fromCurrency)?$model->fromCurrency->title:''?></td>
                     <td style="background-color: #ddd;"><?=$model->from_exchange_rate?></td>
                     <td style="background: #eee;"><?=isset($model->toBranch)?$model->toBranch->title:''?></td>
                     <td style="background: #eee;"><?=isset($model->toCurrency)?$model->toCurrency->title:''?></td>
