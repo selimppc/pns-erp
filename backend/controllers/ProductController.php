@@ -4,12 +4,16 @@ namespace backend\controllers;
 
 use Yii;
 use yii\helpers\Html;
+use yii\helpers\FileHelper;
 
 use backend\models\Product;
 use backend\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use yii\web\UploadedFile;
+use yii\imagine\Image;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -37,6 +41,11 @@ class ProductController extends Controller
      */
     public function actionIndex()
     {
+
+        /*$path = Yii::getAlias('@webroot').'/uploads/';
+        FileHelper::createDirectory($path, $mode = 0775, $recursive = true);
+        echo $path;
+        exit();*/
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -67,7 +76,41 @@ class ProductController extends Controller
     {
         $model = new Product();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            if($model->validate()){
+
+                $model->image = UploadedFile::getInstance($model, 'image');
+
+                if($model->image){
+
+                    // check folder exists & Write
+                    $path = Yii::getAlias('@webroot').'/uploads/';
+                    FileHelper::createDirectory($path, $mode = 0775, $recursive = true);
+
+                    $path_thumb = Yii::getAlias('@webroot').'/uploads/thumb';
+                    FileHelper::createDirectory($path_thumb, $mode = 0775, $recursive = true);
+
+
+                    // generate image name
+                    $image_name = $model->product_code.'-'.$model->image->baseName . '.' . $model->image->extension;
+
+                    // original image upload
+                    $model->image->saveAs('uploads/' . $image_name);
+
+
+                    // thumb image upload
+                    Image::thumbnail('@webroot/uploads/'.$image_name, 200, 130)
+                    ->save(Yii::getAlias('@webroot').'/uploads/thumb/'.$image_name, ['quality' => 80]);
+
+                    $model->image = $model->product_code.'-'.$model->image->baseName . '.' . $model->image->extension;
+
+                }
+                
+                $model->save();
+            }else{
+                print_r($model->getError());
+            }
 
             // Set success data
             \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
@@ -91,7 +134,40 @@ class ProductController extends Controller
         
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $old_image = $model->image;
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->image = UploadedFile::getInstance($model, 'image');
+
+                if(!empty($model->image)){
+                    
+                    // check folder exists & Write
+                    $path = Yii::getAlias('@webroot').'/uploads/';
+                    FileHelper::createDirectory($path, $mode = 0775, $recursive = true);
+
+                    $path_thumb = Yii::getAlias('@webroot').'/uploads/thumb';
+                    FileHelper::createDirectory($path_thumb, $mode = 0775, $recursive = true);
+
+                    @unlink(\Yii::getAlias('@webroot').'/uploads/'.$old_image);
+                    @unlink(\Yii::getAlias('@webroot').'/uploads/thumb/'.$old_image);
+
+                    // generate image name
+                    $image_name = $model->product_code.'-'.$model->image->baseName . '.' . $model->image->extension;
+
+                    // original image upload
+                    $model->image->saveAs('uploads/' . $image_name);
+
+
+                    // thumb image upload
+                    Image::thumbnail('@webroot/uploads/'.$image_name, 200, 130)
+                    ->save(Yii::getAlias('@webroot').'/uploads/thumb/'.$image_name, ['quality' => 80]);
+
+                    $model->image = $model->product_code.'-'.$model->image->baseName . '.' . $model->image->extension;
+
+                }
+
+                $model->save();
 
             // Set success data
             \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');

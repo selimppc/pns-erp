@@ -59,6 +59,8 @@ use yii\behaviors\BlameableBehavior;
 class Product extends \yii\db\ActiveRecord
 {
 
+   
+
     public function behaviors()
     {
         return [
@@ -92,14 +94,15 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             [['product_code','title','class','group','currency_id','model','origin','stock_type'],'required'],
-            [['product_code'],'unique'],
+            #[['product_code'],'unique'],
             [['description'], 'string'],
+            [['image'], 'file'],
             [['class', 'group', 'category', 'currency_id', 'supplier_id', 'created_by', 'updated_by'], 'integer'],
             [['exchange_rate', 'sell_rate', 'cost_price', 'sell_uom_qty', 'purchase_uom_qty', 'sell_tax', 'stock_uom_qty'], 'number'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','image'], 'safe'],
             [['product_code', 'manufacturer_code','manufacturer_year','machine_size','speed'], 'string', 'max' => 16],
             [['title', 'model', 'size', 'origin'], 'string', 'max' => 45],
-            [['image', 'thumb_image'], 'string', 'max' => 64],
+            
             [['sell_uom', 'purchase_uom', 'stock_uom', 'pack_size','generic', 'max_level', 'min_level', 're_order'], 'string', 'max' => 8],
             [['currency_id'], 'exist', 'skipOnError' => true, 'targetClass' => Currency::className(), 'targetAttribute' => ['currency_id' => 'id']],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Supplier::className(), 'targetAttribute' => ['supplier_id' => 'id']],

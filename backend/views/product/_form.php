@@ -18,12 +18,9 @@ use backend\models\CodesParam;
 
 <div class="product-form form-two-column">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
     <div class="row">
-
-
-
 
         <div class="col-md-6">
 
@@ -84,6 +81,19 @@ use backend\models\CodesParam;
             <?= $form->field($model, 'machine_size',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'generic',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'image')->fileInput() ?>
+
+            <?php
+                if(!empty($model->image)){
+            ?>
+                <div style="width: 60%;float: right;margin-top:10px;">
+                    <img style="width: 100px;" src="<?=Yii::$app->homeUrl.'/uploads/thumb/'.$model->image?>">
+                </div>    
+
+            <?php         
+                }
+            ?>
 
             
         </div>
@@ -180,7 +190,7 @@ use backend\models\CodesParam;
     
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Save Changes') : Yii::t('app', 'Save Changes'), ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect form-two-column' : 'btn btn-primary waves-effect form-two-column']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Save Changes') : Yii::t('app', 'Save Changes'), ['class' => $model->isNewRecord ? 'btn btn-primary waves-effect form-two-column pull-right' : 'btn btn-primary waves-effect form-two-column pull-right']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
