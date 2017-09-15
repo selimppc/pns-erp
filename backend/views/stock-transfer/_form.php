@@ -220,16 +220,16 @@ $this->registerJs($js);
             <div class="panel-body container-items"><!-- widgetContainer -->
 
                 <div style="width: 100%;display: inline-block;">
-                    <div class="col-md-3">
+                    <div class="custom-column-37">
                         <label class="control-label only-label" for="">Product</label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="custom-column-18">
                         <label class="control-label only-label" for="">Unit of Measurement</label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="custom-column-19">
                         <label class="control-label only-label" for="">Quantity</label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="custom-column-18">
                         <label class="control-label only-label" for="">Rate</label>
                     </div>
                 </div>
@@ -248,7 +248,7 @@ $this->registerJs($js);
 
                         <div class="row">
 
-                            <div class="col-md-3">
+                            <div class="custom-column-40">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
                                     <?php
@@ -269,18 +269,18 @@ $this->registerJs($js);
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="custom-column-20">
                                 <?= $form->field($modelTransferDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
                                     ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->all(), 'id', 'title'),
                                      ['prompt'=>'-Select-','class'=>'form-control floating']
                                 )->label(false) ?>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="custom-column-20">
                                 <?= $form->field($modelTransferDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="custom-column-20">
                                 <?= $form->field($modelTransferDetail,"[{$index}]rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                             </div>
                         </div>

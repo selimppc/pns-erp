@@ -333,3 +333,79 @@ a.btn{
 .form-group.field-imgrndetail-product_id{
     margin-top: -15px;
 }
+
+.custom-column-40{
+    float: left;
+    width: calc(40% - 10px);
+    margin-left: 10px;
+}
+
+.custom-column-37{
+    float: left;
+    width: calc(37% - 10px);
+    margin-left: 10px;
+}
+
+.custom-column-30{
+    float: left;
+    width: calc(30% - 10px);
+    margin-left: 10px;
+}
+
+.custom-column-27{
+    float: left;
+    width: calc(27% - 10px);
+    margin-left: 10px;
+}
+
+.custom-column-20{
+    float: left;
+    width: calc(20% - 10px);
+    margin-left: 10px;
+}
+
+.custom-column-19{
+    float: left;
+    width: calc(19% - 10px);
+    margin-left: 10px;
+}
+
+.custom-column-18{
+    float: left;
+    width: calc(18% - 10px);
+    margin-left: 10px;
+}
+
+.custom-column-15{
+    float: left;
+    width: calc(15% - 10px);
+    margin-left: 10px;
+}
+
+.custom-column-14{
+    float: left;
+    width: calc(14% - 10px);
+    margin-left: 10px;
+}
+
+.custom-column-13{
+    float: left;
+    width: calc(13% - 10px);
+    margin-left: 10px;
+}
+
+.custom-column-10{
+    float: left;
+    width: calc(10% - 10px);
+    margin-left: 10px;
+}
+
+.custom-column-9{
+    float: left;
+    width: calc(9% - 10px);
+    margin-left: 10px;
+}
+
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label{
+    font-size: 12px;
+}

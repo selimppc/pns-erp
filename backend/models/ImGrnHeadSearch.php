@@ -20,7 +20,7 @@ class ImGrnHeadSearch extends ImGrnHead
         return [
             [['id', 'pp_purchase_head_id', 'am_voucher_head_id', 'supplier_id', 'branch_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
             [['grn_number', 'date', 'pay_terms', 'status', 'created_at', 'updated_at'], 'safe'],
-            [['tax_rate', 'tax_ammount', 'discount_rate', 'discount_amount', 'exchnage_rate', 'prime_amount', 'net_amount'], 'number'],
+            [['tax_rate', 'tax_ammount', 'discount_rate', 'discount_amount', 'exchange_rate', 'prime_amount', 'net_amount'], 'number'],
         ];
     }
 
@@ -95,7 +95,7 @@ class ImGrnHeadSearch extends ImGrnHead
             'discount_rate' => $this->discount_rate,
             'discount_amount' => $this->discount_amount,
             'currency_id' => $this->currency_id,
-            'exchnage_rate' => $this->exchnage_rate,
+            'exchange_rate' => $this->exchange_rate,
             'prime_amount' => $this->prime_amount,
             'net_amount' => $this->net_amount,
             'created_by' => $this->created_by,

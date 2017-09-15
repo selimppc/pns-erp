@@ -232,7 +232,7 @@ class StockAdustmentController extends Controller
 
         if($model){
 
-            $model->status = 'confirm';
+            $model->status = 'confirmed';
 
             $valid = $model->validate();
             if($valid){

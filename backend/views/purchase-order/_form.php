@@ -194,19 +194,19 @@ $this->registerJs($js);
         </div>
         <div class="panel-body container-items"><!-- widgetContainer -->
             <div style="width: 100%;display: inline-block;">
-                <div class="col-md-3">
+                <div class="custom-column-37">
                     <label class="control-label only-label" for="">Product</label>
                 </div>
-                <div class="col-md-2">
+                <div class="custom-column-9">
                     <label class="control-label only-label" for="">Quantity</label>
                 </div>
-                <div class="col-md-2">
+                <div class="custom-column-19">
                     <label class="control-label only-label" for="">Unit of Measurement</label>
                 </div>
-                <div class="col-md-2">
+                <div class="custom-column-14">
                     <label class="control-label only-label" for="">UOM Quantity</label>
                 </div>
-                <div class="col-md-2">
+                <div class="custom-column-15">
                     <label class="control-label only-label" for="">Purchase Rate</label>
                 </div>
             </div>
@@ -222,7 +222,7 @@ $this->registerJs($js);
                     ?>
                     <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="custom-column-40">
                             <div class="form-group form-material floating" data-plugin="formMaterial">
 
                                 <?php
@@ -245,11 +245,11 @@ $this->registerJs($js);
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="custom-column-10">
                             <?= $form->field($modelPurchaseDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="custom-column-20">
                             
 
                             <?= $form->field($modelPurchaseDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
@@ -258,11 +258,11 @@ $this->registerJs($js);
                                 )->label(false) ?>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="custom-column-15">
                             <?= $form->field($modelPurchaseDetail, "[{$index}]uom_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="custom-column-15">
                             <?= $form->field($modelPurchaseDetail, "[{$index}]purchase_rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                         </div>
 

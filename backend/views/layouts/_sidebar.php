@@ -89,39 +89,7 @@
               </ul>
             </li>
 
-            <li class="site-menu-item has-sub">
-              <a href="javascript:void(0)">
-                <i class="site-menu-icon md-border-all" aria-hidden="true"></i>
-                <span class="site-menu-title">General Ledger</span>
-              </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/am-coa']); ?>">
-                    <span class="site-menu-title">Chart of Accounts</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
-                    <span class="site-menu-title">Voucher</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
-                    <span class="site-menu-title">Transaction</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/general-ledger-settings']); ?>">
-                    <span class="site-menu-title">Settings</span>
-                  </a>
-                </li>  
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/general-ledger-report']); ?>">
-                    <span class="site-menu-title">Reports</span>
-                  </a>
-                </li> 
-              </ul>
-            </li>
+            
 
              <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
@@ -199,6 +167,40 @@
                     <span class="site-menu-title">Reports</span>
                   </a>
                 </li>
+              </ul>
+            </li>
+
+            <li class="site-menu-item has-sub">
+              <a href="javascript:void(0)">
+                <i class="site-menu-icon md-border-all" aria-hidden="true"></i>
+                <span class="site-menu-title">General Ledger</span>
+              </a>
+              <ul class="site-menu-sub">
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/am-coa']); ?>">
+                    <span class="site-menu-title">Chart of Accounts</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="#">
+                    <span class="site-menu-title">Voucher</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="#">
+                    <span class="site-menu-title">Transaction</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/general-ledger-settings']); ?>">
+                    <span class="site-menu-title">Settings</span>
+                  </a>
+                </li>  
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/general-ledger-report']); ?>">
+                    <span class="site-menu-title">Reports</span>
+                  </a>
+                </li> 
               </ul>
             </li>
 

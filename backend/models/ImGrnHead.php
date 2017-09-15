@@ -24,7 +24,7 @@ use yii\behaviors\BlameableBehavior;
  * @property string $discount_rate
  * @property string $discount_amount
  * @property integer $currency_id
- * @property string $exchnage_rate
+ * @property string $exchange_rate
  * @property string $prime_amount
  * @property string $net_amount
  * @property string $status
@@ -77,7 +77,7 @@ class ImGrnHead extends \yii\db\ActiveRecord
             [['grn_number','pp_purchase_head_id','supplier_id','date','pay_terms','branch_id'],'required'],
             [['pp_purchase_head_id', 'am_voucher_head_id', 'supplier_id', 'branch_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
             [['date', 'created_at', 'updated_at'], 'safe'],
-            [['tax_rate', 'tax_ammount', 'discount_rate', 'discount_amount', 'exchnage_rate', 'prime_amount', 'net_amount'], 'number'],
+            [['tax_rate', 'tax_ammount', 'discount_rate', 'discount_amount', 'exchange_rate', 'prime_amount', 'net_amount'], 'number'],
             [['grn_number', 'pay_terms', 'status'], 'string', 'max' => 16],
             [['pp_purchase_head_id'], 'exist', 'skipOnError' => true, 'targetClass' => PpPurchaseHead::className(), 'targetAttribute' => ['pp_purchase_head_id' => 'id']],
             [['am_voucher_head_id'], 'exist', 'skipOnError' => true, 'targetClass' => AmVoucherHead::className(), 'targetAttribute' => ['am_voucher_head_id' => 'id']],
@@ -106,7 +106,7 @@ class ImGrnHead extends \yii\db\ActiveRecord
             'discount_rate' => Yii::t('app', 'Discount Rate'),
             'discount_amount' => Yii::t('app', 'Discount Amount'),
             'currency_id' => Yii::t('app', 'Currency'),
-            'exchnage_rate' => Yii::t('app', 'Exchnage Rate'),
+            'exchange_rate' => Yii::t('app', 'Exchange Rate'),
             'prime_amount' => Yii::t('app', 'Prime Amount'),
             'net_amount' => Yii::t('app', 'Net Amount'),
             'status' => Yii::t('app', 'Status'),

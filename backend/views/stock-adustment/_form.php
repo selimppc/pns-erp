@@ -175,23 +175,23 @@ $this->registerJs($js);
 
                 <div style="width: 100%;display: inline-block;">
                     
-                    <div class="col-md-2">
+                    <div class="custom-column-27">
                         <label class="control-label only-label" for="">Product</label>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="custom-column-15">
                         <label class="control-label only-label" for="">Batch Number</label>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="custom-column-18">
                         <label class="control-label only-label" for="">Expire Date</label>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="custom-column-13">
                         <label class="control-label only-label" for="">UOM</label>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="custom-column-10">
                         <label class="control-label only-label" for="">Quantity</label>
                     </div>
 
@@ -216,7 +216,7 @@ $this->registerJs($js);
 
                         <div class="row">
 
-                            <div class="col-md-2">
+                            <div class="custom-column-30">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
                                     <?php
@@ -237,11 +237,11 @@ $this->registerJs($js);
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="custom-column-15">
                                 <?= $form->field($modelAdjustmentDetail,"[{$index}]batch_number", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="custom-column-20">
                                 <?= $form->field($modelAdjustmentDetail,"[{$index}]expire_date", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->widget(DatePicker::classname(), [
                                     'value' => date('Y-m-d'),
                                     'options' => [
@@ -256,7 +256,7 @@ $this->registerJs($js);
                                 ])->label(false) ?>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="custom-column-15">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
                                     <?= $form->field($modelAdjustmentDetail, "[{$index}]uom")
@@ -268,11 +268,11 @@ $this->registerJs($js);
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="custom-column-10">
                                 <?= $form->field($modelAdjustmentDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="custom-column-10">
                                 <?= $form->field($modelAdjustmentDetail,"[{$index}]stock_rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                             </div>
 

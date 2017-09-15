@@ -64,7 +64,10 @@ class GrnController extends Controller
             ]);
     }
 
-    public function actionCreateGrn($po='',$grn='',$id=''){
+    public function actionCreateGrn($po='',$id=''){
+
+        // Generate Transaction Code
+        $grn = TransactionCode::generate_transaction_number('GRN-');
 
         // Purchase Order Data
         $purchased_order = PpPurchaseHead::find()->where(['po_order_number' => $po])->one();
