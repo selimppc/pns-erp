@@ -95,6 +95,10 @@ use backend\models\CodesParam;
                 }
             ?>
 
+            <?php
+                echo Yii::$app->homeUrl . '===========';
+            ?>
+
             <div style="width: 60%;float: right;margin-top:10px;">
                     <img style="width: 100px;" src="<?=Yii::$app->homeUrl.'/uploads/thumb/'.$model->image?>">
                 </div> 
