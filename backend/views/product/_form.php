@@ -96,7 +96,7 @@ use backend\models\CodesParam;
             ?>
 
             <?php
-                echo Yii::$app->homeUrl . '===========';
+                echo Yii::$app->basePath . '===========';
             ?>
 
             <div style="width: 60%;float: right;margin-top:10px;">
