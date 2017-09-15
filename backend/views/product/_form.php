@@ -86,22 +86,15 @@ use backend\models\CodesParam;
 
             <?php
                 if(!empty($model->image)){
+                    $image_url = Url::base('').'/uploads/thumb/'.$model->image;
             ?>
                 <div style="width: 60%;float: right;margin-top:10px;">
-                    <img style="width: 100px;" src="<?=Yii::$app->homeUrl.'/uploads/thumb/'.$model->image?>">
+                    <img style="width: 100px;" src="<?=$image_url?>">
                 </div>    
 
             <?php         
                 }
             ?>
-
-            <?php
-                echo Yii::$app->basePath . '===========';
-            ?>
-
-            <div style="width: 60%;float: right;margin-top:10px;">
-                    <img style="width: 100px;" src="<?=Yii::$app->homeUrl.'/uploads/thumb/'.$model->image?>">
-                </div> 
 
             
         </div>
