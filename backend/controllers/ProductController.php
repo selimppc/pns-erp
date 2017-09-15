@@ -144,10 +144,10 @@ class ProductController extends Controller
                     
                     // check folder exists & Write
                     $path = Yii::getAlias('@webroot').'/uploads/';
-                    FileHelper::createDirectory($path, $mode = 0775, $recursive = true);
+                    FileHelper::createDirectory($path, $mode = 0777, $recursive = true);
 
                     $path_thumb = Yii::getAlias('@webroot').'/uploads/thumb';
-                    FileHelper::createDirectory($path_thumb, $mode = 0775, $recursive = true);
+                    FileHelper::createDirectory($path_thumb, $mode = 0777, $recursive = true);
 
                     @unlink(\Yii::getAlias('@webroot').'/uploads/'.$old_image);
                     @unlink(\Yii::getAlias('@webroot').'/uploads/thumb/'.$old_image);
