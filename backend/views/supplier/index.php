@@ -72,11 +72,11 @@ $this->params['breadcrumbs'][] = $this->title;
                           'buttons' => [
                             'update' => function ($url,$model) {
                                 $url =  $url;
-                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['target' => '_blank']);
+                                return Html::a('<span class="btn btn-xs btn-primary" title="Update">Edit </span>', $url, ['target' => '_blank']);
                               },
                               'view' => function ($url,$model) {
                                 $url =  $url;
-                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['target' => '_blank']);
+                                return Html::a('<span class="btn btn-xs btn-info">Show </span>', $url, ['target' => '_blank']);
                               },
                             
                           ],
