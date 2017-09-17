@@ -93,7 +93,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_code','title','class','group','currency_id','model','origin','stock_type'],'required'],
+            [['product_code','title','class','group','currency_id','model','origin','stock_type', 'sell_rate', 'cost_price'],'required'],
             #[['product_code'],'unique'],
             [['description'], 'string'],
             [['image'], 'file'],
