@@ -130,29 +130,6 @@ class GrnController extends Controller
 
             $purchased_order_details = VwPurchaseDetail::find()->where(['pp_purchase_head_id' => $purchased_order->id])->all();
 
-            /*$query = new Query;
-            $query  ->select(['pp_purchase_detail.id as id',
-                'pp_purchase_detail.product_id as product_id',
-                'product.title as product_title',
-                'pp_purchase_detail.uom as uom',
-                'codes_param.title as uom_title',
-                'pp_purchase_detail.uom_quantity as uom_quantity',
-                'pp_purchase_detail.quantity as quantity',
-                'pp_purchase_detail.purchase_rate as purchase_rate'
-               ])  
-                ->from('pp_purchase_detail')
-                ->where(['pp_purchase_detail.pp_purchase_head_id'=>$purchased_order->id])
-                ->leftJoin('im_grn_head', 'im_grn_head.pp_purchase_head_id = pp_purchase_detail.pp_purchase_head_id')
-                ->InnerJoin('im_grn_detail', 'im_grn_detail.im_grn_head_id = im_grn_head.id')
-                ->InnerJoin('product', 'product.id = pp_purchase_detail.product_id')
-                ->InnerJoin('codes_param', 'codes_param.id = pp_purchase_detail.uom')
-                ->distinct();
-                
-        $command = $query->createCommand();
-        $purchased_order_details = $command->queryAll();*/
-
-
-
         }else{
             $purchased_order_details = '';
         }
@@ -193,8 +170,7 @@ class GrnController extends Controller
                 $model->row_amount = number_format($transaction_details->purchase_rate * $transaction_details->quantity,3);                
             }
 
-            // Grn Details Data Save
-           
+            // Grn Details Data Save           
             if ($model->load(Yii::$app->request->post()))
             {
                 $model->im_grn_head_id = $grn_head->id;

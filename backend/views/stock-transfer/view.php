@@ -72,10 +72,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     <th>Note</th>
                     <th style="background-color: #ddd;border-bottom: 1px solid rgba(0, 0, 0, 0.06);border-right:1px solid rgba(0, 0, 0, 0.06);">From Branch</th>
                     <th style="background-color: #ddd;border-bottom: 1px solid rgba(0, 0, 0, 0.06);border-right: 1px solid rgba(0, 0, 0, 0.06);">From Currency</th>
-                    <th style="background-color: #ddd;border-bottom: 1px solid rgba(0, 0, 0, 0.06);">From Exchange Rate</th>
+                    <th style="background-color: #ddd;border-bottom: 1px solid rgba(0, 0, 0, 0.06);">From Exch. Rate</th>
                     <th style="background: #eee;">To Branch</th>
                     <th style="background: #eee;">To Currency</th>
-                    <th style="background: #eee;">To Exchange Rate</th>
+                    <th style="background: #eee;">To Exch. Rate</th>
                     <th>Status</th>
                 </tr>
 
@@ -85,10 +85,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td><?=$model->note?></td>
                     <td style="background-color: #ddd;border-right:1px solid rgba(0, 0, 0, 0.06);"><?=isset($model->fromBranch)?$model->fromBranch->title:''?></td>
                     <td style="background-color: #ddd;border-right:1px solid rgba(0, 0, 0, 0.06);"><?=isset($model->fromCurrency)?$model->fromCurrency->title:''?></td>
-                    <td style="background-color: #ddd;"><?=$model->from_exchange_rate?></td>
+                    <td style="background-color: #ddd;"><?=number_format($model->from_exchange_rate,3)?></td>
                     <td style="background: #eee;"><?=isset($model->toBranch)?$model->toBranch->title:''?></td>
                     <td style="background: #eee;"><?=isset($model->toCurrency)?$model->toCurrency->title:''?></td>
-                    <td style="background: #eee;"><?=$model->to_exchange_rate?></td>
+                    <td style="background: #eee;"><?=number_format($model->to_exchange_rate,3)?></td>
                     <td><?=$model->status?></td>
                 </tr>
             </table>
