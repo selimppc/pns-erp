@@ -136,6 +136,9 @@ class PurchaseOrderController extends Controller
                             $modelPurchaseDetail->pp_purchase_head_id = $modelPurchaseHead->id;
 
                             $modelPurchaseDetail->row_amount = $modelPurchaseDetail->quantity * $modelPurchaseDetail->purchase_rate;
+
+                            $modelPurchaseDetail->unit_quantity = 1;
+
                             if (! ($flag = $modelPurchaseDetail->save(false))) {
                                 $transaction->rollBack();
                                 break;
@@ -221,6 +224,8 @@ class PurchaseOrderController extends Controller
                             $modelPurchaseDetail->pp_purchase_head_id = $modelPurchaseHead->id;
 
                             $modelPurchaseDetail->row_amount = $modelPurchaseDetail->quantity * $modelPurchaseDetail->purchase_rate;
+
+                            $modelPurchaseDetail->unit_quantity = 1;
 
                             if (! ($flag = $modelPurchaseDetail->save(false))) {
                                 $transaction->rollBack();

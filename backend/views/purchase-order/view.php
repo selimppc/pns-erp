@@ -94,7 +94,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <th>Branch</th>
                     <th>Currency</th>
                     <th>Exchange Rate</th>
-                    <th>Discount Rate</th>
+                    <th>Prime Amount</th>
+                    <th>Net Amount</th>
                     <th>Status</th>
                 </tr>
 
@@ -106,8 +107,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td><?=$model->delivery_date?></td>
                     <td><?=isset($model->branch)?$model->branch->title:''?></td>
                     <td><?=isset($model->currency)?$model->currency->currency_code:''?></td>
-                    <td><?=$model->exchange_rate?></td>
-                    <td><?=$model->discount_rate?></td>
+                    <td><?=number_format($model->exchange_rate,3)?></td>
+                    <td><?=number_format($model->prime_amount,3)?></td>
+                    <td><?=number_format($model->net_amount,3)?></td>
                     <td><?=ucfirst($model->status)?></td>
                 </tr>
                 
@@ -160,12 +162,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </td>
 
                                     <td>
-                                        <?=number_format($po_details->purchase_rate,2)?>
+                                        <?=number_format($po_details->purchase_rate,3)?>
                                             
                                     </td>
 
                                     <td>
-                                        <?=number_format($po_details->purchase_rate*$po_details->quantity,2)?>
+                                        <?=number_format($po_details->purchase_rate*$po_details->quantity,3)?>
                                     </td>
                                 </tr>
                         <?php

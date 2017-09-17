@@ -106,9 +106,28 @@ $this->params['breadcrumbs'][] = $this->title;
                        return isset($model->currency)?$model->currency->currency_code:'';
                    }
                  ],
-                 'exchange_rate',
-                 'discount_rate',
-                 'net_amount',
+                 [
+                   'attribute' => 'exchange_rate',  
+                   'label' => 'Exchange Rate',
+                   'value' => function ($model) {
+                       return number_format($model->exchange_rate,3);
+                   }
+                 ],
+                 [
+                   'attribute' => 'discount_rate',  
+                   'label' => 'Discount Rate',
+                   'value' => function ($model) {
+                       return number_format($model->discount_rate,3);
+                   }
+                 ],
+                 [
+                   'attribute' => 'net_amount',  
+                   'label' => 'Total Amount',
+                   'value' => function ($model) {
+                       return number_format($model->net_amount,3);
+                   }
+                 ],
+                 
                   [
                     'attribute' => 'status',
                     'label' => 'Status',
