@@ -71,9 +71,25 @@ $this->params['breadcrumbs'][] = $this->title;
                         return isset($model->branch)?$model->branch->title:'';
                     },
                 ],
-                'sell_rate',
-                'sell_tax',
-                'im_rate',
+
+                [
+                    'attribute' => 'sell_rate',
+                    'label' => 'Sell Rate',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return number_format($model->sell_rate,3);
+                    },
+                ],
+               
+               [
+                    'attribute' => 'im_rate',
+                    'label' => 'IM Rate',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return number_format($model->im_rate,3);
+                    },
+                ],
+                
                 [
                     'attribute' => 'uom',
                     'label' => 'UOM',
