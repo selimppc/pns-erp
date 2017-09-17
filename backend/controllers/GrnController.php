@@ -192,7 +192,7 @@ class GrnController extends Controller
                 $valid = $model->validate();
                 if($valid){
 
-                    $model->row_amount = $transaction_details->purchase_rate * $model->receive_quantity;
+                    $model->row_amount = $model->cost_price * $model->receive_quantity;
 
                     $model->save(); 
 
