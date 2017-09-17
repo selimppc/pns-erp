@@ -51,6 +51,7 @@ class TransactionCodeController extends Controller
         $searchModel = new TransactionCodeSearch();
         $searchModel->type = $type;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=30;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 

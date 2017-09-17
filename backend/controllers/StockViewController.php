@@ -40,6 +40,7 @@ class StockViewController extends Controller{
 
         $searchModel = new VwImStockViewSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=30;
 
         return $this->render('index', [
             'models' => $models,

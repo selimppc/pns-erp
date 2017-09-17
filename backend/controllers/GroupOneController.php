@@ -37,6 +37,7 @@ class GroupOneController extends Controller
     {
         $searchModel = new GroupOneSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=30;
 
         return $this->render('index', [
             'searchModel' => $searchModel,

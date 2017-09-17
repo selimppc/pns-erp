@@ -50,6 +50,8 @@ class GrnController extends Controller
 
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $dataProvider->pagination->pageSize=30;
+
 
         // Generate Transaction Code
         $grn_transaction_number = TransactionCode::generate_transaction_number('GRN-');
@@ -255,6 +257,7 @@ class GrnController extends Controller
 
         $searchModel = new ImGrnHeadSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=30;
 
 
         return $this->render('index', [
@@ -303,6 +306,7 @@ class GrnController extends Controller
     {
         $searchModel = new ImGrnHeadSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=30;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -323,6 +327,7 @@ class GrnController extends Controller
         $searchModel = new ImGrnDetailSearch();
         $searchModel->im_grn_head_id = $id;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=30;
 
 
         return $this->render('/grn-detail/index', [

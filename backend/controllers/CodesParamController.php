@@ -48,6 +48,8 @@ class CodesParamController extends Controller
         $searchModel->type = $type;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $dataProvider->pagination->pageSize=30;
+
 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -127,6 +129,8 @@ class CodesParamController extends Controller
         $searchModel->type = $type;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $dataProvider->pagination->pageSize=30;
+
         return $this->render('view_codes_params', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -143,6 +147,8 @@ class CodesParamController extends Controller
     {
         $searchModel = new CodesParamSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $dataProvider->pagination->pageSize=30;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
