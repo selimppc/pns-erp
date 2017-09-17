@@ -117,6 +117,41 @@ class ImGrnHead extends \yii\db\ActiveRecord
         ];
     }
 
+
+
+    public static function update_grn_amount($grn_id){
+
+        $model = ImGrnDetail::find()->where(['im_grn_head_id' => $grn_id])->all();
+
+        if(!empty($model)){
+
+            $prime_amount = 0.00;
+            $net_amount = 0.00;
+            foreach($model as $value){
+                $prime_amount+=$value->cost_price*$value->receive_quantity;
+                $net_amount+=$value->cost_price*$value->receive_quantity;
+            }
+
+            $grn_head = ImGrnHead::find()->where(['id' => $grn_id])->one();
+
+            $grn_head->prime_amount = $prime_amount;
+            $grn_head->net_amount = $net_amount;
+
+            if($grn_head->save()){
+                return true;
+            }else{
+                return false;
+            }
+
+        }else{
+            return false;
+        }
+
+
+
+    }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */

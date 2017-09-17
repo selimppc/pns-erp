@@ -20,6 +20,7 @@ use backend\models\PpPurchaseHead;
 use backend\models\PpPurchaseDetail;
 use backend\models\PpPurchaseHeadSearch;
 use backend\models\TransactionCode;
+use backend\models\VwImGrnDetail;
 
 /**
  * ImGrnHeadController implements the CRUD actions for ImGrnHead model.
@@ -151,7 +152,7 @@ class GrnController extends Controller
         if(!empty($grn_head)){
 
             // get Grn Details Data
-            $grn_details = ImGrnDetail::find()->where(['im_grn_head_id'=>$grn_head->id])->all();
+            $grn_details = VwImGrnDetail::find()->where(['im_grn_head_id'=>$grn_head->id])->all();
 
         }else{
             $grn_details = '';
@@ -191,12 +192,15 @@ class GrnController extends Controller
                 $valid = $model->validate();
                 if($valid){
 
-                    $model->row_amount = $transaction_details->purchase_rate * $model->quantity;
+                    $model->row_amount = $transaction_details->purchase_rate * $model->receive_quantity;
 
                     $model->save(); 
 
                     $model = new ImGrnDetail();
-                    $model->grn_number = $grn; 
+                    $model->grn_number = $grn;
+
+                    // Update Purchase Order Head prime amount & net amount
+                    ImGrnHead::update_grn_amount($grn_head->id); 
 
                     // Set success data
                     \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');

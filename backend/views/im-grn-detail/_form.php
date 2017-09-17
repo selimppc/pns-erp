@@ -57,13 +57,13 @@ use kartik\select2\Select2;
 
             </div>            
 
-            <?= $form->field($model, 'quantity',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'quantity',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true]) ?>
 
             <?= $form->field($model, 'receive_quantity',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>            
 
             <?= $form->field($model, 'cost_price',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
             
-            <?= $form->field($model, 'row_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'row_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true]) ?>
 
         </div>
 
@@ -76,3 +76,29 @@ use kartik\select2\Select2;
 
     <?php ActiveForm::end(); ?>
 </div>
+
+<?php
+    
+    $this->registerJs("
+
+        $('#imgrndetail-receive_quantity').change(function (e) {
+            
+            var receive_quantity = $('#imgrndetail-receive_quantity').val();
+            var cost_price = $('#imgrndetail-cost_price').val();
+
+            $('#imgrndetail-row_amount').val(receive_quantity*cost_price);
+
+        });
+
+        $('#imgrndetail-cost_price').change(function (e) {
+            
+            var receive_quantity = $('#imgrndetail-receive_quantity').val();
+            var cost_price = $('#imgrndetail-cost_price').val();
+
+            $('#imgrndetail-row_amount').val(receive_quantity*cost_price);
+
+        });
+
+
+     ", yii\web\View::POS_READY, "total_amount_change_with_receive_quantity_cost_price");   
+?>
