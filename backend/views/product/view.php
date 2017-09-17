@@ -81,15 +81,54 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'  => 'Product Group',
                 'value'  => isset($model->product_group)?$model->product_group->title:''
             ],
-                     
+
+            [
+                'label'  => 'Product Category',
+                'value'  => isset($model->product_category)?$model->product_category->title:''
+            ],
+            'model',         
+            'size', 
+            'origin', 
+            'manufacturer_code',
+            'manufacturer_year',
+            'speed',
+            'machine_size',
+            'generic',
+            'stock_type', 
+             [
+                'label'  => 'Supplier',
+                'value'  => isset($model->supplier)?$model->supplier->supplier_code:''
+            ],
+            'sell_rate',
+            [
+                'label'  => 'Product Sell UOM',
+                'value'  => isset($model->product_sell_uom)?$model->product_sell_uom->title:''
+            ],
+            'cost_price',
+            [
+                'label'  => 'Product Purchase UOM',
+                'value'  => isset($model->product_purchase_uom)?$model->product_purchase_uom->title:''
+            ],
+            'purchase_uom_qty',
+            [
+                'label'  => 'Product Stock UOM',
+                'value'  => isset($model->product_stock_uom)?$model->product_stock_uom->title:''
+            ],
+            'stock_uom_qty',
+            'pack_size',
             [
                 'label'  => 'Currency',
                 'value'  => isset($model->currency)?$model->currency->title:''
             ],
-            'origin', 
-            'stock_type', 
-            'model',
-            'size', 
+            'exchange_rate',
+            'max_level',
+            'min_level',
+            're_order',
+            [
+                'attribute'=>'Product Image',
+                'value'=>'uploads/'.$model->image,
+                'format' => ['image',['width'=>'100','height'=>'100']],
+            ],
             [
                 'label'  => 'Created By',
                 'value'  => isset($model->createdBy)?$model->createdBy->email:''

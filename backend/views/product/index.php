@@ -62,10 +62,47 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => function ($model) {
                         return Html::a($model->title, ['/product/view', 'id' => $model->id]);
                     },
-                 ],                   
+                 ],
+                 [
+                    'attribute' => 'class',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return isset($model->product_class)?$model->product_class->title:'';
+                    },
+                 ],
+                 [
+                    'attribute' => 'group',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return isset($model->product_group)?$model->product_group->title:'';
+                    },
+                 ],
                    'model',
-                   'size',
                    'origin',
+                   'size',
+                  [
+                    'attribute' => 'sell_rate',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return number_format($model->sell_rate,3);
+                    },
+                 ],
+                  [
+                    'attribute' => 'cost_price',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return number_format($model->cost_price,3);
+                    },
+                 ],
+                 [
+                    'attribute' => 'created_at',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return date_format(date_create($model->created_at),"Y-m-d");
+                    },
+                 ],
+
+                   
                    [
                      'label' => 'Currency',
                      'value' => function ($model) {
