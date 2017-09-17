@@ -86,7 +86,9 @@ use kartik\select2\Select2;
             var receive_quantity = $('#imgrndetail-receive_quantity').val();
             var cost_price = $('#imgrndetail-cost_price').val();
 
-            $('#imgrndetail-row_amount').val(receive_quantity*cost_price);
+            var row_amount = parseFloat(Math.round( (receive_quantity*cost_price)*100 ) /100 ).toFixed(3);
+
+            $('#imgrndetail-row_amount').val(row_amount);
 
         });
 
@@ -94,8 +96,10 @@ use kartik\select2\Select2;
             
             var receive_quantity = $('#imgrndetail-receive_quantity').val();
             var cost_price = $('#imgrndetail-cost_price').val();
+            
+            var row_amount = parseFloat(Math.round( (receive_quantity*cost_price)*100 ) /100 ).toFixed(3);
 
-            $('#imgrndetail-row_amount').val(receive_quantity*cost_price);
+            $('#imgrndetail-row_amount').val(row_amount);
 
         });
 
