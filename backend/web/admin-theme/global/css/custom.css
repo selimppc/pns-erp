@@ -413,3 +413,10 @@ a.btn{
 .table-striped tbody tr.red{
     background-color: rgba(255, 0, 0, 0.20);
 }
+
+.modal-header{
+    background: #4085BB;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+}

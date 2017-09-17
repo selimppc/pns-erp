@@ -3,6 +3,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use backend\models\ImGrnHead;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImGrnHeadSearch */
@@ -59,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   'label' => 'Purchase Order No',
                   'format' => 'raw',
                   'value' => function ($model) {
-                      return Html::a($model->po_order_number, ['/purchase-order/view', 'id' => $model->id]);
+                      return Html::a($model->po_order_number, ['/purchase-order/view-popup', 'id' => $model->id],['class'=>'modalButton']);
                   },
                 ],
                 [
@@ -124,8 +125,36 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]); ?>  
 
+        <!-- We don't need to print modal popup multiple times -->
+      <?php 
+        Modal::begin([
+            'header' => 'Purchase Order Details',
+            'id' => 'modal',
+            'size' => 'modal-lg',
+        ]);
+        echo "<div id='modalContent'></div>";
+        Modal::end();
+      ?>
+
         </div>
 
       </div>
 
 </div>      
+
+<?php
+    
+    $this->registerJs("
+
+      // changed id to class
+      $('.modalButton').click(function (){
+
+          $.get($(this).attr('href'), function(data) {
+              $('#modal').modal('show').find('#modalContent').html(data);
+          });
+
+         return false;
+      });
+
+    ", yii\web\View::POS_READY, "modal_open");   
+?>

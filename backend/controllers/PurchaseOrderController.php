@@ -80,6 +80,19 @@ class PurchaseOrderController extends Controller
         
     }
 
+
+    public function actionViewPopup($id){
+
+        $model = PpPurchaseHead::find()->where(['id' => $id])->one();
+
+        $purchased_order_details = PpPurchaseDetail::find()->where(['pp_purchase_head_id' => $model->id])->all();
+        
+        return Yii::$app->controller->renderPartial('purchase-order-modal',[
+                'model' => $model,
+                'purchased_order_details' => $purchased_order_details
+            ]);
+    }
+
     /**
      * Creates a new PpPurchaseHead model.
      * If creation is successful, the browser will be redirected to the 'view' page.
