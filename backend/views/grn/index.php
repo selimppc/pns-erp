@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         if($model->status == 'open'){
                         
-                          return Html::a($model->grn_number, ['grn/create-grn', 'po' => isset($model->ppPurchaseHead)?$model->ppPurchaseHead->po_order_number:'','grn' => $model->grn_number]);
+                          return Html::a($model->grn_number, ['grn/generate-grn', 'po' => isset($model->ppPurchaseHead)?$model->ppPurchaseHead->po_order_number:'','grn'=>$model->grn_number]);
                         
                         }else{
                           return Html::a($model->grn_number, ['grn/view', 'id' => $model->id]);
