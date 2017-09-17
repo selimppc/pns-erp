@@ -167,7 +167,7 @@ class Product extends \yii\db\ActiveRecord
         
         if(!empty($product_q)){
             foreach ($product_q as $key => $value) {
-                $options[$value->id] = $value->title;
+                $options[$value->id] = $value->title . ' :: '.$value->product_code;
 
             }
         }        
