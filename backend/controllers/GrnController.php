@@ -92,14 +92,22 @@ class GrnController extends Controller
         // save GRN Head Data
         $grn_head = new ImGrnHead();
         $grn_head->grn_number = $grn;
-        $grn_head->status = 'open';
+        
         $grn_head->pp_purchase_head_id = $purchased_order->id;
         $grn_head->supplier_id = $purchased_order->supplier_id;
         $grn_head->date = $purchased_order->date;
         $grn_head->pay_terms = $purchased_order->pay_terms;
         $grn_head->branch_id = $purchased_order->branch_id;
+        $grn_head->tax_rate = $purchased_order->tax_rate;
+        $grn_head->tax_amount = $purchased_order->tax_amount;
+        $grn_head->discount_rate = $purchased_order->discount_rate;
+        $grn_head->discount_amount = $purchased_order->discount_amount;
+        $grn_head->currency_id = $purchased_order->currency_id;
+        $grn_head->exchange_rate = $purchased_order->exchange_rate;
         $grn_head->prime_amount = $purchased_order->prime_amount;
         $grn_head->net_amount = $purchased_order->net_amount;
+
+        $grn_head->status = 'open';
 
         $grn_head->save();
 
@@ -262,24 +270,23 @@ class GrnController extends Controller
             
         if($model){
 
-            // $model->status = 'confirmed';
+            //$transaction = \Yii::$app->db->beginTransaction();
 
-            /*$valid = $model->validate();
-            if($valid){
+            try {
 
-                // Set success data
-                \Yii::$app->getSession()->setFlash('success', 'Successfully Confirm GRN');
-
-                $model->save();    
-            }else{
-                print_r($model->getErrors());
-                exit();
-            }*/
-            
-             $result = \Yii::$app->db->createCommand("CALL sp_im_confirm_grn(:grn_head_id, :user_id)") 
+                $result = \Yii::$app->db->createCommand("CALL sp_im_confirm_grn(:grn_head_id, :user_id)") 
                       ->bindValue(':grn_head_id' , $im_grn_head_id )
                       ->bindValue(':user_id', Yii::$app->user->id)
                       ->execute(); 
+
+               // $transaction->commit();
+
+            } catch (\Exception $e) {
+                print_r($e);
+                exit();
+            }          
+
+
 
            
         }
