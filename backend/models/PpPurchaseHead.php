@@ -110,6 +110,39 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public static function update_purchase_order_amount($purchsed_order_id){
+
+        $model = PpPurchaseDetail::find()->where(['pp_purchase_head_id' => $purchsed_order_id])->all();
+
+        if(!empty($model)){
+
+            $prime_amount = 0.00;
+            $net_amount = 0.00;
+            foreach($model as $value){
+                $prime_amount+=$value->quantity*$value->purchase_rate;
+                $net_amount+=$value->quantity*$value->purchase_rate;
+            }
+
+            $purchase_head = PpPurchaseHead::find()->where(['id' => $purchsed_order_id])->one();
+
+            $purchase_head->prime_amount = $prime_amount;
+            $purchase_head->net_amount = $net_amount;
+
+            if($purchase_head->save()){
+                return true;
+            }else{
+                return false;
+            }
+
+        }else{
+            return false;
+        }
+
+
+
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

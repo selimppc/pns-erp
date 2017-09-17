@@ -134,6 +134,8 @@ class PurchaseOrderController extends Controller
                     if ($flag = $modelPurchaseHead->save(false)) {
                         foreach ($modelsPurchaseDetail as $modelPurchaseDetail) {
                             $modelPurchaseDetail->pp_purchase_head_id = $modelPurchaseHead->id;
+
+                            $modelPurchaseDetail->row_amount = $modelPurchaseDetail->quantity * $modelPurchaseDetail->purchase_rate;
                             if (! ($flag = $modelPurchaseDetail->save(false))) {
                                 $transaction->rollBack();
                                 break;
@@ -151,6 +153,9 @@ class PurchaseOrderController extends Controller
                         }else{
                             echo 'successfully not updated';
                         }
+
+                        // Update Purchase Order Head prime amount & net amount
+                        PpPurchaseHead::update_purchase_order_amount($modelPurchaseHead->id);
 
                         // Set success data
                         \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
@@ -214,6 +219,9 @@ class PurchaseOrderController extends Controller
                         }
                         foreach ($modelsPurchaseDetail as $modelPurchaseDetail) {
                             $modelPurchaseDetail->pp_purchase_head_id = $modelPurchaseHead->id;
+
+                            $modelPurchaseDetail->row_amount = $modelPurchaseDetail->quantity * $modelPurchaseDetail->purchase_rate;
+
                             if (! ($flag = $modelPurchaseDetail->save(false))) {
                                 $transaction->rollBack();
                                 break;
@@ -222,6 +230,9 @@ class PurchaseOrderController extends Controller
                     }
                     if ($flag) {
                         $transaction->commit();
+
+                        // Update Purchase Order Head prime amount & net amount
+                        PpPurchaseHead::update_purchase_order_amount($modelPurchaseHead->id);
 
                         // Set success data
                         \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
