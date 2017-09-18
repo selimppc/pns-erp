@@ -202,7 +202,7 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/sales-invoice']); ?>">
                     <span class="site-menu-title">Invoice Entry</span>
                   </a>
                 </li>

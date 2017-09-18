@@ -26,6 +26,9 @@ use Yii;
  */
 class SmDetail extends \yii\db\ActiveRecord
 {
+   
+   public $total;
+
     /**
      * @inheritdoc
      */
@@ -42,7 +45,7 @@ class SmDetail extends \yii\db\ActiveRecord
         return [
             [['sm_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['uom_quantity', 'rate', 'bonus_quantity', 'quantity', 'row_amount'], 'number'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','total'], 'safe'],
             [['uom'], 'string', 'max' => 8],
             [['sm_head_id'], 'exist', 'skipOnError' => true, 'targetClass' => SmHead::className(), 'targetAttribute' => ['sm_head_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],

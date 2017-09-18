@@ -75,21 +75,21 @@ class SmHead extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'sm_number' => Yii::t('app', 'Sm Number'),
-            'date' => Yii::t('app', 'Date'),
-            'customer_id' => Yii::t('app', 'Customer ID'),
-            'doc_type' => Yii::t('app', 'Doc Type'),
-            'branch_id' => Yii::t('app', 'Branch ID'),
+            'sm_number' => Yii::t('app', 'Sales Number'),
+            'date' => Yii::t('app', 'Sales Date'),
+            'customer_id' => Yii::t('app', 'Customer Name'),
+            'doc_type' => Yii::t('app', 'Pay Terms'),
+            'branch_id' => Yii::t('app', 'Branch'),
             'am_coa_id' => Yii::t('app', 'Am Coa ID'),
             'check_number' => Yii::t('app', 'Check Number'),
-            'currency_id' => Yii::t('app', 'Currency ID'),
+            'currency_id' => Yii::t('app', 'Currency'),
             'exchange_rate' => Yii::t('app', 'Exchange Rate'),
             'note' => Yii::t('app', 'Note'),
             'tax_rate' => Yii::t('app', 'Tax Rate'),
-            'tax_amount' => Yii::t('app', 'Tax Amount'),
+            'tax_amount' => Yii::t('app', 'Total Tax Amt'),
             'discount_rate' => Yii::t('app', 'Discount Rate'),
             'discount_amount' => Yii::t('app', 'Discount Amount'),
-            'prime_amount' => Yii::t('app', 'Prime Amount'),
+            'prime_amount' => Yii::t('app', 'Total Amount'),
             'net_amount' => Yii::t('app', 'Net Amount'),
             'sign' => Yii::t('app', 'Sign'),
             'status' => Yii::t('app', 'Status'),
@@ -100,6 +100,39 @@ class SmHead extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+
+    public static function update_sale_invoice_amount($invoiced_id){
+
+        $model = SmDetail::find()->where(['sm_head_id' => $invoiced_id])->all();
+
+        if(!empty($model)){
+
+            $prime_amount = 0.00;
+            $net_amount = 0.00;
+            foreach($model as $value){
+                $prime_amount+=$value->quantity*$value->rate;
+                $net_amount+=$value->quantity*$value->rate;
+            }
+
+            $sm_head = SmHead::find()->where(['id' => $invoiced_id])->one();
+
+            $sm_head->prime_amount = $prime_amount;
+            $sm_head->net_amount = $net_amount;
+
+            if($sm_head->save()){
+                return true;
+            }else{
+                return false;
+            }
+
+        }else{
+            return false;
+        }
+
+
+
     }
 
     /**
