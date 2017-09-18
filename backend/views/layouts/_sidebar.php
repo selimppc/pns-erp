@@ -172,6 +172,66 @@
 
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
+                <i class="site-menu-icon md-balance-wallet" aria-hidden="true"></i>
+                <span class="site-menu-title">Account Payable</span>
+              </a>
+              <ul class="site-menu-sub">
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="#">
+                    <span class="site-menu-title">Invoice</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="#">
+                    <span class="site-menu-title">Payment</span>
+                  </a>
+                </li> 
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="#">
+                    <span class="site-menu-title">Report</span>
+                  </a>
+                </li> 
+                
+              </ul>
+            </li>
+
+            <li class="site-menu-item has-sub">
+              <a href="javascript:void(0)">
+                <i class="site-menu-icon md-money-box" aria-hidden="true"></i>
+                <span class="site-menu-title">Sales</span>
+              </a>
+              <ul class="site-menu-sub">
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="#">
+                    <span class="site-menu-title">Invoice Entry</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="#">
+                    <span class="site-menu-title">Direct Sales </span>
+                  </a>
+                </li> 
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="#">
+                    <span class="site-menu-title">Money Recipt</span>
+                  </a>
+                </li> 
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="#">
+                    <span class="site-menu-title">Settings</span>
+                  </a>
+                </li> 
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="#">
+                    <span class="site-menu-title">Reports</span>
+                  </a>
+                </li> 
+                
+              </ul>
+            </li>
+
+            <li class="site-menu-item has-sub">
+              <a href="javascript:void(0)">
                 <i class="site-menu-icon md-border-all" aria-hidden="true"></i>
                 <span class="site-menu-title">General Ledger</span>
               </a>
