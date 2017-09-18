@@ -31,24 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
       </div>
 </div>
 
-<div class="page-content">
-    <!-- Panel Basic -->
-    <div class="panel">
-
-        <div id="flag_desc">
-          <div id="flag_desc_text">
-              <?php
-                if(isset(\Yii::$app->params['invoice_entry_create']) && !empty(\Yii::$app->params['invoice_entry_create'])){
-                  echo \Yii::$app->params['invoice_entry_create'];
-                }
-              ?>              
-          </div>
-      </div>
-
-    </div>
-</div>
-
-
 
 <div class="page-content">
     <!-- Panel Basic -->
