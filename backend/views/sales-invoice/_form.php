@@ -211,6 +211,11 @@ $this->registerJs($js);
                                                 'classs' => 'form-group form-material floating',
                                                 'data-plugin' => 'formMaterial'
                                             ],
+                                            /*'pluginEvents' => [
+                                               'change' => 'function() { 
+                                                   
+                                                }',
+                                            ],*/
                                         ])->label(false);
 
                                     ?>
@@ -288,6 +293,10 @@ $this->registerJs($js);
         window.initSelect2DropStyle = function(id, kvClose, ev){
             initS2Loading(id, kvClose, ev)
         };
+
+        $('.dynamicform_wrapper').on('afterInsert', function(e, item) {
+            
+        });
 
      ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
 ?>
