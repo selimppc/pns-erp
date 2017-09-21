@@ -217,12 +217,12 @@
                   </a>
                 </li> 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/sales-settings']); ?>">
                     <span class="site-menu-title">Settings</span>
                   </a>
                 </li> 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/sales-reports']); ?>">
                     <span class="site-menu-title">Reports</span>
                   </a>
                 </li> 

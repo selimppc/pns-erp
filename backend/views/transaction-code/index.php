@@ -80,7 +80,14 @@ $this->params['breadcrumbs'][] = $this->title;
                   'columns' => [
                     #  ['class' => 'yii\grid\SerialColumn'],
                       'id',
-                      'type',
+                      
+                      [
+                       # 'attribute' => 'type',
+                        'format' => 'raw',
+                        'value' => function ($model) {
+                            return $model->type;
+                        },
+                      ], 
                       [
                         'attribute' => 'code',
                         'format' => 'raw',
