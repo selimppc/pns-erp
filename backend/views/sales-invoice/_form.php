@@ -133,6 +133,18 @@ $this->registerJs($js);
 
         </div>
 
+        <div class="col-md-2">
+
+            <?= $form->field($modelSmHead, 'discount_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+        </div>
+
+        <div class="col-md-2">
+
+            <?= $form->field($modelSmHead, 'discount_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+        </div>
+
     </div>
 
 
@@ -176,7 +188,7 @@ $this->registerJs($js);
                         <label class="control-label only-label" for="">Quantity</label>
                     </div>                    
                     <div class="custom-column-15">
-                        <label class="control-label only-label" for="">unit</label>
+                        <label class="control-label only-label" for="">UOM</label>
                     </div>                    
                     <div class="custom-column-15">
                         <label class="control-label only-label" for="">Total</label>
@@ -234,9 +246,14 @@ $this->registerJs($js);
                             </div>
 
                             <div class="custom-column-15">
-                                <?= $form->field($modelSmDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
-                            </div>
+                            
 
+                                <?= $form->field($modelSmDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
+                                        ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->all(), 'id', 'title'),
+                                         ['prompt'=>'-Select-','class'=>'form-control floating']
+                                    )->label(false) ?>
+                            </div>
+                            
                              <div class="custom-column-15">
                                 <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                             </div>
@@ -296,6 +313,21 @@ $this->registerJs($js);
 
         $('.dynamicform_wrapper').on('afterInsert', function(e, item) {
             
+        });
+
+
+        $('#smhead-discount_rate').change(function (e) {
+            var discount_rate = $('#smhead-discount_rate').val();
+            if(discount_rate > 0.00){
+                $('#smhead-discount_amount').prop('readonly', true);
+            }
+        });
+
+        $('#smhead-discount_amount').change(function (e) {
+            var discount_amount = $('#smhead-discount_amount').val();
+            if(discount_amount > 0.00){
+                $('#smhead-discount_rate').prop('readonly', true);
+            }
         });
 
      ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   

@@ -43,10 +43,10 @@ class SmDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sm_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
+            [['product_id','quantity','rate','uom'],'required'],
+            [[ 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['uom_quantity', 'rate', 'bonus_quantity', 'quantity', 'row_amount'], 'number'],
             [['created_at', 'updated_at','total'], 'safe'],
-            [['uom'], 'string', 'max' => 8],
             [['sm_head_id'], 'exist', 'skipOnError' => true, 'targetClass' => SmHead::className(), 'targetAttribute' => ['sm_head_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
@@ -88,6 +88,14 @@ class SmDetail extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUomData()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'uom']);
     }
 
     /**

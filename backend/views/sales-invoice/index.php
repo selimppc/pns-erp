@@ -77,24 +77,78 @@ $this->params['breadcrumbs'][] = $this->title;
                    # ['class' => 'yii\grid\SerialColumn'],
 
                     'id',
-                    'sm_number',
+                    [
+                      'attribute' => 'sm_number',
+                      'label' => 'Sales Number',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return Html::a($model->sm_number, ['/sales-invoice/view', 'id' => $model->id]);
+                      },
+                    ],                   
                     'date',
-                    'customer_id',
-                    'branch_id',
+                    [
+                     'attribute' => 'customer_id',  
+                     'label' => 'Customer Name',
+                     'value' => function ($model) {
+                         return isset($model->customer)?$model->customer->name:'';
+                     }
+                   ],
+                    [
+                     'attribute' => 'branch_id',  
+                     'label' => 'Branch',
+                     'value' => function ($model) {
+                         return isset($model->branch)?$model->branch->title:'';
+                     }
+                   ],
                     'doc_type',
-                    'prime_amount',
-                    'tax_amount',
-                    'discount_amount',
-                    'net_amount',
-                    'status',   
+                    [
+                     'attribute' => 'prime_amount',  
+                     'label' => 'Total Amount',
+                     'value' => function ($model) {
+                         return number_format($model->prime_amount,3);
+                     }
+                   ],
+                   [
+                     'attribute' => 'discount_rate',  
+                     'label' => 'Discount Rate (%)',
+                     'value' => function ($model) {
+                         return number_format($model->discount_rate,3);
+                     }
+                   ],
+                   [
+                     'attribute' => 'discount_amount',  
+                     'label' => 'Discount Amount',
+                     'value' => function ($model) {
+                         return number_format($model->discount_amount,3);
+                     }
+                   ],
+                   [
+                     'attribute' => 'net_amount',  
+                     'label' => 'Net Amount',
+                     'value' => function ($model) {
+                         return number_format($model->net_amount,3);
+                     }
+                   ],
+                   
+                    [
+                      'attribute' => 'status',
+                      'label' => 'Status',
+                      'value' => function ($model){
+                        return ucfirst($model->status);
+                      }
+                    ],
                     'gl_voucher_number',
                     [
-                      'header' => 'Cancel Invoice',
+                      'header' => 'View | Cancel Invoice',
                       'class' => 'yii\grid\ActionColumn',
-                      'template' => '{cancel}',
+                      'template' => '{view} {cancel}',
                       'buttons' => [
+                          'view' => function ($url,$model) {
+                            $url =  $url;
+                            return Html::a('<span class="btn btn-xs btn-info">Show </span>', $url);
+                          },
                           'cancel' => function ($url, $model) {
-                                return $model->status == 'confirmed'?Html::a('Cancel', ['sales-invoice/cancel', 'id' => $model->id], ['class' => 'btn btn-xs btn-danger', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this invoice?") ']):'';
+                                return $model->status == 'open'?Html::a('Cancel', ['sales-invoice/cancel', 'id' => $model->id], ['class' => 'btn btn-xs btn-danger', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this invoice?") ']):'';
                             },
                     ],
 
@@ -104,11 +158,27 @@ $this->params['breadcrumbs'][] = $this->title;
                       'class' => 'yii\grid\ActionColumn',
                       'template' => '{confirm}',
                       'buttons' => [
-                          'cancel' => function ($url, $model) {
-                                return $model->status == 'confirmed'?Html::a('Cancel', ['sales-invoice/confirm', 'id' => $model->id], ['class' => 'btn btn-xs btn-primary', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to confirm this invoice?") ']):'';
+                          'confirm' => function ($url, $model) {
+                                return $model->status == 'open'?Html::a('Confirm', ['sales-invoice/confirm', 'id' => $model->id], ['class' => 'btn btn-xs btn-primary', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to confirm this invoice?") ']):'';
                             },
                     ],
                     
+                  ],
+
+                  [
+                      'header' => 'Reports',
+                      'class' => 'yii\grid\ActionColumn',
+                      'template' => '{pdf}{xlsx}',
+                      'buttons' => [
+                          'pdf' => function ($url, $model) {
+                                return Html::a('<span id="action-btn-pdf" class="action-btn-2" title="PDF">&nbsp;</span>', ['purchase-order/cancel', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']);
+                            },
+
+                            'xlsx' => function ($url, $model) {
+                                return Html::a('<span id="action-btn-xls" class="action-btn-2" title="XLSX">&nbsp;</span>', ['purchase-order/cancel', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']);
+                            },
+                        
+                      ],
                   ],
 
                 ],

@@ -4,6 +4,10 @@ namespace backend\models;
 
 use Yii;
 
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
+use yii\behaviors\BlameableBehavior;
+
 /**
  * This is the model class for table "{{%sm_head}}".
  *
@@ -41,6 +45,26 @@ use Yii;
  */
 class SmHead extends \yii\db\ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+                ],
+            
+        ];
+    }
+
+
     /**
      * @inheritdoc
      */
@@ -87,7 +111,7 @@ class SmHead extends \yii\db\ActiveRecord
             'note' => Yii::t('app', 'Note'),
             'tax_rate' => Yii::t('app', 'Tax Rate'),
             'tax_amount' => Yii::t('app', 'Total Tax Amt'),
-            'discount_rate' => Yii::t('app', 'Discount Rate'),
+            'discount_rate' => Yii::t('app', 'Discount Rate (%)'),
             'discount_amount' => Yii::t('app', 'Discount Amount'),
             'prime_amount' => Yii::t('app', 'Total Amount'),
             'net_amount' => Yii::t('app', 'Net Amount'),
@@ -118,8 +142,14 @@ class SmHead extends \yii\db\ActiveRecord
 
             $sm_head = SmHead::find()->where(['id' => $invoiced_id])->one();
 
+            if($sm_head->discount_rate > 0){
+                $discount_price = ($prime_amount * $sm_head->discount_rate) / 100;
+            }else{
+                $discount_price = $sm_head->discount_amount;
+            }
+
             $sm_head->prime_amount = $prime_amount;
-            $sm_head->net_amount = $net_amount;
+            $sm_head->net_amount = $net_amount - $discount_price;
 
             if($sm_head->save()){
                 return true;

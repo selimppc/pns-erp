@@ -135,6 +135,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       return ucfirst($model->status);
                     }
                   ],
+                  
                   [
                       'header' => 'Action',
                       'class' => 'yii\grid\ActionColumn',
