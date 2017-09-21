@@ -79,6 +79,8 @@ class SmHead extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id'],'required','on'=>'create'],
+            [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id','net_amount'],'required','on'=>'create_direct_sales'],
             [['date', 'created_at', 'updated_at'], 'safe'],
             [['customer_id', 'branch_id', 'am_coa_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
             [['exchange_rate', 'tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],

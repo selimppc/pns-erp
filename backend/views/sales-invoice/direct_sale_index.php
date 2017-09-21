@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\SmHeadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Invoice Entry';
+$this->title = 'Direct Sales';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -23,8 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create '.$this->title), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage '.$this->title), ['index'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create '.$this->title), ['create-direct-sales'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage '.$this->title), ['direct-sales'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -78,11 +78,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     'id',
                     [
-                      #'attribute' => 'sm_number',
+                     # 'attribute' => 'sm_number',
                       'label' => 'Sales Number',
                       'format' => 'raw',
                       'value' => function ($model) {
-                          return Html::a($model->sm_number, ['/sales-invoice/view', 'id' => $model->id]);
+                          return Html::a($model->sm_number, ['/sales-invoice/view-direct-sales', 'id' => $model->id]);
                       },
                     ],                   
                     'date',
@@ -143,9 +143,8 @@ $this->params['breadcrumbs'][] = $this->title;
                       'class' => 'yii\grid\ActionColumn',
                       'template' => '{view} {cancel}',
                       'buttons' => [
-                          'view' => function ($url,$model) {
-                            $url =  $url;
-                            return Html::a('<span class="btn btn-xs btn-info">Show </span>', $url);
+                          'view' => function ($url,$model) {                           
+                           return Html::a('Show', ['sales-invoice/view-direct-sales', 'id' => $model->id], ['class' => 'btn btn-xs btn-info']);
                           },
                           'cancel' => function ($url, $model) {
                                 return $model->status == 'open'?Html::a('Cancel', ['sales-invoice/cancel', 'id' => $model->id], ['class' => 'btn btn-xs btn-danger', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this invoice?") ']):'';

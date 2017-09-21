@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $model backend\models\SmHead */
 
-$this->title = 'Sales Invoice';
+$this->title = 'Direct Sales';
 $this->params['breadcrumbs'][] = ['label' => 'Sm Heads', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -22,8 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create '.$this->title), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage '.$this->title), ['index'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Create '.$this->title), ['create-direct-sales'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Manage '.$this->title), ['direct-sales'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -47,9 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <div class="panel-body">
 
-	    	<?= $this->render('_form', [
-		        'modelSmHead' => $modelSmHead,
-		        'modelsSmDetail' => $modelsSmDetail
+	    	<?= $this->render('_form_direct_sale', [
+		        'model' => $model
 		    ]) ?>
 
 	    </div>

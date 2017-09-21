@@ -54,6 +54,22 @@ class SalesInvoiceController extends Controller
     }
 
     /**
+     * Lists all SmHead models.
+     * @return mixed
+     */
+    public function actionDirectSales()
+    {
+        $searchModel = new SmHeadSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,'direct_sale');
+        $dataProvider->pagination->pageSize=30;
+
+        return $this->render('direct_sale_index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
      * Displays a single SmHead model.
      * @param integer $id
      * @return mixed
@@ -76,6 +92,24 @@ class SalesInvoiceController extends Controller
         
     }
 
+    public function actionViewDirectSales($id)
+    {
+        $model = $this->findModel($id);
+
+        if(!empty($model)){
+
+            $sm_details_r = SmDetail::find()->where(['sm_head_id' => $model->id])->all();
+
+            return $this->render('view_direct_sales', [
+                'model' => $model,
+                'sm_details_r' => $sm_details_r
+            ]);
+
+        }
+
+        
+    }
+
     /**
      * Creates a new SmHead model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -83,8 +117,7 @@ class SalesInvoiceController extends Controller
      */
     public function actionCreate()
     {
-        // generate purchase Order Number
-               
+        // generate Invoice Number               
         $invoice_number = TransactionCode::generate_transaction_number('IN--');
         
         if(empty($invoice_number)){
@@ -94,6 +127,8 @@ class SalesInvoiceController extends Controller
 
         $modelSmHead = new SmHead;
         $modelsSmDetail = [new SmDetail];
+
+        $modelSmHead->scenario = 'create';
 
         $modelSmHead->sm_number = $invoice_number; 
         $modelSmHead->tax_rate ='0.00';
@@ -166,6 +201,55 @@ class SalesInvoiceController extends Controller
         ]);
     }
 
+
+    public function actionCreateDirectSales(){
+
+        // generate Invoice Number               
+        $invoice_number = TransactionCode::generate_transaction_number('DS--');
+        
+        if(empty($invoice_number)){
+            $invoice_number = '';
+        }
+
+        $model = new SmHead();
+
+        $model->scenario = 'create_direct_sales';
+
+        $model->sm_number = $invoice_number;
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->tax_rate = 0.00;
+            $model->tax_amount = 0.00;
+            $model->discount_rate = 0.00;
+            $model->discount_amount = 0.00;
+            $model->prime_amount = $model->net_amount;
+            $model->status = 'open';
+
+            if($model->save()){
+
+                // Update transaction code data
+                $update_transaction = TransactionCode::update_transaction_number('DS--');
+
+                if($update_transaction){
+                    echo 'successfully updated';
+                }else{
+                    echo 'successfully not updated';
+                }
+
+                // Set success data
+                \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+            }            
+
+            return $this->redirect(['view-direct-sales', 'id' => $model->id]);
+        } else {
+            return $this->render('create_direct_sales', [
+                'model' => $model,
+            ]);
+        }
+
+    }
+
     /**
      * Updates an existing SmHead model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -177,6 +261,8 @@ class SalesInvoiceController extends Controller
        
         $modelSmHead = $this->findModel($id);
         $modelsSmDetail = $modelSmHead->smDetails;
+
+        $modelSmHead->scenario = 'create';
 
         if ($modelSmHead->load(Yii::$app->request->post())) {
 
@@ -232,7 +318,23 @@ class SalesInvoiceController extends Controller
 
     }
 
+    public function actionUpdateDirectSales($id){
 
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // Set success data
+            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+
+            return $this->redirect(['view-direct-sales', 'id' => $model->id]);
+        } else {
+            return $this->render('update_direct_sales', [
+                'model' => $model,
+            ]);
+        }
+
+    }
 
     public function actionConfirm($id)
     {

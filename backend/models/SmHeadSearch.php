@@ -40,7 +40,7 @@ class SmHeadSearch extends SmHead
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$sales_type='')
     {
         $query = SmHead::find();
 
@@ -79,8 +79,13 @@ class SmHeadSearch extends SmHead
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'sm_number', $this->sm_number])
-            ->andFilterWhere(['like', 'doc_type', $this->doc_type])
+        if($sales_type == 'direct_sale'){
+            $query->andFilterWhere(['like', 'sm_number', 'DS--']);
+        }else{
+            $query->andFilterWhere(['like', 'sm_number', 'IN--']);
+        }
+
+        $query->andFilterWhere(['like', 'doc_type', $this->doc_type])
             ->andFilterWhere(['like', 'check_number', $this->check_number])
             ->andFilterWhere(['like', 'note', $this->note])
             ->andFilterWhere(['like', 'sign', $this->sign])
