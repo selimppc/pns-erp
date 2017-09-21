@@ -243,6 +243,9 @@ class SalesInvoiceController extends Controller
 
             return $this->redirect(['view-direct-sales', 'id' => $model->id]);
         } else {
+
+            $model->tax_amount = 0.00;
+            
             return $this->render('create_direct_sales', [
                 'model' => $model,
             ]);

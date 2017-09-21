@@ -146,7 +146,19 @@ $this->registerJs($js);
 
         <div class="col-md-2">
 
-            <?= $form->field($model, 'net_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'prime_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+        </div>
+
+        <div class="col-md-2">
+
+            <?= $form->field($model, 'tax_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+        </div>
+
+        <div class="col-md-2">
+
+            <?= $form->field($model, 'net_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => 1]) ?>
 
         </div>
 
@@ -184,4 +196,34 @@ $this->registerJs($js);
 
 
      ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
+?>
+
+<?php
+    
+    $this->registerJs("
+
+        $('#smhead-prime_amount').change(function (e) {
+            
+            var prime_amount = parseInt($('#smhead-prime_amount').val());
+            var tax_amount = parseInt($('#smhead-tax_amount').val());
+
+            var net_amount = prime_amount+tax_amount;
+
+            $('#smhead-net_amount').val(net_amount);
+
+        });
+
+        $('#smhead-tax_amount').change(function (e) {
+            
+            var tax_amount = parseInt($('#smhead-tax_amount').val());
+            var prime_amount = parseInt($('#smhead-prime_amount').val());
+            
+            var net_amount = prime_amount+tax_amount;
+
+            $('#smhead-net_amount').val(net_amount);
+
+        });
+
+
+     ", yii\web\View::POS_READY, "total_amount_change_with_receive_quantity_cost_price");   
 ?>
