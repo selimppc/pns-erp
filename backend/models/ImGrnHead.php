@@ -76,7 +76,7 @@ class ImGrnHead extends \yii\db\ActiveRecord
         return [
             [['grn_number','pp_purchase_head_id','supplier_id','date','pay_terms','branch_id'],'required'],
             [['pp_purchase_head_id', 'am_voucher_head_id', 'supplier_id', 'branch_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
-            [['date', 'created_at', 'updated_at'], 'safe'],
+            [['date', 'created_at', 'updated_at','voucher_number'], 'safe'],
             [['tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'exchange_rate', 'prime_amount', 'net_amount'], 'number'],
             [['grn_number', 'pay_terms', 'status'], 'string', 'max' => 16],
             [['pp_purchase_head_id'], 'exist', 'skipOnError' => true, 'targetClass' => PpPurchaseHead::className(), 'targetAttribute' => ['pp_purchase_head_id' => 'id']],

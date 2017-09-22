@@ -19,7 +19,7 @@ class ImGrnHeadSearch extends ImGrnHead
     {
         return [
             [['id', 'pp_purchase_head_id', 'am_voucher_head_id', 'supplier_id', 'branch_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
-            [['grn_number', 'date', 'pay_terms', 'status', 'created_at', 'updated_at'], 'safe'],
+            [['grn_number', 'date', 'pay_terms', 'status', 'created_at', 'updated_at','voucher_number'], 'safe'],
             [['tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'exchange_rate', 'prime_amount', 'net_amount'], 'number'],
         ];
     }
@@ -106,6 +106,7 @@ class ImGrnHeadSearch extends ImGrnHead
 
         $query->andFilterWhere(['like', 'grn_number', $this->grn_number])
             ->andFilterWhere(['like', 'pay_terms', $this->pay_terms])
+            ->andFilterWhere(['like', 'voucher_number', $this->voucher_number])
             ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;

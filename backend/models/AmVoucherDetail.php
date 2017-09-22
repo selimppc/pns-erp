@@ -71,7 +71,7 @@ class AmVoucherDetail extends \yii\db\ActiveRecord
             [['am_voucher_head_id', 'am_coa_id', 'am_sub_coa_id', 'currency_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['exchange_rate', 'prime_amount', 'base_amount'], 'number'],
             [['note'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','voucher_number'], 'safe'],
             [['status'], 'string', 'max' => 16],
             [['am_voucher_head_id'], 'exist', 'skipOnError' => true, 'targetClass' => AmVoucherHead::className(), 'targetAttribute' => ['am_voucher_head_id' => 'id']],
             [['am_coa_id'], 'exist', 'skipOnError' => true, 'targetClass' => AmCoa::className(), 'targetAttribute' => ['am_coa_id' => 'id']],

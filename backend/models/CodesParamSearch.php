@@ -19,7 +19,7 @@ class CodesParamSearch extends CodesParam
     {
         return [
             [['id', 'am_coa_id', 'am_coa_cr_id', 'am_coa_dr_id', 'am_coa_tax_id', 'created_by', 'updated_by'], 'integer'],
-            [['type', 'code', 'title', 'long', 'percentage', 'status', 'created_at', 'updated_at'], 'safe'],
+            [['type', 'code', 'title', 'long', 'percentage', 'status', 'created_at', 'updated_at','am_coa_discount_id'], 'safe'],
         ];
     }
 
@@ -99,6 +99,7 @@ class CodesParamSearch extends CodesParam
             ->andFilterWhere(['like', 'code', $this->code])
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'long', $this->long])
+            ->andFilterWhere(['like', 'am_coa_discount_id', $this->am_coa_discount_id])
             ->andFilterWhere(['like', 'percentage', $this->percentage])
             ->andFilterWhere(['like', 'status', $this->status]);
 

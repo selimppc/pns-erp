@@ -70,7 +70,7 @@ class CodesParam extends \yii\db\ActiveRecord
             [['type','code','title','status'],'required'],
             [['title'],'unique'],
             [['am_coa_id', 'am_coa_cr_id', 'am_coa_dr_id', 'am_coa_tax_id', 'created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','am_coa_discount_id'], 'safe'],
             [['type', 'code', 'long'], 'string'],
             [['title'], 'string', 'max' => 45],
             [['percentage', 'status'], 'string', 'max' => 8],
