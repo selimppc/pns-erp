@@ -104,9 +104,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
                    
                    [
+                     'attribute' => 'currency_id',
                      'label' => 'Currency',
                      'value' => function ($model) {
                          return isset($model->currency)?$model->currency->currency_code:'';
+                     }
+                   ],
+
+                    [
+                     'attribute' => 'status',
+                     'label' => 'Status',
+                     'value' => function ($model) {
+                         return ucfirst($model->status);
                      }
                    ],
                   

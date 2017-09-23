@@ -93,7 +93,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_code','title','class','group','currency_id','model','origin','stock_type', 'sell_rate', 'cost_price'],'required'],
+            [['product_code','title','class','group','currency_id','model','origin','stock_type', 'sell_rate', 'cost_price','status'],'required'],
             #[['product_code'],'unique'],
             [['description'], 'string'],
             [['image'], 'file'],
@@ -149,6 +149,7 @@ class Product extends \yii\db\ActiveRecord
             'max_level' => Yii::t('app', 'Product Max Level'),
             'min_level' => Yii::t('app', 'Product Min Level'),
             're_order' => Yii::t('app', 'Product Re Order'),
+            'status' => Yii::t('app', 'Status'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
             'created_at' => Yii::t('app', 'Created At'),
@@ -163,7 +164,7 @@ class Product extends \yii\db\ActiveRecord
 
     public static function get_product_list() {
         $options = [];
-        $product_q = Product::find()->all();
+        $product_q = Product::find()->where(['status'=>'active'])->all();
         
         if(!empty($product_q)){
             foreach ($product_q as $key => $value) {

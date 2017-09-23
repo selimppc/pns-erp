@@ -82,6 +82,16 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'generic',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'stock_type')
+                            ->dropDownList(
+                                array ('stock'=>'Stock', 'non'=>'Non Stock'),
+                                array ('class'=>'form-control') 
+                            ); ?>
+
+            </div>
+
             <?= $form->field($model, 'image')->fileInput() ?>
 
             <?php
@@ -100,16 +110,6 @@ use backend\models\CodesParam;
         </div>
 
         <div class="col-md-6">
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'stock_type')
-                            ->dropDownList(
-                                array ('stock'=>'Stock', 'non'=>'Non Stock'),
-                                array ('class'=>'form-control') 
-                            ); ?>
-
-            </div>
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
@@ -179,6 +179,16 @@ use backend\models\CodesParam;
             <?= $form->field($model, 'min_level',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>            
 
             <?= $form->field($model, 're_order',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'status')
+                            ->dropDownList(
+                                array ('active'=>'Active', 'inactive'=>'Inactive','cancel' => 'Cancel'),
+                                array ('class'=>'form-control') 
+                            ); ?>
+
+            </div>
 
         </div>
 
