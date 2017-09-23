@@ -127,7 +127,7 @@ class StockTransferController extends Controller
                     if ($flag) {
 
                         // Update transaction code data
-                        $update_transaction = TransactionCode::update_transaction_number('TRNF');
+                        $update_transaction = TransactionCode::update_transaction_number('TRN-');
 
                         if($update_transaction){
                             echo 'successfully updated';
@@ -143,6 +143,7 @@ class StockTransferController extends Controller
                         return $this->redirect(['view', 'id' => $modelTransferHead->id]);
                     }
                 } catch (\Exception $e) {
+
                     $transaction->rollBack();
                 }
             }

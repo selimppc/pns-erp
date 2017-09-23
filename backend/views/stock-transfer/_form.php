@@ -43,64 +43,66 @@ $this->registerJs($js);
 
     <div class="row">
 
+        <div style="width: 100%;display: inline-block;">
+            <div class="col-md-2">
+             <?= $form->field($modelTransferHead, 'transfer_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => 1]) ?>
+            </div>
 
-        <div class="col-md-2">
-         <?= $form->field($modelTransferHead, 'transfer_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => 1]) ?>
-        </div>
+            <div class="col-md-2">
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+                    <?php
 
-        <div class="col-md-2">
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-                <?php
-
-                echo $form->field($modelTransferHead, 'date')->widget(DatePicker::classname(), [
-                        'value' => date('Y-m-d'),
-                        'options' => [
-                            'placeholder' => 'Enter Date ...',
+                    echo $form->field($modelTransferHead, 'date')->widget(DatePicker::classname(), [
                             'value' => date('Y-m-d'),
-                        ],
-                        'pluginOptions' => [
-                            'autoclose'=>true,
-                            'format' => 'yyyy-m-dd',
-                            'todayHighlight' => true
-                        ]
-                    ]);
+                            'options' => [
+                                'placeholder' => 'Enter Date ...',
+                                'value' => date('Y-m-d'),
+                            ],
+                            'pluginOptions' => [
+                                'autoclose'=>true,
+                                'format' => 'yyyy-m-dd',
+                                'todayHighlight' => true
+                            ]
+                        ]);
 
-                    
-                ?>
+                        
+                    ?>
+                </div>
             </div>
-        </div>
 
-        <div class="col-md-2">
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-                <?php
+            <div class="col-md-2">
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+                    <?php
 
-                echo $form->field($modelTransferHead, 'confirm_date')->widget(DatePicker::classname(), [
-                        'value' => date('Y-m-d'),
-                        'options' => [
-                            'placeholder' => 'Enter Date ...',
-                            'value' => date('Y-m-d',strtotime('+1 days')) ,
-                        ],
-                        'pluginOptions' => [
-                            'autoclose'=>true,
-                            'format' => 'yyyy-m-dd',
-                            'todayHighlight' => true
-                        ]
-                    ]);
+                    echo $form->field($modelTransferHead, 'confirm_date')->widget(DatePicker::classname(), [
+                            'value' => date('Y-m-d'),
+                            'options' => [
+                                'placeholder' => 'Enter Date ...',
+                                'value' => date('Y-m-d',strtotime('+1 days')) ,
+                            ],
+                            'pluginOptions' => [
+                                'autoclose'=>true,
+                                'format' => 'yyyy-m-dd',
+                                'todayHighlight' => true
+                            ]
+                        ]);
 
-                    
-                ?>
+                        
+                    ?>
+                </div>
             </div>
+
+            <div class="col-md-4">
+
+                <?= $form->field($modelTransferHead, 'note',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            </div>
+
+            <div class="col-md-2">
+                <?= $form->field($modelTransferHead, 'status',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => 1]) ?>
+            </div> 
+
         </div>
-
-        <div class="col-md-4">
-
-            <?= $form->field($modelTransferHead, 'note',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
-
-        </div>
-
-        <div class="col-md-2">
-            <?= $form->field($modelTransferHead, 'status',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => 1]) ?>
-        </div> 
 
 
         <div class="col-md-6">
