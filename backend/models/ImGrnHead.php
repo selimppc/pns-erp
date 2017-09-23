@@ -96,6 +96,7 @@ class ImGrnHead extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'grn_number' => Yii::t('app', 'GRN Number'),
             'pp_purchase_head_id' => Yii::t('app', 'Purchase Order Number '),
+            'voucher_number' => Yii::t('app','GL Voucher Number'),
             'am_voucher_head_id' => Yii::t('app', 'Voucher'),
             'supplier_id' => Yii::t('app', 'Supplier'),
             'date' => Yii::t('app', 'Date'),

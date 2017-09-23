@@ -124,5 +124,7 @@ return [
 
     'stock_receive_index' => '<b>Stock Receive:</b> In this screen you will be able to confirm receive by clicking the button under the column <b>Confirm Receive</b>. You can also view full information, click on the button under the column<b>"View Full Information"</b>',
 
-    'account_payable_payment' => '<b>Account Payable:</b> This screen will allow you to view supplier(s) invoice payable list. For payment, click on the link under <b>Supplier Code</b> column. The link will redirect you to a new entry screen for the Payment Voucher.'
+    'account_payable_payment' => '<b>Account Payable:</b> This screen will allow you to view supplier(s) invoice payable list. For payment, click on the link under <b>Supplier Code</b> column. The link will redirect you to a new entry screen for the Payment Voucher.',
+
+    'account_payable_invoice' => '<b>New Invoice (from GRN list):</b> This screen will allow you to view the GRN history. To create invoice from the list below click the <b>"Create Invoice"</b> button under Action column. By clicking <b>"Create Invoice"</b> button a link will appear under <b>"GL Voucher No"</b> column. This link will allow you to view the report(s). To add VAT, click on the button <b>"VAT(%)"</b> under the column Add VAT, a pop-up screen will appear for <b>VAT(%)</b> calculation.<br/><br/>Warning: this (VAT %) task must perform before creating invoice under action column. '
 ];

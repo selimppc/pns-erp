@@ -97,6 +97,14 @@ $this->params['breadcrumbs'][] = $this->title;
                           return isset($model->supplier)?$model->supplier->supplier_code:'';
                       },
                     ],
+                    [
+                      'attribute' => 'branch_id',
+                      'label' => 'Branch',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return isset($model->branch)?$model->branch->title:'';
+                      },
+                    ],
                     'date',
                     'voucher_number',
                     [
@@ -107,36 +115,51 @@ $this->params['breadcrumbs'][] = $this->title;
                           return isset($model->ppPurchaseHead)?$model->ppPurchaseHead->po_order_number:'';
                       },
                     ],
-                   
+                    'pay_terms',
+                    'prime_amount',
                     [
-                      'attribute' => 'branch_id',
-                      'label' => 'Branch',
+                      'attribute' => 'currency_id',
+                      'label' => 'Currency',
                       'format' => 'raw',
                       'value' => function ($model) {
-                          return isset($model->branch)?$model->branch->title:'';
+                          return isset($model->currency)?$model->currency->currency_code:'';
                       },
                     ],
+                    'net_amount',                   
                     
                     [
                       'attribute' => 'status',
                       'label' => 'Status',
                       'value' => function ($model){
-                        return ucfirst('Grn '. $model->status);
+                        return ucfirst($model->status);
                       }
                     ],
 
-                     [
-                    'header' => 'Action',
-                    'class' => 'yii\grid\ActionColumn',
-                    'template' => '{confirm_grn}',
-                    'buttons' => [
-                      
-                        'confirm_grn' => function ($url, $model) {
-                              return $model->status == 'open'?Html::a('Approved GRN', ['grn/confirm-grn', 'id' => $model->id], ["class"=>"btn btn-xs btn-success", "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to Confirm this GRN?") ']):'';
-                          },
-                      
+                    [
+                      'header' => 'Action',
+                      'class' => 'yii\grid\ActionColumn',
+                      'template' => '{create_invoice}',
+                      'buttons' => [
+                        
+                          'create_invoice' => function ($url, $model) {
+                                return $model->status != 'invoiced'?Html::a('Create Invoice', ['account-payable-invoice/create-invoice', 'id' => $model->id], ["class"=>"btn btn-xs btn-success", "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to Create Invoice?") ']):'';
+                            },
+                        
+                      ],
                     ],
-                ],
+
+                    [
+                      'header' => 'VAT',
+                      'class' => 'yii\grid\ActionColumn',
+                      'template' => '{vat}',
+                      'buttons' => [
+                        
+                          'vat' => function ($url, $model) {
+                                return $model->status != 'invoiced'?Html::a('VAT', ['', 'id' => $model->id], ["class"=>"btn btn-xs btn-success", "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to add Vat?") ']):'';
+                            },
+                        
+                      ],
+                    ],
                 ],
             ]); ?>
 

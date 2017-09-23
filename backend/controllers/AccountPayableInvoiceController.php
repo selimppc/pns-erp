@@ -51,4 +51,35 @@ class AccountPayableInvoiceController extends Controller{
 
     }
 
+    public function actionCreateInvoice($id){
+
+        $model = ImGrnHead::find()->where(['id' => $id])->one();
+        $im_grn_head_id = $id;
+            
+        if($model){
+
+            //$transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+
+                $model->status= 'invoiced';
+
+                $model->save();
+
+               // $transaction->commit();
+
+            } catch (\Exception $e) {
+                print_r($e);
+                exit();
+            }          
+
+
+
+           
+        }
+
+        return $this->redirect(['index']);
+
+    }
+
 }
