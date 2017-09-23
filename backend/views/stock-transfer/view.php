@@ -140,6 +140,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 </div>
 
+                <?= $model->status == 'open'?Html::a(Yii::t('app', 'Confirm'), ['confirm-dispatch', 'id' => $model->id], ['class' => 'btn btn-xs btn-success',"data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to approved this purchased order?") ']):''; ?>
+
+                <?= $model->status == 'open'?Html::a(Yii::t('app', 'Cancel'), ['cancel', 'id' => $model->id], ['class' => 'btn btn-xs btn-danger',"data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']):''; ?>
+
             <?php 
                 }
             ?>
