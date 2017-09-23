@@ -124,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       'attribute' => 'status',
                       'label' => 'Status',
                       'value' => function ($model){
-                        return ucfirst('Grn '. $model->status);
+                        return 'Grn '. ucfirst($model->status);
                       }
                     ],
 

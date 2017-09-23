@@ -42,7 +42,7 @@ class ImGrnHeadSearch extends ImGrnHead
      */
     public function search($params,$status='')
     {
-        if($status='open'){
+        if($status=='open'){
             $query = ImGrnHead::find()->where(['!=', 'status', 'open']);
         }else{
             $query = ImGrnHead::find();

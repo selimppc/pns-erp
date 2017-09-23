@@ -10,6 +10,7 @@ use backend\models\SmDetail;
 use backend\models\SmDetailSearch;
 
 use backend\models\TransactionCode;
+use backend\models\Currency;
 
 use yii\web\Controller;
 use yii\helpers\ArrayHelper;
@@ -130,6 +131,7 @@ class SalesInvoiceController extends Controller
 
         $modelSmHead->scenario = 'create';
 
+        // Set Default Data
         $modelSmHead->sm_number = $invoice_number; 
         $modelSmHead->tax_rate ='0.00';
         $modelSmHead->tax_amount ='0.00';
@@ -137,6 +139,15 @@ class SalesInvoiceController extends Controller
         $modelSmHead->discount_amount ='0.00';
         $modelSmHead->prime_amount ='0.00';
         $modelSmHead->net_amount ='0.00';
+        $modelSmHead->currency_id = 1;
+
+        $currecy_data = Currency::find()->where(['id'=>$modelSmHead->currency_id])->one();
+
+        if(!empty($currecy_data)){
+            $modelSmHead->exchange_rate = $currecy_data->exchange_rate;
+        }
+
+        $modelSmHead->branch_id = 1;
 
         if ($modelSmHead->load(Yii::$app->request->post())) {
 
@@ -190,6 +201,10 @@ class SalesInvoiceController extends Controller
                         return $this->redirect(['view', 'id' => $modelSmHead->id]);
                     }
                 } catch (\Exception $e) {
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+
                     $transaction->rollBack();
                 }
             }
@@ -215,6 +230,13 @@ class SalesInvoiceController extends Controller
 
         $model->scenario = 'create_direct_sales';
 
+        // Set Default Data
+        $model->currency_id = 1;
+        $currecy_data = Currency::find()->where(['id'=>$model->currency_id])->one();
+        if(!empty($currecy_data)){
+            $model->exchange_rate = $currecy_data->exchange_rate;
+        }
+        $model->branch_id = 1;
         $model->sm_number = $invoice_number;
 
         if ($model->load(Yii::$app->request->post())) {

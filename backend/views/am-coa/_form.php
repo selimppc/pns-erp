@@ -49,11 +49,6 @@ use backend\models\Branch;
 
             </div>
 
-            
-        </div>
-
-        <div class="col-md-6">
-
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
                 <?= $form->field($model, 'analyical_code')
@@ -64,6 +59,19 @@ use backend\models\Branch;
 
             </div>
 
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'branch_id')
+                            ->dropDownList(
+                                ArrayHelper::map(Branch::find()->all(), 'id', 'title'),
+                                 ['prompt'=>'-Select-','class'=>'form-control']
+                            ); ?>
+
+            </div>
+            
+        </div>
+
+        <div class="col-md-6">
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
@@ -87,9 +95,19 @@ use backend\models\Branch;
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
-                <?= $form->field($model, 'branch_id')
+                <?= $form->field($model, 'group_three_id')
                             ->dropDownList(
-                                ArrayHelper::map(Branch::find()->all(), 'id', 'title'),
+                                ArrayHelper::map(GroupThree::find()->all(), 'id', 'title'),
+                                 ['prompt'=>'-Select-','class'=>'form-control']
+                            ); ?>
+
+            </div>
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'group_four_id')
+                            ->dropDownList(
+                                ArrayHelper::map(GroupFour::find()->all(), 'id', 'title'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 

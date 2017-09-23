@@ -17,6 +17,7 @@ use backend\models\PpPurchaseHead;
 use backend\models\PpPurchaseDetail;
 use backend\models\PpPurchaseHeadSearch;
 use backend\models\TransactionCode;
+use backend\models\Currency;
 
 
 /**
@@ -122,6 +123,7 @@ class PurchaseOrderController extends Controller
         $modelPurchaseHead = new PpPurchaseHead;
         $modelsPurchaseDetail = [new PpPurchaseDetail];
 
+        // Set Defult Data
         $modelPurchaseHead->po_order_number = $po_order_number; 
         $modelPurchaseHead->status = 'open'; 
         $modelPurchaseHead->tax_rate ='0.00';
@@ -130,6 +132,16 @@ class PurchaseOrderController extends Controller
         $modelPurchaseHead->discount_amount ='0.00';
         $modelPurchaseHead->prime_amount ='0.00';
         $modelPurchaseHead->net_amount ='0.00';
+        $modelPurchaseHead->branch_id = 1;
+        $modelPurchaseHead->currency_id = 1;
+
+        // Currency Rate
+        $currency_data = Currency::find()->where(['id' => $modelPurchaseHead->currency_id])->one();
+
+        if(!empty($currency_data)){           
+            $modelPurchaseHead->exchange_rate = $currency_data->exchange_rate;
+        }
+
 
         if ($modelPurchaseHead->load(Yii::$app->request->post())) {
 
@@ -183,12 +195,14 @@ class PurchaseOrderController extends Controller
                     }
                 } catch (\Exception $e) {
 
-                    print_r($e);
-                    exit();
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+
                     $transaction->rollBack();
                 }
             }
         }
+
 
         return $this->render('create', [
             'modelPurchaseHead' => $modelPurchaseHead,
@@ -252,6 +266,8 @@ class PurchaseOrderController extends Controller
                         return $this->redirect(['view', 'id' => $modelPurchaseHead->id]);
                     }
                 } catch (\Exception $e) {
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', $e->getMessage());
                     $transaction->rollBack();
                 }
             }

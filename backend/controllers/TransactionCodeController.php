@@ -237,16 +237,15 @@ class TransactionCodeController extends Controller
 
                     // Set success data
                     \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+            
+                }
 
-                    return $this->render('index', [
+                return $this->render('index', [
                         'searchModel' => $searchModel,
                         'dataProvider' => $dataProvider,
                         'model' => $model,
                         'transaction_code_help_text' => $transaction_code_help_text
                     ]);
-
-            
-                }
                 
 
             }catch (\Exception $e) {
