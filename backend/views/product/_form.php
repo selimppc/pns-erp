@@ -40,7 +40,7 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'class')
                         ->dropDownList(
-                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Product Class'])->all(), 'id', 'title'),
+                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Product Class'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
                              ['class'=>'form-control floating']
                         ); ?>
 
@@ -50,7 +50,7 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'group')
                         ->dropDownList(
-                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Product Group'])->all(), 'id', 'title'),
+                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Product Group'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
                              ['prompt'=>'-Select-','class'=>'form-control floating']
                         ); ?>
 
@@ -60,7 +60,7 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'category')
                         ->dropDownList(
-                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Product Category'])->all(), 'id', 'title'),
+                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Product Category'])->andWhere(['status' => 'active'])->all(), 'id', 'title'),
                              ['prompt'=>'-Select-','class'=>'form-control floating']
                         ); ?>
 
@@ -128,7 +128,7 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'sell_uom')
                         ->dropDownList(
-                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->all(), 'id', 'title'),
+                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
                              ['prompt'=>'-Select-','class'=>'form-control floating']
                         ); ?>
 
@@ -140,7 +140,7 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'purchase_uom')
                         ->dropDownList(
-                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->all(), 'id', 'title'),
+                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status' => 'active'])->all(), 'id', 'title'),
                              ['prompt'=>'-Select-','class'=>'form-control floating']
                         ); ?>
 
@@ -152,7 +152,7 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'stock_uom')
                         ->dropDownList(
-                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->all(), 'id', 'title'),
+                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status' => 'active'])->all(), 'id', 'title'),
                              ['prompt'=>'-Select-','class'=>'form-control floating']
                         ); ?>
 
@@ -166,7 +166,7 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 'currency_id')
                         ->dropDownList(
-                            ArrayHelper::map(Currency::find()->all(), 'id', 'title'),
+                            ArrayHelper::map(Currency::find()->where(['status' => 'active'])->all(), 'id', 'title'),
                              ['prompt'=>'-Select-','class'=>'form-control floating']
                         ); ?>
 

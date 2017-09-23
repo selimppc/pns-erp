@@ -8,6 +8,9 @@ use yii\helpers\FileHelper;
 
 use backend\models\Product;
 use backend\models\ProductSearch;
+
+use backend\models\Currency;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -119,6 +122,20 @@ class ProductController extends Controller
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            $model->group = 10;
+            $model->category = 6;
+            $model->sell_uom = 11;
+            $model->purchase_uom = 11;
+            $model->stock_uom = 11;
+            $model->currency_id = 1;
+
+            $currency_data = Currency::find()->where(['id'=>$model->currency_id])->one();
+
+            if(!empty($currency_data)){
+                $model->exchange_rate = $currency_data->exchange_rate;
+            }
+
             return $this->render('create', [
                 'model' => $model,
             ]);
