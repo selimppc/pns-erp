@@ -45,7 +45,11 @@ class VwImStockView extends \yii\db\ActiveRecord
 
     public static function get_product_list() {
         $options = [];
-        $product_q = VwImStockView::find()->all();
+
+        //$branch = $_GET[‘branch’]; // TODO::
+        $date = date('Y-m-d');
+
+        $product_q = VwImStockView::find()->where(['>=','expire_date',$date])->all();
         
         if(!empty($product_q)){
             foreach ($product_q as $key => $value) {
