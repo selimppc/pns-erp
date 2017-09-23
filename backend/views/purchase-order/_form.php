@@ -232,9 +232,13 @@ $this->registerJs($js);
                                         'language' => '',
                                         'options' => ['placeholder' => 'Select a product ...'],
                                         'pluginOptions' => [
+                                            'multiple' => false,
                                             'allowClear' => true,
                                             'classs' => 'form-group form-material floating',
                                             'data-plugin' => 'formMaterial'
+                                        ],
+                                        'pluginEvents' => [
+                                            #"change" => "function() { alert('sss') }"
                                         ],
                                     ])->label(false);
 

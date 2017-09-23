@@ -9,6 +9,9 @@ use backend\models\ImTransferHeadSearch;
 use backend\models\ImTransferDetail;
 use backend\models\ImTransferDetailSearch;
 
+use backend\models\ImBatchTransfer;
+use backend\models\VwImStockView;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -102,6 +105,7 @@ class StockTransferController extends Controller
         
         if ($modelTransferHead->load(Yii::$app->request->post())) {
 
+
             $modelsTransferDetail = Model::createMultiple(ImTransferDetail::classname());
             Model::loadMultiple($modelsTransferDetail, Yii::$app->request->post());
 
@@ -114,12 +118,48 @@ class StockTransferController extends Controller
 
                 try {
                     $modelTransferHead->status = 'open';
+
                     if ($flag = $modelTransferHead->save(false)) {
+
                         foreach ($modelsTransferDetail as $modelTransferDetail) {
+
                             $modelTransferDetail->im_transfer_head_id = $modelTransferHead->id;
-                            if (! ($flag = $modelTransferDetail->save(false))) {
-                                $transaction->rollBack();
-                                break;
+                            if ( ($flag = $modelTransferDetail->save())) {
+
+
+                                // save im_batch_transfer data
+                                $get_stock_view_data = VwImStockView::find()->where(['product_id'=>$modelTransferDetail->product_id])->one();
+
+                                if(!empty($get_stock_view_data)){
+
+                                    $batch_transfer_model = new ImBatchTransfer();
+
+                                    $batch_transfer_model->im_transfer_head_id = $modelTransferHead->id;
+                                    $batch_transfer_model->product_id = $modelTransferDetail->product_id;
+                                    $batch_transfer_model->batch_number = $get_stock_view_data->batch_number;
+                                    $batch_transfer_model->expire_date = $get_stock_view_data->expire_date;
+                                    $batch_transfer_model->quantity = $modelTransferDetail->quantity;
+                                    $batch_transfer_model->uom = $modelTransferDetail->uom;
+                                    $batch_transfer_model->rate = $get_stock_view_data->im_rate;
+
+                                    $valid_batch_transfer = $batch_transfer_model->validate();
+
+                                    if($valid_batch_transfer){
+                                        $batch_transfer_model->save();
+                                    }else{
+                                        print_r($batch_transfer_model->getErrors());
+                                        exit();
+                                    }
+
+
+                                }else{
+                                    exit('Error');
+                                }
+                                /*$transaction->rollBack();
+                                break;*/
+                            }else{
+                                
+                                 exit('else');
                             }
                         }
                     }
@@ -144,6 +184,8 @@ class StockTransferController extends Controller
                     }
                 } catch (\Exception $e) {
 
+                    print_r($e->getMessage());
+                    exit();
                     $transaction->rollBack();
                 }
             }

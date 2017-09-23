@@ -208,7 +208,7 @@ $this->registerJs($js);
             'product_id',
             'uom',
             'quantity',
-            'rate'
+            #'rate'
         ],
     ]); 
     ?>
@@ -232,9 +232,7 @@ $this->registerJs($js);
                     <div class="custom-column-19">
                         <label class="control-label only-label" for="">Quantity</label>
                     </div>
-                    <div class="custom-column-18">
-                        <label class="control-label only-label" for="">Rate</label>
-                    </div>
+                    
                 </div>
 
                 <?php foreach ($modelsTransferDetail as $index => $modelTransferDetail): ?>
@@ -283,9 +281,7 @@ $this->registerJs($js);
                                 <?= $form->field($modelTransferDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                             </div>
 
-                            <div class="custom-column-20">
-                                <?= $form->field($modelTransferDetail,"[{$index}]rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
-                            </div>
+                           
                         </div>
 
                     </div>

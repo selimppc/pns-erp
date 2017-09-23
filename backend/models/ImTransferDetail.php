@@ -60,7 +60,7 @@ class ImTransferDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id','uom','quantity','rate'],'required'],
+            [['product_id','uom','quantity'],'required'],
             [['im_transfer_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['quantity', 'rate'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
