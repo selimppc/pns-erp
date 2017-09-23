@@ -70,7 +70,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'group_three_id',
                     // 'group_four_id',
                     'analyical_code',
-                    'branch_id',
+                    [
+                      'attribute' => 'branch_id',
+                      'label' => 'Branch',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return isset($model->branch)?$model->branch->title:'';
+                      },
+                    ],
                     [
                         'label' => 'Status',
                         'value' => function ($model){
