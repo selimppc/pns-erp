@@ -11,6 +11,7 @@ use backend\models\Branch;
 use backend\models\Currency;
 use backend\models\Product;
 use backend\models\CodesParam;
+use backend\models\VwImStockView;
 use kartik\date\DatePicker;
 
 use kartik\select2\Select2;
@@ -256,7 +257,7 @@ $this->registerJs($js);
                                     <?php
 
                                         echo $form->field($modelTransferDetail, "[{$index}]product_id")->widget(Select2::classname(), [
-                                            'data' => Product::get_product_list(),
+                                            'data' => VwImStockView::get_product_list(),
                                             'language' => '',
                                             'options' => ['placeholder' => 'Select a product ...'],
                                             'pluginOptions' => [

@@ -25,6 +25,7 @@ class VwImStockView extends \yii\db\ActiveRecord
     {
         return [
             'product_id' => Yii::t('app', 'Product id'),
+            'product_code' => Yii::t('app', 'Product Code'),
             'product_title'  => Yii::t('app', 'Product Title'),
             'batch_number' => Yii::t('app', 'Batch Number'),
             'expire_date' => Yii::t('app', 'Expire Date'),
@@ -41,6 +42,20 @@ class VwImStockView extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public static function get_product_list() {
+        $options = [];
+        $product_q = VwImStockView::find()->all();
+        
+        if(!empty($product_q)){
+            foreach ($product_q as $key => $value) {
+                $options[$value->product_id] = $value->product_title .' :: '.$value->product_code;
+
+            }
+        }        
+
+        return $options;
+    }
 
     /**
      * @return \yii\db\ActiveQuery

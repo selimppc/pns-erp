@@ -59,11 +59,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 #['class' => 'yii\grid\SerialColumn'],
 
                 [
-                    'attribute' => 'product_id',
+                    'attribute' => 'product_code',
                     'label' => 'Product Code',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        return isset($model->product)?$model->product->product_code:'';
+                        return $model->product_code;
                     },
                 ],
                 'product_title',
