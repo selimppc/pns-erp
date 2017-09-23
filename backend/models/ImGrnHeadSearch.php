@@ -40,9 +40,14 @@ class ImGrnHeadSearch extends ImGrnHead
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$status='')
     {
-        $query = ImGrnHead::find();
+        if($status='open'){
+            $query = ImGrnHead::find()->where(['!=', 'status', 'open']);
+        }else{
+            $query = ImGrnHead::find();
+        }
+        
 
         // add conditions that should always apply here
 

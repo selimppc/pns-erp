@@ -177,7 +177,7 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/account-payable-invoice']); ?>">
                     <span class="site-menu-title">Invoice</span>
                   </a>
                 </li>

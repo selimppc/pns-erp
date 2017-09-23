@@ -118,5 +118,7 @@ return [
 
     'invoice_entry_index' => '<b>Manage Invoice:</b> In this screen you can view sales invoice history. To view the item details click on the link under the <b>Sales Number</b> column. For Cancel or Confirm Click the button under the column <b>"Cancel Invoice"</b> or <b>"Confirm Invoice"</b>. Under <b>Reports</b> column select pdf or xls for viewing report. After confirming the invoice, a link will appear under the column <b>"GL Voucher No"</b> for viewing reports. To create new invoice click on the menu tab <b>"New Invoice"</b>, this will redirect you to new entry screen.',
 
-    'invoice_entry_view' => '<b>New Invoice:</b> In this screen fill up the fields in both tables. Please follow the <b>Instruction</b> below ** on column <b>Item Details</b>'
+    'invoice_entry_view' => '<b>New Invoice:</b> In this screen fill up the fields in both tables. Please follow the <b>Instruction</b> below ** on column <b>Item Details</b>',
+
+    'account_payable_invoice' => ''
 ];
