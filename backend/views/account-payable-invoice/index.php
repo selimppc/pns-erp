@@ -90,15 +90,6 @@ $this->params['breadcrumbs'][] = $this->title;
                       },
                     ],
                     [
-                      'attribute' => 'pp_purchase_head_id',
-                      'label' => 'Purchase Order No',
-                      'format' => 'raw',
-                      'value' => function ($model) {
-                          return isset($model->ppPurchaseHead)?$model->ppPurchaseHead->po_order_number:'';
-                      },
-                    ],
-                    'date',
-                    [
                       'attribute' => 'supplier_id',
                       'label' => 'Supplier',
                       'format' => 'raw',
@@ -106,6 +97,17 @@ $this->params['breadcrumbs'][] = $this->title;
                           return isset($model->supplier)?$model->supplier->supplier_code:'';
                       },
                     ],
+                    'date',
+                    'voucher_number',
+                    [
+                      'attribute' => 'pp_purchase_head_id',
+                      'label' => 'Purchase Order No',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return isset($model->ppPurchaseHead)?$model->ppPurchaseHead->po_order_number:'';
+                      },
+                    ],
+                   
                     [
                       'attribute' => 'branch_id',
                       'label' => 'Branch',

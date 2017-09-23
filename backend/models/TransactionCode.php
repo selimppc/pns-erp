@@ -95,12 +95,17 @@ class TransactionCode extends \yii\db\ActiveRecord
 
         $transaction_data = TransactionCode::find()->where(['code' => $type])->one();
 
-        $number = str_pad($transaction_data->last_number+$transaction_data->increment,8,"0",STR_PAD_LEFT);
+        if(!empty($transaction_data)){
 
-        $invoice_number = $type.$number;
+            $number = str_pad($transaction_data->last_number+$transaction_data->increment,8,"0",STR_PAD_LEFT);
 
-        return $invoice_number;
+            $invoice_number = $type.$number;
 
+            return $invoice_number;
+
+        }else{
+            return false;
+        }        
 
     }
 

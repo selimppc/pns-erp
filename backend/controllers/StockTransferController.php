@@ -87,7 +87,7 @@ class StockTransferController extends Controller
         
         // generate purchase Order Number
                
-        $transfer_number = TransactionCode::generate_transaction_number('TRNF');
+        $transfer_number = TransactionCode::generate_transaction_number('TRN-');
         
         if(empty($transfer_number)){
             $transfer_number = '';
