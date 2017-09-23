@@ -58,14 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 #['class' => 'yii\grid\SerialColumn'],
 
-                [
-                    'attribute' => 'product_code',
-                    'label' => 'Product Code',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return $model->product_code;
-                    },
-                ],
+                'product_code',
                 'product_title',
                 'batch_number',
                 'expire_date',
