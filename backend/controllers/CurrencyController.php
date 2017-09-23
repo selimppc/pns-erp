@@ -68,12 +68,30 @@ class CurrencyController extends Controller
     {
         $model = new Currency();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+            if($model->save()){
 
-            return $this->redirect(['view', 'id' => $model->id]);
+                $transaction = \Yii::$app->db->beginTransaction();
+
+                try {
+
+                    $transaction->commit();
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
+                    return $this->redirect(['view', 'id' => $model->id]);
+
+                }catch (\Exception $e) {
+
+                    \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                    $transaction->rollBack();
+                }
+
+            }
+
+            
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -93,10 +111,28 @@ class CurrencyController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+            if($model->save()){
+
+                $transaction = \Yii::$app->db->beginTransaction();
+
+                try {
+
+                    $transaction->commit();
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
             
-            return $this->redirect(['view', 'id' => $model->id]);
+                    return $this->redirect(['view', 'id' => $model->id]);
+
+                }catch (\Exception $e) {
+
+                    \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                    $transaction->rollBack();
+                }
+
+            }
+
+            
         } else {
             return $this->render('update', [
                 'model' => $model,

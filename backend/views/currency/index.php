@@ -66,8 +66,15 @@ $this->params['breadcrumbs'][] = $this->title;
                           return Html::a($model->title, ['/currency/view', 'id' => $model->id]);
                       },
                     ],
-                    'title',
-                    'exchange_rate',
+
+                    [
+                      'attribute' => 'exchange_rate',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return number_format($model->exchange_rate,3);
+                      },
+                    ],
+                    
                     [
                         'label' => 'Status',
                         'value' => function ($model){

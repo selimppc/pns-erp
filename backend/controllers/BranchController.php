@@ -67,12 +67,32 @@ class BranchController extends Controller
     {
         $model = new Branch();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+            $transaction = \Yii::$app->db->beginTransaction();
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            try {
+
+                if($model->save()){
+
+                    $transaction->commit();
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
+                    return $this->redirect(['view', 'id' => $model->id]);
+
+                }
+
+                
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+
+            
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -90,12 +110,29 @@ class BranchController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+            $transaction = \Yii::$app->db->beginTransaction();
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            try {
+
+                if($model->save()){
+
+                    $transaction->commit();
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+
+                    return $this->redirect(['view', 'id' => $model->id]);        
+                }                
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+
+            
         } else {
             return $this->render('update', [
                 'model' => $model,

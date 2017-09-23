@@ -103,6 +103,7 @@ class CustomerSearch extends Customer
             ->andFilterWhere(['like', 'cell', $this->cell])
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'fax', $this->fax])
+            ->andFilterWhere(['like', 'customer_group', $this->customer_group])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'market', $this->market])
             ->andFilterWhere(['like', 'sales_person', $this->sales_person])

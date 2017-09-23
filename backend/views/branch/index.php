@@ -70,6 +70,20 @@ $this->params['breadcrumbs'][] = $this->title;
                           return $data->currency->title;
                       },
                     ],
+
+                    [
+                     'attribute' => 'exchange_rate',
+                     'label'=>'Exchange Rate',
+                     'format' => 'raw',
+                     'value'=>function ($model) {
+                          return number_format($model->exchange_rate,3);
+                      },
+                    ],
+                    'contact_person',
+                    'designation',
+                    'mailing_addess',
+                    'phone',
+                    'cell',
                     [
                         'label' => 'Status',
                         'value' => function ($model){

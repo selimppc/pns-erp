@@ -53,18 +53,37 @@ class TransactionCodeController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->pagination->pageSize=30;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
 
-            $model = new TransactionCode();
-            $model->last_number = '0';
-            $model->increment = '1';
+            $transaction = \Yii::$app->db->beginTransaction();
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-                'model' => $model,
-                'transaction_code_help_text' => $transaction_code_help_text
-            ]);
+            try {
+
+                if($model->save()){
+
+                    $transaction->commit();
+
+                    $model = new TransactionCode();
+                    $model->last_number = '0';
+                    $model->increment = '1';
+
+                    return $this->render('index', [
+                        'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'model' => $model,
+                        'transaction_code_help_text' => $transaction_code_help_text
+                    ]);
+
+                }
+                
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+
+            
 
         }else{
 
@@ -135,22 +154,42 @@ class TransactionCodeController extends Controller
         $searchModel->type = $type;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+
+                if($model->save()){
+
+                    $transaction->commit();    
+
+                    $model = new TransactionCode();
+                    $model->type = $type;
+                    $model->last_number = '0';
+                    $model->increment = '1';
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
+                    return $this->render('index', [
+                        'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'model' => $model,
+                        'transaction_code_help_text' => $transaction_code_help_text
+                    ]);
+
+                }
+
+                
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
             
-            $model = new TransactionCode();
-            $model->type = $type;
-            $model->last_number = '0';
-            $model->increment = '1';
-
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
-
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-                'model' => $model,
-                'transaction_code_help_text' => $transaction_code_help_text
-            ]);
+            
 
         } else {
             
@@ -186,17 +225,37 @@ class TransactionCodeController extends Controller
         $searchModel->type = $type;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+        if ($model->load(Yii::$app->request->post())) {
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-                'model' => $model,
-                'transaction_code_help_text' => $transaction_code_help_text
-            ]);
+            $transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+
+                if($model->save()){
+
+                    $transaction->commit();    
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+
+                    return $this->render('index', [
+                        'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'model' => $model,
+                        'transaction_code_help_text' => $transaction_code_help_text
+                    ]);
+
+            
+                }
+                
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+            
+            
 
         } else {
             

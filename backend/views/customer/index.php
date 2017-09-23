@@ -72,6 +72,14 @@ $this->params['breadcrumbs'][] = $this->title;
                    'phone',
                    'fax',
                    'email',
+                    [
+                        'attribute' => 'customer_group',
+                        'label' => 'Customer Group',
+                        'format' => 'raw',
+                        'value' => function ($model) {
+                            return isset($model->customer_group_data)?$model->customer_group_data->title:'';
+                        },
+                    ],
 
                     [
                         'label' => 'Status',

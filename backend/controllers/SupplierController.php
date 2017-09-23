@@ -66,12 +66,29 @@ class SupplierController extends Controller
     {
         $model = new Supplier();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+            $transaction = \Yii::$app->db->beginTransaction();
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            try {
+
+                if($model->save()){
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
+                    $transaction->commit();
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+
+                
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+
+            
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -89,12 +106,31 @@ class SupplierController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+            $transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+
+                if($model->save()){
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+
+                    $transaction->commit();
+                    
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+
+                
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+
             
-            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

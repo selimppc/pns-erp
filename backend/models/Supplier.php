@@ -134,7 +134,7 @@ class Supplier extends \yii\db\ActiveRecord
      /**
      * @return \yii\db\ActiveQuery
      */
-    public function getGroup()
+    public function getGroupData()
     {
         return $this->hasOne(CodesParam::className(), ['id' => 'group']);
     }

@@ -71,7 +71,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'supplier_code',
                     'org_name',
-                    'address:ntext',                    
+                    'address:ntext',                       
+                    [
+                        'label'  => 'Group',
+                        'value'  => isset($model->groupData)?$model->groupData->title:''
+                    ],
+                    'contct_person',
+                    'phone',
+                    'fax',
+                    'cell',
+                    'email',
+                    'web_url',                 
                     'status',
                     [
                         'label'  => 'Created By',

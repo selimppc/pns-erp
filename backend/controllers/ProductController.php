@@ -83,7 +83,11 @@ class ProductController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            if($model->validate()){
+            $transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+
+                if($model->validate()){
 
                 $model->image = UploadedFile::getInstance($model, 'image');
 
@@ -120,9 +124,20 @@ class ProductController extends Controller
             // Set success data
             \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
 
+                $transaction->commit();
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+
+            
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
+            // Assigned Default data
             $model->group = 10;
             $model->category = 6;
             $model->sell_uom = 11;
@@ -136,6 +151,8 @@ class ProductController extends Controller
                 $model->exchange_rate = $currency_data->exchange_rate;
             }
 
+
+            // View Page
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -157,7 +174,11 @@ class ProductController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->image = UploadedFile::getInstance($model, 'image');
+            $transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+
+                $model->image = UploadedFile::getInstance($model, 'image');
 
                 if(!empty($model->image)){
                     
@@ -188,10 +209,22 @@ class ProductController extends Controller
 
                 $model->save();
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+                // Set success data
+                \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            
+
+                $transaction->commit();
+
+                return $this->redirect(['view', 'id' => $model->id]);
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+
+            
         } else {
             return $this->render('update', [
                 'model' => $model,

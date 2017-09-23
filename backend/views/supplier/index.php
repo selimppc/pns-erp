@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'label' => 'Group',
                         'format' => 'raw',
                         'value' => function ($model) {
-                            return isset($model->group)?$model->group->title:'';
+                            return isset($model->groupData)?$model->groupData->title:'';
                         },
                      ],
                      

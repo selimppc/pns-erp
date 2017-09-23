@@ -52,17 +52,36 @@ class CodesParamController extends Controller
 
 
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+            $transaction = \Yii::$app->db->beginTransaction();
 
-            return $this->render('codes_params_option', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-                'model' => $model,
-                'codes_params_help_text' => $codes_params_help_text
-            ]);
+            try {
+
+                if($model->save()){
+
+                    $transaction->commit();
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
+                    return $this->render('codes_params_option', [
+                        'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'model' => $model,
+                        'codes_params_help_text' => $codes_params_help_text
+                    ]);
+
+                }
+
+                
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+            
 
         } else {
 
@@ -96,17 +115,34 @@ class CodesParamController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
-            
-            return $this->render('codes_params_option', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-                'model' => $model,
-                'codes_params_help_text' => $codes_params_help_text
-            ]);
+            $transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+
+                if($model->save()){
+                    $transaction->commit();
+                    
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+                    
+                    return $this->render('codes_params_option', [
+                        'searchModel' => $searchModel,
+                        'dataProvider' => $dataProvider,
+                        'model' => $model,
+                        'codes_params_help_text' => $codes_params_help_text
+                    ]);
+                }
+
+                
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+          
 
         } else {
             
@@ -177,8 +213,27 @@ class CodesParamController extends Controller
     {
         $model = new CodesParam();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+
+                if($model->save()){
+
+                    $transaction->commit();
+
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+
+            
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -196,8 +251,27 @@ class CodesParamController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+
+                if($model->save()){
+
+                    $transaction->commit();
+                    
+                    return $this->redirect(['view', 'id' => $model->id]);        
+                }
+
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+
+            
         } else {
             return $this->render('update', [
                 'model' => $model,

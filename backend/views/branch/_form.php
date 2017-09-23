@@ -23,8 +23,6 @@ use backend\models\Currency;
 
             <?= $form->field($model, 'title',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
-
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
                 <?= $form->field($model, 'currency_id')
@@ -34,6 +32,8 @@ use backend\models\Currency;
                             ); ?>
 
             </div>
+
+            <?= $form->field($model, 'exchange_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
@@ -76,3 +76,31 @@ use backend\models\Currency;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+    
+    $this->registerJs("
+
+        $('#branch-currency_id').change(function (e) {
+            var currency = $('#branch-currency_id').val();
+
+            $.ajax({
+                type : 'POST',
+                dataType : 'json',
+                url : '".Url::toRoute('currency/find-currency-rate')."',
+                data: {currency:currency},
+                beforeSend : function( request ){
+                    
+                },
+                success : function( data )
+                    {   
+                        if(data.result == 'success'){                            
+                            $('#branch-exchange_rate').val(data.exchange_rate);
+                        }
+                    }
+            });
+
+        });
+
+     ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
+?>

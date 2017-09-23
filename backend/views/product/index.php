@@ -111,6 +111,14 @@ $this->params['breadcrumbs'][] = $this->title;
                      }
                    ],
 
+                  [
+                    'attribute' => 'exchange_rate',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return number_format($model->exchange_rate,3);
+                    },
+                  ],
+
                     [
                      'attribute' => 'status',
                      'label' => 'Status',
