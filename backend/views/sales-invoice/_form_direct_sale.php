@@ -76,7 +76,7 @@ $this->registerJs($js);
 
                 <?= $form->field($model, 'customer_id')
                             ->dropDownList(
-                                ArrayHelper::map(Customer::find()->all(), 'id', 'name'),
+                                ArrayHelper::map(Customer::find()->where(['status'=>'active'])->all(), 'id', 'name'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 
@@ -105,7 +105,7 @@ $this->registerJs($js);
 
                 <?= $form->field($model, 'currency_id')
                             ->dropDownList(
-                                ArrayHelper::map(Currency::find()->all(), 'id', 'currency_code'),
+                                ArrayHelper::map(Currency::find()->where(['status'=>'active'])->all(), 'id', 'currency_code'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 
@@ -125,7 +125,7 @@ $this->registerJs($js);
 
                 <?= $form->field($model, 'branch_id')
                             ->dropDownList(
-                                ArrayHelper::map(Branch::find()->all(), 'id', 'branch_code'),
+                                ArrayHelper::map(Branch::find()->where(['status'=>'active'])->all(), 'id', 'branch_code'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 

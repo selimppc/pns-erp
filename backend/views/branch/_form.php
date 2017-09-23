@@ -29,7 +29,7 @@ use backend\models\Currency;
 
                 <?= $form->field($model, 'currency_id')
                             ->dropDownList(
-                                ArrayHelper::map(Currency::find()->all(), 'id', 'title'),
+                                ArrayHelper::map(Currency::find()->where(['status'=>'active'])->all(), 'id', 'title'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 

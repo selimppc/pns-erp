@@ -76,7 +76,7 @@ $this->registerJs($js);
 
                 <?= $form->field($modelSmHead, 'customer_id')
                             ->dropDownList(
-                                ArrayHelper::map(Customer::find()->all(), 'id', 'name'),
+                                ArrayHelper::map(Customer::find()->where(['status'=>'active'])->all(), 'id', 'name'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 
@@ -105,7 +105,7 @@ $this->registerJs($js);
 
                 <?= $form->field($modelSmHead, 'currency_id')
                             ->dropDownList(
-                                ArrayHelper::map(Currency::find()->all(), 'id', 'currency_code'),
+                                ArrayHelper::map(Currency::find()->where(['status'=>'active'])->all(), 'id', 'currency_code'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 
@@ -125,7 +125,7 @@ $this->registerJs($js);
 
                 <?= $form->field($modelSmHead, 'branch_id')
                             ->dropDownList(
-                                ArrayHelper::map(Branch::find()->all(), 'id', 'branch_code'),
+                                ArrayHelper::map(Branch::find()->where(['status'=>'active'])->all(), 'id', 'branch_code'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 
@@ -249,7 +249,7 @@ $this->registerJs($js);
                             
 
                                 <?= $form->field($modelSmDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
-                                        ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->all(), 'id', 'title'),
+                                        ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
                                          ['prompt'=>'-Select-','class'=>'form-control floating']
                                     )->label(false) ?>
                             </div>

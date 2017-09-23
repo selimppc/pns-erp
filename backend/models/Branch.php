@@ -100,7 +100,7 @@ class Branch extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'branch_code' => Yii::t('app', 'Branch Code'),
             'title' => Yii::t('app', 'Title'),
-            'currency_id' => Yii::t('app', 'Currency ID'),
+            'currency_id' => Yii::t('app', 'Currency'),
             'exchange_rate' => Yii::t('app', 'Exchange Rate'),
             'contact_person' => Yii::t('app', 'Contact Person'),
             'designation' => Yii::t('app', 'Designation'),

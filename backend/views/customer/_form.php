@@ -31,7 +31,7 @@ use backend\models\CodesParam;
 
                 <?= $form->field($model, 'customer_group')
                         ->dropDownList(
-                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Customer Group'])->all(), 'id', 'title'),
+                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Customer Group'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
                              ['class'=>'form-control floating']
                         ); ?>
                 
@@ -41,7 +41,7 @@ use backend\models\CodesParam;
 
                 <?= $form->field($model, 'branch_id')
                             ->dropDownList(
-                                ArrayHelper::map(Branch::find()->all(), 'id', 'title'),
+                                ArrayHelper::map(Branch::find()->where(['status'=>'active'])->all(), 'id', 'title'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 

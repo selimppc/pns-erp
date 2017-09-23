@@ -114,7 +114,7 @@ $this->registerJs($js);
 
                     <?= $form->field($modelTransferHead, 'from_branch_id')
                                 ->dropDownList(
-                                    ArrayHelper::map(Branch::find()->all(), 'id', 'branch_code'),
+                                    ArrayHelper::map(Branch::find()->where(['status'=>'active'])->all(), 'id', 'branch_code'),
                                      ['prompt'=>'-Select-','class'=>'form-control']
                                 ); ?>
 
@@ -128,7 +128,7 @@ $this->registerJs($js);
 
                     <?= $form->field($modelTransferHead, 'from_currency_id')
                                 ->dropDownList(
-                                    ArrayHelper::map(Currency::find()->all(), 'id', 'currency_code'),
+                                    ArrayHelper::map(Currency::find()->where(['status'=>'active'])->all(), 'id', 'currency_code'),
                                      ['prompt'=>'-Select-','class'=>'form-control']
                                 ); ?>
 
@@ -156,7 +156,7 @@ $this->registerJs($js);
 
                     <?= $form->field($modelTransferHead, 'to_branch_id')
                                 ->dropDownList(
-                                    ArrayHelper::map(Branch::find()->all(), 'id', 'branch_code'),
+                                    ArrayHelper::map(Branch::find()->where(['status'=>'active'])->all(), 'id', 'branch_code'),
                                      ['prompt'=>'-Select-','class'=>'form-control']
                                 ); ?>
 
@@ -170,7 +170,7 @@ $this->registerJs($js);
 
                     <?= $form->field($modelTransferHead, 'to_currency_id')
                                 ->dropDownList(
-                                    ArrayHelper::map(Currency::find()->all(), 'id', 'currency_code'),
+                                    ArrayHelper::map(Currency::find()->where(['status'=>'active'])->all(), 'id', 'currency_code'),
                                      ['prompt'=>'-Select-','class'=>'form-control']
                                 ); ?>
 
@@ -271,7 +271,7 @@ $this->registerJs($js);
 
                             <div class="custom-column-20">
                                 <?= $form->field($modelTransferDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
-                                    ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->all(), 'id', 'title'),
+                                    ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
                                      ['prompt'=>'-Select-','class'=>'form-control floating']
                                 )->label(false) ?>
                             </div>

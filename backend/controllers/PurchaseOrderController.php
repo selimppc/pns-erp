@@ -182,6 +182,9 @@ class PurchaseOrderController extends Controller
                         return $this->redirect(['view', 'id' => $modelPurchaseHead->id]);
                     }
                 } catch (\Exception $e) {
+
+                    print_r($e);
+                    exit();
                     $transaction->rollBack();
                 }
             }
