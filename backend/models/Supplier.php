@@ -74,7 +74,7 @@ class Supplier extends \yii\db\ActiveRecord
             [['address'], 'string'],
             [['zip'], 'number'],
             [['created_by', 'updated_by'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','group'], 'safe'],
             [['supplier_code', 'state', 'phone', 'fax', 'cell', 'status'], 'string', 'max' => 16],
             [['org_name', 'contct_person', 'email', 'web_url'], 'string', 'max' => 45],
         ];
@@ -92,6 +92,7 @@ class Supplier extends \yii\db\ActiveRecord
             'address' => Yii::t('app', 'Organization Address'),
             'state' => Yii::t('app', 'Organization State'),
             'zip' => Yii::t('app', 'Organization Zip'),
+            'group' => Yii::t('app', 'Group'),
             'contct_person' => Yii::t('app', 'Contct Person'),
             'phone' => Yii::t('app', 'Contct Person Phone'),
             'fax' => Yii::t('app', 'Contct Person Fax'),
@@ -128,6 +129,14 @@ class Supplier extends \yii\db\ActiveRecord
     public function getProducts()
     {
         return $this->hasMany(Product::className(), ['supplier_id' => 'id']);
+    }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGroup()
+    {
+        return $this->hasOne(CodesParam::className(), ['id' => 'group']);
     }
 
     /**

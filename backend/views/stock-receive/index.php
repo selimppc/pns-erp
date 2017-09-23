@@ -20,7 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        &nbsp;   
+       <?php
+          echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
+        ?>  
       </div>
 </div>
 

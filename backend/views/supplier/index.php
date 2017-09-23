@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
        
       <div class="panel-body">
 
-          
+          <div class="table-responsive">  
              <?= GridView::widget([
                   'dataProvider' => $dataProvider,
                   'filterModel' => $searchModel,
@@ -56,9 +56,23 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a($model->supplier_code, ['/supplier/view', 'id' => $model->id]);
                         },
                       ],
+                      [
+                        'attribute' => 'group',
+                        'label' => 'Group',
+                        'format' => 'raw',
+                        'value' => function ($model) {
+                            return isset($model->group)?$model->group->title:'';
+                        },
+                     ],
                      
                       'org_name',
                       'address:ntext',
+                      'contct_person',
+                      'phone',
+                      'fax',
+                      'cell',
+                      'email',
+                      'web_url',
                       [
                           'label' => 'Status',
                           'value' => function ($model){
@@ -85,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   ],
               ]); ?>
           
-
+        </div>
       </div>
 
   </div>  

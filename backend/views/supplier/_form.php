@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+
+use backend\models\CodesParam;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Supplier */
@@ -17,6 +20,12 @@ use yii\widgets\ActiveForm;
         <div class="col-md-6">
 
             <?= $form->field($model, 'supplier_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'group')
+                        ->dropDownList(
+                            ArrayHelper::map(CodesParam::find()->where(['type'=>'Supplier Group'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
+                             ['prompt'=>'-Select-','class'=>'form-control floating']
+                        ); ?>
 
             <?= $form->field($model, 'contct_person',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 

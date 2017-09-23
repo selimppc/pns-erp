@@ -19,7 +19,7 @@ class SupplierSearch extends Supplier
     {
         return [
             [['id', 'created_by', 'updated_by'], 'integer'],
-            [['supplier_code', 'org_name', 'address', 'state', 'contct_person', 'phone', 'fax', 'cell', 'email', 'web_url', 'status', 'created_at', 'updated_at'], 'safe'],
+            [['supplier_code', 'org_name', 'address', 'state', 'contct_person', 'phone', 'fax', 'cell', 'email', 'web_url', 'status', 'created_at', 'updated_at','group'], 'safe'],
             [['zip'], 'number'],
         ];
     }
@@ -100,6 +100,7 @@ class SupplierSearch extends Supplier
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'fax', $this->fax])
             ->andFilterWhere(['like', 'cell', $this->cell])
+            ->andFilterWhere(['like', 'group', $this->group])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'web_url', $this->web_url])
             ->andFilterWhere(['like', 'status', $this->status]);
