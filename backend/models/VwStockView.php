@@ -10,12 +10,24 @@ use yii\behaviors\BlameableBehavior;
 
 class VwStockView extends \yii\db\ActiveRecord
 {
+
+    public $total;
 	/**
      * @inheritdoc
      */
     public static function tableName()
     {
         return '{{%vw_stock_view}}';
+    }
+
+     public function rules()
+    {
+        return [
+          
+            [['total'],'safe']
+        ];
+
+
     }
 
     /**

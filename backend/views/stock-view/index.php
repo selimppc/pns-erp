@@ -108,6 +108,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'saleQty',
                 'inhandQty',
                 'available',
+                [
+                   # 'attribute' => 'product_id',
+                    'label' => 'Total',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return '';
+                    },
+                ],
                
                
                 #['class' => 'yii\grid\ActionColumn'],
