@@ -120,5 +120,9 @@ return [
 
     'invoice_entry_view' => '<b>New Invoice:</b> In this screen fill up the fields in both tables. Please follow the <b>Instruction</b> below ** on column <b>Item Details</b>',
 
-    'account_payable_invoice' => ''
+    'account_payable_invoice' => '',
+
+    'stock_receive_index' => '<b>Stock Receive:</b> In this screen you will be able to confirm receive by clicking the button under the column <b>Confirm Receive</b>. You can also view full information, click on the button under the column<b>"View Full Information"</b>',
+
+    'account_payable_payment' => '<b>Account Payable:</b> This screen will allow you to view supplier(s) invoice payable list. For payment, click on the link under <b>Supplier Code</b> column. The link will redirect you to a new entry screen for the Payment Voucher.'
 ];

@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="page-content">
     <!-- Panel Basic -->
     <div class="panel">
-      <div id="flag_desc">
+        <div id="flag_desc">
           <div id="flag_desc_text">
               <?php
                 if(isset(\Yii::$app->params['stock_view']) && !empty(\Yii::$app->params['stock_view'])){

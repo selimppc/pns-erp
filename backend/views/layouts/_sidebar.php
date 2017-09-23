@@ -138,7 +138,7 @@
                   </a>
                 </li> 
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/stock-receive']); ?>">
                     <span class="site-menu-title">Stock Receive</span>
                   </a>
                 </li>
@@ -182,7 +182,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/account-payment']); ?>">
                     <span class="site-menu-title">Payment</span>
                   </a>
                 </li> 
