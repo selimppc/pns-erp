@@ -62,18 +62,19 @@ class AccountPayableInvoiceController extends Controller{
 
             try {
 
-                $model->status= 'invoiced';
+                $result = \Yii::$app->db->createCommand("CALL sp_im_invoice(:p_id, :p_UserId)") 
+                      ->bindValue(':p_id' , $id )
+                      ->bindValue(':p_UserId', Yii::$app->user->id)
+                      ->execute(); 
 
-                $model->save();
+                // Set success data
+                \Yii::$app->getSession()->setFlash('success', 'Successfully Invoiced');
 
                // $transaction->commit();
 
             } catch (\Exception $e) {
-                print_r($e);
-                exit();
-            }          
-
-
+                \Yii::$app->getSession()->setFlash($e->getMessage());
+            }
 
            
         }

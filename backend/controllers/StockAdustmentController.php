@@ -233,20 +233,21 @@ class StockAdustmentController extends Controller
 
         if($model){
 
-            $model->status = 'confirmed';
+            try {
 
-            $valid = $model->validate();
-            if($valid){
+                $result = \Yii::$app->db->createCommand("CALL sp_im_adjust_confirm(:pID, :pUserId)") 
+                      ->bindValue(':pID' , $id )
+                      ->bindValue(':pUserId', Yii::$app->user->id)
+                      ->execute(); 
 
                 // Set success data
                 \Yii::$app->getSession()->setFlash('success', 'Successfully Confirmed');
 
-                $model->save();    
-            }else{
-                print_r($model->getErrors());
-                exit();
-            }
-            
+               // $transaction->commit();
+
+            } catch (\Exception $e) {
+                \Yii::$app->getSession()->setFlash($e->getMessage());
+            }  
 
            
         }
