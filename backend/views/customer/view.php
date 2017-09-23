@@ -71,6 +71,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'customer_code',
                     'name',
+                    'address',
+                    'terotorry',
+                    'type',
+                    'cell',
+                    'phone',
+                    'fax',
+                    'email',
+                    'market',
+                    'sales_person',
+                    'credit_limit',
+                    'hub',
                     [
                         'label'  => 'Branch',
                         'value'  => isset($model->branch)?$model->branch->title:''

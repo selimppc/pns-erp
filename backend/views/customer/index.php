@@ -67,6 +67,12 @@ $this->params['breadcrumbs'][] = $this->title;
                       },
                    ],
 
+                   'address',
+                   'cell',
+                   'phone',
+                   'fax',
+                   'email',
+
                     [
                         'label' => 'Status',
                         'value' => function ($model){
