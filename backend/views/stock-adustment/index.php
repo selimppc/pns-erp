@@ -3,6 +3,11 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use yii\helpers\ArrayHelper;
+
+use backend\models\Currency;
+use backend\models\Branch;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImAdjustHeadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -82,13 +87,28 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                         ],
                         'date',
-                        'branch_id',
+                        [
+                           'attribute' => 'branch_id',  
+                           'label' => 'Branch',
+                           'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
+                           'value' => function ($model) {
+                               return isset($model->branch)?$model->branch->title:'';
+                           }
+                        ],
                         'confirm_date',
-                        'currency_id',
+                        [
+                           'attribute' => 'currency_id',  
+                           'label' => 'Currency',
+                           'filter'=>ArrayHelper::map(Currency::find()->asArray()->all(), 'id', 'currency_code'),
+                           'value' => function ($model) {
+                               return isset($model->currency)?$model->currency->currency_code:'';
+                           }
+                        ],
                         'exchange_rate',
                         [
                           'attribute' => 'status',
                           'label' => 'Status',
+                          'filter'=>array("open"=>"Open","confirmed"=>"Confirmed"),
                           'value' => function ($model){
                             return ucfirst($model->status);
                           }

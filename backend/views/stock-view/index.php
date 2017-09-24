@@ -3,6 +3,11 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use yii\helpers\ArrayHelper;
+
+use backend\models\Branch;
+use backend\models\CodesParam;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImGrnDetailSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -64,6 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'expire_date',
                 [
                     'attribute' => 'branch_id',
+                    'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
                     'label' => 'Branch',
                     'format' => 'raw',
                     'value' => function ($model) {
@@ -92,6 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'uom',
                     'label' => 'UOM',
+                    'filter'=>ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->asArray()->all(), 'id', 'title'),
                     'format' => 'raw',
                     'value' => function ($model) {
                         return isset($model->productUom)?$model->productUom->title:'';

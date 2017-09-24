@@ -86,9 +86,7 @@ class ImTransferHeadSearch extends ImTransferHead
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'date' => $this->date,
-            'confirm_date' => $this->confirm_date,
+            'id' => $this->id,            
             'from_branch_id' => $this->from_branch_id,
             'from_currency_id' => $this->from_currency_id,
             'from_exchange_rate' => $this->from_exchange_rate,
@@ -103,6 +101,8 @@ class ImTransferHeadSearch extends ImTransferHead
 
         $query->andFilterWhere(['like', 'transfer_number', $this->transfer_number])
             ->andFilterWhere(['like', 'note', $this->note])
+            ->andFilterWhere(['like', 'date', $this->date])
+            ->andFilterWhere(['like', 'confirm_date', $this->confirm_date])
             ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;

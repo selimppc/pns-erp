@@ -5,6 +5,12 @@ use yii\grid\GridView;
 use backend\models\ImGrnHead;
 use yii\bootstrap\Modal;
 
+use yii\helpers\ArrayHelper;
+
+use backend\models\Supplier;
+use backend\models\Branch;
+use backend\models\Currency;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImGrnHeadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -66,6 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                  'attribute' => 'supplier_id',
                  'label' => 'Supplier',
+                 'filter'=>ArrayHelper::map(Supplier::find()->asArray()->all(), 'id', 'supplier_code'),
                  'value' => function ($model) {
                      return isset($model->supplier)?$model->supplier->supplier_code:'';
                  }
@@ -73,6 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                [
                  'attribute' => 'supplier_id',
                  'label' => 'Supplier Name',
+                 'filter'=>ArrayHelper::map(Supplier::find()->asArray()->all(), 'id', 'org_name'),
                  'value' => function ($model) {
                      return isset($model->supplier)?$model->supplier->org_name:'';
                  }
@@ -87,7 +95,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'delivery_date',
                
                 [
+                  'attribute' => 'status',
                   'label' => 'PO Status',
+                  'filter'=>array("open"=>"Open","grn-created"=>"Grn-created","approved"=>"Approved","part-received"=>"Part-received"),
                   'value' => function ($model){
 
                     $grn_data_exists = ImGrnHead::find()->where(['pp_purchase_head_id'=>$model->id])->one();
@@ -95,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     if(empty($grn_data_exists)){
                       return ucfirst($model->status);
                     }else{
-                      return ucfirst('Grn '.$grn_data_exists->status);
+                      return 'Grn '.ucfirst($grn_data_exists->status);
                     }
                     
                   }

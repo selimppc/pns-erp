@@ -87,8 +87,7 @@ class PpPurchaseHeadSearch extends PpPurchaseHead
             'id' => $this->id,           
             'supplier_id' => $this->supplier_id,
             'currency_id' => $this->currency_id,
-            'exchange_rate' => $this->exchange_rate,
-            'delivery_date' => $this->delivery_date,
+            'exchange_rate' => $this->exchange_rate,            
             'branch_id' => $this->branch_id,
             'tax_rate' => $this->tax_rate,
             'tax_amount' => $this->tax_amount,
@@ -105,6 +104,7 @@ class PpPurchaseHeadSearch extends PpPurchaseHead
         $query->andFilterWhere(['like', 'po_order_number', $this->po_order_number])
             ->andFilterWhere(['like', 'pay_terms', $this->pay_terms])
             ->andFilterWhere(['like', 'date', $this->date])
+            ->andFilterWhere(['like', 'delivery_date', $this->delivery_date])
             ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;

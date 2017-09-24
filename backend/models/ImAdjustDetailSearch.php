@@ -63,7 +63,6 @@ class ImAdjustDetailSearch extends ImAdjustDetail
             'id' => $this->id,
             'im_adjust_head_id' => $this->im_adjust_head_id,
             'product_id' => $this->product_id,
-            'expire_date' => $this->expire_date,
             'quantity' => $this->quantity,
             'stock_rate' => $this->stock_rate,
             'created_by' => $this->created_by,
@@ -73,6 +72,7 @@ class ImAdjustDetailSearch extends ImAdjustDetail
         ]);
 
         $query->andFilterWhere(['like', 'batch_number', $this->batch_number])
+            ->andFilterWhere(['like', 'expire_date', $this->expire_date])
             ->andFilterWhere(['like', 'uom', $this->uom]);
 
         return $dataProvider;

@@ -3,6 +3,11 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use yii\helpers\ArrayHelper;
+
+use backend\models\Branch;
+use backend\models\Currency;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImTransferHeadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -83,6 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                'attribute' => 'from_branch_id',  
                'label' => 'From Branch',
+               'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
                'value' => function ($model) {
                    return isset($model->fromBranch)?$model->fromBranch->title:'';
                }
@@ -91,14 +97,16 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                'attribute' => 'from_currency_id',  
                'label' => 'From Currency',
+               'filter'=>ArrayHelper::map(Currency::find()->asArray()->all(), 'id', 'currency_code'),
                'value' => function ($model) {
-                   return isset($model->fromCurrency)?$model->fromCurrency->title:'';
+                   return isset($model->fromCurrency)?$model->fromCurrency->currency_code:'';
                }
             ],                       
             'from_exchange_rate',
             [
-               'attribute' => 'tp_branch_id',  
+               'attribute' => 'to_branch_id',  
                'label' => 'To Branch',
+               'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
                'value' => function ($model) {
                    return isset($model->toBranch)?$model->toBranch->title:'';
                }
@@ -107,14 +115,16 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                'attribute' => 'to_currency_id',  
                'label' => 'Top Currency',
+               'filter'=>ArrayHelper::map(Currency::find()->asArray()->all(), 'id', 'currency_code'),
                'value' => function ($model) {
-                   return isset($model->toCurrency)?$model->toCurrency->title:'';
+                   return isset($model->toCurrency)?$model->toCurrency->currency_code:'';
                }
             ], 
             'to_exchange_rate',
             [
               'attribute' => 'status',
               'label' => 'Status',
+              'filter'=>array("dispatch"=>"Dispatch","open"=>"Open","received"=>"Received"),
               'value' => function ($model){
                 return ucfirst($model->status);
               }

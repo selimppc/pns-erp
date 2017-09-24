@@ -16,7 +16,7 @@ class VwImStockViewSearch extends VwImStockView
     public function rules()
     {
         return [            
-            [['product_id','product_title','batch_number','expire_date', 'branch_id','sell_rate','sell_tax','im_rate','uom','batch_number','issueQty','saleQty','inhandQty','available','min_level'], 'safe'],
+            [['product_id','product_title','batch_number','expire_date', 'branch_id','sell_rate','sell_tax','im_rate','uom','batch_number','issueQty','saleQty','inhandQty','available','min_level','product_code'], 'safe'],
         ];
     }
 
@@ -58,22 +58,22 @@ class VwImStockViewSearch extends VwImStockView
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'product_id' => $this->product_id,
-            'product_title' => $this->product_title,
-            'batch_number' => $this->batch_number,
-            'expire_date' => $this->expire_date,
-            'branch_id' => $this->branch_id,
-            'sell_rate' => $this->sell_rate,
-            'sell_tax' => $this->sell_tax,
-            'im_rate' => $this->im_rate,
-            'uom' => $this->uom,
-            'issueQty' => $this->issueQty,
-            'saleQty' => $this->saleQty,
-            'inhandQty' => $this->inhandQty,
-            'available' => $this->available,
-            'min_level' => $this->min_level
-        ]);
+       
+
+        $query->andFilterWhere(['like', 'product_code', $this->product_code])
+            ->andFilterWhere(['like', 'product_title', $this->product_title])
+            ->andFilterWhere(['like', 'batch_number', $this->batch_number])
+            ->andFilterWhere(['like', 'expire_date', $this->expire_date])
+            ->andFilterWhere(['like', 'branch_id', $this->branch_id])
+            ->andFilterWhere(['like', 'sell_rate', $this->sell_rate])
+            ->andFilterWhere(['like', 'sell_tax', $this->sell_tax])
+            ->andFilterWhere(['like', 'im_rate', $this->im_rate])
+            ->andFilterWhere(['like', 'uom', $this->uom])
+            ->andFilterWhere(['like', 'available', $this->available])
+            ->andFilterWhere(['like', 'min_level', $this->min_level])
+            ->andFilterWhere(['like', 'issueQty', $this->issueQty])
+            ->andFilterWhere(['like', 'saleQty', $this->saleQty])
+            ->andFilterWhere(['like', 'inhandQty', $this->inhandQty]);
 
         return $dataProvider;
 
