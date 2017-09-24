@@ -19,7 +19,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'class', 'group', 'category', 'currency_id', 'supplier_id', 'created_by', 'updated_by'], 'integer'],
-            [['product_code', 'title', 'description', 'image', 'thumb_image', 'model', 'size', 'origin', 'sell_uom', 'purchase_uom', 'stock_uom', 'pack_size', 'stock_type', 'generic', 'manufacture_code', 'max_level', 'min_level', 're_order', 'created_at', 'updated_at'], 'safe'],
+            [['product_code', 'title', 'description', 'image', 'thumb_image', 'model', 'size', 'origin', 'sell_uom', 'purchase_uom', 'stock_uom', 'pack_size', 'stock_type', 'generic', 'manufacture_code', 'max_level', 'min_level', 're_order', 'created_at', 'updated_at','status'], 'safe'],
             [['exchange_rate', 'sell_rate', 'cost_price', 'sell_uom_qty', 'purchase_uom_qty', 'sell_tax', 'stock_uom_qty'], 'number'],
         ];
     }
@@ -109,6 +109,7 @@ class ProductSearch extends Product
             ->andFilterWhere(['like', 'thumb_image', $this->thumb_image])
             ->andFilterWhere(['like', 'model', $this->model])
             ->andFilterWhere(['like', 'size', $this->size])
+            ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['like', 'origin', $this->origin])
             ->andFilterWhere(['like', 'sell_uom', $this->sell_uom])
             ->andFilterWhere(['like', 'purchase_uom', $this->purchase_uom])

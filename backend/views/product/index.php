@@ -4,6 +4,12 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
+use yii\helpers\ArrayHelper;
+
+use backend\models\CodesParam;
+use backend\models\Currency;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -66,6 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                  [
                     'attribute' => 'class',
                     'format' => 'raw',
+                    'filter'=>ArrayHelper::map(CodesParam::find()->where(['type'=>'Product Class'])->asArray()->all(), 'id', 'title'),
                     'value' => function ($model) {
                         return isset($model->product_class)?$model->product_class->title:'';
                     },
@@ -73,6 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                  [
                     'attribute' => 'group',
                     'format' => 'raw',
+                    'filter'=>ArrayHelper::map(CodesParam::find()->where(['type'=>'Product Group'])->asArray()->all(), 'id', 'title'),
                     'value' => function ($model) {
                         return isset($model->product_group)?$model->product_group->title:'';
                     },
@@ -106,6 +114,7 @@ $this->params['breadcrumbs'][] = $this->title;
                    [
                      'attribute' => 'currency_id',
                      'label' => 'Currency',
+                     'filter'=>ArrayHelper::map(Currency::find()->asArray()->all(), 'id', 'currency_code'),
                      'value' => function ($model) {
                          return isset($model->currency)?$model->currency->currency_code:'';
                      }
@@ -121,7 +130,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     [
                      'attribute' => 'status',
+                      'format' => 'raw',
                      'label' => 'Status',
+                     'filter'=>array("active"=>"Active","inactive"=>"Inactive","cancel"=>"Cancel"),
                      'value' => function ($model) {
                          return ucfirst($model->status);
                      }
