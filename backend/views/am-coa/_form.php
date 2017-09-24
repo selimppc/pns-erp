@@ -59,6 +59,11 @@ use backend\models\Branch;
 
             </div>
 
+            
+        </div>
+
+        <div class="col-md-6">
+
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
                 <?= $form->field($model, 'branch_id')
@@ -68,10 +73,6 @@ use backend\models\Branch;
                             ); ?>
 
             </div>
-            
-        </div>
-
-        <div class="col-md-6">
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
@@ -87,28 +88,7 @@ use backend\models\Branch;
 
                 <?= $form->field($model, 'group_two_id')
                             ->dropDownList(
-                                ArrayHelper::map(GroupTwo::find()->all(), 'id', 'title'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'group_three_id')
-                            ->dropDownList(
-                                ArrayHelper::map(GroupThree::find()->all(), 'id', 'title'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'group_four_id')
-                            ->dropDownList(
-                                ArrayHelper::map(GroupFour::find()->all(), 'id', 'title'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
+                                 $model->isNewRecord?['prompt'=>'-Select-']:ArrayHelper::map(GroupTwo::find()->all(), 'id', 'title')
                             ); ?>
 
             </div>
@@ -135,3 +115,32 @@ use backend\models\Branch;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+    
+    $this->registerJs("
+
+        $('#amcoa-group_one_id').change(function (e) {
+            var group__one = $('#amcoa-group_one_id').val();
+
+            $.ajax({
+                type : 'POST',
+                dataType : 'json',
+                url : '".Url::toRoute('am-coa/find-group-two')."',
+                data: {group__one:group__one},
+                beforeSend : function( request ){
+                    
+                },
+                success : function( data )
+                    {   
+                        if(data.result == 'success'){                               
+                            $('#amcoa-group_two_id').html(data.select_data);
+                        }
+                    }
+            });
+
+        });
+
+      
+     ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
+?>

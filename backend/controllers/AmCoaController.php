@@ -5,10 +5,18 @@ namespace backend\controllers;
 use Yii;
 use backend\models\AmCoa;
 use backend\models\AmCoaSearch;
+
 use backend\models\TransactionCode;
+
+use backend\models\GroupTwo;
+use backend\models\GroupThree;
+use backend\models\GroupFour;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
+use yii\web\Response;
 
 /**
  * AmCoaController implements the CRUD actions for AmCoa model.
@@ -68,12 +76,32 @@ class AmCoaController extends Controller
     {
         $model = new AmCoa();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+            $transaction = \Yii::$app->db->beginTransaction();
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            try {
+
+                if($model->save()){
+                    $transaction->commit();
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted'); 
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }else{
+
+                    return $this->render('create', [
+                        'model' => $model,
+                    ]);
+                }
+                
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                $transaction->rollBack();
+            }
+
+            
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -91,18 +119,78 @@ class AmCoaController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+            $transaction = \Yii::$app->db->beginTransaction();
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            try {
+
+                if($model->save()){
+                    $transaction->commit();   
+                    
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Updated'); 
+
+                    return $this->redirect(['view', 'id' => $model->id]);
+
+                }else{
+
+                    
+
+                    return $this->render('update', [
+                        'model' => $model,
+                    ]);
+
+                }
+                
+
+            }catch (\Exception $e) {
+
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                $transaction->rollBack();
+            }
+
+            
+            
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
     }
+
+
+    public function actionFindGroupTwo(){
+        if (Yii::$app->request->isAjax) {
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $session = Yii::$app->session;
+            $response = [];
+
+            $group__one = $_POST['group__one'];
+
+            $group_two_data = GroupTwo::find()->where(['group_one_id' => $group__one])->all();
+
+            if(!empty($group_two_data)){
+                
+                $response['select_data'] = '<option>-Select-</option>';
+
+                foreach($group_two_data as $group_two){
+                    $response['select_data'].='<option value='.$group_two->id.'>'.$group_two->title.'</option>';
+                }
+                
+
+                $response['result'] = 'success';
+            }else{
+                $response['result'] = 'error';
+            }
+
+            return $response;
+
+
+
+        }
+     }
 
     /**
      * Deletes an existing AmCoa model.

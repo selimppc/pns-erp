@@ -54,6 +54,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     #['class' => 'yii\grid\SerialColumn'],
 
                     'id',
+                    [
+                      'attribute' => 'group_one_id',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return isset($model->groupOne)?$model->groupOne->title:'';
+                      },
+                    ],
+                    [
+                      'attribute' => 'group_two_id',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return isset($model->groupTwo)?$model->groupTwo->title:'';
+                      },
+                    ],
+                    
                     'account_code',
                     [
                       'attribute' => 'title',
