@@ -12,6 +12,8 @@ use backend\models\ImTransferDetailSearch;
 use backend\models\ImBatchTransfer;
 use backend\models\VwImStockView;
 
+use backend\models\Currency;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -100,8 +102,24 @@ class StockTransferController extends Controller
         $modelTransferHead = new ImTransferHead;
         $modelsTransferDetail = [new ImTransferDetail];
 
+        // Set Default Data
         $modelTransferHead->transfer_number = $transfer_number; 
         $modelTransferHead->status = 'open'; 
+
+        $modelTransferHead->from_branch_id = 1;
+        $modelTransferHead->from_currency_id = 1;
+
+        $modelTransferHead->to_branch_id = 1;
+        $modelTransferHead->to_currency_id = 1;
+
+        // Currency Data
+
+        $currency_data = Currency::find()->where(['id' => $modelTransferHead->from_currency_id])->one();
+
+        if(!empty($currency_data)){
+            $modelTransferHead->from_exchange_rate = $currency_data->exchange_rate;
+            $modelTransferHead->to_exchange_rate = $currency_data->exchange_rate;
+        }
         
         if ($modelTransferHead->load(Yii::$app->request->post())) {
 
@@ -152,8 +170,6 @@ class StockTransferController extends Controller
                                     }
 
 
-                                }else{
-                                    exit('Error');
                                 }
                                 /*$transaction->rollBack();
                                 break;*/
@@ -184,8 +200,9 @@ class StockTransferController extends Controller
                     }
                 } catch (\Exception $e) {
 
-                    print_r($e->getMessage());
-                    exit();
+                    // Set error data
+                    \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                    
                     $transaction->rollBack();
                 }
             }
@@ -244,6 +261,10 @@ class StockTransferController extends Controller
                         return $this->redirect(['view', 'id' => $modelTransferHead->id]);
                     }
                 } catch (\Exception $e) {
+
+                    // Set error data
+                    \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+
                     $transaction->rollBack();
                 }
             }

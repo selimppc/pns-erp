@@ -9,6 +9,8 @@ use backend\models\ImAdjustHeadSearch;
 use backend\models\ImAdjustDetail;
 
 use backend\models\TransactionCode;
+use backend\models\Currency;
+
 use backend\models\Model;
 
 use yii\web\Controller;
@@ -98,8 +100,19 @@ class StockAdustmentController extends Controller
         $modelAdjustmentHead = new ImAdjustHead;
         $modelsAdjustmentDetail = [new ImAdjustDetail];
 
+        // Set Default Data
         $modelAdjustmentHead->transaction_no = $adjustment_number; 
         $modelAdjustmentHead->status = 'open'; 
+
+        $modelAdjustmentHead->branch_id = 1;
+        $modelAdjustmentHead->currency_id = 1;
+
+        // Currency Data
+        $currency_data = Currency::find()->where(['id'=>$modelAdjustmentHead->currency_id])->one();
+
+        if(!empty($currency_data)){
+            $modelAdjustmentHead->exchange_rate = $currency_data->exchange_rate;
+        }
         
         if ($modelAdjustmentHead->load(Yii::$app->request->post())) {
 
@@ -144,6 +157,10 @@ class StockAdustmentController extends Controller
                         return $this->redirect(['view', 'id' => $modelAdjustmentHead->id]);
                     }
                 } catch (\Exception $e) {
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+
                     $transaction->rollBack();
                 }
             }
@@ -202,6 +219,10 @@ class StockAdustmentController extends Controller
                         return $this->redirect(['view', 'id' => $modelAdjustmentHead->id]);
                     }
                 } catch (\Exception $e) {
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                    
                     $transaction->rollBack();
                 }
             }
