@@ -202,8 +202,8 @@ class SalesInvoiceController extends Controller
                     }
                 } catch (\Exception $e) {
 
-                    // Set success data
-                    \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                    // Set error data
+                    \Yii::$app->getSession()->setFlash('error', $e->getMessage());
 
                     $transaction->rollBack();
                 }
@@ -248,22 +248,46 @@ class SalesInvoiceController extends Controller
             $model->prime_amount = $model->net_amount;
             $model->status = 'open';
 
-            if($model->save()){
 
-                // Update transaction code data
-                $update_transaction = TransactionCode::update_transaction_number('DS--');
+            $transaction = \Yii::$app->db->beginTransaction();
 
-                if($update_transaction){
-                    echo 'successfully updated';
-                }else{
-                    echo 'successfully not updated';
+            try {
+
+                $transaction->commit();
+
+                if($model->save()){
+
+                    // Update transaction code data
+                    $update_transaction = TransactionCode::update_transaction_number('DS--');
+
+                    if($update_transaction){
+                        echo 'successfully updated';
+                    }else{
+                        echo 'successfully not updated';
+                    }
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
+                    return $this->redirect(['view-direct-sales', 'id' => $model->id]);
+                } else{
+
+                    $model->tax_amount = 0.00;
+            
+                    return $this->render('create_direct_sales', [
+                        'model' => $model,
+                    ]);
+                    
                 }
 
-                // Set success data
-                \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
-            }            
+            }catch (\Exception $e) {
 
-            return $this->redirect(['view-direct-sales', 'id' => $model->id]);
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                $transaction->rollBack();
+            }
+
+            
+            
         } else {
 
             $model->tax_amount = 0.00;
@@ -331,6 +355,10 @@ class SalesInvoiceController extends Controller
                         return $this->redirect(['view', 'id' => $modelSmHead->id]);
                     }
                 } catch (\Exception $e) {
+
+                    // Set success data
+                    \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+
                     $transaction->rollBack();
                 }
             }

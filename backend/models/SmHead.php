@@ -151,7 +151,7 @@ class SmHead extends \yii\db\ActiveRecord
             }
 
             $sm_head->prime_amount = $prime_amount;
-            $sm_head->net_amount = $net_amount - $discount_price;
+            $sm_head->net_amount = ($net_amount - $discount_price) + $sm_head->tax_amount;
 
             if($sm_head->save()){
                 return true;

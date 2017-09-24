@@ -145,6 +145,12 @@ $this->registerJs($js);
 
         </div>
 
+        <div class="col-md-2">
+
+            <?= $form->field($modelSmHead, 'tax_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+        </div>
+
     </div>
 
 

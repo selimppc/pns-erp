@@ -108,6 +108,15 @@ $this->params['breadcrumbs'][] = $this->title;
                          return number_format($model->prime_amount,3);
                      }
                    ],
+
+                    [
+                     'attribute' => 'tax_amount',  
+                     'label' => 'Tax Amount',
+                     'value' => function ($model) {
+                         return number_format($model->tax_amount,3);
+                     }
+                   ],
+
                    [
                      'attribute' => 'discount_rate',  
                      'label' => 'Discount Rate (%)',
