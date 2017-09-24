@@ -5,6 +5,11 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
+use yii\helpers\ArrayHelper;
+
+use backend\models\Customer;
+use backend\models\Branch;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\SmHeadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -78,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     'id',
                     [
-                      #'attribute' => 'sm_number',
+                      'attribute' => 'sm_number',
                       'label' => 'Sales Number',
                       'format' => 'raw',
                       'value' => function ($model) {
@@ -89,13 +94,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                      'attribute' => 'customer_id',  
                      'label' => 'Customer Name',
+                     'filter'=>ArrayHelper::map(Customer::find()->asArray()->all(), 'id', 'name'),
                      'value' => function ($model) {
                          return isset($model->customer)?$model->customer->name:'';
                      }
-                   ],
+                    ],
                     [
                      'attribute' => 'branch_id',  
                      'label' => 'Branch',
+                     'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
                      'value' => function ($model) {
                          return isset($model->branch)?$model->branch->title:'';
                      }
@@ -142,6 +149,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                       'attribute' => 'status',
                       'label' => 'Status',
+                      'filter'=>array("open"=>"Open","confirmed"=>"Confirmed","invoiced"=>"Invoiced"),
                       'value' => function ($model){
                         return ucfirst($model->status);
                       }

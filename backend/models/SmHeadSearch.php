@@ -60,8 +60,7 @@ class SmHeadSearch extends SmHead
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'date' => $this->date,
+            'id' => $this->id,           
             'customer_id' => $this->customer_id,
             'branch_id' => $this->branch_id,
             'am_coa_id' => $this->am_coa_id,
@@ -88,6 +87,7 @@ class SmHeadSearch extends SmHead
         $query->andFilterWhere(['like', 'doc_type', $this->doc_type])
             ->andFilterWhere(['like', 'check_number', $this->check_number])
             ->andFilterWhere(['like', 'note', $this->note])
+            ->andFilterWhere(['like', 'date', $this->date])
             ->andFilterWhere(['like', 'sign', $this->sign])
             ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['like', 'reference_code', $this->reference_code])

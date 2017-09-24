@@ -93,7 +93,6 @@ class ImGrnHeadSearch extends ImGrnHead
             'pp_purchase_head_id' => $this->pp_purchase_head_id,
             'am_voucher_head_id' => $this->am_voucher_head_id,
             'supplier_id' => $this->supplier_id,
-            'date' => $this->date,
             'branch_id' => $this->branch_id,
             'tax_rate' => $this->tax_rate,
             'tax_amount' => $this->tax_amount,
@@ -111,6 +110,7 @@ class ImGrnHeadSearch extends ImGrnHead
 
         $query->andFilterWhere(['like', 'grn_number', $this->grn_number])
             ->andFilterWhere(['like', 'pay_terms', $this->pay_terms])
+            ->andFilterWhere(['like', 'date', $this->date])
             ->andFilterWhere(['like', 'voucher_number', $this->voucher_number])
             ->andFilterWhere(['like', 'status', $this->status]);
 

@@ -3,6 +3,12 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use yii\helpers\ArrayHelper;
+
+use backend\models\Branch;
+use backend\models\Currency;
+use backend\models\Supplier;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImGrnHeadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -21,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
      
       <div class="middle-menu-bar">
        
-        <?= Html::a(Yii::t('app', 'GRN List for Create Invoice'), ['#'], ['class' => '']) ?>    
+        <?= Html::a(Yii::t('app', 'GRN List for Create Invoice'), [''], ['class' => '']) ?>    
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -92,6 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                       'attribute' => 'supplier_id',
                       'label' => 'Supplier',
+                      'filter'=>ArrayHelper::map(Supplier::find()->asArray()->all(), 'id', 'supplier_code'),
                       'format' => 'raw',
                       'value' => function ($model) {
                           return isset($model->supplier)?$model->supplier->supplier_code:'';
@@ -100,6 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                       'attribute' => 'branch_id',
                       'label' => 'Branch',
+                      'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
                       'format' => 'raw',
                       'value' => function ($model) {
                           return isset($model->branch)?$model->branch->title:'';
@@ -120,6 +128,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                       'attribute' => 'currency_id',
                       'label' => 'Currency',
+                      'filter'=>ArrayHelper::map(Currency::find()->asArray()->all(), 'id', 'currency_code'),
                       'format' => 'raw',
                       'value' => function ($model) {
                           return isset($model->currency)?$model->currency->currency_code:'';
@@ -130,6 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                       'attribute' => 'status',
                       'label' => 'Status',
+                      'filter'=>array("invoiced"=>"invoiced","confirmed"=>"Confirmed"),
                       'value' => function ($model){
                         return ucfirst($model->status);
                       }

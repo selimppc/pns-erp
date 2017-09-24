@@ -4,6 +4,13 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
+use yii\helpers\ArrayHelper;
+
+use backend\models\GroupOne;
+use backend\models\GroupTwo;
+use backend\models\Branch;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\AmCoaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -57,6 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                       'attribute' => 'group_one_id',
                       'format' => 'raw',
+                      'filter'=>ArrayHelper::map(GroupOne::find()->asArray()->all(), 'id', 'title'),
                       'value' => function ($model) {
                           return isset($model->groupOne)?$model->groupOne->title:'';
                       },
@@ -64,6 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                       'attribute' => 'group_two_id',
                       'format' => 'raw',
+                      'filter'=>ArrayHelper::map(GroupTwo::find()->asArray()->all(), 'id', 'title'),
                       'value' => function ($model) {
                           return isset($model->groupTwo)?$model->groupTwo->title:'';
                       },
@@ -78,23 +87,47 @@ $this->params['breadcrumbs'][] = $this->title;
                       },
                     ],
                     'description:ntext',
-                    'account_type',
-                    'account_usage',
-                    // 'group_one_id',
-                    // 'group_two_id',
-                    // 'group_three_id',
-                    // 'group_four_id',
+                    [
+                      'attribute' => 'account_type',
+                      'format' => 'raw',
+                      'filter'=>array("Asset"=>"Asset","Liability"=>"Liability","Income"=>"Income", "Expenses" => "Expenses"),
+                      'value' => function ($model) {
+                          return $model->account_type;
+                      },
+                    ],
+
+                    [
+                      'attribute' => 'account_usage',
+                      'format' => 'raw',
+                      'filter'=>array("Ledger"=>"Ledger","AP"=>"AP","AR"=>"AR"),
+                      'value' => function ($model) {
+                          return $model->account_usage;
+                      },
+                    ],
+
+                    [
+                      'attribute' => 'analyical_code',
+                      'format' => 'raw',
+                      'filter'=>array("Cash"=>"Cash","Non-Cash"=>"Non-Cash","Cheque"=>"Cheque","Bankers Draft"=>"Bankers Draft","Wire Transfer"=>"Wire Transfer","Letter of Credit"=>"Letter of Credit","Others"=>"Others"),
+                      'value' => function ($model) {
+                          return $model->analyical_code;
+                      },
+                    ],                                       
+                    
                     'analyical_code',
                     [
                       'attribute' => 'branch_id',
                       'label' => 'Branch',
                       'format' => 'raw',
+                      'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
                       'value' => function ($model) {
                           return isset($model->branch)?$model->branch->title:'';
                       },
                     ],
                     [
+                        'attribute' => 'status',
                         'label' => 'Status',
+                        'filter'=>array("active"=>"Active","inactive"=>"Inactive","cancel"=>"Cancel"),
                         'value' => function ($model){
                             return ucfirst($model->status);
                         }
