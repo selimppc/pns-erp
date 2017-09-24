@@ -130,7 +130,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     [
                      'attribute' => 'status',
-                      'format' => 'raw',
+                     'format' => 'raw',
                      'label' => 'Status',
                      'filter'=>array("active"=>"Active","inactive"=>"Inactive","cancel"=>"Cancel"),
                      'value' => function ($model) {

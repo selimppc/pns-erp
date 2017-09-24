@@ -3,6 +3,10 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
+use yii\helpers\ArrayHelper;
+
+use backend\models\CodesParam;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\SupplierSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -58,6 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       ],
                       [
                         'attribute' => 'group',
+                        'filter'=>ArrayHelper::map(CodesParam::find()->where(['type'=>'Supplier Group'])->asArray()->all(), 'id', 'title'),
                         'label' => 'Group',
                         'format' => 'raw',
                         'value' => function ($model) {
@@ -74,7 +79,9 @@ $this->params['breadcrumbs'][] = $this->title;
                       'email',
                       'web_url',
                       [
+                          'attribute' => 'status',
                           'label' => 'Status',
+                          'filter'=>array("active"=>"Active","inactive"=>"Inactive","cancel"=>"Cancel"),
                           'value' => function ($model){
                               return ucfirst($model->status);
                           }
