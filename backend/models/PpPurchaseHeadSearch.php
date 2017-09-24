@@ -19,7 +19,7 @@ class PpPurchaseHeadSearch extends PpPurchaseHead
     {
         return [
             [['id', 'supplier_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
-            [['po_order_number', 'date', 'pay_terms', 'delivery_date', 'status', 'created_at', 'updated_at','currency_id','exchange_rate'], 'safe'],
+            [['po_order_number', 'date', 'pay_terms', 'delivery_date', 'status', 'created_at', 'updated_at','currency_id','exchange_rate','status'], 'safe'],
             [['tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],
         ];
     }
@@ -84,8 +84,7 @@ class PpPurchaseHeadSearch extends PpPurchaseHead
         
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'date' => $this->date,
+            'id' => $this->id,           
             'supplier_id' => $this->supplier_id,
             'currency_id' => $this->currency_id,
             'exchange_rate' => $this->exchange_rate,
@@ -105,6 +104,7 @@ class PpPurchaseHeadSearch extends PpPurchaseHead
 
         $query->andFilterWhere(['like', 'po_order_number', $this->po_order_number])
             ->andFilterWhere(['like', 'pay_terms', $this->pay_terms])
+            ->andFilterWhere(['like', 'date', $this->date])
             ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;

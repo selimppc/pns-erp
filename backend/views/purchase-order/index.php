@@ -4,6 +4,12 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
+use yii\helpers\ArrayHelper;
+
+use backend\models\Supplier;
+use backend\models\Branch;
+use backend\models\Currency;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PpPurchaseHeadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -86,6 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   [
                    'attribute' => 'supplier_id',  
                    'label' => 'Supplier',
+                   'filter'=>ArrayHelper::map(Supplier::find()->asArray()->all(), 'id', 'supplier_code'),
                    'value' => function ($model) {
                        return isset($model->supplier)?$model->supplier->supplier_code:'';
                    }
@@ -95,6 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   [
                    'attribute' => 'branch_id',  
                    'label' => 'Delivery to Branch',
+                   'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
                    'value' => function ($model) {
                        return isset($model->branch)?$model->branch->title:'';
                    }
@@ -102,6 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
                  [
                    'attribute' => 'currency_id',
                    'label' => 'Currency',
+                   'filter'=>ArrayHelper::map(Currency::find()->asArray()->all(), 'id', 'currency_code'),
                    'value' => function ($model) {
                        return isset($model->currency)?$model->currency->currency_code:'';
                    }
@@ -131,6 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   [
                     'attribute' => 'status',
                     'label' => 'Status',
+                    'filter'=>array("open"=>"Open","grn-created"=>"Grn-created","approved"=>"Approved","part-received"=>"Part-received"),
                     'value' => function ($model){
                       return ucfirst($model->status);
                     }
