@@ -87,6 +87,8 @@ class StockReceiveController extends Controller{
 
         if($model){
 
+            $transaction = \Yii::$app->db->beginTransaction();
+
             try {
 
                 $result = \Yii::$app->db->createCommand("CALL sp_im_trn_receive(:p_id, :p_userId)") 
@@ -97,10 +99,11 @@ class StockReceiveController extends Controller{
                 // Set success data
                 \Yii::$app->getSession()->setFlash('success', 'Successfully Received');
 
-               // $transaction->commit();
+                $transaction->commit();
 
             } catch (\Exception $e) {
-                \Yii::$app->getSession()->setFlash($e->getMessage());
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                $transaction->rollBack();
             }
             
 

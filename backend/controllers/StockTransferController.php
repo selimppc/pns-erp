@@ -315,6 +315,8 @@ class StockTransferController extends Controller
 
         if($model){
 
+            $transaction = \Yii::$app->db->beginTransaction();
+
             try {
 
                 $result = \Yii::$app->db->createCommand("CALL sp_im_trn_dispatch(:p_id, :p_userId)") 
@@ -325,10 +327,12 @@ class StockTransferController extends Controller
                 // Set success data
                 \Yii::$app->getSession()->setFlash('success', 'Successfully Dispatch');
 
-               // $transaction->commit();
+                $transaction->commit();
 
             } catch (\Exception $e) {
-                \Yii::$app->getSession()->setFlash($e->getMessage());
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+
+               $transaction->rollBack();
             }
            
         }

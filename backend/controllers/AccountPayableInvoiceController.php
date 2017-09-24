@@ -58,7 +58,7 @@ class AccountPayableInvoiceController extends Controller{
             
         if($model){
 
-            //$transaction = \Yii::$app->db->beginTransaction();
+            $transaction = \Yii::$app->db->beginTransaction();
 
             try {
 
@@ -70,10 +70,13 @@ class AccountPayableInvoiceController extends Controller{
                 // Set success data
                 \Yii::$app->getSession()->setFlash('success', 'Successfully Invoiced');
 
-               // $transaction->commit();
+                $transaction->commit();
 
             } catch (\Exception $e) {
-                \Yii::$app->getSession()->setFlash($e->getMessage());
+
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                
+                $transaction->rollBack();
             }
 
            

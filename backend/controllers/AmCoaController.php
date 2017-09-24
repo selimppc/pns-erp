@@ -97,7 +97,7 @@ class AmCoaController extends Controller
 
             }catch (\Exception $e) {
 
-                \Yii::$app->getSession()->setFlash('success', $e->getMessage());
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
                 $transaction->rollBack();
             }
 

@@ -249,7 +249,7 @@ class GrnController extends Controller
             
         if($model){
 
-            //$transaction = \Yii::$app->db->beginTransaction();
+            $transaction = \Yii::$app->db->beginTransaction();
 
             try {
 
@@ -258,11 +258,13 @@ class GrnController extends Controller
                       ->bindValue(':user_id', Yii::$app->user->id)
                       ->execute(); 
 
-               // $transaction->commit();
+                $transaction->commit();
 
             } catch (\Exception $e) {
-                print_r($e);
-                exit();
+
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                $transaction->rollBack();
+                
             }          
 
 

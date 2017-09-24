@@ -254,6 +254,8 @@ class StockAdustmentController extends Controller
 
         if($model){
 
+            $transaction = \Yii::$app->db->beginTransaction();
+
             try {
 
                 $result = \Yii::$app->db->createCommand("CALL sp_im_adjust_confirm(:pID, :pUserId)") 
@@ -264,10 +266,13 @@ class StockAdustmentController extends Controller
                 // Set success data
                 \Yii::$app->getSession()->setFlash('success', 'Successfully Confirmed');
 
-               // $transaction->commit();
+                $transaction->commit();
 
             } catch (\Exception $e) {
-                \Yii::$app->getSession()->setFlash($e->getMessage());
+                
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+
+                $transaction->rollBack();
             }  
 
            
