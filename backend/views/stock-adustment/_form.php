@@ -111,7 +111,7 @@ $this->registerJs($js);
 
                 <?= $form->field($modelAdjustmentHead, 'type')
                             ->dropDownList(
-                                array ('positive'=>'Positive', 'negative'=>'Negative'),
+                                array ('1'=>'Positive', '-1'=>'Negative'),
                                 array ('class'=>'form-control') 
                             ); ?>
 
