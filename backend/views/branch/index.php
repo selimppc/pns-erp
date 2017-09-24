@@ -3,6 +3,12 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
+use yii\helpers\ArrayHelper;
+
+use backend\models\CodesParam;
+use backend\models\Currency;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\BranchSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -64,10 +70,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],                    
                     
                     [
+                     'attribute' => 'currency_id',
                      'label'=>'Currency',
+                     'filter'=>ArrayHelper::map(Currency::find()->asArray()->all(), 'id', 'currency_code'),
                      'format' => 'raw',
                      'value'=>function ($data) {
-                          return $data->currency->title;
+                          return $data->currency->currency_code;
                       },
                     ],
 
@@ -85,7 +93,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'phone',
                     'cell',
                     [
+                        'attribute' => 'status',
                         'label' => 'Status',
+                        'filter'=>array("active"=>"Active","inactive"=>"Inactive","cancel"=>"Cancel"),
                         'value' => function ($model){
                             return ucfirst($model->status);
                         }

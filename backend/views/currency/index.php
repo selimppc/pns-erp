@@ -76,7 +76,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     
                     [
+                        'attribute' => 'status',
                         'label' => 'Status',
+                        'filter'=>array("active"=>"Active","inactive"=>"Inactive","cancel"=>"Cancel"),
                         'value' => function ($model){
                             return ucfirst($model->status);
                         }

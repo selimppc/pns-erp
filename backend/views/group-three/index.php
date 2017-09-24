@@ -3,6 +3,10 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
+use yii\helpers\ArrayHelper;
+
+use backend\models\GroupTwo;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\GroupThreeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -57,7 +61,9 @@ $this->params['breadcrumbs'][] = $this->title;
               #  ['class' => 'yii\grid\SerialColumn'],
                 'id',
                 [
+                   'attribute' => 'group_two_id',
                    'label'=>'Group Two',
+                   'filter'=>ArrayHelper::map(GroupTwo::find()->asArray()->all(), 'id', 'title'),
                    'format' => 'raw',
                    'value'=>function ($data) {
                         return $data->groupTwo->title;

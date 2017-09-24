@@ -3,6 +3,10 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
+use yii\helpers\ArrayHelper;
+
+use backend\models\GroupThree;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\GroupFourSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -58,7 +62,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
 
                     [
+                     'attribute' => 'group_three_id',
                      'label'=>'Group Three',
+                     'filter'=>ArrayHelper::map(GroupThree::find()->asArray()->all(), 'id', 'title'),
                      'format' => 'raw',
                      'value'=>function ($data) {
                           return $data->groupThree->title;

@@ -3,6 +3,11 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
+use yii\helpers\ArrayHelper;
+
+use backend\models\CodesParam;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\CustomerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -75,6 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'customer_group',
                         'label' => 'Customer Group',
+                        'filter'=>ArrayHelper::map(CodesParam::find()->where(['type'=>'Customer Group'])->asArray()->all(), 'id', 'title'),
                         'format' => 'raw',
                         'value' => function ($model) {
                             return isset($model->customer_group_data)?$model->customer_group_data->title:'';
@@ -82,7 +88,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
 
                     [
+                        'attribute' => 'status',
                         'label' => 'Status',
+                        'filter'=>array("active"=>"Active","inactive"=>"Inactive","cancel"=>"Cancel"),
                         'value' => function ($model){
                             return ucfirst($model->status);
                         }

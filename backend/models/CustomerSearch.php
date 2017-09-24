@@ -19,7 +19,7 @@ class CustomerSearch extends Customer
     {
         return [
             [['id', 'group_one_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
-            [['customer_code', 'name', 'api_id', 'address', 'terotorry', 'type', 'cell', 'phone', 'fax', 'email', 'market', 'sales_person', 'hub', 'status', 'created_at', 'updated_at'], 'safe'],
+            [['customer_code', 'name', 'api_id', 'address', 'terotorry', 'type', 'cell', 'phone', 'fax', 'email', 'market', 'sales_person', 'hub', 'status', 'created_at', 'updated_at','customer_group'], 'safe'],
             [['credit_limit'], 'number'],
         ];
     }
