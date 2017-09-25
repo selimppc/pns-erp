@@ -14,7 +14,7 @@ use backend\models\CodesParam;
 use backend\models\VwImStockView;
 use kartik\date\DatePicker;
 
-use kartik\select2\Select2;
+
 
 
 /* @var $this yii\web\View */
@@ -206,6 +206,7 @@ $this->registerJs($js);
         'formId' => 'dynamic-form',
         'formFields' => [
             'product_id',
+            'available_quantity',
             'uom',
             'quantity',
             #'rate'
@@ -222,15 +223,21 @@ $this->registerJs($js);
 
             <div class="panel-body container-items"><!-- widgetContainer -->
 
-                <div style="width: 100%;display: inline-block;">
-                    <div class="custom-column-37">
+                <div class="row">
+                    <div class="col-md-7">
                         <label class="control-label only-label" for="">Product</label>
                     </div>
-                    <div class="custom-column-18">
-                        <label class="control-label only-label" for="">Unit of Measurement</label>
+                    <div class="col-md-2">
+                        <label class="control-label only-label" for="">Available Quantity</label>
                     </div>
-                    <div class="custom-column-19">
+                    <div class="col-md-1">
+                        <label class="control-label only-label" for="">UOM</label>
+                    </div>
+                    <div class="col-md-1">
                         <label class="control-label only-label" for="">Quantity</label>
+                    </div>
+                    <div class="col-md-1">
+                        
                     </div>
                     
                 </div>
@@ -238,8 +245,7 @@ $this->registerJs($js);
                 <?php foreach ($modelsTransferDetail as $index => $modelTransferDetail): ?>
 
                     <div class="item"><!-- widgetBody -->
-
-                        <button type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i> Remove</button>
+                        
                         <?php
                             // necessary for update action.
                             if (!$modelTransferDetail->isNewRecord) {
@@ -249,36 +255,43 @@ $this->registerJs($js);
 
                         <div class="row">
 
-                            <div class="custom-column-40">
+                            <div class="col-md-7">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
                                     <?php
-
-                                        echo $form->field($modelTransferDetail, "[{$index}]product_id")->widget(Select2::classname(), [
-                                            'data' => VwImStockView::get_product_list(),
-                                            'language' => '',
-                                            'options' => ['placeholder' => 'Select a product ...'],
-                                            'pluginOptions' => [
-                                                'allowClear' => true,
-                                                'classs' => 'form-group form-material floating',
-                                                'data-plugin' => 'formMaterial'
-                                            ],
-                                        ])->label(false);
-
-                                    ?>
+                                        echo $form->field($modelTransferDetail, "[{$index}]product_id")->dropDownList(
+                                            VwImStockView::get_product_list(),[
+                                                'class' => 'custom-select2 form-control',
+                                                'prompt'=>'--Select Product--'
+                                            ]
+                                            )->label(false);
+                                    ?>                                   
 
                                 </div>
                             </div>
 
-                            <div class="custom-column-20">
-                                <?= $form->field($modelTransferDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
-                                    ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
-                                     ['prompt'=>'-Select-','class'=>'form-control floating']
-                                )->label(false) ?>
+                            <div class="col-md-2">
+                                <?= $form->field($modelTransferDetail,"[{$index}]available_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly'=>true,'class' => 'available_quantity_class form-control'])->label(false) ?>
                             </div>
 
-                            <div class="custom-column-20">
+                            <div class="col-md-1">
+                                <?= $form->field($modelTransferDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
+                                    ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
+                                     ['prompt'=>'-Select-','class'=>'form-control floating uom_class','readonly'=>true]
+                                )->label(false) ?>
+                            </div>
+                           
+
+                            
+
+                            <div class="col-md-1">
                                 <?= $form->field($modelTransferDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="row">
+                                    <button type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i> Remove</button>
+                                </div>
                             </div>
 
                            
@@ -306,6 +319,49 @@ $this->registerJs($js);
 <?php
     
     $this->registerJs("
+
+        $(document).delegate('.custom-select2','change',function(){
+            
+            var product_id = $(this).val();
+            var item = $(this);
+
+            $.ajax({
+                type : 'POST',
+                dataType : 'json',
+                url : '".Url::toRoute('stock-transfer/find-product')."',
+                data: {product_id:product_id},
+                beforeSend : function( request ){
+                    
+                },
+                success : function( data )
+                    {   
+
+                        if(data.result == 'success'){ 
+                            $(item).closest('.item').find('.available_quantity_class').val(data.available_quantity);
+                            $(item).closest('.item').find('.uom_class').val(data.uom);                            
+                        }
+                    }
+            });
+            
+            
+
+        });
+
+        $(document).delegate('.add-item','click',function(){
+
+            /*$('.custom-select2').each(function(i,item){
+              
+              $(item).select2('destroy');
+            });*/
+
+            setTimeout(function(){
+                $('.custom-select2').select2();
+            },100)
+            
+        });
+
+        $('.custom-select2').select2();
+
 
         $('#imtransferhead-from_currency_id').change(function (e) {
             var currency = $('#imtransferhead-from_currency_id').val();
@@ -351,12 +407,12 @@ $this->registerJs($js);
         });
 
 
-        window.initSelect2Loading = function(id, optVar){
+       /* window.initSelect2Loading = function(id, optVar){
             initS2Loading(id, optVar)
         };
         window.initSelect2DropStyle = function(id, kvClose, ev){
             initS2Loading(id, kvClose, ev)
-        };
+        };*/
 
      ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
 ?>

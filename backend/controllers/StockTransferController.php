@@ -22,6 +22,8 @@ use yii\helpers\ArrayHelper;
 
 use backend\models\TransactionCode;
 
+use yii\web\Response;
+
 
 /**
  * ImTransferHeadController implements the CRUD actions for ImTransferHead model.
@@ -144,9 +146,10 @@ class StockTransferController extends Controller
                             $modelTransferDetail->im_transfer_head_id = $modelTransferHead->id;
                             if ( ($flag = $modelTransferDetail->save())) {
 
-
+                                $date = date('Y-m-d');
+                                
                                 // save im_batch_transfer data
-                                $get_stock_view_data = VwImStockView::find()->where(['product_id'=>$modelTransferDetail->product_id])->one();
+                                $get_stock_view_data = VwImStockView::find()->where(['product_id'=>$modelTransferDetail->product_id])->where(['>=','expire_date',$date])->one();
 
                                 if(!empty($get_stock_view_data)){
 
@@ -246,6 +249,11 @@ class StockTransferController extends Controller
                         }
                         foreach ($modelsTransferDetail as $modelTransferDetail) {
                             $modelTransferDetail->im_transfer_head_id = $modelTransferHead->id;
+
+                         /*   $product_id_explode = explode(':::', $modelTransferDetail->product_id);
+
+                            $modelTransferDetail->product_id = $product_id_explode['0'];*/
+
                             if (! ($flag = $modelTransferDetail->save(false))) {
                                 $transaction->rollBack();
                                 break;
@@ -338,6 +346,37 @@ class StockTransferController extends Controller
         }
 
         return $this->redirect(['index']);
+    }
+
+
+    public function actionFindProduct(){
+        if (Yii::$app->request->isAjax) {
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $session = Yii::$app->session;
+            $response = [];
+
+            /*$product_data = explode(':::', $_POST['product_id']);*/
+
+            $date = date('Y-m-d');
+
+            $product_data = VwImStockView::find()->where(['product_id' => $_POST['product_id']])->where(['>=','expire_date',$date])->one();
+
+            if(!empty($product_data)){
+                $response['available_quantity'] = $product_data->available;
+                $response['batch_number'] = $product_data->batch_number;
+                $response['expire_date'] = $product_data->expire_date;
+                $response['rate'] = $product_data->im_rate;
+                $response['sell_rate'] = $product_data->sell_rate;
+                $response['uom'] = $product_data->uom;
+                $response['result'] = 'success';
+            }else{
+                $response['result'] = 'error';
+            }
+
+            return $response;
+
+        }
     }
 
     /**

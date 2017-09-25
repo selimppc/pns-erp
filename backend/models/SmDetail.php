@@ -28,6 +28,7 @@ class SmDetail extends \yii\db\ActiveRecord
 {
    
    public $total;
+   public $available_quantity;
 
     /**
      * @inheritdoc
@@ -60,6 +61,7 @@ class SmDetail extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'sm_head_id' => Yii::t('app', 'Sm Head ID'),
+            'available_quantity' => Yii::t('app','Available Quantity'),
             'product_id' => Yii::t('app', 'Product ID'),
             'uom' => Yii::t('app', 'Uom'),
             'uom_quantity' => Yii::t('app', 'Uom Quantity'),

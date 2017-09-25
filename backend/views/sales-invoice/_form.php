@@ -14,7 +14,9 @@ use backend\models\CodesParam;
 use backend\models\Customer;
 use kartik\date\DatePicker;
 
-use kartik\select2\Select2;
+use backend\models\VwImStockView;
+
+
 
 
 /* @var $this yii\web\View */
@@ -166,6 +168,7 @@ $this->registerJs($js);
             'formId' => 'dynamic-form',
             'formFields' => [
                 'product_id',
+                'available_quantity',
                 'rate',
                 'quantity',
                 'uom',
@@ -183,20 +186,23 @@ $this->registerJs($js);
 
             <div class="panel-body container-items"><!-- widgetContainer -->
 
-                <div style="width: 100%;display: inline-block;">
-                    <div class="custom-column-37">
+                <div class="row">
+                    <div class="col-md-5">
                         <label class="control-label only-label" for="">Product</label>
-                    </div>                    
-                    <div class="custom-column-15">
-                        <label class="control-label only-label" for="">Sell Rate</label>
-                    </div>                    
-                    <div class="custom-column-15">
+                    </div>      
+                    <div class="col-md-2">
+                        <label class="control-label only-label" for="">Available Quantity</label>
+                    </div>               
+                    <div class="col-md-1">
+                        <label class="control-label only-label" for="">Rate</label>
+                    </div>                                        
+                    <div class="col-md-1">
                         <label class="control-label only-label" for="">Quantity</label>
                     </div>                    
-                    <div class="custom-column-15">
+                    <div class="col-md-1">
                         <label class="control-label only-label" for="">UOM</label>
                     </div>                    
-                    <div class="custom-column-15">
+                    <div class="col-md-1">
                         <label class="control-label only-label" for="">Total</label>
                     </div>                    
                 </div>
@@ -205,7 +211,7 @@ $this->registerJs($js);
 
                     <div class="item"><!-- widgetBody -->
 
-                        <button type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i> Remove</button>
+                        
                         <?php
                             // necessary for update action.
                             if (!$modelSmDetail->isNewRecord) {
@@ -215,53 +221,51 @@ $this->registerJs($js);
 
                         <div class="row">
 
-                            <div class="custom-column-40">
+                            <div class="col-md-5">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
                                     <?php
-
-                                        echo $form->field($modelSmDetail, "[{$index}]product_id")->widget(Select2::classname(), [
-                                            'data' => Product::get_product_list(),
-                                            'language' => '',
-                                            'options' => ['placeholder' => 'Select a product ...'],
-                                            'pluginOptions' => [
-                                                'allowClear' => true,
-                                                'classs' => 'form-group form-material floating',
-                                                'data-plugin' => 'formMaterial'
-                                            ],
-                                            /*'pluginEvents' => [
-                                               'change' => 'function() { 
-                                                   
-                                                }',
-                                            ],*/
-                                        ])->label(false);
-
+                                        echo $form->field($modelSmDetail, "[{$index}]product_id")->dropDownList(
+                                            VwImStockView::get_product_list(),[
+                                                'class' => 'custom-select2 form-control',
+                                                'prompt'=>'--Select Product--'
+                                            ]
+                                            )->label(false);
                                     ?>
 
-                                    
 
                                 </div>
                             </div>
 
-                            <div class="custom-column-15">
-                                <?= $form->field($modelSmDetail, "[{$index}]rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
+                            <div class="col-md-2">
+                                <?= $form->field($modelSmDetail, "[{$index}]available_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true, 'class' => 'available_quantity_class form-control'])->label(false) ?>
                             </div>
 
-                            <div class="custom-column-15">
+                            <div class="col-md-1">
+                                <?= $form->field($modelSmDetail, "[{$index}]rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' => 'sell_rate_class form-control'])->label(false) ?>
+                            </div>
+
+                            <div class="col-md-1">
                                 <?= $form->field($modelSmDetail, "[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                             </div>
 
-                            <div class="custom-column-15">
+                            <div class="col-md-1">
                             
 
                                 <?= $form->field($modelSmDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
                                         ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
-                                         ['prompt'=>'-Select-','class'=>'form-control floating']
+                                         ['prompt'=>'-Select-','class'=>'form-control floating uom_class']
                                     )->label(false) ?>
                             </div>
                             
-                             <div class="custom-column-15">
+                            <div class="col-md-1">
                                 <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="row">
+                                    <button type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i> Remove</button>
+                                </div>
                             </div>
 
                         </div>
@@ -289,6 +293,53 @@ $this->registerJs($js);
     
     $this->registerJs("
 
+        $(document).delegate('.custom-select2','change',function(){
+            
+            var product_id = $(this).val();
+            var item = $(this);
+
+            $.ajax({
+                type : 'POST',
+                dataType : 'json',
+                url : '".Url::toRoute('stock-transfer/find-product')."',
+                data: {product_id:product_id},
+                beforeSend : function( request ){
+                    
+                },
+                success : function( data )
+                    {   
+
+                        if(data.result == 'success'){ 
+
+                            $(item).closest('.item').find('.available_quantity_class').val(data.available_quantity);
+
+                            $(item).closest('.item').find('.sell_rate_class').val(data.sell_rate);
+
+                            $(item).closest('.item').find('.uom_class').val(data.uom);
+                                                      
+                        }
+                    }
+            });
+            
+            
+
+        });
+
+        $(document).delegate('.add-item','click',function(){
+
+            /*$('.custom-select2').each(function(i,item){
+              
+              $(item).select2('destroy');
+            });*/
+
+            setTimeout(function(){
+                $('.custom-select2').select2();
+            },100)
+            
+        });
+
+        $('.custom-select2').select2();
+
         $('#smhead-currency_id').change(function (e) {
             var currency = $('#smhead-currency_id').val();
 
@@ -310,7 +361,7 @@ $this->registerJs($js);
 
         });
 
-        window.initSelect2Loading = function(id, optVar){
+       /* window.initSelect2Loading = function(id, optVar){
             initS2Loading(id, optVar)
         };
         window.initSelect2DropStyle = function(id, kvClose, ev){
@@ -319,7 +370,7 @@ $this->registerJs($js);
 
         $('.dynamicform_wrapper').on('afterInsert', function(e, item) {
             
-        });
+        });*/
 
 
         $('#smhead-discount_rate').change(function (e) {

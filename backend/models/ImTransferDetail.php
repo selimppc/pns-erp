@@ -28,6 +28,8 @@ use yii\behaviors\BlameableBehavior;
 class ImTransferDetail extends \yii\db\ActiveRecord
 {
 
+    public $available_quantity;
+
     public function behaviors()
     {
         return [
@@ -61,9 +63,9 @@ class ImTransferDetail extends \yii\db\ActiveRecord
     {
         return [
             [['product_id','uom','quantity'],'required'],
-            [['im_transfer_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
+            [['im_transfer_head_id', 'created_by', 'updated_by'], 'integer'],
             [['quantity', 'rate'], 'number'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at','available_quantity'], 'safe'],
             [['uom'], 'string', 'max' => 8],
             [['im_transfer_head_id'], 'exist', 'skipOnError' => true, 'targetClass' => ImTransferHead::className(), 'targetAttribute' => ['im_transfer_head_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
@@ -78,6 +80,7 @@ class ImTransferDetail extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'im_transfer_head_id' => Yii::t('app', 'Transfer Head'),
+            'available_quantity' => Yii::t('app','Available Quantity'),
             'product_id' => Yii::t('app', 'Product'),
             'uom' => Yii::t('app', 'Uom'),
             'quantity' => Yii::t('app', 'Quantity'),
