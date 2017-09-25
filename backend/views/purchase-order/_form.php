@@ -13,7 +13,7 @@ use backend\models\Product;
 use backend\models\CodesParam;
 use kartik\date\DatePicker;
 
-use kartik\select2\Select2;
+/*use kartik\select2\Select2;*/
 
 
 /* @var $this yii\web\View */
@@ -193,27 +193,29 @@ $this->registerJs($js);
             <div class="clearfix"></div>
         </div>
         <div class="panel-body container-items"><!-- widgetContainer -->
-            <div style="width: 100%;display: inline-block;">
-                <div class="custom-column-37">
+            <div class="row">
+                <div class="col-md-7">
                     <label class="control-label only-label" for="">Product</label>
                 </div>
-                <div class="custom-column-9">
+                <div class="col-md-1">
                     <label class="control-label only-label" for="">Quantity</label>
                 </div>
-                <div class="custom-column-19">
-                    <label class="control-label only-label" for="">Unit of Measurement</label>
+                <div class="col-md-1">
+                    <label class="control-label only-label" for="">UOM</label>
                 </div>
-                <div class="custom-column-14">
+                <div class="col-md-1">
                     <label class="control-label only-label" for="">UOM Quantity</label>
                 </div>
-                <div class="custom-column-15">
+                <div class="col-md-1">
                     <label class="control-label only-label" for="">Purchase Rate</label>
+                </div>
+                <div class="col-md-1">
+
                 </div>
             </div>
             <?php foreach ($modelsPurchaseDetail as $index => $modelPurchaseDetail): ?>
                 <div class="item"><!-- widgetBody -->
-
-                    <button type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i> Remove</button>
+                    
                     <?php
                         // necessary for update action.
                         if (!$modelPurchaseDetail->isNewRecord) {
@@ -222,25 +224,17 @@ $this->registerJs($js);
                     ?>
                     <div class="row">
 
-                        <div class="custom-column-40">
+                        <div class="col-md-7">
                             <div class="form-group form-material floating" data-plugin="formMaterial">
 
                                 <?php
 
-                                    echo $form->field($modelPurchaseDetail, "[{$index}]product_id")->widget(Select2::classname(), [
-                                        'data' => Product::get_product_list(),
-                                        'language' => '',
-                                        'options' => ['placeholder' => 'Select a product ...'],
-                                        'pluginOptions' => [
-                                            'multiple' => false,
-                                            'allowClear' => true,
-                                            'classs' => 'form-group form-material floating',
-                                            'data-plugin' => 'formMaterial'
-                                        ],
-                                        'pluginEvents' => [
-                                            #"change" => "function() { alert('sss') }"
-                                        ],
-                                    ])->label(false);
+                                    echo $form->field($modelPurchaseDetail, "[{$index}]product_id")->dropDownList(
+                                        Product::get_product_list(),[
+                                            'class' => 'custom-select2 form-control',
+                                            'prompt'=>'--Select Product--'
+                                        ]
+                                        )->label(false);
 
                                 ?>
 
@@ -249,27 +243,30 @@ $this->registerJs($js);
                             </div>
                         </div>
 
-                        <div class="custom-column-10">
+                        <div class="col-md-1">
                             <?= $form->field($modelPurchaseDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                         </div>
 
-                        <div class="custom-column-20">
+                        <div class="col-md-1">
                             
 
                             <?= $form->field($modelPurchaseDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
                                     ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
-                                     ['prompt'=>'-Select-','class'=>'form-control floating']
+                                     ['prompt'=>'-Select-','class'=>'form-control floating uom_class']
                                 )->label(false) ?>
                         </div>
 
-                        <div class="custom-column-15">
-                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
+                        <div class="col-md-1">
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]uom_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' => 'uom_quantity_class form-control'])->label(false) ?>
                         </div>
 
-                        <div class="custom-column-15">
-                            <?= $form->field($modelPurchaseDetail, "[{$index}]purchase_rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
+                        <div class="col-md-1">
+                            <?= $form->field($modelPurchaseDetail, "[{$index}]purchase_rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' =>'purchase_rate_class form-control'])->label(false) ?>
                         </div>
 
+                        <div class="col-md-1">
+                            <button type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i> Remove</button>
+                        </div>
                         
 
                     </div>
@@ -294,10 +291,58 @@ $this->registerJs($js);
 
     <?php ActiveForm::end(); ?>
 
-
+<style type="text/css">
+    .form-group .select2{
+        width: 100% !important;
+    }
+</style>
 <?php
     
     $this->registerJs("
+
+        $(document).delegate('.custom-select2','change',function(){
+            
+            var product_id = $(this).val();
+            var item = $(this);
+
+            $.ajax({
+                type : 'POST',
+                dataType : 'json',
+                url : '".Url::toRoute('product/find-product')."',
+                data: {product_id:product_id},
+                beforeSend : function( request ){
+                    
+                },
+                success : function( data )
+                    {   
+
+                        if(data.result == 'success'){ 
+                            $(item).closest('.item').find('.uom_quantity_class').val(data.sell_uom_qty);
+                            $(item).closest('.item').find('.uom_class').val(data.sell_uom);
+                            $(item).closest('.item').find('.purchase_rate_class').val(data.sell_rate);
+                        }
+                    }
+            });
+            
+            
+
+        });
+
+        $(document).delegate('.add-item','click',function(){
+
+            /*$('.custom-select2').each(function(i,item){
+              
+              $(item).select2('destroy');
+            });*/
+
+            setTimeout(function(){
+                $('.custom-select2').select2();
+            },100)
+            
+        });
+
+        $('.custom-select2').select2();
+
 
         $('#pppurchasehead-currency_id').change(function (e) {
             var currency = $('#pppurchasehead-currency_id').val();
@@ -320,12 +365,12 @@ $this->registerJs($js);
 
         });
 
-        window.initSelect2Loading = function(id, optVar){
+        /*window.initSelect2Loading = function(id, optVar){
             initS2Loading(id, optVar)
         };
         window.initSelect2DropStyle = function(id, kvClose, ev){
             initS2Loading(id, kvClose, ev)
-        };
+        };*/
 
      ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
 ?>

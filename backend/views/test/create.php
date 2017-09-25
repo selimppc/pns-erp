@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $model backend\models\PpPurchaseHead */
 
-$this->title = 'Create Purchase Order';
+$this->title = 'Create';
 $this->params['breadcrumbs'][] = ['label' => 'Pp Purchase Heads', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

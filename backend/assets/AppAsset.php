@@ -40,6 +40,8 @@ class AppAsset extends AssetBundle
 
         'http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic',
 
+        'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css',
+
     ];
     public $js = [
 
@@ -94,6 +96,7 @@ class AppAsset extends AssetBundle
         'admin-theme/global/js/Plugin/peity.js',
 
         'admin-theme/iconbar/assets/examples/js/dashboard/v1.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js',
 
     ];
     public $depends = [

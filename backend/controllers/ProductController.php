@@ -18,6 +18,8 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 
+use yii\web\Response;
+
 /**
  * ProductController implements the CRUD actions for Product model.
  */
@@ -229,6 +231,33 @@ class ProductController extends Controller
             return $this->render('update', [
                 'model' => $model,
             ]);
+        }
+    }
+
+
+
+    public function actionFindProduct(){
+        if (Yii::$app->request->isAjax) {
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $session = Yii::$app->session;
+            $response = [];
+
+            $product_id = $_POST['product_id'];
+
+            $product_data = Product::find()->where(['id' => $product_id])->one();
+
+            if(!empty($product_data)){
+                $response['sell_uom'] = $product_data->sell_uom;
+                $response['sell_uom_qty'] = $product_data->sell_uom_qty;
+                $response['sell_rate'] = $product_data->sell_rate;
+                $response['result'] = 'success';
+            }else{
+                $response['result'] = 'error';
+            }
+
+            return $response;
+
         }
     }
 

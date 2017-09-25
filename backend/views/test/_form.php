@@ -13,7 +13,7 @@ use backend\models\Product;
 use backend\models\CodesParam;
 use kartik\date\DatePicker;
 
-use kartik\select2\Select2;
+/*use kartik\select2\Select2;*/
 
 
 /* @var $this yii\web\View */
@@ -89,22 +89,12 @@ $this->registerJs($js);
 
                                 <?php
 
-                                    echo $form->field($modelPurchaseDetail, "[{$index}]product_id")->widget(Select2::classname(), [
-                                        'data' => Product::get_product_list(),
-                                        'language' => '',
-                                        'options' => ['placeholder' => 'Select a product ...'],
-                                        'pluginOptions' => [
-                                            'multiple' => false,
-                                            'allowClear' => true,
-                                            'classs' => 'form-group form-material floating',
-                                            'data-plugin' => 'formMaterial'
-                                        ],
-                                        'pluginEvents' => [
-                                            "change" => "function() { 
-                                                console.log('OK');
-                                             }"
-                                        ],
-                                    ])->label(false);
+                                    echo $form->field($modelPurchaseDetail, "[{$index}]product_id")->dropDownList(
+                                        Product::get_product_list(),[
+                                            'class' => 'custom-select2',
+                                            'prompt'=>'Select...'
+                                        ]
+                                        )->label(false);
 
                                 ?>
 
@@ -114,7 +104,7 @@ $this->registerJs($js);
                         </div>
 
                         <div class="custom-column-10">
-                            <?= $form->field($modelPurchaseDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
+                            <?= $form->field($modelPurchaseDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' => 'quantity_class'])->label(false) ?>
                         </div>
 
                        
@@ -144,17 +134,40 @@ $this->registerJs($js);
     <?php ActiveForm::end(); ?>
 
 
+
 <?php
     
     $this->registerJs("
 
+        $(document).delegate('.custom-select2','change',function(){
+            
+            var product_id = $(this).val();
+            
+            $(this).closest('.item').find('.quantity_class').val(product_id);
+
+        });
+
+        $(document).delegate('.add-item','click',function(){
+
+            /*$('.custom-select2').each(function(i,item){
+              
+              $(item).select2('destroy');
+            });*/
+
+            setTimeout(function(){
+                $('.custom-select2').select2();
+            },1000)
+            
+        });
+
+        $('.custom-select2').select2();
        
-        window.initSelect2Loading = function(id, optVar){
+        /*window.initSelect2Loading = function(id, optVar){
             initS2Loading(id, optVar)
         };
         window.initSelect2DropStyle = function(id, kvClose, ev){
             initS2Loading(id, kvClose, ev)
-        };
+        };*/
 
      ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
 ?>
