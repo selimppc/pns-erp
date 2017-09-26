@@ -277,7 +277,7 @@ $this->registerJs($js);
                             <div class="col-md-1">
                                 <?= $form->field($modelTransferDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
                                     ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
-                                     ['prompt'=>'-Select-','class'=>'form-control floating uom_class','readonly'=>true]
+                                     ['prompt'=>'-Select-','class'=>'form-control floating uom_class','disabled'=>true]
                                 )->label(false) ?>
                             </div>
                            
@@ -285,7 +285,7 @@ $this->registerJs($js);
                             
 
                             <div class="col-md-1">
-                                <?= $form->field($modelTransferDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
+                                <?= $form->field($modelTransferDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' =>'quantity_class form-control'])->label(false) ?>
                             </div>
 
                             <div class="col-md-1">
@@ -319,6 +319,20 @@ $this->registerJs($js);
 <?php
     
     $this->registerJs("
+
+        $(document).delegate('.quantity_class','change',function(){
+
+            var item = $(this);
+
+            var quantity_class = $(this).val();
+            var available_quantity = $(item).closest('.item').find('.available_quantity_class').val();
+
+            if(available_quantity < quantity_class  ){
+                $(item).closest('.item').find('.quantity_class').val('');
+                alert('Sorry !! Quantity must be less than or same');
+            }
+             
+        });
 
         $(document).delegate('.custom-select2','change',function(){
             
