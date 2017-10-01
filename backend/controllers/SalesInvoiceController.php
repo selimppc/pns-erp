@@ -412,6 +412,9 @@ class SalesInvoiceController extends Controller
         if($model)
         {
             try{
+
+                // send sales data into the table sm_batch_sale
+
                 $result = \Yii::$app->db->createCommand("CALL sp_sm_do_confirm(:sm_head_id, :user_id)")
                     ->bindValue(':sm_head_id' , $model->id )
                     ->bindValue(':user_id', Yii::$app->user->id)
