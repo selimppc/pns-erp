@@ -276,6 +276,9 @@ class GrnController extends Controller
                 $po_head->status = 'received';
                 $po_head->update();
 
+                $model->status = 'confirmed';
+                $model->update();
+
                 //commit the changes
                 $transaction->commit();
 
