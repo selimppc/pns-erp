@@ -111,14 +111,23 @@ class GrnController extends Controller
 
         $grn_head->status = 'open';
 
-        $grn_head->save();
+        try{
+            if($grn_head->save())
+            {
+                $purchased_order->status = 'grn-created';
+                $purchased_order->update();
+            }
+        }catch (\Exception $e)
+        {
+            echo $e->getMessage();
+        }
 
+        Yii::$app->session->setFlash('success', 'GRN Created Successfully !');
 
         return $this->redirect(array('grn/generate-grn', 'po' => $po, 'grn' => $grn, 'id' => $id));
-        
-        
-
     }
+
+
 
     public function actionGenerateGrn($po='',$grn='',$id=''){
 
