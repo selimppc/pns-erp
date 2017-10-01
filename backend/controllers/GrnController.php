@@ -251,6 +251,11 @@ class GrnController extends Controller
         ]);
     }
 
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     */
     public function actionConfirmGrn($id){
 
         $model = ImGrnHead::find()->where(['id' => $id])->one();
@@ -265,24 +270,24 @@ class GrnController extends Controller
                 $result = \Yii::$app->db->createCommand("CALL sp_im_confirm_grn(:grn_head_id, :user_id)") 
                       ->bindValue(':grn_head_id' , $im_grn_head_id )
                       ->bindValue(':user_id', Yii::$app->user->id)
-                      ->execute(); 
+                      ->execute();
 
+                $po_head = PpPurchaseHead::find()->where(['id' => $model->pp_purchase_head_id])->one();
+                $po_head->status = 'received';
+                $po_head->update();
+
+                //commit the changes
                 $transaction->commit();
 
-            } catch (\Exception $e) {
+            } catch (\Exception $e)
+            {
 
                 \Yii::$app->getSession()->setFlash('error', $e->getMessage());
                 $transaction->rollBack();
                 
-            }          
-
-
-
-           
+            }
         }
-
         return $this->redirect(['index']);
-
     }
 
     /**
