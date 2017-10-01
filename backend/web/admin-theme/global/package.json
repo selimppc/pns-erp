@@ -27,10 +27,12 @@
     "url": "https://forum.getbootstrapadmin.com/remark"
   },
   "license": "Themeforest Standard Licenses",
-  "licenses": [{
-    "type": "Themeforest Standard Licenses",
-    "url": "http://themeforest.net/licenses/standard"
-  }],
+  "licenses": [
+    {
+      "type": "Themeforest Standard Licenses",
+      "url": "http://themeforest.net/licenses/standard"
+    }
+  ],
   "devDependencies": {
     "glob": "*",
     "grunt": "^0.4.5",
