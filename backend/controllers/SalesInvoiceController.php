@@ -93,6 +93,10 @@ class SalesInvoiceController extends Controller
         
     }
 
+    /**
+     * @param $id
+     * @return string
+     */
     public function actionViewDirectSales($id)
     {
         $model = $this->findModel($id);
@@ -217,6 +221,9 @@ class SalesInvoiceController extends Controller
     }
 
 
+    /**
+     * @return string
+     */
     public function actionCreateDirectSales(){
 
         // generate Invoice Number               
@@ -371,6 +378,11 @@ class SalesInvoiceController extends Controller
 
     }
 
+
+    /**
+     * @param $id
+     * @return string|\yii\web\Response
+     */
     public function actionUpdateDirectSales($id){
 
         $model = $this->findModel($id);
@@ -389,34 +401,37 @@ class SalesInvoiceController extends Controller
 
     }
 
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     */
     public function actionConfirm($id)
     {
         $model = $this->findModel($id);
 
-        if($model){
+        if($model)
+        {
+            try{
+                $result = \Yii::$app->db->createCommand("CALL sp_sm_do_confirm(:sm_head_id, :user_id)")
+                    ->bindValue(':sm_head_id' , $model->id )
+                    ->bindValue(':user_id', Yii::$app->user->id)
+                    ->execute();
 
-            $model->status = 'confirmed';
-
-            $valid = $model->validate();
-            if($valid){
-
-                // Set success data
-                \Yii::$app->getSession()->setFlash('success', 'Successfully Confirmed');
-
-                $model->save();    
-            }else{
-                print_r($model->getErrors());
-                exit();
+                \Yii::$app->getSession()->setFlash('success', 'Sales Confirmed Successfully !');
+            }catch (\Exception $e)
+            {
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
             }
-            
-
-           
         }
 
         return $this->redirect(['index']);
     }
 
 
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     */
     public function actionCancel($id)
     {
         $model = $this->findModel($id);
