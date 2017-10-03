@@ -184,7 +184,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     
                     <tr>
                         <td>Total Amount</td>
-                        <td><?=number_format($model->net_amount)?></td>
+                        <td><?=number_format($model->net_amount,3)?></td>
                     </tr>
                 </table>
 

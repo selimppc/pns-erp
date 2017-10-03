@@ -207,7 +207,10 @@ $this->registerJs($js);
                     </div>                    
                 </div>
 
-                <?php foreach ($modelsSmDetail as $index => $modelSmDetail): ?>
+                <?php foreach ($modelsSmDetail as $index => $modelSmDetail):
+
+                        $modelSmDetail->total = $modelSmDetail->rate * $modelSmDetail->quantity;
+                ?>
 
                     <div class="item"><!-- widgetBody -->
 
@@ -246,7 +249,7 @@ $this->registerJs($js);
                             </div>
 
                             <div class="col-md-1">
-                                <?= $form->field($modelSmDetail, "[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
+                                <?= $form->field($modelSmDetail, "[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'class' => 'quantity_class form-control'])->label(false) ?>
                             </div>
 
                             <div class="col-md-1">
@@ -259,7 +262,7 @@ $this->registerJs($js);
                             </div>
                             
                             <div class="col-md-1">
-                                <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
+                                <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'class' => 'total_class form-control'])->label(false) ?>
                             </div>
 
                             <div class="col-md-1">
@@ -292,6 +295,33 @@ $this->registerJs($js);
 <?php
     
     $this->registerJs("
+
+        $(document).delegate('.quantity_class','change',function(){
+
+            var quantity = $(this).val();
+            var item = $(this);
+
+            var sell_rate = $(item).closest('.item').find('.sell_rate_class').val();
+
+            var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3);
+
+            $(item).closest('.item').find('.total_class').val(total_amount);
+
+        });
+
+        $(document).delegate('.sell_rate_class','change',function(){
+
+            var sell_rate = $(this).val();
+            var item = $(this);
+
+            var quantity = $(item).closest('.item').find('.quantity_class').val();
+
+            var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3);
+
+            $(item).closest('.item').find('.total_class').val(total_amount);
+
+        });
+
 
         $(document).delegate('.custom-select2','change',function(){
             
