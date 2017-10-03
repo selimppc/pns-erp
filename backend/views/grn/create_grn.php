@@ -90,74 +90,75 @@ $this->params['breadcrumbs'][] = $this->title;
               if(!empty($purchased_order_details))
               {
             ?>
-
-              <table class="items">
-                  <thead>
-                    <tr>
-                      <th>Product Code</th>
-                      <th>Product Name</th>
-                      <th>Unit of Measurement</th>
-                      <th>UOM Quantity</th>
-                      <th>Quantity</th>
-                      <th>Purchase Rate</th>
-                      <th>Total Amount</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <?php
-                      foreach($purchased_order_details as $pp_details)
-                      {
-
-                        $already_added_grn = ImGrnDetail::grn_data($grn,$pp_details->product_id);
-
-                        if(!empty($already_added_grn)){
-
-                        if($pp_details->quantity > $already_added_grn->receive_quantity){
-
-                          $orignal_quantity = $pp_details->quantity - $already_added_grn->receive_quantity;
-                    ?>
-                      <tr class="odd">
-                          <td>
-                            <?= Html::a(Yii::t('app', 'Manage '.isset($pp_details->product_code)?$pp_details->product_code:''), ['generate-grn','po'=>$po,'grn'=>$grn,'id'=>$pp_details->product_id], ['class' => '']) ?> 
-                            
-                          </td>
-                          <td>
-                              <?=$pp_details->title?>
-                          </td>
-                          <td><?=isset($pp_details->uomData)?$pp_details->uomData->title:'';?></td>
-                          <td><?=$pp_details->uom_quantity?></td>
-                          <td><?=$orignal_quantity?></td>
-                          <td><?=number_format($pp_details->purchase_rate,2)?></td>
-                          <td><?=number_format($pp_details->purchase_rate * $orignal_quantity,2)?></td>
+              <div class="table-responsive">
+                <table class="items">
+                    <thead>
+                      <tr>
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Unit of Measurement</th>
+                        <th>UOM Quantity</th>
+                        <th>Quantity</th>
+                        <th>Purchase Rate</th>
+                        <th>Total Amount</th>
                       </tr>
+                    </thead>
 
-                    <?php                       
+                    <tbody>
+                      <?php
+                        foreach($purchased_order_details as $pp_details)
+                        {
+
+                          $already_added_grn = ImGrnDetail::grn_data($grn,$pp_details->product_id);
+
+                          if(!empty($already_added_grn)){
+
+                          if($pp_details->quantity > $already_added_grn->receive_quantity){
+
+                            $orignal_quantity = $pp_details->quantity - $already_added_grn->receive_quantity;
+                      ?>
+                        <tr class="odd">
+                            <td>
+                              <?= Html::a(Yii::t('app', 'Manage '.isset($pp_details->product_code)?$pp_details->product_code:''), ['generate-grn','po'=>$po,'grn'=>$grn,'id'=>$pp_details->product_id], ['class' => '']) ?> 
+                              
+                            </td>
+                            <td>
+                                <?=$pp_details->title?>
+                            </td>
+                            <td><?=isset($pp_details->uomData)?$pp_details->uomData->title:'';?></td>
+                            <td><?=$pp_details->uom_quantity?></td>
+                            <td><?=$orignal_quantity?></td>
+                            <td><?=number_format($pp_details->purchase_rate,2)?></td>
+                            <td><?=number_format($pp_details->purchase_rate * $orignal_quantity,2)?></td>
+                        </tr>
+
+                      <?php                       
+                            }
+                          }else{
+                      ?>
+                      
+                        <tr class="odd">
+                            <td>
+                              <?= Html::a(Yii::t('app', 'Manage '.isset($pp_details->product_code)?$pp_details->product_code:''), ['generate-grn','po'=>$po,'grn'=>$grn,'id'=>$pp_details->product_id], ['class' => '']) ?> 
+                              
+                            </td>
+                            <td>
+                                <?=$pp_details->title?>
+                            </td>
+                            <td><?=isset($pp_details->uomData)?$pp_details->uomData->title:'';?></td>
+                            <td><?=$pp_details->uom_quantity?></td>
+                            <td><?=$pp_details->quantity?></td>
+                            <td><?=number_format($pp_details->purchase_rate,2)?></td>
+                            <td><?=number_format($pp_details->purchase_rate * $pp_details->purchase_rate,2)?></td>
+                        </tr>
+
+                      <?php      
                           }
-                        }else{
-                    ?>
-                    
-                      <tr class="odd">
-                          <td>
-                            <?= Html::a(Yii::t('app', 'Manage '.isset($pp_details->product_code)?$pp_details->product_code:''), ['generate-grn','po'=>$po,'grn'=>$grn,'id'=>$pp_details->product_id], ['class' => '']) ?> 
-                            
-                          </td>
-                          <td>
-                              <?=$pp_details->title?>
-                          </td>
-                          <td><?=isset($pp_details->uomData)?$pp_details->uomData->title:'';?></td>
-                          <td><?=$pp_details->uom_quantity?></td>
-                          <td><?=$pp_details->quantity?></td>
-                          <td><?=number_format($pp_details->purchase_rate,2)?></td>
-                          <td><?=number_format($pp_details->purchase_rate * $pp_details->purchase_rate,2)?></td>
-                      </tr>
-
-                    <?php      
                         }
-                      }
-                    ?>
-                  </tbody>
-              </table>
+                      ?>
+                    </tbody>
+                </table>
+              </div>
 
             <?php              
               }
@@ -165,44 +166,47 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             <h2>GRN Detail :: <?=$grn?></h2>
-            <table class="items">
-              <thead>
-                <tr>
-                  <th>Product Name</th>
-                  <th>Expiry Date</th>
-                  <th>Receive Quantity</th>
-                  <th>Cost Price</th>
-                  <th>UOM</th>
-                  <th>Total Value</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
 
-              <tbody>
-                <?php
-                  if(!empty($grn_details)){
-                  foreach($grn_details as $details){
+            <div class="table-responsive">
+              <table class="items">
+                <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Expiry Date</th>
+                    <th>Receive Quantity</th>
+                    <th>Cost Price</th>
+                    <th>UOM</th>
+                    <th>Total Value</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
 
-                ?>
-                    <tr>
-                      <td>
-                        <?=isset($details->product)?$details->product->title:''?>
-                      </td>
-                      <td><?=$details->expire_date?></td>
-                      <td><?=$details->receive_quantity?></td>
-                      <td><?=number_format($details->cost_price,3)?></td>
-                      <td><?=isset($details->productUom)?$details->productUom->title:'';?></td>
-                      <td><?=number_format($details->row_amount,3)?></td>
-                      <td>
-                        <?=Html::a('<span class="glyphicon glyphicon-trash" title="Delete"></span>', ['grn/delete-grn','po'=>$po,'grn' => $grn ,'id' => $details->id], ["class"=>"btn btn-xs btn-danger","data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") '])?>
-                      </td>
-                    </tr>
-                <?php 
+                <tbody>
+                  <?php
+                    if(!empty($grn_details)){
+                    foreach($grn_details as $details){
+
+                  ?>
+                      <tr>
+                        <td>
+                          <?=isset($details->product)?$details->product->title:''?>
+                        </td>
+                        <td><?=$details->expire_date?></td>
+                        <td><?=$details->receive_quantity?></td>
+                        <td><?=number_format($details->cost_price,3)?></td>
+                        <td><?=isset($details->productUom)?$details->productUom->title:'';?></td>
+                        <td><?=number_format($details->row_amount,3)?></td>
+                        <td>
+                          <?=Html::a('<span class="glyphicon glyphicon-trash" title="Delete"></span>', ['grn/delete-grn','po'=>$po,'grn' => $grn ,'id' => $details->id], ["class"=>"btn btn-xs btn-danger","data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") '])?>
+                        </td>
+                      </tr>
+                  <?php 
+                      }
                     }
-                  }
-                ?>
-              </tbody>
-            </table>
+                  ?>
+                </tbody>
+              </table>
+            </div>
 
           </div>
 
