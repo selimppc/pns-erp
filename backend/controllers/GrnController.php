@@ -176,7 +176,7 @@ class GrnController extends Controller
                 $model->quantity = $transaction_details->uom_quantity;
                 $model->receive_quantity = $transaction_details->quantity;
                 $model->cost_price = $transaction_details->purchase_rate;
-                $model->row_amount = bcmul($transaction_details->purchase_rate, $transaction_details->quantity, 8);                
+                $model->row_amount = $transaction_details->purchase_rate * $transaction_details->quantity;                
             }
 
             // Grn Details Data Save           
