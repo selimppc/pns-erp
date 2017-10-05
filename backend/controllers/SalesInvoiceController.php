@@ -12,6 +12,8 @@ use backend\models\SmDetailSearch;
 use backend\models\TransactionCode;
 use backend\models\Currency;
 
+use backend\models\SmBatchSale;
+
 use yii\web\Controller;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
@@ -419,6 +421,35 @@ class SalesInvoiceController extends Controller
                     ->bindValue(':sm_head_id' , $model->id )
                     ->bindValue(':user_id', Yii::$app->user->id)
                     ->execute();
+
+                $sm_details = SmDetail::find()->where(['sm_head_id' => $model->id])->all();
+
+                if(!empty($sm_details)){
+
+                    foreach($sm_details as $sm_d){
+
+                        $sm_batch_sale_model = new SmBatchSale();
+
+                        $sm_batch_sale_model->sm_head_id = $model->id;
+                        $sm_batch_sale_model->product_id = $sm_d->product_id;
+                        $sm_batch_sale_model->batch_number = '';
+                        $sm_batch_sale_model->expire_date = $model->date;
+                        $sm_batch_sale_model->uom = $sm_d->uom;
+                        $sm_batch_sale_model->quantity = $sm_d->quantity;
+                        $sm_batch_sale_model->bonus_quantity = $sm_d->bonus_quantity;
+                        $sm_batch_sale_model->sell_rate = '';
+                        $sm_batch_sale_model->rate = $sm_d->rate;
+                        $sm_batch_sale_model->tax_rate = $model->tax_rate;
+                        $sm_batch_sale_model->tax_amount = $model->tax_amount;
+                        $sm_batch_sale_model->line_amount = $model->net_amount;
+                        $sm_batch_sale_model->courency_id = $model->currency_id;
+                        $sm_batch_sale_model->exchange_rate = $model->exchange_rate;
+                        $sm_batch_sale_model->reference_code = $model->reference_code;
+
+                        $sm_batch_sale_model->save();
+                    }
+
+                } 
 
                 \Yii::$app->getSession()->setFlash('success', 'Sales Confirmed Successfully !');
             }catch (\Exception $e)
