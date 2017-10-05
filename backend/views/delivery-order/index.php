@@ -14,7 +14,7 @@ use backend\models\Branch;
 /* @var $searchModel backend\models\SmHeadSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Invoice Entry';
+$this->title = 'Delivery Order';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -22,14 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
-        <li class="breadcrumb-item">Sales</li>
+        <li class="breadcrumb-item">Inventory</li>
 
-        <li class="breadcrumb-item active"><a href="<?= Url::toRoute(['/sales-invoice']); ?>"><?= Html::encode($this->title) ?></a></li>
+        <li class="breadcrumb-item active"><a><?= Html::encode($this->title) ?></a></li>
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Create '.$this->title), ['create'], ['class' => '']) ?>   
-        <?= Html::a(Yii::t('app', 'Manage '.$this->title), ['index'], ['class' => '']) ?>   
+        
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -64,8 +63,8 @@ $this->params['breadcrumbs'][] = $this->title;
        <div id="flag_desc">
           <div id="flag_desc_text">
               <?php
-                if(isset(\Yii::$app->params['invoice_entry_index']) && !empty(\Yii::$app->params['invoice_entry_index'])){
-                  echo \Yii::$app->params['invoice_entry_index'];
+                if(isset(\Yii::$app->params['inventory_delivery_order']) && !empty(\Yii::$app->params['inventory_delivery_order'])){
+                  echo \Yii::$app->params['inventory_delivery_order'];
                 }
               ?>              
           </div>
@@ -98,15 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                      'value' => function ($model) {
                          return isset($model->customer)?$model->customer->name:'';
                      }
-                    ],
-                    [
-                     'attribute' => 'branch_id',  
-                     'label' => 'Branch',
-                     'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
-                     'value' => function ($model) {
-                         return isset($model->branch)?$model->branch->title:'';
-                     }
-                   ],
+                    ],                    
                     'doc_type',
                     [
                      'attribute' => 'prime_amount',  
@@ -155,28 +146,14 @@ $this->params['breadcrumbs'][] = $this->title;
                       }
                     ],
                     'gl_voucher_number',
-                    [
-                      'header' => 'View | Cancel Invoice',
-                      'class' => 'yii\grid\ActionColumn',
-                      'template' => '{view} {cancel}',
-                      'buttons' => [
-                          'view' => function ($url,$model) {
-                            $url =  $url;
-                            return Html::a('<span class="btn btn-xs btn-info">Show </span>', $url);
-                          },
-                          'cancel' => function ($url, $model) {
-                                return $model->status == 'open'?Html::a('Cancel', ['sales-invoice/cancel', 'id' => $model->id], ['class' => 'btn btn-xs btn-danger', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this invoice?") ']):'';
-                            },
-                    ],
-
-                  ],                 
+                                    
                   [
-                      'header' => 'Confirm Invoice',
+                      'header' => 'Confirm Delivery',
                       'class' => 'yii\grid\ActionColumn',
-                      'template' => '{confirm}',
+                      'template' => '{delivery}',
                       'buttons' => [
-                          'confirm' => function ($url, $model) {
-                                return $model->status == 'open'?Html::a('Confirm', ['sales-invoice/confirm', 'id' => $model->id], ['class' => 'btn btn-xs btn-primary', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to confirm this invoice?") ']):'';
+                          'delivery' => function ($url, $model) {
+                                return $model->status == 'confirmed'?Html::a('Confirm', ['delivery-order/delivery', 'id' => $model->id], ['class' => 'btn btn-xs btn-primary', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to delivery?") ']):'';
                             },
                     ],
                     

@@ -148,7 +148,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/delivery-order']); ?>">
                     <span class="site-menu-title">Delivery Order</span>
                   </a>
                 </li>

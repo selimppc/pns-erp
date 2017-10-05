@@ -42,7 +42,14 @@ class SmHeadSearch extends SmHead
      */
     public function search($params,$sales_type='')
     {
-        $query = SmHead::find();
+
+        if($sales_type == 'confirmed'){
+            $query = SmHead::find()->where(['status' => 'confirmed'])->orWhere(['status' => 'delivered']);
+        }else{
+            $query = SmHead::find();
+        }
+
+        
 
         // add conditions that should always apply here
 
