@@ -190,8 +190,8 @@ $this->registerJs($js);
                     <div class="col-md-5">
                         <label class="control-label only-label" for="">Product</label>
                     </div>      
-                    <div class="col-md-2">
-                        <label class="control-label only-label" for="">Available Quantity</label>
+                    <div class="col-md-1">
+                        <label class="control-label only-label" for="">Avail Qty</label>
                     </div>               
                     <div class="col-md-1">
                         <label class="control-label only-label" for="">Rate</label>
@@ -202,7 +202,7 @@ $this->registerJs($js);
                     <div class="col-md-1">
                         <label class="control-label only-label" for="">UOM</label>
                     </div>                    
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <label class="control-label only-label" for="">Total</label>
                     </div>                    
                 </div>
@@ -240,7 +240,7 @@ $this->registerJs($js);
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <?= $form->field($modelSmDetail, "[{$index}]available_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true, 'class' => 'available_quantity_class form-control'])->label(false) ?>
                             </div>
 
@@ -261,7 +261,7 @@ $this->registerJs($js);
                                     )->label(false) ?>
                             </div>
                             
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'class' => 'total_class form-control'])->label(false) ?>
                             </div>
 

@@ -360,10 +360,22 @@ class StockTransferController extends Controller
 
             $date = date('Y-m-d');
 
-            $product_data = VwImStockView::find()->where(['product_id' => $_POST['product_id']])->where(['>=','expire_date',$date])->one();
+            $product_data_avaliable = VwImStockView::find()->where(['product_id' => $_POST['product_id']])->andWhere(['>=','expire_date',$date])->all();
 
+            $total_avaliable = 0;
+            if(!empty($product_data_avaliable)){
+               
+                foreach($product_data_avaliable as $avaliable_data){
+           //         echo $avaliable_data->batch_number.' 1 ';
+                    $total_avaliable = $total_avaliable + $avaliable_data->available;
+                }
+            }
+
+            $product_data = VwImStockView::find()->where(['product_id' => $_POST['product_id']])->andWhere(['>=','expire_date',$date])->one();
+
+            
             if(!empty($product_data)){
-                $response['available_quantity'] = $product_data->available;
+                $response['available_quantity'] = $total_avaliable;
                 $response['batch_number'] = $product_data->batch_number;
                 $response['expire_date'] = $product_data->expire_date;
                 $response['rate'] = $product_data->im_rate;
