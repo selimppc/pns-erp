@@ -13,6 +13,7 @@ use backend\models\TransactionCode;
 use backend\models\Currency;
 
 use backend\models\SmBatchSale;
+use backend\models\VwImStockView;
 
 use yii\web\Controller;
 use yii\helpers\ArrayHelper;
@@ -428,16 +429,18 @@ class SalesInvoiceController extends Controller
 
                     foreach($sm_details as $sm_d){
 
+                        $stock_view_data = VwImStockView::find()->where(['product_id' => $sm_d->product_id])->orderBy(['expire_date'=>SORT_DESC])->one();
+
                         $sm_batch_sale_model = new SmBatchSale();
 
                         $sm_batch_sale_model->sm_head_id = $model->id;
                         $sm_batch_sale_model->product_id = $sm_d->product_id;
-                        $sm_batch_sale_model->batch_number = '';
+                        $sm_batch_sale_model->batch_number = $stock_view_data->batch_number;
                         $sm_batch_sale_model->expire_date = $model->date;
                         $sm_batch_sale_model->uom = $sm_d->uom;
                         $sm_batch_sale_model->quantity = $sm_d->quantity;
                         $sm_batch_sale_model->bonus_quantity = $sm_d->bonus_quantity;
-                        $sm_batch_sale_model->sell_rate = '';
+                        $sm_batch_sale_model->sell_rate = $stock_view_data->sell_rate;
                         $sm_batch_sale_model->rate = $sm_d->rate;
                         $sm_batch_sale_model->tax_rate = $model->tax_rate;
                         $sm_batch_sale_model->tax_amount = $model->tax_amount;
