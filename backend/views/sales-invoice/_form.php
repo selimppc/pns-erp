@@ -5,6 +5,8 @@ use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
 
+use yii\bootstrap\Modal;
+
 use yii\helpers\ArrayHelper;
 use backend\models\Supplier;
 use backend\models\Branch;
@@ -191,7 +193,8 @@ $this->registerJs($js);
                 <div class="row">
                     <div class="col-md-5">
                         <label class="control-label only-label" for="">Product</label>
-                    </div>      
+                    </div>  
+                    <div class="col-md-1"></div>    
                     <div class="col-md-1">
                         <label class="control-label only-label" for="">Avail Qty</label>
                     </div>               
@@ -204,7 +207,7 @@ $this->registerJs($js);
                     <div class="col-md-1">
                         <label class="control-label only-label" for="">UOM</label>
                     </div>                    
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <label class="control-label only-label" for="">Total</label>
                     </div>                    
                 </div>
@@ -243,6 +246,10 @@ $this->registerJs($js);
                             </div>
 
                             <div class="col-md-1">
+                                <a href="#" class="modalButton btn btn-xs btn-primary details_class">Details</a>
+                            </div>    
+
+                            <div class="col-md-1">
                                 <?= $form->field($modelSmDetail, "[{$index}]available_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true, 'class' => 'available_quantity_class form-control'])->label(false) ?>
                             </div>
 
@@ -263,7 +270,7 @@ $this->registerJs($js);
                                     )->label(false) ?>
                             </div>
                             
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'class' => 'total_class form-control'])->label(false) ?>
 
                                 <?= $form->field($modelSmDetail, "[{$index}]batch_number", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'batch_number_class form-control'])->label(false) ?>
@@ -297,6 +304,15 @@ $this->registerJs($js);
 
 <?php ActiveForm::end(); ?>
 
+<?php 
+        Modal::begin([
+            'header' => 'Product Details',
+            'id' => 'modal',
+            'size' => 'modal-lg',
+        ]);
+        echo "<div id='modalContent'></div>";
+        Modal::end();
+?>
 
 <?php
     
@@ -354,6 +370,8 @@ $this->registerJs($js);
                             $(item).closest('.item').find('.batch_number_class').val(data.batch_number);
 
                             $(item).closest('.item').find('.sell_rate_class').val(data.sell_rate);
+
+                            $(item).closest('.item').find('.details_class').attr('href',data.view_popup);
 
                             $(item).closest('.item').find('.uom_class').val(data.uom);
                                                       
@@ -428,4 +446,27 @@ $this->registerJs($js);
         });
 
      ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
+?>
+
+<?php
+    
+    $this->registerJs("
+
+      // changed id to class
+      $('.modalButton').click(function (){
+
+        if($(this).attr('href') == '#'){
+            $('#modal').modal('show').find('#modalContent').html('Please Select Product');
+        }else{
+
+            $.get($(this).attr('href'), function(data) {
+              $('#modal').modal('show').find('#modalContent').html(data);
+            });
+
+        }
+        
+        return false;
+      });
+
+    ", yii\web\View::POS_READY, "modal_open");   
 ?>

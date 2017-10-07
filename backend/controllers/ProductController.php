@@ -261,6 +261,25 @@ class ProductController extends Controller
         }
     }
 
+
+    public function actionViewPopup($id){
+
+        $model = Product::find()->where(['id' => $id])->one();
+
+        if(!empty($model)){
+
+            return Yii::$app->controller->renderPartial('product-modal',[
+                'model' => $model
+            ]);
+
+        }else{
+
+            return 'Sorry!! Product Not Found';
+
+        }        
+
+    }
+
     /**
      * Deletes an existing Product model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
