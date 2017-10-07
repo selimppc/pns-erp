@@ -255,11 +255,7 @@ $this->registerJs($js);
                             <div class="col-md-1">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
-                                    <?= $form->field($modelAdjustmentDetail, "[{$index}]uom")
-                                                ->dropDownList(
-                                                    ArrayHelper::map(CodesParam::find()->where(['type' => 'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
-                                                     ['prompt'=>'-Select-','class'=>'form-control uom_class']
-                                                )->label(false); ?>
+                                    <?= $form->field($modelAdjustmentDetail,"[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true , 'class' => 'uom_class form-control'])->label(false) ?>
 
                                 </div>
                             </div>

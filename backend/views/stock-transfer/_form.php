@@ -275,10 +275,9 @@ $this->registerJs($js);
                             </div>
 
                             <div class="col-md-1">
-                                <?= $form->field($modelTransferDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
-                                    ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
-                                     ['prompt'=>'-Select-','class'=>'form-control floating uom_class','disabled'=>true]
-                                )->label(false) ?>
+
+                                <?= $form->field($modelTransferDetail,"[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly'=>true,'class' => 'uom_class form-control'])->label(false) ?>
+                                
                             </div>
                            
 

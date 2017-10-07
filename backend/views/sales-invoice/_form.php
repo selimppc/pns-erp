@@ -262,16 +262,12 @@ $this->registerJs($js);
                             </div>
 
                             <div class="col-md-1">
-                            
 
-                                <?= $form->field($modelSmDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
-                                        ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
-                                         ['prompt'=>'-Select-','class'=>'form-control floating uom_class']
-                                    )->label(false) ?>
+                                <?= $form->field($modelSmDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'uom_class form-control'])->label(false) ?>
                             </div>
                             
                             <div class="col-md-1">
-                                <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'class' => 'total_class form-control'])->label(false) ?>
+                                <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'total_class form-control'])->label(false) ?>
 
                                 <?= $form->field($modelSmDetail, "[{$index}]batch_number", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'batch_number_class form-control'])->label(false) ?>
 
@@ -322,12 +318,21 @@ $this->registerJs($js);
 
             var quantity = $(this).val();
             var item = $(this);
+            var available_quantity = $(item).closest('.item').find('.available_quantity_class').val();
 
-            var sell_rate = $(item).closest('.item').find('.rate_class').val();
+            if(quantity < 1 || quantity > available_quantity  ){
+                alert('Please put valid quantity');
+                $(item).closest('.item').find('.total_class').val('');
+            }else{
 
-            var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3);
+                var sell_rate = $(item).closest('.item').find('.rate_class').val();
 
-            $(item).closest('.item').find('.total_class').val(total_amount);
+                var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3);
+
+                $(item).closest('.item').find('.total_class').val(total_amount);
+            }
+
+            
 
         });
 
@@ -336,11 +341,22 @@ $this->registerJs($js);
             var sell_rate = $(this).val();
             var item = $(this);
 
-            var quantity = $(item).closest('.item').find('.quantity_class').val();
+            if(sell_rate < 1){
 
-            var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3);
+                alert('Please put valid rate');
+                $(item).closest('.item').find('.total_class').val('');
 
-            $(item).closest('.item').find('.total_class').val(total_amount);
+            }else{
+
+                var quantity = $(item).closest('.item').find('.quantity_class').val();
+
+                var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3);
+
+                $(item).closest('.item').find('.total_class').val(total_amount);
+
+            }
+
+            
 
         });
 

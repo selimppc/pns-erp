@@ -374,7 +374,6 @@ class StockTransferController extends Controller
 
             $product_data = VwImStockView::find()->where(['product_id' => $_POST['product_id']])->andWhere(['>=','expire_date',$date])->one();
 
-            
             if(!empty($product_data)){
                 $response['available_quantity'] = $total_avaliable;
                 $response['batch_number'] = $product_data->batch_number;
@@ -382,7 +381,7 @@ class StockTransferController extends Controller
                 $response['rate'] = $product_data->im_rate;
                 $response['sell_rate'] = $product_data->sell_rate;
                 $response['batch_number'] = $product_data->batch_number;
-                $response['uom'] = $product_data->uom;
+                $response['uom'] = isset($product_data->productUom)?$product_data->productUom->title:'';
                 $response['view_popup'] = Url::toRoute(['/product/view-popup','id'=> $product_data->product_id]);
                 $response['result'] = 'success';
             }else{

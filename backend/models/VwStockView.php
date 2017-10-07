@@ -41,5 +41,6 @@ class VwStockView extends \yii\db\ActiveRecord
             'cost_price' => Yii::t('app', 'Stock Rate')
         ];
     }
+
 }
 

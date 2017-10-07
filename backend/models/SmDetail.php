@@ -44,7 +44,7 @@ class SmDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id','quantity','rate','uom'],'required'],
+            [['product_id','quantity','rate','uom','total'],'required'],
             [['batch_number','sell_rate'],'safe'],
             [[ 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['uom_quantity', 'rate', 'bonus_quantity', 'quantity', 'row_amount'], 'number'],
