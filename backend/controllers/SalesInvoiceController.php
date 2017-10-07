@@ -170,6 +170,15 @@ class SalesInvoiceController extends Controller
 
                 try {
                     $modelSmHead->status = 'open';
+
+                    if($modelSmHead->doc_type == 'sales'){
+                        $modelSmHead->sign = '1';
+                    }
+
+                    if($modelSmHead->doc_type == 'receipt'){
+                        $modelSmHead->sign = '-1';
+                    }
+
                     if ($flag = $modelSmHead->save(false)) {
                         foreach ($modelsSmDetail as $modelSmDetail) {
 
@@ -251,6 +260,7 @@ class SalesInvoiceController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
+
             $model->tax_rate = 0.00;
             $model->tax_amount = 0.00;
             $model->discount_rate = 0.00;
@@ -258,7 +268,20 @@ class SalesInvoiceController extends Controller
             $model->prime_amount = $model->net_amount;
             $model->status = 'open';
 
+            if($model->doc_type == 'sales'){
+                $model->sign ='1';
+            }
 
+            if($model->doc_type == 'receipt'){
+                $model->sign = '-1';
+            }
+
+            $valid = $model->validate();
+
+            if(!$valid){
+                print_r($model->getErrors());
+                exit();
+            }
             $transaction = \Yii::$app->db->beginTransaction();
 
             try {
@@ -280,32 +303,25 @@ class SalesInvoiceController extends Controller
                     \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
 
                     return $this->redirect(['view-direct-sales', 'id' => $model->id]);
-                } else{
-
-                    $model->tax_amount = 0.00;
-            
-                    return $this->render('create_direct_sales', [
-                        'model' => $model,
-                    ]);
-                    
-                }
+                } 
 
             }catch (\Exception $e) {
 
+                print_r($e->getMessage());
+                exit();
                 \Yii::$app->getSession()->setFlash('error', $e->getMessage());
                 $transaction->rollBack();
             }
 
             
             
-        } else {
+        } 
 
-            $model->tax_amount = 0.00;
+        $model->tax_amount = 0.00;
             
-            return $this->render('create_direct_sales', [
-                'model' => $model,
-            ]);
-        }
+        return $this->render('create_direct_sales', [
+            'model' => $model,
+        ]);
 
     }
 
@@ -337,6 +353,15 @@ class SalesInvoiceController extends Controller
             if ($valid) {
                 $transaction = \Yii::$app->db->beginTransaction();
                 try {
+
+                    if($modelSmHead->doc_type == 'sales'){
+                        $modelSmHead->sign = '1';
+                    }
+
+                    if($modelSmHead->doc_type == 'receipt'){
+                        $modelSmHead->sign = '-1';
+                    }
+
                     if ($flag = $modelSmHead->save(false)) {
                         if (!empty($deletedIDs)) {
                             SmDetail::deleteAll(['id' => $deletedIDs]);
@@ -390,12 +415,24 @@ class SalesInvoiceController extends Controller
 
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
 
-            // Set success data
-            \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+            if($model->doc_type == 'sales'){
+                $model->sign = '1';
+            }
 
-            return $this->redirect(['view-direct-sales', 'id' => $model->id]);
+            if($model->doc_type == 'receipt'){
+                $model->sign = '-1';
+            }
+
+            if($model->save()){
+                 // Set success data
+                \Yii::$app->getSession()->setFlash('success', 'Successfully Updated');
+
+                return $this->redirect(['view-direct-sales', 'id' => $model->id]);
+            }
+
+           
         } else {
             return $this->render('update_direct_sales', [
                 'model' => $model,
@@ -429,18 +466,16 @@ class SalesInvoiceController extends Controller
 
                     foreach($sm_details as $sm_d){
 
-                        $stock_view_data = VwImStockView::find()->where(['product_id' => $sm_d->product_id])->orderBy(['expire_date'=>SORT_DESC])->one();
-
                         $sm_batch_sale_model = new SmBatchSale();
 
                         $sm_batch_sale_model->sm_head_id = $model->id;
                         $sm_batch_sale_model->product_id = $sm_d->product_id;
-                        $sm_batch_sale_model->batch_number = $stock_view_data->batch_number;
+                        $sm_batch_sale_model->batch_number = $sm_d->batch_number;
                         $sm_batch_sale_model->expire_date = $model->date;
                         $sm_batch_sale_model->uom = $sm_d->uom;
                         $sm_batch_sale_model->quantity = $sm_d->quantity;
                         $sm_batch_sale_model->bonus_quantity = $sm_d->bonus_quantity;
-                        $sm_batch_sale_model->sell_rate = $stock_view_data->sell_rate;
+                        $sm_batch_sale_model->sell_rate = $sm_d->sell_rate;
                         $sm_batch_sale_model->rate = $sm_d->rate;
                         $sm_batch_sale_model->tax_rate = $model->tax_rate;
                         $sm_batch_sale_model->tax_amount = $model->tax_amount;
@@ -461,7 +496,7 @@ class SalesInvoiceController extends Controller
             }
         }
 
-        return $this->redirect(['index']);
+        return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
     }
 
 

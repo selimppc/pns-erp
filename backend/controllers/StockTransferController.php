@@ -380,6 +380,7 @@ class StockTransferController extends Controller
                 $response['expire_date'] = $product_data->expire_date;
                 $response['rate'] = $product_data->im_rate;
                 $response['sell_rate'] = $product_data->sell_rate;
+                $response['batch_number'] = $product_data->batch_number;
                 $response['uom'] = $product_data->uom;
                 $response['result'] = 'success';
             }else{

@@ -42,6 +42,16 @@ $this->registerJs($js);
 
 <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
 
+    <?php 
+        if(Yii::$app->session->hasFlash('error')){
+    ?>
+        <div class="alert alert-danger">
+          <?= Yii::$app->session->getFlash('error'); ?>
+        </div>
+    <?php 
+        }
+    ?>
+
 	<div class="row">
 
 		<div class="col-md-2">

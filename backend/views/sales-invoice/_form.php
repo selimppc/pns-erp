@@ -92,7 +92,7 @@ $this->registerJs($js);
 
                 <?= $form->field($modelSmHead, 'doc_type')
                             ->dropDownList(
-                                array ('1'=>'Sales', '-1' => 'Receipt', '2'=>'Return'),
+                                array ('sales'=>'Sales', 'receipt' => 'Receipt', 'return'=>'Return'),
                                ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 
@@ -172,7 +172,9 @@ $this->registerJs($js);
                 'rate',
                 'quantity',
                 'uom',
-                'total'
+                'total',
+                'batch_number',
+                'sell_rate'
             ],
         ]); 
     ?>
@@ -245,7 +247,7 @@ $this->registerJs($js);
                             </div>
 
                             <div class="col-md-1">
-                                <?= $form->field($modelSmDetail, "[{$index}]rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' => 'sell_rate_class form-control'])->label(false) ?>
+                                <?= $form->field($modelSmDetail, "[{$index}]rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' => 'rate_class form-control'])->label(false) ?>
                             </div>
 
                             <div class="col-md-1">
@@ -263,6 +265,10 @@ $this->registerJs($js);
                             
                             <div class="col-md-2">
                                 <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'class' => 'total_class form-control'])->label(false) ?>
+
+                                <?= $form->field($modelSmDetail, "[{$index}]batch_number", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'batch_number_class form-control'])->label(false) ?>
+
+                                <?= $form->field($modelSmDetail, "[{$index}]sell_rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'sell_rate_class form-control'])->label(false) ?>
                             </div>
 
                             <div class="col-md-1">
@@ -301,7 +307,7 @@ $this->registerJs($js);
             var quantity = $(this).val();
             var item = $(this);
 
-            var sell_rate = $(item).closest('.item').find('.sell_rate_class').val();
+            var sell_rate = $(item).closest('.item').find('.rate_class').val();
 
             var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3);
 
@@ -309,7 +315,7 @@ $this->registerJs($js);
 
         });
 
-        $(document).delegate('.sell_rate_class','change',function(){
+        $(document).delegate('.rate_class','change',function(){
 
             var sell_rate = $(this).val();
             var item = $(this);
@@ -342,6 +348,10 @@ $this->registerJs($js);
                         if(data.result == 'success'){ 
 
                             $(item).closest('.item').find('.available_quantity_class').val(data.available_quantity);
+
+                            $(item).closest('.item').find('.rate_class').val(data.sell_rate);
+
+                            $(item).closest('.item').find('.batch_number_class').val(data.batch_number);
 
                             $(item).closest('.item').find('.sell_rate_class').val(data.sell_rate);
 
