@@ -196,7 +196,7 @@ $this->registerJs($js);
                     </div>  
                     <div class="col-md-1"></div>    
                     <div class="col-md-1">
-                        <label class="control-label only-label" for="">Avail Qty</label>
+                        <label class="control-label only-label" for="">Aval Qty</label>
                     </div>               
                     <div class="col-md-1">
                         <label class="control-label only-label" for="">Rate</label>
