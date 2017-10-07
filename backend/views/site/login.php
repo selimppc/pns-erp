@@ -12,7 +12,7 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
+<div class="" data-animsition-in="fade-in" data-animsition-out="fade-out">
     <div class="page-content">
       <div class="page-brand-info">
         <div class="brand">
