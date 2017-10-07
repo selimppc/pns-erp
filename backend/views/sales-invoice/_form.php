@@ -92,7 +92,7 @@ $this->registerJs($js);
 
                 <?= $form->field($modelSmHead, 'doc_type')
                             ->dropDownList(
-                                array ('sales'=>'Sales', 'return'=>'Return', 'receipt' => 'Receipt'),
+                                array ('1'=>'Sales', '-1' => 'Receipt', '2'=>'Return'),
                                ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 
