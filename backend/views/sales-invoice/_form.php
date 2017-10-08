@@ -283,7 +283,7 @@ $this->registerJs($js);
 
                             <div class="col-md-1">
                                 <div class="row">
-                                    <button type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i> Remove</button>
+                                    <button style="width: 90%;" type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i> Remove</button>
                                 </div>
                             </div>
 
