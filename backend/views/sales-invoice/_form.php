@@ -92,11 +92,13 @@ $this->registerJs($js);
 
             <div class="form-group form-material" data-plugin="formMaterial">
 
-                <?= $form->field($modelSmHead, 'doc_type')
+                <?= $form->field($modelSmHead, 'pay_terms')
                             ->dropDownList(
-                                array ('sales'=>'Sales', 'receipt' => 'Receipt', 'return'=>'Return'),
+                                array ('Cash'=>'Cash', 'Credit' => 'Credit'),
                                ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
+
+                <?= $form->field($modelSmHead, 'doc_type')->hiddenInput(['value'=>'sales'])->label(false); ?>            
 
             </div>
 

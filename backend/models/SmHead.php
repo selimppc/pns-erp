@@ -79,7 +79,7 @@ class SmHead extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id'],'required','on'=>'create'],
+            [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id','pay_terms'],'required','on'=>'create'],
             [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id','prime_amount','net_amount'],'required','on'=>'create_direct_sales'],
             [['date', 'created_at', 'updated_at'], 'safe'],
             [['customer_id', 'branch_id', 'am_coa_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
@@ -104,7 +104,8 @@ class SmHead extends \yii\db\ActiveRecord
             'sm_number' => Yii::t('app', 'Sales Number'),
             'date' => Yii::t('app', 'Sales Date'),
             'customer_id' => Yii::t('app', 'Customer Name'),
-            'doc_type' => Yii::t('app', 'Pay Terms'),
+            'doc_type' => Yii::t('app', 'Doc Type'),
+            'pay_terms' => Yii::t('app','Pay Terms'),
             'branch_id' => Yii::t('app', 'Branch'),
             'am_coa_id' => Yii::t('app', 'Am Coa ID'),
             'check_number' => Yii::t('app', 'Check Number'),
