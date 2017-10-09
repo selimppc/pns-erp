@@ -270,15 +270,15 @@ $this->registerJs($js);
 
                                 <?= $form->field($modelSmDetail, "[{$index}]uom_name", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'uom_class form-control'])->label(false) ?>
 
-                                <?= $form->field($modelSmDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'readonly' => true, 'class' => 'uom_id_class form-control'])->label(false) ?>
+                                <?= $form->field($modelSmDetail, "[{$index}]uom", ['options' => ['class' => '','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'readonly' => true, 'class' => 'uom_id_class form-control'])->label(false) ?>
                             </div>
                             
                             <div class="col-md-1">
                                 <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'total_class form-control'])->label(false) ?>
 
-                                <?= $form->field($modelSmDetail, "[{$index}]batch_number", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'batch_number_class form-control'])->label(false) ?>
+                                <?= $form->field($modelSmDetail, "[{$index}]batch_number", ['options' => ['class' => '','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'batch_number_class form-control'])->label(false) ?>
 
-                                <?= $form->field($modelSmDetail, "[{$index}]sell_rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'sell_rate_class form-control'])->label(false) ?>
+                                <?= $form->field($modelSmDetail, "[{$index}]sell_rate", ['options' => ['class' => '','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'sell_rate_class form-control'])->label(false) ?>
                             </div>
 
                             <div class="col-md-1">
@@ -327,7 +327,7 @@ $this->registerJs($js);
             var item = $(this);
             var available_quantity = $(item).closest('.item').find('.available_quantity_class').val();
 
-            if(quantity < 1 || quantity > available_quantity  ){
+            if(quantity < 1 || quantity > available_quantity ){
                 alert('Please put valid quantity');
                 $(item).closest('.item').find('.total_class').val('');
             }else{

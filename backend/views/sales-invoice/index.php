@@ -107,7 +107,14 @@ $this->params['breadcrumbs'][] = $this->title;
                          return isset($model->branch)?$model->branch->title:'';
                      }
                    ],
-                    'doc_type',
+                    [
+                      'attribute' => 'pay_terms',
+                      'label' => 'Pay Terms',
+                      'filter'=>array("Cash"=>"Cash","Credit"=>"Credit"),
+                      'value' => function ($model){
+                        return ucfirst($model->pay_terms);
+                      }
+                    ],
                     [
                      'attribute' => 'prime_amount',  
                      'label' => 'Total Amount',

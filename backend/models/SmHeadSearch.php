@@ -19,7 +19,7 @@ class SmHeadSearch extends SmHead
     {
         return [
             [['id', 'customer_id', 'branch_id', 'am_coa_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
-            [['sm_number', 'date', 'doc_type', 'check_number', 'note', 'sign', 'status', 'reference_code', 'gl_voucher_number', 'created_at', 'updated_at'], 'safe'],
+            [['sm_number', 'date', 'doc_type', 'pay_terms' , 'check_number', 'note', 'sign', 'status', 'reference_code', 'gl_voucher_number', 'created_at', 'updated_at'], 'safe'],
             [['exchange_rate', 'tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],
         ];
     }
@@ -111,6 +111,7 @@ class SmHeadSearch extends SmHead
 
         $query->andFilterWhere(['like', 'doc_type', $this->doc_type])
             ->andFilterWhere(['like', 'check_number', $this->check_number])
+            ->andFilterWhere(['like', 'pay_terms', $this->pay_terms])
             ->andFilterWhere(['like', 'note', $this->note])
             ->andFilterWhere(['like', 'date', $this->date])
             ->andFilterWhere(['like', 'sign', $this->sign])
