@@ -65,6 +65,9 @@ use kartik\select2\Select2;
             
             <?= $form->field($model, 'row_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true]) ?>
 
+            <input type="hidden" name="actual_quantity" id="actual_quantity" value="<?=$model->receive_quantity?>">
+            <input type="hidden" name="actual_cost_price" id="actual_cost_price" value="<?=$model->cost_price?>">
+
         </div>
 
     </div>    
@@ -79,12 +82,23 @@ use kartik\select2\Select2;
 
 <?php
     
-    $this->registerJs("
+    $this->registerJs("       
 
         $('#imgrndetail-receive_quantity').change(function (e) {
             
             var receive_quantity = $('#imgrndetail-receive_quantity').val();
             var cost_price = $('#imgrndetail-cost_price').val();
+            var actual_quantity = $('#actual_quantity').val();
+
+            if(receive_quantity > actual_quantity){
+
+                var message = 'Receive Quantity must be less than or equal '+actual_quantity;
+                alert(message);
+                $('#imgrndetail-receive_quantity').val(actual_quantity);
+
+                var receive_quantity = actual_quantity;
+
+            }
 
             var row_amount = parseFloat(Math.round( (receive_quantity*cost_price)*100 ) /100 ).toFixed(3);
 
@@ -96,6 +110,12 @@ use kartik\select2\Select2;
             
             var receive_quantity = $('#imgrndetail-receive_quantity').val();
             var cost_price = $('#imgrndetail-cost_price').val();
+            var actual_cost_price = $('#actual_cost_price').val();
+
+            if(isNaN(cost_price) == true){
+                $('#imgrndetail-cost_price').val(actual_cost_price);
+                var cost_price = actual_cost_price;
+            }
             
             var row_amount = parseFloat(Math.round( (receive_quantity*cost_price)*100 ) /100 ).toFixed(3);
 
