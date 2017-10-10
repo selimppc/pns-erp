@@ -8,6 +8,8 @@ use yii\helpers\ArrayHelper;
 use backend\models\Branch;
 use backend\models\CodesParam;
 
+use backend\models\VwImStockView;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImGrnDetailSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -113,7 +115,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Total',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        return '';
+                        $total_value = VwImStockView::findtotal_available($model->product_id);
+                        return $total_value;
                     },
                 ],
                
