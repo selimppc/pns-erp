@@ -428,6 +428,13 @@ a.btn{
     padding-right: 0.5%;
 }
 
+.custom-col-45{
+    width: 45%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
 .custom-col-4{
     width: 40%;
     float: left;
@@ -435,8 +442,8 @@ a.btn{
     padding-right: 0.5%;
 }
 
-.custom-col-45{
-    width: 45%;
+.custom-col-35{
+    width: 35%;
     float: left;
     padding-left: 0.5%;
     padding-right: 0.5%;
@@ -458,6 +465,13 @@ a.btn{
 
 .custom-col-2{
     width: 20%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.custom-col-15{
+    width: 15%;
     float: left;
     padding-left: 0.5%;
     padding-right: 0.5%;

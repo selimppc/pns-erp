@@ -101,7 +101,7 @@ $this->registerJs($js);
                 <?= $form->field($model, 'pay_terms')
                             ->dropDownList(
                                 array ('Cash'=>'Cash', 'Credit'=>'Credit'),
-                               ['prompt'=>'-Select-','class'=>'form-control']
+                               ['class'=>'form-control']
                             ); ?>
 
                 <?= $form->field($model, 'doc_type')->hiddenInput(['value'=>'sales'])->label(false); ?>            
@@ -147,7 +147,7 @@ $this->registerJs($js);
 
         <div class="col-md-10">
 
-            <?= $form->field($model, 'note',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'note',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textArea() ?>
 
         </div>
 
@@ -219,6 +219,11 @@ $this->registerJs($js);
             var prime_amount = parseInt($('#smhead-prime_amount').val());
             var tax_amount = parseInt($('#smhead-tax_amount').val());
 
+            if(isNaN(prime_amount) == true){
+                $('#smhead-prime_amount').val('0'); 
+                var prime_amount = 0;               
+            }
+
             var net_amount = prime_amount+tax_amount;
 
             $('#smhead-net_amount').val(net_amount);
@@ -229,6 +234,15 @@ $this->registerJs($js);
             
             var tax_amount = parseInt($('#smhead-tax_amount').val());
             var prime_amount = parseInt($('#smhead-prime_amount').val());
+
+            if(isNaN(tax_amount) == true){
+                $('#smhead-tax_amount').val('0');
+                var tax_amount = 0;                
+            }
+
+            if(isNaN(prime_amount) == true){
+                var prime_amount = 0;
+            }
             
             var net_amount = prime_amount+tax_amount;
 
