@@ -455,9 +455,9 @@ class SalesInvoiceController extends Controller
 
                 // send sales data into the table sm_batch_sale
 
-                $result = \Yii::$app->db->createCommand("CALL sp_sm_do_confirm(:sm_head_id, :user_id)")
-                    ->bindValue(':sm_head_id' , $model->id )
-                    ->bindValue(':user_id', Yii::$app->user->id)
+                $result = \Yii::$app->db->createCommand("CALL sp_sm_do_confirm(:pID, :pUserId)")
+                    ->bindValue(':pID' , $model->id )
+                    ->bindValue(':pUserId', Yii::$app->user->id)
                     ->execute();
 
                 $sm_details = SmDetail::find()->where(['sm_head_id' => $model->id])->all();
@@ -496,7 +496,9 @@ class SalesInvoiceController extends Controller
             }
         }
 
-        return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
+        return $this->redirect(['index']);
+        
+        /*return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));*/
     }
 
 

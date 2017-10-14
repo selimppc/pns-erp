@@ -348,7 +348,7 @@ $this->registerJs($js);
             var sell_rate = $(this).val();
             var item = $(this);
 
-            if(sell_rate < 1){
+            if(sell_rate < 0){
 
                 alert('Please put valid rate');
                 $(item).closest('.item').find('.total_class').val('');
