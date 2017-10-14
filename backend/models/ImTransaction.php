@@ -78,7 +78,7 @@ class ImTransaction extends \yii\db\ActiveRecord
             [['product_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['date', 'expire_date', 'created_at', 'updated_at', 'supplier_id'], 'safe'],
             [['quantity', 'foreign_rate', 'rate', 'total_price', 'base_value'], 'number'],
-            [['sign', 'note'], 'string'],
+            [['sign', 'note'], 'integer'],
             [['transaction_number', 'reference_number', 'reference_row', 'status'], 'string', 'max' => 16],
             [['batch_number'], 'string', 'max' => 45],
             [['uom'], 'string', 'max' => 8],
