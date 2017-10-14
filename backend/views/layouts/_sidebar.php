@@ -170,31 +170,7 @@
               </ul>
             </li>
 
-            <li class="site-menu-item has-sub">
-              <a href="javascript:void(0)">
-                <i class="site-menu-icon md-balance-wallet" aria-hidden="true"></i>
-                <span class="site-menu-title">Account Payable</span>
-              </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/account-payable-invoice']); ?>">
-                    <span class="site-menu-title">Invoice</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="<?= Url::toRoute(['/account-payment']); ?>">
-                    <span class="site-menu-title">Payment</span>
-                  </a>
-                </li> 
-                <li class="site-menu-item">
-                  <a class="animsition-link" href="#">
-                    <span class="site-menu-title">Report</span>
-                  </a>
-                </li> 
-                
-              </ul>
-            </li>
-
+            
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
                 <i class="site-menu-icon md-money-box" aria-hidden="true"></i>
@@ -229,6 +205,32 @@
                 
               </ul>
             </li>
+
+            <li class="site-menu-item has-sub">
+              <a href="javascript:void(0)">
+                <i class="site-menu-icon md-balance-wallet" aria-hidden="true"></i>
+                <span class="site-menu-title">Account Payable</span>
+              </a>
+              <ul class="site-menu-sub">
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/account-payable-invoice']); ?>">
+                    <span class="site-menu-title">Invoice</span>
+                  </a>
+                </li>
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/account-payment']); ?>">
+                    <span class="site-menu-title">Payment</span>
+                  </a>
+                </li> 
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="#">
+                    <span class="site-menu-title">Report</span>
+                  </a>
+                </li> 
+                
+              </ul>
+            </li>
+
 
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
