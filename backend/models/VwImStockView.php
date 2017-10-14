@@ -61,6 +61,21 @@ class VwImStockView extends \yii\db\ActiveRecord
         return $options;
     }
 
+    public static function findtotal_available($product_id){
+
+        $total = 0;
+
+        $product_q = VwImStockView::find()->where(['product_id' => $product_id])->all();
+
+        if(!empty($product_q)){
+            foreach($product_q as $product){
+                $total += $product->available;
+            }
+        }
+
+        return $total;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

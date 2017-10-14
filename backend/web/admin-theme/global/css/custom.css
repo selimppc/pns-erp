@@ -420,3 +420,81 @@ a.btn{
     text-align: center;
     display: inline-block;
 }
+
+.custom-col-5{
+    width: 50%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.custom-col-45{
+    width: 45%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.custom-col-4{
+    width: 40%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.custom-col-35{
+    width: 35%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.custom-col-1{
+    width: 10%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.custom-col-07{
+    width: 7%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.custom-col-2{
+    width: 20%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.custom-col-15{
+    width: 15%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.custom-col-05{
+    width: 5%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.custom-col-05 button{
+    margin-left: 5%;
+}
+
+.custom-col-06{
+    width: 6%;
+    float: left;
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.custom-col-06 button{
+    width: 100%;
+}

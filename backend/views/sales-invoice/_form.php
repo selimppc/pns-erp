@@ -95,7 +95,7 @@ $this->registerJs($js);
                 <?= $form->field($modelSmHead, 'pay_terms')
                             ->dropDownList(
                                 array ('Cash'=>'Cash', 'Credit' => 'Credit'),
-                               ['prompt'=>'-Select-','class'=>'form-control']
+                               ['class'=>'form-control']
                             ); ?>
 
                 <?= $form->field($modelSmHead, 'doc_type')->hiddenInput(['value'=>'sales'])->label(false); ?>            
@@ -194,23 +194,23 @@ $this->registerJs($js);
             <div class="panel-body container-items"><!-- widgetContainer -->
 
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="custom-col-35">
                         <label class="control-label only-label" for="">Product</label>
                     </div>  
-                    <div class="col-md-1"></div>    
-                    <div class="col-md-1">
+                    <div class="custom-col-05"></div>    
+                    <div class="custom-col-07">
                         <label class="control-label only-label" for="">Aval Qty</label>
                     </div>               
-                    <div class="col-md-1">
+                    <div class="custom-col-15">
                         <label class="control-label only-label" for="">Rate</label>
                     </div>                                        
-                    <div class="col-md-1">
+                    <div class="custom-col-07">
                         <label class="control-label only-label" for="">Quantity</label>
                     </div>                    
-                    <div class="col-md-1">
+                    <div class="custom-col-07">
                         <label class="control-label only-label" for="">UOM</label>
                     </div>                    
-                    <div class="col-md-1">
+                    <div class="custom-col-15">
                         <label class="control-label only-label" for="">Total</label>
                     </div>                    
                 </div>
@@ -234,7 +234,7 @@ $this->registerJs($js);
 
                         <div class="row">
 
-                            <div class="col-md-5">
+                            <div class="custom-col-35">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
                                     <?php
@@ -250,30 +250,30 @@ $this->registerJs($js);
                                 </div>
                             </div>
 
-                            <div class="col-md-1">
-                                <a href="#" class="modalButton btn btn-xs btn-primary details_class">Details</a>
+                            <div class="custom-col-05">
+                                <a style="width: 100%;height: 25px;line-height: 23px;" href="#" class="modalButton btn btn-xs btn-primary details_class">Details</a>
                             </div>    
 
-                            <div class="col-md-1">
+                            <div class="custom-col-07">
                                 <?= $form->field($modelSmDetail, "[{$index}]available_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true, 'class' => 'available_quantity_class form-control'])->label(false) ?>
                             </div>
 
-                            <div class="col-md-1">
+                            <div class="custom-col-15">
                                 <?= $form->field($modelSmDetail, "[{$index}]rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' => 'rate_class form-control'])->label(false) ?>
                             </div>
 
-                            <div class="col-md-1">
+                            <div class="custom-col-07">
                                 <?= $form->field($modelSmDetail, "[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'class' => 'quantity_class form-control'])->label(false) ?>
                             </div>
 
-                            <div class="col-md-1">
+                            <div class="custom-col-07">
 
                                 <?= $form->field($modelSmDetail, "[{$index}]uom_name", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'uom_class form-control'])->label(false) ?>
 
                                 <?= $form->field($modelSmDetail, "[{$index}]uom", ['options' => ['class' => '','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'readonly' => true, 'class' => 'uom_id_class form-control'])->label(false) ?>
                             </div>
                             
-                            <div class="col-md-1">
+                            <div class="custom-col-15">
                                 <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'total_class form-control'])->label(false) ?>
 
                                 <?= $form->field($modelSmDetail, "[{$index}]batch_number", ['options' => ['class' => '','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'batch_number_class form-control'])->label(false) ?>
@@ -281,10 +281,10 @@ $this->registerJs($js);
                                 <?= $form->field($modelSmDetail, "[{$index}]sell_rate", ['options' => ['class' => '','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'sell_rate_class form-control'])->label(false) ?>
                             </div>
 
-                            <div class="col-md-1">
-                                <div class="row">
-                                    <button style="width: 90%;" type="button" class="pull-right remove-item btn-danger btn-xs"><i class="icon md-close" aria-hidden="true"></i> Remove</button>
-                                </div>
+                            <div class="custom-col-06">
+                                
+                                <button style="width: 90%;" type="button" class="pull-right remove-item btn-danger btn-xs"> Remove</button>
+                                
                             </div>
 
                         </div>
@@ -317,6 +317,12 @@ $this->registerJs($js);
         Modal::end();
 ?>
 
+<style type="text/css">
+    .form-group .select2{
+        width: 100% !important;
+    }
+</style>
+
 <?php
     
     $this->registerJs("
@@ -328,8 +334,11 @@ $this->registerJs($js);
             var available_quantity = $(item).closest('.item').find('.available_quantity_class').val();
 
             if(quantity < 1 || quantity > available_quantity ){
+
                 alert('Please put valid quantity');
                 $(item).closest('.item').find('.total_class').val('');
+                $(item).closest('.item').find('.quantity_class').val('');
+
             }else{
 
                 var sell_rate = $(item).closest('.item').find('.rate_class').val();
@@ -348,10 +357,14 @@ $this->registerJs($js);
             var sell_rate = $(this).val();
             var item = $(this);
 
-            if(sell_rate < 0){
+            if(sell_rate < 1){
 
                 alert('Please put valid rate');
                 $(item).closest('.item').find('.total_class').val('');
+
+            }else if(isNaN(sell_rate) == true){
+
+                $(item).closest('.item').find('.rate_class').val('');
 
             }else{
 
