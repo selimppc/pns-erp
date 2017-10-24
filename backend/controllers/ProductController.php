@@ -250,7 +250,7 @@ class ProductController extends Controller
             if(!empty($product_data)){
                 $response['sell_uom'] = $product_data->sell_uom;
                 $response['sell_uom_qty'] = $product_data->sell_uom_qty;
-                $response['sell_rate'] = $product_data->sell_rate;
+                $response['sell_rate'] = $product_data->cost_price;
                 $response['result'] = 'success';
             }else{
                 $response['result'] = 'error';
