@@ -149,6 +149,10 @@ form div label.control-label:after{
     color: #4B0082;
 }
 
+.dropdown-menu{
+      z-index: 2251 !important; 
+}
+
 .dynamicform_wrapper .panel-default>.panel-heading{
     padding: 5px 10px;
 }
