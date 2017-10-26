@@ -65,7 +65,7 @@ class ImGrnDetail extends \yii\db\ActiveRecord
     {
         return [
             [['im_grn_head_id','product_id','batch_number','uom','receive_quantity','cost_price','row_amount','quantity'],'required'],
-            [['batch_number'],'unique'],
+            #[['batch_number'],'unique'],
             [['im_grn_head_id', 'product_id', 'created_by', 'updated_by'], 'integer'],
             [['expire_date', 'created_at', 'updated_at'], 'safe'],
             [['receive_quantity', 'cost_price', 'quantity', 'row_amount'], 'number'],
