@@ -90,13 +90,21 @@ use kartik\select2\Select2;
             var cost_price = $('#imgrndetail-cost_price').val();
             var actual_quantity = $('#actual_quantity').val();
 
-            if(receive_quantity > actual_quantity){
+            if( parseInt(receive_quantity) > parseInt(actual_quantity) ){
 
-                var message = 'Receive Quantity must be less than or equal '+actual_quantity;
-                alert(message);
-                $('#imgrndetail-receive_quantity').val(actual_quantity);
+                var txt;
+                var r = confirm('Receive Quantity greater than '+actual_quantity+'. Do you want to apply ?');
+                if (r == true) {
+                    // normal calculation
+                } else {
+                   
+                    $('#imgrndetail-receive_quantity').val(actual_quantity);
 
-                var receive_quantity = actual_quantity;
+                    var receive_quantity = actual_quantity;
+
+                }
+
+                
 
             }
 
