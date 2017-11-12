@@ -67,6 +67,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 'product_code',
                 'product_title',
+                [
+                    'attribute' => 'product_id',
+                    'label' => 'Product Model',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return isset($model->product)?$model->product->model:'';
+                    },
+                ],
                 'batch_number',
                 'expire_date',
                 [
