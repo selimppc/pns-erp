@@ -115,7 +115,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <table class="table table-striped table-bordered detail-view">
 
                         <tr>
-                            <th>Product</th>
+                            <th>Product Name</th>
+                            <th>Product Code</th>
+                            <th>Product Model</th>
                             <th>Sell Rate</th>
                             <th>Quantity</th>
                             <th>Unit of Measurment</th>                            
@@ -129,6 +131,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             <tr>
                                 <td>
                                     <?=isset($sm_details->product)?$sm_details->product->title:'';?>
+                                </td>
+                                <td>
+                                    <?=isset($sm_details->product)?$sm_details->product->product_code:'';?>
+                                </td>
+                                <td>
+                                    <?=isset($sm_details->product)?$sm_details->product->model:'';?>
                                 </td>
                                 <td>
                                     <?=number_format($sm_details->rate,3)?>
