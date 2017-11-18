@@ -96,6 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       <tr>
                         <th>Product Code</th>
                         <th>Product Name</th>
+                        <th>Product Model</th>
                         <th>Unit of Measurement</th>
                         <th>UOM Quantity</th>
                         <th>Quantity</th>
@@ -125,6 +126,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td>
                                 <?=$pp_details->title?>
                             </td>
+                           <td>
+                                <?=isset($pp_details->product)?$pp_details->product->model:'';?>
+                            </td>
                             <td><?=isset($pp_details->uomData)?$pp_details->uomData->title:'';?></td>
                             <td><?=$pp_details->uom_quantity?></td>
                             <td><?=$orignal_quantity?></td>
@@ -144,6 +148,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             </td>
                             <td>
                                 <?=$pp_details->title?>
+                            </td>
+                            <td>
+                                <?=isset($pp_details->product)?$pp_details->product->model:'';?>
                             </td>
                             <td><?=isset($pp_details->uomData)?$pp_details->uomData->title:'';?></td>
                             <td><?=$pp_details->uom_quantity?></td>
@@ -171,7 +178,9 @@ $this->params['breadcrumbs'][] = $this->title;
               <table class="items">
                 <thead>
                   <tr>
+                    <th>Product Model</th>
                     <th>Product Name</th>
+                    <th>Product Model</th>
                     <th>Expiry Date</th>
                     <th>Receive Quantity</th>
                     <th>Cost Price</th>
@@ -189,7 +198,13 @@ $this->params['breadcrumbs'][] = $this->title;
                   ?>
                       <tr>
                         <td>
+                          <?=isset($details->product)?$details->product->product_code:''?>
+                        </td>
+                        <td>
                           <?=isset($details->product)?$details->product->title:''?>
+                        </td>
+                        <td>
+                          <?=isset($details->product)?$details->product->model:''?>
                         </td>
                         <td><?=$details->expire_date?></td>
                         <td><?=$details->receive_quantity?></td>

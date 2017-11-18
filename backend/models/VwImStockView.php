@@ -53,7 +53,7 @@ class VwImStockView extends \yii\db\ActiveRecord
         
         if(!empty($product_q)){
             foreach ($product_q as $key => $value) {
-                $options[$value->product_id] = $value->product_title .' :: '.$value->product_code;
+                $options[$value->product_id] = $value->product_title .' :: '.$value->product_code. ' :: '.$value->product->model ;
 
             }
         }        

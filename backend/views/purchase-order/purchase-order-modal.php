@@ -44,6 +44,8 @@
             
             <tr>
                 <th>Product</th>
+                <th>Code</th>
+                <th>Model</th>
                 <th>Quantity</th>
                 <th>Unit of Measurment</th>
                 <th>UOM Quantity</th>
@@ -58,6 +60,16 @@
                     <tr>
                         <td>
                             <?=isset($po_details->product)?$po_details->product->title:'';?>
+                                
+                        </td>
+
+                        <td>
+                            <?=isset($po_details->product)?$po_details->product->product_code:'';?>
+                                
+                        </td>
+
+                        <td>
+                            <?=isset($po_details->product)?$po_details->product->model:'';?>
                                 
                         </td>
 
