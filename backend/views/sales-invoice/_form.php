@@ -386,11 +386,13 @@ $this->registerJs($js);
             var product_id = $(this).val();
             var item = $(this);
 
+            var branch_id = $('#smhead-branch_id').val();
+
             $.ajax({
                 type : 'POST',
                 dataType : 'json',
                 url : '".Url::toRoute('stock-transfer/find-product')."',
-                data: {product_id:product_id},
+                data: {product_id:product_id,branch_id:branch_id},
                 beforeSend : function( request ){
                     
                 },
