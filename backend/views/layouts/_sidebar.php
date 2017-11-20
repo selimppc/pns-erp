@@ -33,6 +33,12 @@
                   <a class="animsition-link" href="<?= Url::toRoute(['/user']); ?>">
                     <span class="site-menu-title">User</span>
                   </a>
+                </li> 
+
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/sales-person']); ?>">
+                    <span class="site-menu-title">Sales Person</span>
+                  </a>
                 </li>              
                 
                 
