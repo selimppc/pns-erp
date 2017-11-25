@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $model backend\models\SalesPerson */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Employer', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Employee', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -20,14 +20,14 @@ $this->params['breadcrumbs'][] = $this->title;
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
             <li class="breadcrumb-item">Administrator</li>
-            <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/employer']); ?>">Employer</a></li>
+            <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/employer']); ?>">Employees</a></li>
             <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
           </ol>
           
          
           <div class="middle-menu-bar">
-            <?= Html::a(Yii::t('app', 'Add New Employer'), ['create'], ['class' => '']) ?>
-            <?= Html::a(Yii::t('app', 'Manage Employer'), ['index'], ['class' => '']) ?> 
+            <?= Html::a(Yii::t('app', 'Add New Employee'), ['create'], ['class' => '']) ?>
+            <?= Html::a(Yii::t('app', 'Manage Employees'), ['index'], ['class' => '']) ?> 
             <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b']) ?> 
 
             <?php

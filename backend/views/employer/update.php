@@ -8,9 +8,9 @@ use yii\widgets\Pjax;
 /* @var $model backend\models\SalesPerson */
 
 $this->title = Yii::t('app', 'Update :: ', [
-    'modelClass' => 'Employer',
+    'modelClass' => 'Employee',
 ]) . $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Employer'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Employee'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
@@ -23,13 +23,13 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 	      <ol class="breadcrumb">
 	        <li class="breadcrumb-item"><a href="<?=Url::base('')?>">Home</a></li>
 	        <li class="breadcrumb-item">Administrator</li>
-	        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/employer']); ?>">Employer</a></li>
+	        <li class="breadcrumb-item"><a href="<?= Url::toRoute(['/employer']); ?>">Employees</a></li>
 	        <li class="breadcrumb-item active"><?= Html::encode($this->title) ?></li>
 	      </ol>     
 	     
 	      <div class="middle-menu-bar">
-	        <?= Html::a(Yii::t('app', 'Add New Employer'), ['create'], ['class' => '']) ?>
-	        <?= Html::a(Yii::t('app', 'Manage Employer'), ['index'], ['class' => '']) ?>
+	        <?= Html::a(Yii::t('app', 'Add New Employee'), ['create'], ['class' => '']) ?>
+	        <?= Html::a(Yii::t('app', 'Manage Employees'), ['index'], ['class' => '']) ?>
 	        <?php
 	          echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
 	        ?>    

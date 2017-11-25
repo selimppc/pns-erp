@@ -43,7 +43,7 @@
 
                 <li class="site-menu-item">
                   <a class="animsition-link" href="<?= Url::toRoute(['/employer']); ?>">
-                    <span class="site-menu-title">Employer</span>
+                    <span class="site-menu-title">Employee</span>
                   </a>
                 </li>              
                 

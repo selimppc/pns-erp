@@ -12,7 +12,7 @@ use backend\models\CodesParam;
 /* @var $searchModel backend\models\EmployerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Employers';
+$this->title = 'Employee';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Add New Employer'), ['create'], ['class' => '']) ?>
-        <?= Html::a(Yii::t('app', 'Manage Employers'), ['index'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Employee'), ['create'], ['class' => '']) ?>
+        <?= Html::a(Yii::t('app', 'Manage Employees'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
