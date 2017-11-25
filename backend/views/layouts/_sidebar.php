@@ -40,6 +40,12 @@
                     <span class="site-menu-title">Sales Person</span>
                   </a>
                 </li>              
+
+                <li class="site-menu-item">
+                  <a class="animsition-link" href="<?= Url::toRoute(['/employer']); ?>">
+                    <span class="site-menu-title">Employer</span>
+                  </a>
+                </li>              
                 
                 
               </ul>

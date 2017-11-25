@@ -9,14 +9,15 @@ use yii\helpers\ArrayHelper;
 use backend\models\CodesParam;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\SalesPersonSearch */
+/* @var $searchModel backend\models\EmployerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Sales People';
+$this->title = 'Employers';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php Pjax::begin(); ?>
+
 
     <div class="page-header">
 
@@ -27,21 +28,21 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-        <?= Html::a(Yii::t('app', 'Add New Sales Person'), ['create'], ['class' => '']) ?>
-        <?= Html::a(Yii::t('app', 'Manage Sales Person'), ['index'], ['class' => '']) ?>   
+        <?= Html::a(Yii::t('app', 'Add New Employer'), ['create'], ['class' => '']) ?>
+        <?= Html::a(Yii::t('app', 'Manage Employers'), ['index'], ['class' => '']) ?>   
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
       </div>
     </div>
 
-<div class="page-content">
+    <div class="page-content">
     <!-- Panel Basic -->
     <div class="panel">
 
         <div id="flag_desc">
           <div id="flag_desc_text">
-              <?=\Yii::$app->params['sales_person_index']?>
+              <?=\Yii::$app->params['employer_index']?>
               
           </div>
         </div>
@@ -57,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         #['class' => 'yii\grid\SerialColumn'],
 
                         'id',
-                        'sales_person_code',
+                        'employer_code',
                         'name',
                         'address:ntext',
                         // 'terotorry',
@@ -108,8 +109,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </div>
 
-</div>    
-
+</div>
 
 <?php Pjax::end(); ?>
-

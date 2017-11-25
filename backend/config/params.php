@@ -14,9 +14,13 @@ return [
 
     'sales_person_index' => '<b>Manage Sales Person:</b> This screen will allow you to view the overall sales person detail; you can search specific data by selecting any title columns. By clicking the icons under <b>“Action”</b> column will allow you to update and delete the specific data. You can also open a data entry screen to input new sales person Information(s) by clicking the Menu tab <b>“New Sales Person”</b>',
 
+    'employer_index' => '<b>Manage Employers:</b> This screen will allow you to view the overall employer detail; you can search specific data by selecting any title columns. By clicking the icons under <b>“Action”</b> column will allow you to update and delete the specific data. You can also open a data entry screen to input new sales person Information(s) by clicking the Menu tab <b>“New Employer”</b>',
+
     'customer_master_create' => '<b>New Customer :</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Save”.</b> Fields marked with (*) are mandatory. You can go back to your homescreen to view customer information(s) by clicking the menu tab <b>“Manage Customer”.</b>',
 
     'sales_person_create' => '<b>New Sales Person :</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Save”.</b> Fields marked with (*) are mandatory. You can go back to your homescreen to view customer information(s) by clicking the menu tab <b>“Manage Sales Person.</b>',
+
+    'employer_create' => '<b>New Employer :</b> In this screen, all of the required fields need to be filled before clicking the button <b>“Save”.</b> Fields marked with (*) are mandatory. You can go back to your homescreen to view customer information(s) by clicking the menu tab <b>“Manage Employers.</b>',
 
     'branch_master_index' => '<b>Manage Branch Master:</b> This screen will allow you to view the overall branch’s detail; you can search specific data by selecting any title columns. By clicking the icons under <b>“Action”</b> column will allow you to update and delete the specific data. You can also open a data entry screen to input new Information(s) by clicking the Menu tab <b>“New Branch Master”.</b>',
 

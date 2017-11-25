@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\SalesPerson;
-use backend\models\SalesPersonSearch;
+use backend\models\Employer;
+use backend\models\EmployerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SalesPersonController implements the CRUD actions for SalesPerson model.
+ * EmployerController implements the CRUD actions for Employer model.
  */
-class SalesPersonController extends Controller
+class EmployerController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class SalesPersonController extends Controller
     }
 
     /**
-     * Lists all SalesPerson models.
+     * Lists all Employer models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SalesPersonSearch();
+        $searchModel = new EmployerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class SalesPersonController extends Controller
     }
 
     /**
-     * Displays a single SalesPerson model.
+     * Displays a single Employer model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class SalesPersonController extends Controller
     }
 
     /**
-     * Creates a new SalesPerson model.
+     * Creates a new Employer model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new SalesPerson();
+        $model = new Employer();
 
         if ($model->load(Yii::$app->request->post()) ) {
 
@@ -99,7 +99,7 @@ class SalesPersonController extends Controller
     }
 
     /**
-     * Updates an existing SalesPerson model.
+     * Updates an existing Employer model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -139,7 +139,7 @@ class SalesPersonController extends Controller
     }
 
     /**
-     * Deletes an existing SalesPerson model.
+     * Deletes an existing Employer model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -152,15 +152,15 @@ class SalesPersonController extends Controller
     }
 
     /**
-     * Finds the SalesPerson model based on its primary key value.
+     * Finds the Employer model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return SalesPerson the loaded model
+     * @return Employer the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = SalesPerson::findOne($id)) !== null) {
+        if (($model = Employer::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
