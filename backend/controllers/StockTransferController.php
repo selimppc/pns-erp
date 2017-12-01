@@ -372,7 +372,7 @@ class StockTransferController extends Controller
                 }
             }
 
-            $product_data = VwImStockView::find()->where(['product_id' => $_POST['product_id']])->andWhere(['>=','expire_date',$date])->one();
+            $product_data = VwImStockView::find()->where(['product_id' => $_POST['product_id']])->andWhere(['branch_id' => $_POST['branch_id']])->andWhere(['>=','expire_date',$date])->one();
 
             if(!empty($product_data)){
                 $response['available_quantity'] = $total_avaliable;
