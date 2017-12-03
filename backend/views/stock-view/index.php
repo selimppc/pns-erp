@@ -96,14 +96,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                 ],
                
-               [
+               /*[
                     'attribute' => 'im_rate',
                     'label' => 'IM Rate',
                     'format' => 'raw',
                     'value' => function ($model) {
                         return number_format($model->im_rate,3);
                     },
-                ],
+                ],*/
                 
                 [
                     'attribute' => 'uom',
@@ -114,7 +114,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return isset($model->productUom)?$model->productUom->title:'';
                     },
                 ],
-                'issueQty',
+                /*'issueQty',*/
                 'saleQty',
                 'inhandQty',
                 'available',
