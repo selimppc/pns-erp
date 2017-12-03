@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use yii\web\Response;
+
 /**
  * SalesPersonController implements the CRUD actions for SalesPerson model.
  */
@@ -54,6 +56,36 @@ class SalesPersonController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    public function actionFindCommission(){
+        if (Yii::$app->request->isAjax) {
+
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            $session = Yii::$app->session;
+            $response = [];
+
+            $response['commission_value'] = '';
+            $response['commission'] = '';
+            $response['result'] = 'error';
+
+            if(!empty($_POST['sales_person_id']))
+            {
+                $sales_person_id = $_POST['sales_person_id'];
+
+                $model = SalesPerson::find()->where(['id'=>$sales_person_id])->one();
+
+                if(!empty($model))
+                {
+                    $response['commission'] = '<label>Commission :: ' .$model->commission . '%</label>';
+                    $response['commission_value'] = $model->commission;
+                    $response['result'] = 'success';
+                } 
+            }
+            
+
+            return $response;
+        }
     }
 
     /**

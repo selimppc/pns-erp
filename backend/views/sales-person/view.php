@@ -76,6 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'id',
                         'sales_person_code',
                         'name',
+                        'commission',
                         'api_id',
                         'address:ntext',
                         'terotorry',

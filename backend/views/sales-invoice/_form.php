@@ -14,6 +14,7 @@ use backend\models\Currency;
 use backend\models\Product;
 use backend\models\CodesParam;
 use backend\models\Customer;
+use backend\models\SalesPerson;
 use kartik\date\DatePicker;
 
 use backend\models\VwImStockView;
@@ -76,20 +77,6 @@ $this->registerJs($js);
 
         <div class="col-md-2">
 
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($modelSmHead, 'customer_id')
-                            ->dropDownList(
-                                ArrayHelper::map(Customer::find()->where(['status'=>'active'])->all(), 'id', 'name'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-2">
-
             <div class="form-group form-material" data-plugin="formMaterial">
 
                 <?= $form->field($modelSmHead, 'pay_terms')
@@ -127,6 +114,12 @@ $this->registerJs($js);
 
         <div class="col-md-2">
 
+            <?= $form->field($modelSmHead, 'tax_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+        </div>
+
+        <div class="col-md-2">
+
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
                 <?= $form->field($modelSmHead, 'branch_id')
@@ -141,7 +134,31 @@ $this->registerJs($js);
 
         <div class="col-md-2">
 
-            <?= $form->field($modelSmHead, 'discount_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($modelSmHead, 'customer_id')
+                            ->dropDownList(
+                                ArrayHelper::map(Customer::find()->where(['status'=>'active'])->all(), 'id', 'name'),
+                                 ['prompt'=>'-Select-','class'=>'form-control']
+                            ); ?>
+            </div>
+
+        </div>
+
+        <div class="col-md-2">
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($modelSmHead, 'sales_person_id')
+                            ->dropDownList(
+                                ArrayHelper::map(SalesPerson::find()->where(['status'=>'active'])->all(), 'id', 'name'),
+                                 ['prompt'=>'-Select-','class'=>'form-control sales_person_class']
+                            ); ?>
+                <div id="sales_person_data"></div>
+                <?=$form->field($modelSmHead, 'commission')->hiddenInput()->label(false);
+?>
+                
+            </div>
 
         </div>
 
@@ -153,9 +170,13 @@ $this->registerJs($js);
 
         <div class="col-md-2">
 
-            <?= $form->field($modelSmHead, 'tax_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <?= $form->field($modelSmHead, 'discount_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
         </div>
+
+        
+
+        
 
     </div>
 
@@ -326,6 +347,34 @@ $this->registerJs($js);
 <?php
     
     $this->registerJs("
+
+        $(document).delegate('.sales_person_class','change',function(){
+            var sales_person_id = $(this).val();
+            
+            $.ajax({
+                type : 'POST',
+                dataType : 'json',
+                url : '".Url::toRoute('sales-person/find-commission')."',
+                data: {sales_person_id:sales_person_id},
+                beforeSend : function( request ){
+                    
+                },
+                success : function( data )
+                    {   
+                        if(data.result == 'success'){ 
+
+                            $('#sales_person_data').html(data.commission);
+                            $('#smhead-commission').val(data.commission_value);
+                                                                                  
+                        }else{
+                            $('#sales_person_data').html('');
+                            $('#smhead-commission').val('');
+                        }
+                    }
+            });
+
+            return false;
+        });
 
         $(document).delegate('.quantity_class','change',function(){
 

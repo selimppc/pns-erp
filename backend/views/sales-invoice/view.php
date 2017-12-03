@@ -84,21 +84,37 @@ $this->params['breadcrumbs'][] = $this->title;
                 <tr>
                     <th>Sales Number</th>
                     <th>Sales Date</th>
+                    <th>Branch</th>                    
                     <th>Customer Name</th>
+                    <th>Sales Person</th>
+                    <th>Discount</th>
                     <th>Pay Terms</th>
                     <th>Currency</th>
-                    <th>Exchange Rate</th>
-                    <th>Branch</th>                    
+                    <th>Exchange Rate</th>                    
                 </tr>
 
                 <tr>
+
+                    <?php
+                        $commission = ($model->net_amount * $model->commission)/100;
+                    ?>
                     <td><?=$model->sm_number?></td>
                     <td><?=$model->date?></td>
+                    <td><?=isset($model->branch)?$model->branch->title:''?></td>
                     <td><?=isset($model->customer)?$model->customer->name:''?></td>
+                    <td>
+                        <?php
+                            if(isset($model->salesperson))
+                            {
+                                echo $model->salesperson->name;
+                                echo '<br/>Commission :: '.$model->salesperson->commission.'%('.$commission.')';
+                            }
+                        ?>
+                    </td>
+                    <td><?=$model->discount_amount?></td>
                     <td><?=ucfirst($model->doc_type)?></td>
                     <td><?=isset($model->currency)?$model->currency->currency_code:''?></td>
                     <td><?=number_format($model->exchange_rate,3)?></td>
-                    <td><?=isset($model->branch)?$model->branch->title:''?></td>
                 </tr>
 
             </table>

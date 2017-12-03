@@ -59,6 +59,8 @@ use backend\models\Branch;
 
             <div class="col-md-6">
 
+                <?= $form->field($model, 'commission',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
                 <?= $form->field($model, 'name',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'address',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>

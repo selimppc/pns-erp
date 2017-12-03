@@ -79,9 +79,9 @@ class SmHead extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id','pay_terms'],'required','on'=>'create'],
+            [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id','pay_terms','sales_person_id'],'required','on'=>'create'],
             [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id','prime_amount','net_amount', 'pay_terms'],'required','on'=>'create_direct_sales'],
-            [['date', 'created_at', 'updated_at'], 'safe'],
+            [['date', 'created_at', 'updated_at','commission'], 'safe'],
             [['customer_id', 'branch_id', 'am_coa_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
             [['exchange_rate', 'tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],
             [['note'], 'string'],
@@ -103,6 +103,8 @@ class SmHead extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'sm_number' => Yii::t('app', 'Sales Number'),
             'date' => Yii::t('app', 'Sales Date'),
+            'commission' => Yii::t('app','Commission'),
+            'sales_person_id' => Yii::t('app','Sales Person'),
             'customer_id' => Yii::t('app', 'Customer Name'),
             'doc_type' => Yii::t('app', 'Doc Type'),
             'pay_terms' => Yii::t('app','Pay Terms'),
@@ -172,7 +174,7 @@ class SmHead extends \yii\db\ActiveRecord
 
             $sm_head->prime_amount = $prime_amount;
             $sm_head->net_amount = ($net_amount - $discount_price) + $sm_head->tax_amount;
-
+            
             if($sm_head->save()){
                 return true;
             }else{
@@ -201,6 +203,14 @@ class SmHead extends \yii\db\ActiveRecord
     public function getCustomer()
     {
         return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSalesperson()
+    {
+        return $this->hasOne(SalesPerson::className(), ['id' => 'sales_person_id']);
     }
 
     /**

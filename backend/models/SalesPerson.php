@@ -69,13 +69,13 @@ class SalesPerson extends \yii\db\ActiveRecord
     {
         return [
             [['sales_person_code'],'unique'],
-            [['name','sales_person_code','branch_id','status'],'required'],
+            [['name','sales_person_code','branch_id','status','commission'],'required'],
             [['email'],'email'],
             [['address'], 'string'],
             [['branch_id', 'created_by', 'updated_by'], 'integer'],
             [['credit_limit'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
-            [['sales_person_code', 'api_id', 'terotorry', 'type', 'cell', 'phone', 'fax', 'hub', 'status'], 'string', 'max' => 16],
+            [['sales_person_code', 'api_id', 'terotorry', 'type', 'cell', 'phone', 'fax', 'hub', 'status', 'commission'], 'string', 'max' => 16],
             [['name', 'market'], 'string', 'max' => 45],
             [['email'], 'string', 'max' => 64],
         ];
@@ -103,6 +103,7 @@ class SalesPerson extends \yii\db\ActiveRecord
             'credit_limit' => 'Credit Limit',
             'hub' => 'Hub',
             'status' => 'Status',
+            'commission' => 'Commission (%)',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
             'created_at' => 'Created At',

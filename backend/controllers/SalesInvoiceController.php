@@ -178,6 +178,7 @@ class SalesInvoiceController extends Controller
             $valid = $modelSmHead->validate();
             $valid = Model::validateMultiple($modelsSmDetail) && $valid;
 
+
             if ($valid) {
                 $transaction = \Yii::$app->db->beginTransaction();
 
