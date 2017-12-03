@@ -333,7 +333,9 @@ $this->registerJs($js);
             var item = $(this);
             var available_quantity = $(item).closest('.item').find('.available_quantity_class').val();
 
-            if(quantity < 1 || quantity > available_quantity ){
+
+
+            if(parseInt(quantity) < 1 || parseInt(quantity) > parseInt(available_quantity) ){
 
                 alert('Please put valid quantity');
                 $(item).closest('.item').find('.total_class').val('');
