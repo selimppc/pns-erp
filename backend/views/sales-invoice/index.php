@@ -38,6 +38,53 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div class="page-content">
+
+
+  
+    <div class="row mt-20" data-plugin="matchHeight" data-by-row="true">
+
+        <div class="col-xl-6 col-md-6">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+            <div class="card-block p-20 pt-10">
+              <div class="clearfix">
+                <div class="grey-800 float-left py-10">
+                  <i class="icon md-money grey-600 font-size-24 vertical-align-bottom mr-5"></i>     Today's Sales
+                </div>
+                <span class="float-right grey-700 font-size-30"><?=number_format($todays_sale,3)?></span>
+              </div>
+              <div class="mb-20 grey-500">
+                <i class="icon md-long-arrow-up green-500 font-size-16"></i> Today's sales of <?=date('F');?>
+              </div>
+              
+            </div>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
+        <div class="col-xl-6 col-md-6">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+            <div class="card-block p-20 pt-10">
+              <div class="clearfix">
+                <div class="grey-800 float-left py-10">
+                  <i class="icon md-money grey-600 font-size-24 vertical-align-bottom mr-5"></i> This month sales
+                </div>
+                <span class="float-right grey-700 font-size-30"><?=number_format($this_month_sale,3);?></span>
+              </div>
+              <div class="mb-20 grey-500">
+                <i class="icon md-long-arrow-up green-500 font-size-16"></i>
+                Sales of <?=date('F');?>
+              </div>
+              
+            </div>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
+    </div>
+  
+
     <!-- Panel Basic -->
     <div class="panel">
 
@@ -61,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
             }
         ?>
 
-       <div id="flag_desc">
+       <!-- <div id="flag_desc">
           <div id="flag_desc_text">
               <?php
                 if(isset(\Yii::$app->params['invoice_entry_index']) && !empty(\Yii::$app->params['invoice_entry_index'])){
@@ -69,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
               ?>              
           </div>
-      </div>
+      </div> -->
 
       <div class="panel-body">
 

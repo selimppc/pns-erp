@@ -47,6 +47,17 @@ class SalesInvoiceController extends Controller
      */
     public function actionIndex()
     {
+
+        // Calculate todays & current month sales
+        $current_date = Date('Y-m-d');
+        
+        $start_date = date('Y-m-01',strtotime('this month'));
+        $end_date = date('Y-m-t',strtotime('this month'));
+
+        $todays_sale = SmHead::total_sales_value($current_date) ;
+        $this_month_sale = SmHead::total_sales_value($start_date,$end_date);
+
+        // All data
         $searchModel = new SmHeadSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->pagination->pageSize=30;
@@ -54,6 +65,8 @@ class SalesInvoiceController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'todays_sale' => $todays_sale,
+            'this_month_sale' => $this_month_sale,
         ]);
     }
 

@@ -129,6 +129,25 @@ class SmHead extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function total_sales_value($date1='',$date2='')
+    {
+
+        if(!empty($date1) && !empty($date2))
+        {
+
+            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE date BETWEEN '$date1' AND '$date2'")
+            ->queryScalar();
+
+        }else{
+
+            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE date = '$date1'")
+            ->queryScalar();
+
+        }
+
+        return $total_sales;   
+    }
+
 
     public static function update_sale_invoice_amount($invoiced_id){
 
