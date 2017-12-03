@@ -8,6 +8,7 @@ use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
 
 use backend\models\Customer;
+use backend\models\SalesPerson;
 use backend\models\Branch;
 
 /* @var $this yii\web\View */
@@ -147,6 +148,14 @@ $this->params['breadcrumbs'][] = $this->title;
                      }
                     ],
                     [
+                     'attribute' => 'sales_person_id',  
+                     'label' => 'Sales Person',
+                     'filter'=>ArrayHelper::map(SalesPerson::find()->asArray()->all(), 'id', 'name'),
+                     'value' => function ($model) {
+                         return isset($model->salesperson)?$model->salesperson->name:'';
+                     }
+                    ],
+                    [
                      'attribute' => 'branch_id',  
                      'label' => 'Branch',
                      'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
@@ -190,6 +199,14 @@ $this->params['breadcrumbs'][] = $this->title;
                      'label' => 'Discount Amount',
                      'value' => function ($model) {
                          return number_format($model->discount_amount,3);
+                     }
+                   ],
+                   [
+                     'attribute' => 'commission',  
+                     'label' => 'Commission',
+                     'value' => function ($model) {
+                        $commission_value = ($model->net_amount * $model->commission)/100;
+                        return !empty($model->commission)?$model->commission.'%':'';
                      }
                    ],
                    [

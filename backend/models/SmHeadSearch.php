@@ -19,7 +19,7 @@ class SmHeadSearch extends SmHead
     {
         return [
             [['id', 'customer_id', 'branch_id', 'am_coa_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
-            [['sm_number', 'date', 'doc_type', 'pay_terms' , 'check_number', 'note', 'sign', 'status', 'reference_code', 'gl_voucher_number', 'created_at', 'updated_at'], 'safe'],
+            [['sm_number', 'date', 'doc_type', 'pay_terms' , 'check_number', 'note', 'sign', 'status', 'reference_code', 'gl_voucher_number', 'created_at', 'updated_at','commission','sales_person_id'], 'safe'],
             [['exchange_rate', 'tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],
         ];
     }
@@ -87,6 +87,7 @@ class SmHeadSearch extends SmHead
         $query->andFilterWhere([
             'id' => $this->id,           
             'customer_id' => $this->customer_id,
+            'sales_person_id' => $this->sales_person_id,
             'branch_id' => $this->branch_id,
             'am_coa_id' => $this->am_coa_id,
             'currency_id' => $this->currency_id,
@@ -97,6 +98,7 @@ class SmHeadSearch extends SmHead
             'discount_amount' => $this->discount_amount,
             'prime_amount' => $this->prime_amount,
             'net_amount' => $this->net_amount,
+            'commission' => $this->commission,
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by,
             'created_at' => $this->created_at,
