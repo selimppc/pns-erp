@@ -261,6 +261,11 @@ form div label.control-label:after{
 }
 label{
     font-size: 13px;
+    color: #aaa;
+}
+
+.table-bordered thead th{
+    color: #aaa;
 }
 
 .site-menu>.site-menu-item>a{

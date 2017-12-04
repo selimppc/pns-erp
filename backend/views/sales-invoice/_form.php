@@ -124,7 +124,7 @@ $this->registerJs($js);
 
                 <?= $form->field($modelSmHead, 'branch_id')
                             ->dropDownList(
-                                ArrayHelper::map(Branch::find()->where(['status'=>'active'])->all(), 'id', 'branch_code'),
+                                ArrayHelper::map(Branch::find()->where(['status'=>'active'])->all(), 'id', 'title'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 

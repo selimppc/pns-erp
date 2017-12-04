@@ -104,11 +104,18 @@ $this->params['breadcrumbs'][] = $this->title;
                    return isset($model->fromCurrency)?$model->fromCurrency->currency_code:'';
                }
             ],                       
-            'from_exchange_rate',
+            
+            [
+              'attribute' => 'from_exchange_rate',  
+              'label' => 'From Exch. Rate',
+              'value' => function($model){
+                return number_format($model->from_exchange_rate,3);
+              }
+            ],
             [
                'attribute' => 'to_branch_id',  
                'label' => 'To Branch',
-               'filter'=>ArrayHelper::map(Currency::find()->asArray()->all(), 'id', 'title'),
+               'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
                'value' => function ($model) {
                    return isset($model->toBranch)?$model->toBranch->title:'';
                }
@@ -122,7 +129,13 @@ $this->params['breadcrumbs'][] = $this->title;
                    return isset($model->toCurrency)?$model->toCurrency->currency_code:'';
                }
             ], 
-            'to_exchange_rate',
+            [
+              'attribute' => 'to_exchange_rate',  
+              'label' => 'To Exch. Rate',
+              'value' => function($model){
+                return number_format($model->to_exchange_rate,3);
+              }
+            ],
             [
               'attribute' => 'status',
               'label' => 'Status',

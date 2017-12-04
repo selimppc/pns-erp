@@ -104,7 +104,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                return isset($model->currency)?$model->currency->currency_code:'';
                            }
                         ],
-                        'exchange_rate',
+                        
+                        [
+                          'attribute' => 'exchange_rate',  
+                          'label' => 'Exch. Rate',
+                          'value' => function($model){
+                            return number_format($model->exchange_rate,3);
+                          }
+                        ],
                         [
                           'attribute' => 'status',
                           'label' => 'Status',

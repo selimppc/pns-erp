@@ -99,12 +99,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'  => 'Supplier',
                 'value'  => isset($model->supplier)?$model->supplier->supplier_code:''
             ],
-            'sell_rate',
+            [
+                'label'  => 'Product Sell Rate',
+                'value'  => isset($model->sell_rate)?number_format($model->sell_rate,3):''
+            ],
             [
                 'label'  => 'Product Sell UOM',
                 'value'  => isset($model->product_sell_uom)?$model->product_sell_uom->title:''
             ],
-            'cost_price',
+            [
+                'label'  => 'Product Cost Price',
+                'value'  => isset($model->cost_price)?number_format($model->cost_price,3):''
+            ],
+            
             [
                 'label'  => 'Product Purchase UOM',
                 'value'  => isset($model->product_purchase_uom)?$model->product_purchase_uom->title:''
@@ -120,7 +127,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'  => 'Currency',
                 'value'  => isset($model->currency)?$model->currency->title:''
             ],
-            'exchange_rate',
+            [
+                'label'  => 'Product Exchange Rate',
+                'value'  => isset($model->exchange_rate)?number_format($model->exchange_rate,3):''
+            ],
             'max_level',
             'min_level',
             're_order',

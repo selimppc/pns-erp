@@ -132,8 +132,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td><?=isset($pp_details->uomData)?$pp_details->uomData->title:'';?></td>
                             <td><?=$pp_details->uom_quantity?></td>
                             <td><?=$orignal_quantity?></td>
-                            <td><?=number_format($pp_details->purchase_rate,2)?></td>
-                            <td><?=number_format($pp_details->purchase_rate * $orignal_quantity,2)?></td>
+                            <td><?=number_format($pp_details->purchase_rate,3)?></td>
+                            <td><?=number_format($pp_details->purchase_rate * $orignal_quantity,3)?></td>
                         </tr>
 
                       <?php                       

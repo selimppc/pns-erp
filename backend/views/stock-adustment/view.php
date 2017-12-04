@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?=isset($model->currency)?$model->currency->title:'';?>
                 </td>
                 <td>
-                    <?=$model->exchange_rate?>
+                    <?=number_format($model->exchange_rate,3)?>
                 </td>
                 <td>
                     <?=$model->status?>
@@ -146,7 +146,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <?=$adjustment->quantity?>
                                 </td>
                                 <td>
-                                    <?=$adjustment->stock_rate?>
+                                    <?=number_format($adjustment->stock_rate,3)?>
                                 </td>
                             </tr>
 

@@ -102,7 +102,13 @@ $this->params['breadcrumbs'][] = $this->title;
                    return isset($model->fromCurrency)?$model->fromCurrency->currency_code:'';
                }
             ],                       
-            'from_exchange_rate',
+            [
+              'attribute' => 'from_exchange_rate',  
+              'label' => 'From Exch. Rate',
+              'value' => function($model){
+                return number_format($model->from_exchange_rate,3);
+              }
+            ],
             [
                'attribute' => 'to_branch_id',  
                'label' => 'To Branch',
@@ -120,7 +126,13 @@ $this->params['breadcrumbs'][] = $this->title;
                    return isset($model->toCurrency)?$model->toCurrency->currency_code:'';
                }
             ], 
-            'to_exchange_rate',
+            [
+              'attribute' => 'to_exchange_rate',  
+              'label' => 'To Exch. Rate',
+              'value' => function($model){
+                return number_format($model->to_exchange_rate,3);
+              }
+            ],
             [
               'attribute' => 'status',
               'label' => 'Status',
