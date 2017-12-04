@@ -61,6 +61,24 @@ class VwImStockView extends \yii\db\ActiveRecord
         return $options;
     }
 
+    public static function get_product_list_dpends_branch($branch_id) {
+        $options = [];
+
+        //$branch = $_GET[‘branch’]; // TODO::
+        $date = date('Y-m-d');
+
+        $product_q = VwImStockView::find()->where(['branch_id'=>$branch_id])->andWhere(['>=','expire_date',$date])->all();
+        
+        if(!empty($product_q)){
+            foreach ($product_q as $key => $value) {
+                $options[$value->product_id] = $value->product_title .' :: '.$value->product_code. ' :: '.$value->product->model ;
+
+            }
+        }        
+
+        return $options;
+    }
+
     public static function findtotal_available($product_id){
 
         $total = 0;

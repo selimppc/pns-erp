@@ -260,7 +260,7 @@ $this->registerJs($js);
 
                                     <?php
                                         echo $form->field($modelSmDetail, "[{$index}]product_id")->dropDownList(
-                                            VwImStockView::get_product_list(),[
+                                            VwImStockView::get_product_list_dpends_branch(isset($modelSmHead->branch_id) && !empty($modelSmHead->branch_id)?$modelSmHead->branch_id:''),[
                                                 'class' => 'custom-select2 form-control',
                                                 'prompt'=>'--Select Product--'
                                             ]
@@ -272,7 +272,7 @@ $this->registerJs($js);
                             </div>
 
                             <div class="custom-col-05">
-                                <a style="width: 100%;height: 25px;line-height: 23px;" href="#" class="modalButton btn btn-xs btn-primary details_class">Details</a>
+                                <a href="#" class="modalButton badge badge-primary details_class">Details</a>
                             </div>    
 
                             <div class="custom-col-07">
@@ -304,7 +304,7 @@ $this->registerJs($js);
 
                             <div class="custom-col-06">
                                 
-                                <button style="width: 90%;" type="button" class="pull-right remove-item btn-danger btn-xs"> Remove</button>
+                                <button style="border:none;" type="button" class="pull-right remove-item badge badge-danger"> Remove</button>
                                 
                             </div>
 
@@ -347,6 +347,40 @@ $this->registerJs($js);
 <?php
     
     $this->registerJs("
+
+
+        $(document).delegate('#smhead-branch_id','change',function(){
+
+           var branch_id = $('#smhead-branch_id').val();
+
+           $('.available_quantity_class').val('');
+           $('.rate_class').val('');
+           $('.batch_number_class').val('');
+           $('.sell_rate_class').val('');
+           $('.uom_class').val('');
+           $('.uom_id_class').val('');
+           
+           $.ajax({
+               type : 'POST',
+               dataType : 'json',
+               url : '".Url::toRoute('stock-view/find-product')."',
+               data: {branch_id:branch_id},
+               beforeSend : function( request ){
+                   
+               },
+               success : function( data )
+                   {   
+
+                       newoptions = '<option value=1>NewO1</option><option value=2>NewO1</option>';
+
+                       $('select.custom-select2').html(data.content);
+                   }
+           });
+
+           
+
+       });
+
 
         $(document).delegate('.sales_person_class','change',function(){
             var sales_person_id = $(this).val();

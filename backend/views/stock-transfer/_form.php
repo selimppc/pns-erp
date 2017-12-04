@@ -260,7 +260,7 @@ $this->registerJs($js);
 
                                     <?php
                                         echo $form->field($modelTransferDetail, "[{$index}]product_id")->dropDownList(
-                                            VwImStockView::get_product_list(),[
+                                            VwImStockView::get_product_list_dpends_branch(isset($modelTransferHead->from_branch_id) && !empty($modelTransferHead->from_branch_id)?$modelTransferHead->from_branch_id:''),[
                                                 'class' => 'custom-select2 form-control',
                                                 'prompt'=>'--Select Product--'
                                             ]
@@ -318,6 +318,38 @@ $this->registerJs($js);
 <?php
     
     $this->registerJs("
+
+        $(document).delegate('#imtransferhead-from_branch_id','change',function(){
+
+           var branch_id = $('#imtransferhead-from_branch_id').val();
+
+           $('.available_quantity_class').val('');
+           $('.rate_class').val('');
+           $('.batch_number_class').val('');
+           $('.sell_rate_class').val('');
+           $('.uom_class').val('');
+           $('.uom_id_class').val('');
+           
+           $.ajax({
+               type : 'POST',
+               dataType : 'json',
+               url : '".Url::toRoute('stock-view/find-product')."',
+               data: {branch_id:branch_id},
+               beforeSend : function( request ){
+                   
+               },
+               success : function( data )
+                   {   
+
+                       newoptions = '<option value=1>NewO1</option><option value=2>NewO1</option>';
+
+                       $('select.custom-select2').html(data.content);
+                   }
+           });
+
+           
+
+       });
 
         $(document).delegate('.quantity_class','change',function(){
 
