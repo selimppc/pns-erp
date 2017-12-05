@@ -11,6 +11,8 @@ use backend\models\ImGrnDetailSearch;
 use backend\models\VwImStockView;
 use backend\models\VwImStockViewSearch;
 
+use backend\models\PpPurchaseHead;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -44,8 +46,21 @@ class StockViewController extends Controller{
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->pagination->pageSize=30;
 
+
+        // Dhaka branch quantity
+        $dhaka_branch_qty = VwImStockView::total_qty_branch(1);    
+
+        // Savar branch quantity
+        $savar_branch_qty = VwImStockView::total_qty_branch(2);    
+
+        // PO approved qty
+        $po_approved_qty = PpPurchaseHead::total_po_qty('approved');
+        
         return $this->render('index', [
             'models' => $models,
+            'dhaka_branch_qty' => $dhaka_branch_qty,
+            'savar_branch_qty' => $savar_branch_qty,
+            'po_approved_qty' => $po_approved_qty,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

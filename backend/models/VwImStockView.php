@@ -61,6 +61,15 @@ class VwImStockView extends \yii\db\ActiveRecord
         return $options;
     }
 
+
+    public static function total_qty_branch($branch_id='')
+    {
+        $branch_qty = Yii::$app->db->createCommand("SELECT count([[product_id]]) FROM {{vw_im_stock_view}} WHERE branch_id = '$branch_id'")
+            ->queryScalar();
+
+        return $branch_qty;    
+    }
+
     public static function get_product_list_dpends_branch($branch_id) {
         $options = [];
 

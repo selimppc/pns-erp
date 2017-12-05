@@ -35,9 +35,74 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <div class="page-content">
+
+
+    <div class="row mt-20" data-plugin="matchHeight" data-by-row="true">
+
+        <div class="col-xl-4 col-md-4">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+            <div class="card-block p-20 pt-10">
+              <div class="clearfix">
+                <div class="grey-800 float-left py-10">
+                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i>     Dhaka
+                </div>
+                <span class="float-right grey-700 font-size-30"><?=$dhaka_branch_qty?></span>
+              </div>
+              <div class="mb-20 grey-500">
+                <i class="icon md-long-arrow-up green-500 font-size-16"></i> Stock of Dhaka
+              </div>
+              
+            </div>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
+        <div class="col-xl-4 col-md-4">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+            <div class="card-block p-20 pt-10">
+              <div class="clearfix">
+                <div class="grey-800 float-left py-10">
+                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i> Savar
+                </div>
+                <span class="float-right grey-700 font-size-30"><?=$savar_branch_qty?></span>
+              </div>
+              <div class="mb-20 grey-500">
+                <i class="icon md-long-arrow-up green-500 font-size-16"></i>
+                Stock of Savar
+              </div>
+              
+            </div>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
+        <div class="col-xl-4 col-md-4">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+            <div class="card-block p-20 pt-10">
+              <div class="clearfix">
+                <div class="grey-800 float-left py-10">
+                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i> Upcoming Quantity
+                </div>
+                <span class="float-right grey-700 font-size-30"><?=$po_approved_qty?></span>
+              </div>
+              <div class="mb-20 grey-500">
+                <i class="icon md-long-arrow-up green-500 font-size-16"></i>
+                Approved purchased
+              </div>
+              
+            </div>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
+    </div>
+
     <!-- Panel Basic -->
     <div class="panel">
-        <div id="flag_desc">
+        <!-- <div id="flag_desc">
           <div id="flag_desc_text">
               <?php
                 if(isset(\Yii::$app->params['stock_view']) && !empty(\Yii::$app->params['stock_view'])){
@@ -45,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
               ?>              
           </div>
-        </div>
+        </div> -->
 
       <div class="panel-body">
 
@@ -64,7 +129,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'columns' => [
                 #['class' => 'yii\grid\SerialColumn'],
-
+                [
+                    'attribute' => 'product_title',
+                    'label' => 'Product',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return isset($model->product)?$model->product->model:'';
+                    },
+                ],
                 'product_code',
                 'product_title',
                 [
