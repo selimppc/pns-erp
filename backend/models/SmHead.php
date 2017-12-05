@@ -131,6 +131,30 @@ class SmHead extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function total_delievered_qty($date1='',$date2='',$status='')
+    {
+        if(!empty($date1) && !empty($date2))
+        {
+            $total_delievered_qty = Yii::$app->db->createCommand("SELECT COUNT([[sm_detail.id]]) FROM {{sm_head}} JOIN {{sm_detail}} ON sm_head.id = sm_detail.sm_head_id  WHERE status ='$status' && date BETWEEN '$date1' AND '$date2'")
+            ->queryScalar();
+
+        }elseif (!empty($date1)) {
+            
+            $total_delievered_qty = Yii::$app->db->createCommand("SELECT COUNT([[sm_detail.id]]) FROM {{sm_head}} JOIN {{sm_detail}} ON sm_head.id = sm_detail.sm_head_id  WHERE status ='$status' && date = '$date1'")
+            ->queryScalar();
+
+        }else{
+            
+            $total_delievered_qty = Yii::$app->db->createCommand("SELECT COUNT([[sm_detail.id]]) FROM {{sm_head}} JOIN {{sm_detail}} ON sm_head.id = sm_detail.sm_head_id  WHERE status ='$status'")
+            ->queryScalar();
+
+        }
+
+
+
+        return $total_delievered_qty;
+    }
+
     public static function total_sales_value($date1='',$date2='')
     {
 

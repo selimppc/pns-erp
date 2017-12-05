@@ -43,6 +43,18 @@ class DeliveryOrderController extends Controller{
      */
     public function actionIndex()
     {
+
+        // Calculate todays & current month sales
+        $current_date = Date('Y-m-d');
+        
+        $start_date = date('Y-m-01',strtotime('this month'));
+        $end_date = date('Y-m-t',strtotime('this month'));
+
+        $todays_delivered = SmHead::total_delievered_qty($current_date,'','delivered') ;
+        $this_month_delivered = SmHead::total_delievered_qty($start_date,$end_date,'delivered') ;
+        $pending_delivered = SmHead::total_delievered_qty('','','confirmed') ;
+
+
         $searchModel = new SmHeadSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams,'confirmed');
         $dataProvider->pagination->pageSize=30;
@@ -50,6 +62,9 @@ class DeliveryOrderController extends Controller{
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'todays_delivered' => $todays_delivered,
+            'this_month_delivered' => $this_month_delivered,
+            'pending_delivered' => $pending_delivered
         ]);
     }
 

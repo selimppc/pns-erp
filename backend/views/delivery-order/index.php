@@ -37,6 +37,70 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <div class="page-content">
+
+    <div class="row mt-20" data-plugin="matchHeight" data-by-row="true">
+
+      <div class="col-xl-4 col-md-4">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+            <div class="card-block p-20 pt-10">
+              <div class="clearfix">
+                <div class="grey-800 float-left py-10">
+                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i>     Today's delivered qty
+                </div>
+                <span class="float-right grey-700 font-size-30"><?=$todays_delivered?></span>
+              </div>
+              <div class="mb-20 grey-500">
+                <i class="icon md-long-arrow-up green-500 font-size-16"></i> Today's delivered of <?=date('F');?>
+              </div>
+              
+            </div>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
+        <div class="col-xl-4 col-md-4">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+            <div class="card-block p-20 pt-10">
+              <div class="clearfix">
+                <div class="grey-800 float-left py-10">
+                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i> This month delivered qty
+                </div>
+                <span class="float-right grey-700 font-size-30"><?=$this_month_delivered?></span>
+              </div>
+              <div class="mb-20 grey-500">
+                <i class="icon md-long-arrow-up green-500 font-size-16"></i>
+                Delivered of <?=date('F');?>
+              </div>
+              
+            </div>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
+        <div class="col-xl-4 col-md-4">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+            <div class="card-block p-20 pt-10">
+              <div class="clearfix">
+                <div class="grey-800 float-left py-10">
+                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i> Pending delivery
+                </div>
+                <span class="float-right grey-700 font-size-30"><?=$pending_delivered?></span>
+              </div>
+              <div class="mb-20 grey-500">
+                <i class="icon md-long-arrow-up green-500 font-size-16"></i>
+                Total pending deliver
+              </div>
+              
+            </div>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
+    </div>
+
     <!-- Panel Basic -->
     <div class="panel">
 
@@ -60,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
             }
         ?>
 
-       <div id="flag_desc">
+       <!-- <div id="flag_desc">
           <div id="flag_desc_text">
               <?php
                 if(isset(\Yii::$app->params['inventory_delivery_order']) && !empty(\Yii::$app->params['inventory_delivery_order'])){
@@ -68,7 +132,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
               ?>              
           </div>
-      </div>
+      </div> -->
 
       <div class="panel-body">
 
