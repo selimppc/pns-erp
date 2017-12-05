@@ -134,21 +134,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Product',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        return isset($model->product)?$model->product->model:'';
+                        $data = '<b>'.$model->product_title.'</b><br/><b>Code : </b>'.$model->product_code.', <b>Model : </b>'.$model->product->model;
+                        return $data;
                     },
                 ],
-                'product_code',
-                'product_title',
-                [
-                    'attribute' => 'product_id',
-                    'label' => 'Product Model',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return isset($model->product)?$model->product->model:'';
-                    },
-                ],
+                
                 'batch_number',
-                'expire_date',
+                
                 [
                     'attribute' => 'branch_id',
                     'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
@@ -214,3 +206,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     
 </div>     
+<style type="text/css">
+    b{
+        font-weight: 700;
+    }
+</style>
