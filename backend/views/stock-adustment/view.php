@@ -89,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?=isset($model->branch)?$model->branch->title:'';?>
                 </td>
                 <td>
-                    <?=$model->type?>
+                    <?=$model->type=='1'?'Positive':'Negative'?>
                 </td>
                 <td>
                     <?=isset($model->currency)?$model->currency->title:'';?>

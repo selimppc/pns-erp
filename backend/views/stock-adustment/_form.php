@@ -334,13 +334,15 @@ $this->registerJs($js);
         $(document).delegate('.custom-select2','change',function(){
             
             var product_id = $(this).val();
+            var branch_id = $('#imadjusthead-branch_id').val();
+
             var item = $(this);
 
             $.ajax({
                 type : 'POST',
                 dataType : 'json',
                 url : '".Url::toRoute('stock-transfer/find-product')."',
-                data: {product_id:product_id},
+                data: {product_id:product_id,branch_id:branch_id},
                 beforeSend : function( request ){
                     
                 },
