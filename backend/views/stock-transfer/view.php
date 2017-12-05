@@ -110,7 +110,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>Product</th>
                             <th>Quantity</th>
                             <th>Unit of Measurment</th>                            
-                            <th>Purchased Rate</th> 
+                            <th>Rate</th> 
+                            <th>Total</th>
                         </tr>
 
                         <?php
@@ -128,7 +129,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?=isset($transfer->uomData)?$transfer->uomData->title:''?>
                                     </td>
                                     <td>
-                                        <?=$transfer->rate?>
+                                        <?=number_format($transfer->rate,2)?>
+                                    </td>
+                                    <td>
+                                        <?=number_format($transfer->quantity * $transfer->rate,2)?>
                                     </td>
                                 </tr>
 

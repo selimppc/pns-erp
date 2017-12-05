@@ -28,7 +28,9 @@ use yii\behaviors\BlameableBehavior;
 class ImTransferDetail extends \yii\db\ActiveRecord
 {
 
+    public $total;
     public $available_quantity;
+    public $uom_name;
 
     public function behaviors()
     {

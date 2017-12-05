@@ -109,7 +109,7 @@ class StockTransferController extends Controller
         $modelTransferHead->transfer_number = $transfer_number; 
         $modelTransferHead->status = 'open'; 
 
-        $modelTransferHead->from_branch_id = 1;
+        $modelTransferHead->from_branch_id = 2;
         $modelTransferHead->from_currency_id = 1;
 
         $modelTransferHead->to_branch_id = 1;
@@ -150,7 +150,7 @@ class StockTransferController extends Controller
                                 $date = date('Y-m-d');
                                 
                                 // save im_batch_transfer data
-                                $get_stock_view_data = VwImStockView::find()->where(['product_id'=>$modelTransferDetail->product_id])->where(['>=','expire_date',$date])->one();
+                                $get_stock_view_data = VwImStockView::find()->where(['branch_id' => $modelTransferHead->from_branch_id])->andWhere(['product_id'=>$modelTransferDetail->product_id])->andWhere(['>=','expire_date',$date])->one();
 
                                 if(!empty($get_stock_view_data)){
 
@@ -162,7 +162,7 @@ class StockTransferController extends Controller
                                     $batch_transfer_model->expire_date = $get_stock_view_data->expire_date;
                                     $batch_transfer_model->quantity = $modelTransferDetail->quantity;
                                     $batch_transfer_model->uom = $modelTransferDetail->uom;
-                                    $batch_transfer_model->rate = $get_stock_view_data->im_rate;
+                                    $batch_transfer_model->rate = $modelTransferDetail->rate;
 
                                     $valid_batch_transfer = $batch_transfer_model->validate();
 

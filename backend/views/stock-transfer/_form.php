@@ -14,7 +14,7 @@ use backend\models\CodesParam;
 use backend\models\VwImStockView;
 use kartik\date\DatePicker;
 
-
+use yii\bootstrap\Modal;
 
 
 /* @var $this yii\web\View */
@@ -224,18 +224,25 @@ $this->registerJs($js);
             <div class="panel-body container-items"><!-- widgetContainer -->
 
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="custom-col-35">
                         <label class="control-label only-label" for="">Product</label>
-                    </div>
-                    <div class="col-md-2">
-                        <label class="control-label only-label" for="">Available Quantity</label>
-                    </div>
-                    <div class="col-md-1">
-                        <label class="control-label only-label" for="">UOM</label>
-                    </div>
-                    <div class="col-md-1">
+                    </div> 
+                    <div class="custom-col-05"></div>    
+                    <div class="custom-col-07">
+                        <label class="control-label only-label" for="">Aval Qty</label>
+                    </div>        
+                    <div class="custom-col-15">
+                        <label class="control-label only-label" for="">Rate</label>
+                    </div>              
+                    <div class="custom-col-07">
                         <label class="control-label only-label" for="">Quantity</label>
-                    </div>
+                    </div>                                                     
+                    <div class="custom-col-07">
+                        <label class="control-label only-label" for="">UOM</label>
+                    </div>                                       
+                    <div class="custom-col-15">
+                        <label class="control-label only-label" for="">Total</label>
+                    </div>                    
                     <div class="col-md-1">
                         
                     </div>
@@ -255,7 +262,7 @@ $this->registerJs($js);
 
                         <div class="row">
 
-                            <div class="col-md-7">
+                            <div class="custom-col-35">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
                                     <?php
@@ -265,26 +272,38 @@ $this->registerJs($js);
                                                 'prompt'=>'--Select Product--'
                                             ]
                                             )->label(false);
-                                    ?>                                   
+                                    ?>
+
 
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
-                                <?= $form->field($modelTransferDetail,"[{$index}]available_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly'=>true,'class' => 'available_quantity_class form-control'])->label(false) ?>
+                            <div class="custom-col-05">
+                                <a href="#" class="modalButton badge badge-primary details_class">Details</a>
+                            </div> 
+
+                            <div class="custom-col-07">
+                                <?= $form->field($modelTransferDetail, "[{$index}]available_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true, 'class' => 'available_quantity_class form-control'])->label(false) ?>
                             </div>
 
-                            <div class="col-md-1">
+                            <div class="custom-col-15">
+                                <?= $form->field($modelTransferDetail, "[{$index}]rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' => 'rate_class form-control'])->label(false) ?>
+                            </div>
 
-                                <?= $form->field($modelTransferDetail,"[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly'=>true,'class' => 'uom_class form-control'])->label(false) ?>
-                                
+                            <div class="custom-col-07">
+                                <?= $form->field($modelTransferDetail, "[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'class' => 'quantity_class form-control'])->label(false) ?>
+                            </div>
+
+                            <div class="custom-col-07">
+
+                                <?= $form->field($modelTransferDetail, "[{$index}]uom_name", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'uom_class form-control'])->label(false) ?>
+
+                                <?= $form->field($modelTransferDetail, "[{$index}]uom", ['options' => ['class' => '','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'readonly' => true, 'class' => 'uom_id_class form-control'])->label(false) ?>
                             </div>
                            
+                           <div class="custom-col-15">
+                                <?= $form->field($modelTransferDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'total_class form-control'])->label(false) ?>
 
-                            
-
-                            <div class="col-md-1">
-                                <?= $form->field($modelTransferDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' =>'quantity_class form-control'])->label(false) ?>
                             </div>
 
                             <div class="col-md-1">
@@ -313,6 +332,17 @@ $this->registerJs($js);
     <?= Html::submitButton($modelTransferDetail->isNewRecord ? 'Save Changes' : 'Save Changes', ['class' => 'btn btn-primary']) ?>
 
 <?php ActiveForm::end(); ?>
+
+
+<?php 
+        Modal::begin([
+            'header' => 'Product Details',
+            'id' => 'modal',
+            'size' => 'modal-lg',
+        ]);
+        echo "<div id='modalContent'></div>";
+        Modal::end();
+?>
 
 
 <?php
@@ -353,16 +383,57 @@ $this->registerJs($js);
 
         $(document).delegate('.quantity_class','change',function(){
 
+            var quantity = $(this).val();
             var item = $(this);
-
-            var quantity_class = $(this).val();
             var available_quantity = $(item).closest('.item').find('.available_quantity_class').val();
 
-            if(available_quantity < quantity_class  ){
+
+
+            if(parseInt(quantity) < 1 || parseInt(quantity) > parseInt(available_quantity) ){
+
+                alert('Please put valid quantity');
+                $(item).closest('.item').find('.total_class').val('');
                 $(item).closest('.item').find('.quantity_class').val('');
-                alert('Sorry !! Quantity must be less than or same');
+
+            }else{
+
+                var sell_rate = $(item).closest('.item').find('.rate_class').val();
+
+                var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3);
+
+                $(item).closest('.item').find('.total_class').val(total_amount);
             }
-             
+
+            
+
+        });
+
+        $(document).delegate('.rate_class','change',function(){
+
+            var sell_rate = $(this).val();
+            var item = $(this);
+
+            if(sell_rate < 1){
+
+                alert('Please put valid rate');
+                $(item).closest('.item').find('.total_class').val('');
+
+            }else if(isNaN(sell_rate) == true){
+
+                $(item).closest('.item').find('.rate_class').val('');
+
+            }else{
+
+                var quantity = $(item).closest('.item').find('.quantity_class').val();
+
+                var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3);
+
+                $(item).closest('.item').find('.total_class').val(total_amount);
+
+            }
+
+            
+
         });
 
         $(document).delegate('.custom-select2','change',function(){
@@ -370,11 +441,13 @@ $this->registerJs($js);
             var product_id = $(this).val();
             var item = $(this);
 
+            var branch_id = $('#imtransferhead-from_branch_id').val();
+
             $.ajax({
                 type : 'POST',
                 dataType : 'json',
                 url : '".Url::toRoute('stock-transfer/find-product')."',
-                data: {product_id:product_id},
+                data: {product_id:product_id,branch_id:branch_id},
                 beforeSend : function( request ){
                     
                 },
@@ -382,8 +455,21 @@ $this->registerJs($js);
                     {   
 
                         if(data.result == 'success'){ 
+
                             $(item).closest('.item').find('.available_quantity_class').val(data.available_quantity);
-                            $(item).closest('.item').find('.uom_class').val(data.uom);                            
+
+                            $(item).closest('.item').find('.rate_class').val(data.sell_rate);
+
+                            $(item).closest('.item').find('.batch_number_class').val(data.batch_number);
+
+                            $(item).closest('.item').find('.sell_rate_class').val(data.sell_rate);
+
+                            $(item).closest('.item').find('.details_class').attr('href',data.view_popup);
+
+                            $(item).closest('.item').find('.uom_class').val(data.uom);
+
+                            $(item).closest('.item').find('.uom_id_class').val(data.uom_id);
+                                                                                  
                         }
                     }
             });
@@ -460,4 +546,27 @@ $this->registerJs($js);
         };*/
 
      ", yii\web\View::POS_READY, "exchange_rate_change_based_on_currency");   
+?>
+
+<?php
+    
+    $this->registerJs("
+
+      // changed id to class
+      $('.modalButton').click(function (){
+
+        if($(this).attr('href') == '#'){
+            $('#modal').modal('show').find('#modalContent').html('Please Select Product');
+        }else{
+
+            $.get($(this).attr('href'), function(data) {
+              $('#modal').modal('show').find('#modalContent').html(data);
+            });
+
+        }
+        
+        return false;
+      });
+
+    ", yii\web\View::POS_READY, "modal_open");   
 ?>
