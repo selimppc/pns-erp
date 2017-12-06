@@ -161,12 +161,18 @@ class SmHead extends \yii\db\ActiveRecord
         if(!empty($date1) && !empty($date2))
         {
 
-            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE date BETWEEN '$date1' AND '$date2'")
+            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && date BETWEEN '$date1' AND '$date2'")
+            ->queryScalar();
+
+        }elseif(!empty($date1))
+        {
+
+            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && date = '$date1'")
             ->queryScalar();
 
         }else{
 
-            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE date = '$date1'")
+            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed'")
             ->queryScalar();
 
         }

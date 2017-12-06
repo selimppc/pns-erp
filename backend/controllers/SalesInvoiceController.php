@@ -56,6 +56,7 @@ class SalesInvoiceController extends Controller
 
         $todays_sale = SmHead::total_sales_value($current_date) ;
         $this_month_sale = SmHead::total_sales_value($start_date,$end_date);
+        $all_sales = SmHead::total_sales_value();
 
         // All data
         $searchModel = new SmHeadSearch();
@@ -67,6 +68,7 @@ class SalesInvoiceController extends Controller
             'dataProvider' => $dataProvider,
             'todays_sale' => $todays_sale,
             'this_month_sale' => $this_month_sale,
+            'all_sales' => $all_sales
         ]);
     }
 

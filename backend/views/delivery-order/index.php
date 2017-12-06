@@ -43,15 +43,15 @@ $this->params['breadcrumbs'][] = $this->title;
       <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <div class="card-block p-20 pt-10">
+            <div class="card-block p-20 pt-10" style="background: #20a8d8;">
               <div class="clearfix">
-                <div class="grey-800 float-left py-10">
-                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i>     Today's delivered qty
+                <div class="white float-left py-10">
+                  <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i>     Today's delivered qty
                 </div>
-                <span class="float-right grey-700 font-size-30"><?=$todays_delivered?></span>
+                <span class="float-right white font-size-30"><?=$todays_delivered?></span>
               </div>
-              <div class="mb-20 grey-500">
-                <i class="icon md-long-arrow-up green-500 font-size-16"></i> Today's delivered of <?=date('F');?>
+              <div class="mb-20 white">
+                <i class="icon md-long-arrow-up white font-size-16"></i> Today's delivered of <?=date('F');?>
               </div>
               
             </div>
@@ -62,15 +62,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <div class="card-block p-20 pt-10">
+            <div class="card-block p-20 pt-10" style="background: #63c2de;">
               <div class="clearfix">
-                <div class="grey-800 float-left py-10">
-                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i> This month delivered qty
+                <div class="white float-left py-10">
+                  <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i> This month delivered qty
                 </div>
-                <span class="float-right grey-700 font-size-30"><?=$this_month_delivered?></span>
+                <span class="float-right white font-size-30"><?=$this_month_delivered?></span>
               </div>
-              <div class="mb-20 grey-500">
-                <i class="icon md-long-arrow-up green-500 font-size-16"></i>
+              <div class="mb-20 white">
+                <i class="icon md-long-arrow-up white font-size-16"></i>
                 Delivered of <?=date('F');?>
               </div>
               
@@ -82,15 +82,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <div class="card-block p-20 pt-10">
+            <div class="card-block p-20 pt-10" style="background: #ffc107;">
               <div class="clearfix">
-                <div class="grey-800 float-left py-10">
-                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i> Pending delivery
+                <div class="white float-left py-10">
+                  <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i> Pending delivery
                 </div>
-                <span class="float-right grey-700 font-size-30"><?=$pending_delivered?></span>
+                <span class="float-right white font-size-30"><?=$pending_delivered?></span>
               </div>
-              <div class="mb-20 grey-500">
-                <i class="icon md-long-arrow-up green-500 font-size-16"></i>
+              <div class="mb-20 white">
+                <i class="icon md-long-arrow-up white font-size-16"></i>
                 Total pending deliver
               </div>
               

@@ -42,15 +42,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <div class="card-block p-20 pt-10">
+            <div class="card-block p-20 pt-10" style="background: #63c2de;">
               <div class="clearfix">
-                <div class="grey-800 float-left py-10">
-                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i>     Dhaka
+                <div class="white float-left py-10">
+                  <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i>     Dhaka
                 </div>
-                <span class="float-right grey-700 font-size-30"><?=$dhaka_branch_qty?></span>
+                <span class="float-right white font-size-30"><?=$dhaka_branch_qty?></span>
               </div>
-              <div class="mb-20 grey-500">
-                <i class="icon md-long-arrow-up green-500 font-size-16"></i> Stock of Dhaka
+              <div class="mb-20 white">
+                <i class="icon md-long-arrow-up white font-size-16"></i> Stock of Dhaka
               </div>
               
             </div>
@@ -61,15 +61,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <div class="card-block p-20 pt-10">
+            <div class="card-block p-20 pt-10" style="background: #20a8d8;">
               <div class="clearfix">
-                <div class="grey-800 float-left py-10">
-                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i> Savar
+                <div class="white float-left py-10">
+                  <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i> Savar
                 </div>
-                <span class="float-right grey-700 font-size-30"><?=$savar_branch_qty?></span>
+                <span class="float-right white font-size-30"><?=$savar_branch_qty?></span>
               </div>
-              <div class="mb-20 grey-500">
-                <i class="icon md-long-arrow-up green-500 font-size-16"></i>
+              <div class="mb-20 white">
+                <i class="icon md-long-arrow-up white font-size-16"></i>
                 Stock of Savar
               </div>
               
@@ -81,15 +81,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <div class="card-block p-20 pt-10">
+            <div class="card-block p-20 pt-10" style="background: #ffc107;">
               <div class="clearfix">
-                <div class="grey-800 float-left py-10">
-                  <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i> Upcoming Quantity
+                <div class="white float-left py-10">
+                  <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i> Upcoming Quantity
                 </div>
-                <span class="float-right grey-700 font-size-30"><?=$po_approved_qty?></span>
+                <span class="float-right white font-size-30"><?=$po_approved_qty?></span>
               </div>
-              <div class="mb-20 grey-500">
-                <i class="icon md-long-arrow-up green-500 font-size-16"></i>
+              <div class="mb-20 white">
+                <i class="icon md-long-arrow-up white font-size-16"></i>
                 Approved purchased
               </div>
               

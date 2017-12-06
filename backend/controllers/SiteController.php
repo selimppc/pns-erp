@@ -7,6 +7,10 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 
+use backend\models\SmHead;
+use backend\models\VwImStockView;
+use backend\models\PpPurchaseHead;
+
 /**
  * Site controller
  */
@@ -61,7 +65,46 @@ class SiteController extends Controller
     public function actionIndex()
     {
 
-        return $this->render('index');
+
+        // Calculate todays & current month sales
+        $current_date = Date('Y-m-d');
+        
+        $start_date = date('Y-m-01',strtotime('this month'));
+        $end_date = date('Y-m-t',strtotime('this month'));
+
+        $todays_sale = SmHead::total_sales_value($current_date) ;
+        $this_month_sale = SmHead::total_sales_value($start_date,$end_date);
+        $all_sales = SmHead::total_sales_value();
+
+
+        // Dhaka branch quantity
+        $dhaka_branch_qty = VwImStockView::total_qty_branch(1);    
+
+        // Savar branch quantity
+        $savar_branch_qty = VwImStockView::total_qty_branch(2);    
+
+        // PO approved qty
+        $po_approved_qty = PpPurchaseHead::total_po_qty('approved');
+
+
+        // Delivery order
+
+        $todays_delivered = SmHead::total_delievered_qty($current_date,'','delivered') ;
+        $this_month_delivered = SmHead::total_delievered_qty($start_date,$end_date,'delivered') ;
+        $pending_delivered = SmHead::total_delievered_qty('','','confirmed') ;
+
+
+        return $this->render('index',[
+            'todays_sale' => $todays_sale,
+            'this_month_sale' => $this_month_sale,
+            'all_sales' => $all_sales,
+            'dhaka_branch_qty' => $dhaka_branch_qty,
+            'savar_branch_qty' => $savar_branch_qty,
+            'po_approved_qty' => $po_approved_qty,
+            'todays_delivered' => $todays_delivered,
+            'this_month_delivered' => $this_month_delivered,
+            'pending_delivered' => $pending_delivered
+        ]);
     }
 
     /**
