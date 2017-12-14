@@ -138,8 +138,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $data;
                     },
                 ],
-                
-                'batch_number',
+                'product_code',
+                #'product_code',
+                #'batch_number',
                 
                 [
                     'attribute' => 'branch_id',
