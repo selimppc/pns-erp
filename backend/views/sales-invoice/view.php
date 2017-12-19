@@ -137,6 +137,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>Sell Rate</th>
                             <th>Quantity</th>
                             <th>Unit of Measurment</th>                            
+                            <th>Sub Total</th> 
+                            <th>Discount</th>
                             <th>Total</th>   
                         </tr>
 
@@ -166,6 +168,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </td>
                                 <td>
                                     <?=number_format($sm_details->rate*$sm_details->quantity,3);?>
+                                </td>
+                                <td>
+                                    <?=number_format($sm_details->total_discount,3);?>
+                                </td>
+                                <td>
+                                    <?=number_format(($sm_details->rate*$sm_details->quantity)-$sm_details->total_discount,3);?>
                                 </td>
                             </tr>
 

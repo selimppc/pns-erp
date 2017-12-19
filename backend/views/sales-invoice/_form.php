@@ -164,15 +164,15 @@ $this->registerJs($js);
 
         <div class="col-md-2">
 
-            <?= $form->field($modelSmHead, 'discount_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <?= $form->field($modelSmHead, 'discount_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true]) ?>
 
         </div>
 
-        <div class="col-md-2">
+       <!--  <div class="col-md-2">
 
             <?= $form->field($modelSmHead, 'discount_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
-        </div>
+        </div> -->
 
         
 
@@ -219,26 +219,35 @@ $this->registerJs($js);
                         <label class="control-label only-label" for="">Product</label>
                     </div>  
                     <div class="custom-col-05"></div>    
-                    <div class="custom-col-07">
+                    <div class="custom-col-06">
                         <label class="control-label only-label" for="">Aval Qty</label>
                     </div>               
-                    <div class="custom-col-15">
+                    <div class="custom-col-08">
                         <label class="control-label only-label" for="">Rate</label>
                     </div>                                        
-                    <div class="custom-col-07">
-                        <label class="control-label only-label" for="">Quantity</label>
+                    <div class="custom-col-06">
+                        <label class="control-label only-label" for="">Qty</label>
                     </div>                    
                     <div class="custom-col-07">
                         <label class="control-label only-label" for="">UOM</label>
+                    </div> 
+                    <div class="custom-col-08">
+                        <label class="control-label only-label" for="">Disc Rate</label>
+                    </div> 
+                    <div class="custom-col-08">
+                        <label class="control-label only-label" for="">Total Disc</label>
                     </div>                    
-                    <div class="custom-col-15">
+                    <div class="custom-col-08">
                         <label class="control-label only-label" for="">Total</label>
-                    </div>                    
+                    </div>   
+                    <div class="custom-col-05">
+
+                    </div>                 
                 </div>
 
                 <?php foreach ($modelsSmDetail as $index => $modelSmDetail):
 
-                        $modelSmDetail->total = $modelSmDetail->rate * $modelSmDetail->quantity;
+                        $modelSmDetail->total = ($modelSmDetail->rate * $modelSmDetail->quantity) - $modelSmDetail->total_discount;
 
                         $modelSmDetail->uom_name = isset($modelSmDetail->uomData)?$modelSmDetail->uomData->title:'';
                 ?>
@@ -275,15 +284,15 @@ $this->registerJs($js);
                                 <a href="#" class="modalButton badge badge-primary details_class">Details</a>
                             </div>    
 
-                            <div class="custom-col-07">
+                            <div class="custom-col-06">
                                 <?= $form->field($modelSmDetail, "[{$index}]available_quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true, 'class' => 'available_quantity_class form-control'])->label(false) ?>
                             </div>
 
-                            <div class="custom-col-15">
+                            <div class="custom-col-08">
                                 <?= $form->field($modelSmDetail, "[{$index}]rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' => 'rate_class form-control'])->label(false) ?>
                             </div>
 
-                            <div class="custom-col-07">
+                            <div class="custom-col-06">
                                 <?= $form->field($modelSmDetail, "[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'class' => 'quantity_class form-control'])->label(false) ?>
                             </div>
 
@@ -293,8 +302,16 @@ $this->registerJs($js);
 
                                 <?= $form->field($modelSmDetail, "[{$index}]uom", ['options' => ['class' => '','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'readonly' => true, 'class' => 'uom_id_class form-control'])->label(false) ?>
                             </div>
+
+                            <div class="custom-col-08">
+                                <?= $form->field($modelSmDetail, "[{$index}]discount_per_product", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => false, 'class' => 'discount_per_product_class form-control'])->label(false) ?>
+                            </div>
+
+                            <div class="custom-col-08">
+                                <?= $form->field($modelSmDetail, "[{$index}]total_discount", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'total_discount_class form-control'])->label(false) ?>
+                            </div>
                             
-                            <div class="custom-col-15">
+                            <div class="custom-col-08">
                                 <?= $form->field($modelSmDetail, "[{$index}]total", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'total_class form-control'])->label(false) ?>
 
                                 <?= $form->field($modelSmDetail, "[{$index}]batch_number", ['options' => ['class' => '','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'batch_number_class form-control'])->label(false) ?>
@@ -302,7 +319,9 @@ $this->registerJs($js);
                                 <?= $form->field($modelSmDetail, "[{$index}]sell_rate", ['options' => ['class' => '','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'class' => 'sell_rate_class form-control'])->label(false) ?>
                             </div>
 
-                            <div class="custom-col-06">
+                            
+
+                            <div class="custom-col-05">
                                 
                                 <button style="border:none;" type="button" class="pull-right remove-item badge badge-danger"> Remove</button>
                                 
@@ -426,13 +445,75 @@ $this->registerJs($js);
 
             }else{
 
+                // calculate total discount
+
+                var discount_per_product = $(item).closest('.item').find('.discount_per_product_class').val();
+
+                var total_discount = discount_per_product * quantity;
+
+                $(item).closest('.item').find('.total_discount_class').val(total_discount);
+
+                var discount_amount = 0;
+                $('.total_discount_class').each(function(){
+                    var input = $(this).val(); 
+                    discount_amount += parseInt( input);
+                });
+
+                $('#smhead-discount_amount').val(discount_amount);
+
+
+
+
                 var sell_rate = $(item).closest('.item').find('.rate_class').val();
 
-                var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3);
+                var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3) - total_discount;
 
                 $(item).closest('.item').find('.total_class').val(total_amount);
+
+                
+
+
+
             }
 
+            
+
+        });
+
+
+
+        $(document).delegate('.discount_per_product_class','change',function(){
+
+            var discount_per_product = $(this).val();
+            var item = $(this);
+
+            var quantity = $(item).closest('.item').find('.quantity_class').val();
+
+            if(parseInt(quantity) < 1 ){
+
+                alert('Please put valid quantity');
+
+            }else{
+
+                var total_discount = discount_per_product * quantity;
+
+                $(item).closest('.item').find('.total_discount_class').val(total_discount);
+
+            }
+
+            var discount_amount = 0;
+            $('.total_discount_class').each(function(){
+                var input = $(this).val(); 
+                discount_amount += parseInt( input);
+            });
+
+            $('#smhead-discount_amount').val(discount_amount);
+
+            var sell_rate = $(item).closest('.item').find('.rate_class').val();
+
+            var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3) - total_discount;
+
+            $(item).closest('.item').find('.total_class').val(total_amount);
             
 
         });
