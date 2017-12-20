@@ -19,9 +19,6 @@ use kartik\date\DatePicker;
 
 use backend\models\VwImStockView;
 
-
-
-
 /* @var $this yii\web\View */
 /* @var $model backend\models\PpPurchaseHead */
 /* @var $form yii\widgets\ActiveForm */
@@ -61,7 +58,7 @@ $this->registerJs($js);
                         'value' => date('Y-m-d'),
                         'options' => [
                             'placeholder' => 'Enter Date ...',
-                            'value' => date('Y-m-d'),
+                            'value' => !empty($modelSmHead->date)?$modelSmHead->date:date('Y-m-d'),
                         ],
                         'pluginOptions' => [
                             'autoclose'=>true,
@@ -199,6 +196,7 @@ $this->registerJs($js);
                 'uom_name',
                 'uom',
                 'total',
+                'actual_sell_rate',
                 'batch_number',
                 'sell_rate'
             ],
@@ -232,7 +230,7 @@ $this->registerJs($js);
                         <label class="control-label only-label" for="">UOM</label>
                     </div> 
                     <div class="custom-col-08">
-                        <label class="control-label only-label" for="">Disc Rate</label>
+                        <label class="control-label only-label" for="">Disc Amt/Qty</label>
                     </div> 
                     <div class="custom-col-08">
                         <label class="control-label only-label" for="">Total Disc</label>
@@ -247,7 +245,7 @@ $this->registerJs($js);
 
                 <?php foreach ($modelsSmDetail as $index => $modelSmDetail):
 
-                        $modelSmDetail->total = ($modelSmDetail->rate * $modelSmDetail->quantity) - $modelSmDetail->total_discount;
+                        $modelSmDetail->total = number_format(($modelSmDetail->rate * $modelSmDetail->quantity) - $modelSmDetail->total_discount, 3, '.', '') ;
 
                         $modelSmDetail->uom_name = isset($modelSmDetail->uomData)?$modelSmDetail->uomData->title:'';
                 ?>
@@ -290,6 +288,11 @@ $this->registerJs($js);
 
                             <div class="custom-col-08">
                                 <?= $form->field($modelSmDetail, "[{$index}]rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'class' => 'rate_class form-control'])->label(false) ?>
+
+                                <div class="actual-sell-rate-show"></div>
+
+                                <?= $form->field($modelSmDetail, "[{$index}]actual_sell_rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'readonly' => true, 'class' => 'actual_sell_rate_class form-control'])->label(false) ?>
+
                             </div>
 
                             <div class="custom-col-06">
@@ -304,7 +307,7 @@ $this->registerJs($js);
                             </div>
 
                             <div class="custom-col-08">
-                                <?= $form->field($modelSmDetail, "[{$index}]discount_per_product", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => false, 'class' => 'discount_per_product_class form-control'])->label(false) ?>
+                                <?= $form->field($modelSmDetail, "[{$index}]discount_per_product", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'discount_per_product_class form-control'])->label(false) ?>
                             </div>
 
                             <div class="custom-col-08">
@@ -449,9 +452,19 @@ $this->registerJs($js);
 
                 var discount_per_product = $(item).closest('.item').find('.discount_per_product_class').val();
 
-                var total_discount = discount_per_product * quantity;
+                var actual_sell_rate = $(item).closest('.item').find('.actual_sell_rate_class').val();
 
-                $(item).closest('.item').find('.total_discount_class').val(total_discount);
+                var sell_rate = $(item).closest('.item').find('.rate_class').val();
+
+                if(sell_rate > actual_sell_rate)
+                {
+                    var total_discount = 0;
+                }else{
+                    var total_discount = discount_per_product * quantity;    
+                }
+                
+
+                $(item).closest('.item').find('.total_discount_class').val(parseFloat(Math.round( (total_discount)*100 ) /100 ).toFixed(3));
 
                 var discount_amount = 0;
                 $('.total_discount_class').each(function(){
@@ -459,16 +472,16 @@ $this->registerJs($js);
                     discount_amount += parseInt( input);
                 });
 
-                $('#smhead-discount_amount').val(discount_amount);
+                $('#smhead-discount_amount').val(parseFloat(Math.round( (discount_amount)*100 ) /100 ).toFixed(3));
 
 
 
 
-                var sell_rate = $(item).closest('.item').find('.rate_class').val();
+                
 
-                var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3) - total_discount;
+                var total_amount = sell_rate * quantity - total_discount;
 
-                $(item).closest('.item').find('.total_class').val(total_amount);
+                $(item).closest('.item').find('.total_class').val(parseFloat(Math.round( (total_amount)*100 ) /100 ).toFixed(3));
 
                 
 
@@ -536,9 +549,34 @@ $this->registerJs($js);
 
                 var quantity = $(item).closest('.item').find('.quantity_class').val();
 
-                var total_amount = parseFloat(Math.round( (quantity*sell_rate)*100 ) /100 ).toFixed(3);
+                var actual_sell_rate = $(item).closest('.item').find('.actual_sell_rate_class').val();
 
-                $(item).closest('.item').find('.total_class').val(total_amount);
+                if(sell_rate > actual_sell_rate)
+                {
+                    var discount_per_product = 0.000;
+                }else{
+                    var discount_per_product = (actual_sell_rate - sell_rate);
+                }
+
+                
+
+                $(item).closest('.item').find('.discount_per_product_class').val(parseFloat(Math.round( (discount_per_product)*100 ) /100 ).toFixed(3));
+
+                var total_discount = discount_per_product * quantity;
+
+                $(item).closest('.item').find('.total_discount_class').val(parseFloat(Math.round( (total_discount)*100 ) /100 ).toFixed(3));
+
+                var total_amount = (sell_rate * quantity) - total_discount;
+
+                $(item).closest('.item').find('.total_class').val(parseFloat(Math.round( (total_amount)*100 ) /100 ).toFixed(3));
+
+                var discount_amount = 0;
+                $('.total_discount_class').each(function(){
+                    var input = $(this).val(); 
+                    discount_amount += parseInt( input);
+                });
+
+                $('#smhead-discount_amount').val(parseFloat(Math.round( (discount_amount)*100 ) /100 ).toFixed(3));
 
             }
 
@@ -569,7 +607,19 @@ $this->registerJs($js);
 
                             $(item).closest('.item').find('.available_quantity_class').val(data.available_quantity);
 
+                            $(item).closest('.item').find('.quantity_class').val(1);
+
+                            $(item).closest('.item').find('.discount_per_product_class').val(parseFloat(Math.round( (0)*100 ) /100 ).toFixed(3));
+
+                            $(item).closest('.item').find('.total_discount_class').val(parseFloat(Math.round( (0)*100 ) /100 ).toFixed(3));
+
+                            $(item).closest('.item').find('.total_class').val(parseFloat(Math.round( (data.sell_rate*1)*100 ) /100 ).toFixed(3));
+
                             $(item).closest('.item').find('.rate_class').val(data.sell_rate);
+
+                            $(item).closest('.item').find('.actual_sell_rate_class').val(data.sell_rate);
+
+                            $(item).closest('.item').find('.actual-sell-rate-show').html('('+data.sell_rate+')');
 
                             $(item).closest('.item').find('.batch_number_class').val(data.batch_number);
 
@@ -676,3 +726,12 @@ $this->registerJs($js);
 
     ", yii\web\View::POS_READY, "modal_open");   
 ?>
+
+<style type="text/css">
+    .actual-sell-rate-show{
+        margin-top: -20px;
+        color: #aaa;
+        font-size: 12px;
+        margin-left: 10px;
+    }
+</style>

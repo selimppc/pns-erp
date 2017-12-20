@@ -155,12 +155,12 @@ class SalesInvoiceController extends Controller
 
         // Set Default Data
         $modelSmHead->sm_number = $invoice_number; 
-        $modelSmHead->tax_rate ='0.00';
-        $modelSmHead->tax_amount ='0.00';
-        $modelSmHead->discount_rate ='0.00';
-        $modelSmHead->discount_amount ='0.00';
-        $modelSmHead->prime_amount ='0.00';
-        $modelSmHead->net_amount ='0.00';
+        $modelSmHead->tax_rate ='0.000';
+        $modelSmHead->tax_amount ='0.000';
+        $modelSmHead->discount_rate ='0.000';
+        $modelSmHead->discount_amount ='0.000';
+        $modelSmHead->prime_amount ='0.000';
+        $modelSmHead->net_amount ='0.000';
         $modelSmHead->currency_id = 1;
 
         $currecy_data = Currency::find()->where(['id'=>$modelSmHead->currency_id])->one();

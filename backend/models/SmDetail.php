@@ -30,6 +30,7 @@ class SmDetail extends \yii\db\ActiveRecord
    public $total;
    public $available_quantity;
    public $uom_name;
+   public $actual_sell_rate;
 
     /**
      * @inheritdoc
