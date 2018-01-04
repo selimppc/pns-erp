@@ -14,7 +14,8 @@
             <div class="card-block p-20 pt-10" style="background: #20a8d8;">
               <div class="clearfix">
                 <div class="white float-left py-10">
-                  <i class="icon md-money white font-size-24 vertical-align-bottom mr-5"></i>     Today's Sales
+                  &#2547;
+                  Today's Sales
                 </div>
                 <span class="float-right white font-size-30"><?=number_format($todays_sale,3)?></span>
               </div>
@@ -33,7 +34,7 @@
             <div class="card-block p-20 pt-10" style="background: #63c2de;">
               <div class="clearfix">
                 <div class="white float-left py-10">
-                  <i class="icon md-money white font-size-24 vertical-align-bottom mr-5"></i> This month sales
+                  &#2547; This month sales
                 </div>
                 <span class="float-right white font-size-30"><?=number_format($this_month_sale,3);?></span>
               </div>
@@ -53,7 +54,7 @@
             <div class="card-block p-20 pt-10" style="background: #ffc107;">
               <div class="clearfix">
                 <div class="white float-left py-10">
-                  <i class="icon md-money white font-size-24 vertical-align-bottom mr-5"></i> Total sales
+                  &#2547; Total sales
                 </div>
                 <span class="float-right white font-size-30"><?=number_format($all_sales,3);?></span>
               </div>
