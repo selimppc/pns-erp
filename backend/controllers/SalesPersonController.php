@@ -8,6 +8,7 @@ use backend\models\SalesPersonSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\TransactionCode;
 
 use yii\web\Response;
 
@@ -107,6 +108,9 @@ class SalesPersonController extends Controller
 
                     $transaction->commit();
 
+                    // Update serial number
+                    TransactionCode::update_transaction_number('SAP-');
+
                     // Set success data
                     \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
 
@@ -124,6 +128,16 @@ class SalesPersonController extends Controller
 
             
         } else {
+
+            // Generate serial number
+            $serial_number = TransactionCode::generate_transaction_number('SAP-');
+        
+            if(empty($serial_number)){
+                $serial_number = '';
+            }
+
+            $model->sales_person_code = $serial_number;
+
             return $this->render('create', [
                 'model' => $model,
             ]);

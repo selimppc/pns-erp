@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Supplier;
 use backend\models\SupplierSearch;
+use backend\models\TransactionCode;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -73,6 +74,10 @@ class SupplierController extends Controller
             try {
 
                 if($model->save()){
+
+                    // Update serial number
+                    TransactionCode::update_transaction_number('SUP-');
+
                     // Set success data
                     \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
 
@@ -90,6 +95,16 @@ class SupplierController extends Controller
 
             
         } else {
+
+            // Generate serial number
+            $serial_number = TransactionCode::generate_transaction_number('SUP-');
+        
+            if(empty($serial_number)){
+                $serial_number = '';
+            }
+
+            $model->supplier_code = $serial_number;
+
             return $this->render('create', [
                 'model' => $model,
             ]);

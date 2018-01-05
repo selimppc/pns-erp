@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Employer;
 use backend\models\EmployerSearch;
+use backend\models\TransactionCode;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -73,6 +74,9 @@ class EmployerController extends Controller
 
                 if($model->save()){
 
+                    // Update serial number
+                    TransactionCode::update_transaction_number('EMP-');
+
                     $transaction->commit();
 
                     // Set success data
@@ -92,6 +96,16 @@ class EmployerController extends Controller
 
             
         } else {
+
+            // Generate serial number
+            $serial_number = TransactionCode::generate_transaction_number('EMP-');
+        
+            if(empty($serial_number)){
+                $serial_number = '';
+            }
+
+            $model->employer_code = $serial_number;
+
             return $this->render('create', [
                 'model' => $model,
             ]);

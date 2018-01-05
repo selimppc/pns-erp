@@ -21,7 +21,7 @@ use backend\models\Branch;
 
             <div class="col-md-6">
 
-                <?= $form->field($model, 'sales_person_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'sales_person_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => 1]) ?>
 
                 <?= $form->field($model, 'terotorry',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 

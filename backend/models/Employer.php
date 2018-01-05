@@ -88,7 +88,7 @@ class Employer extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'employer_code' => 'Employer Code',
+            'employer_code' => 'Employee Code',
             'name' => 'Name',
             'api_id' => 'Api ID',
             'address' => 'Address',

@@ -19,7 +19,7 @@ use backend\models\CodesParam;
 
         <div class="col-md-6">
 
-            <?= $form->field($model, 'supplier_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'supplier_code',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => 1]) ?>
 
             <?= $form->field($model, 'group')
                         ->dropDownList(

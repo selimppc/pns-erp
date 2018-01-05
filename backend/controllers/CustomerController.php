@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Customer;
 use backend\models\CustomerSearch;
+use backend\models\TransactionCode;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -69,11 +70,24 @@ class CustomerController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
+            // Update serial number
+            TransactionCode::update_transaction_number('CUSN');
+
             // Set success data
             \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
+            // Generate serial number
+            $serial_number = TransactionCode::generate_transaction_number('CUSN');
+        
+            if(empty($serial_number)){
+                $serial_number = '';
+            }
+
+            $model->customer_code = $serial_number;
+
             return $this->render('create', [
                 'model' => $model,
             ]);
