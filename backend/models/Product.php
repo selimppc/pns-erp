@@ -101,7 +101,8 @@ class Product extends \yii\db\ActiveRecord
             [['exchange_rate', 'sell_rate', 'cost_price', 'sell_uom_qty', 'purchase_uom_qty', 'sell_tax', 'stock_uom_qty'], 'number'],
             [['created_at', 'updated_at','image'], 'safe'],
             [['product_code', 'manufacturer_code','manufacturer_year','machine_size','speed'], 'string', 'max' => 16],
-            [['title', 'model', 'size', 'origin'], 'string', 'max' => 45],
+            [['model', 'size', 'origin'], 'string', 'max' => 45],
+            [['title'], 'string', 'max' => 128],
             
             [['sell_uom', 'purchase_uom', 'stock_uom', 'pack_size','generic', 'max_level', 'min_level', 're_order'], 'string', 'max' => 8],
             [['currency_id'], 'exist', 'skipOnError' => true, 'targetClass' => Currency::className(), 'targetAttribute' => ['currency_id' => 'id']],

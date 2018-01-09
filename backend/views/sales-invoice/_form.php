@@ -245,7 +245,7 @@ $this->registerJs($js);
 
                 <?php foreach ($modelsSmDetail as $index => $modelSmDetail):
 
-                        $modelSmDetail->total = number_format(($modelSmDetail->rate * $modelSmDetail->quantity) - $modelSmDetail->total_discount, 3, '.', '') ;
+                        $modelSmDetail->total = number_format(($modelSmDetail->sell_rate * $modelSmDetail->quantity) - $modelSmDetail->total_discount, 3, '.', '') ;
 
                         $modelSmDetail->uom_name = isset($modelSmDetail->uomData)?$modelSmDetail->uomData->title:'';
                 ?>
@@ -479,7 +479,7 @@ $this->registerJs($js);
 
                 
 
-                var total_amount = sell_rate * quantity - total_discount;
+                var total_amount = actual_sell_rate * quantity - total_discount;
 
                 $(item).closest('.item').find('.total_class').val(parseFloat(Math.round( (total_amount)*100 ) /100 ).toFixed(3));
 
@@ -566,7 +566,7 @@ $this->registerJs($js);
 
                 $(item).closest('.item').find('.total_discount_class').val(parseFloat(Math.round( (total_discount)*100 ) /100 ).toFixed(3));
 
-                var total_amount = (sell_rate * quantity) - total_discount;
+                var total_amount = (actual_sell_rate * quantity) - total_discount;
 
                 $(item).closest('.item').find('.total_class').val(parseFloat(Math.round( (total_amount)*100 ) /100 ).toFixed(3));
 

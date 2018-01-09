@@ -190,8 +190,8 @@ class SmHead extends \yii\db\ActiveRecord
             $prime_amount = 0.00;
             $net_amount = 0.00;
             foreach($model as $value){
-                $prime_amount+=$value->quantity*$value->rate;
-                $net_amount+=$value->quantity*$value->rate;
+                $prime_amount+=$value->quantity*$value->sell_rate;
+                $net_amount+=$value->quantity*$value->sell_rate;
             }
 
             $sm_head = SmHead::find()->where(['id' => $invoiced_id])->one();

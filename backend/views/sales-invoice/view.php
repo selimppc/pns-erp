@@ -157,7 +157,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <?=isset($sm_details->product)?$sm_details->product->model:'';?>
                                 </td>
                                 <td>
-                                    <?=number_format($sm_details->rate,3)?>
+                                    <?=number_format($sm_details->sell_rate,3)?>
                                 </td>
                                 <td>
                                     <?=$sm_details->quantity?>
@@ -167,13 +167,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                         
                                 </td>
                                 <td>
-                                    <?=number_format($sm_details->rate*$sm_details->quantity,3);?>
+                                    <?=number_format($sm_details->sell_rate*$sm_details->quantity,3);?>
                                 </td>
                                 <td>
                                     <?=number_format($sm_details->total_discount,3);?>
                                 </td>
                                 <td>
-                                    <?=number_format(($sm_details->rate*$sm_details->quantity)-$sm_details->total_discount,3);?>
+                                    <?=number_format(($sm_details->sell_rate*$sm_details->quantity)-$sm_details->total_discount,3);?>
                                 </td>
                             </tr>
 
