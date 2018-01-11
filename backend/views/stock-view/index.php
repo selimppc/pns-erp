@@ -180,9 +180,36 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                 ],
                 /*'issueQty',*/
-                'saleQty',
-                'inhandQty',
-                'available',
+                #'saleQty',
+                [
+                    'attribute' => 'saleQty',
+                    'label' => 'Sale Qty',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        $avilable_value = VwImStockView::total_saleQty($model->product_id,$model->branch_id);
+                        return $avilable_value;
+                    }
+                ],
+                #'inhandQty',
+                [
+                    'attribute' => 'inhandQty',
+                    'label' => 'In Hand Qty',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        $avilable_value = VwImStockView::total_inhandQty($model->product_id,$model->branch_id);
+                        return $avilable_value;
+                    }
+                ],
+                #'available',
+                [
+                    'attribute' => 'available',
+                    'label' => 'Available',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        $avilable_value = VwImStockView::total_available($model->product_id,$model->branch_id);
+                        return $avilable_value;
+                    }
+                ],
                 [
                    # 'attribute' => 'product_id',
                     'label' => 'Total',
