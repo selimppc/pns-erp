@@ -120,7 +120,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 
                                 <tr>
                                     <td>
-                                        <?=isset($transfer->product)?$transfer->product->title:''?>
+                                        <?=isset($transfer->product)?$transfer->product->title:''?><br/>
+                                        Model :: <?=isset($transfer->product)?$transfer->product->model:''?>
                                     </td>
                                     <td>
                                         <?=$transfer->quantity?>
