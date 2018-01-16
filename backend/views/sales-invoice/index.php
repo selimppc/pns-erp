@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
 use backend\models\Customer;
 use backend\models\SalesPerson;
 use backend\models\Branch;
+use backend\models\SmHead;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\SmHeadSearch */
@@ -159,6 +160,30 @@ $this->params['breadcrumbs'][] = $this->title;
                       },
                     ],                   
                     'date',
+                    [
+                     #'attribute' => 'customer_id',  
+                     'label' => 'Product Model',
+                     'value' => function ($model) {
+                        $product_model = '';
+                        if(!empty($model->smDetails))
+                        {
+                          $product_count = 1;
+                          $total_product_model = count($model->smDetails);
+                          foreach($model->smDetails as $key => $sales_details)
+                          {
+                              $product_model.=isset($sales_details->product->model)?$sales_details->product->model:'';
+                              
+                              if($product_count<$total_product_model)
+                              {
+                                $product_model.= ', ';
+                              }
+
+                              $product_count++;  
+                          }
+                        }  
+                        return $product_model;
+                     }
+                    ],
                     [
                      'attribute' => 'customer_id',  
                      'label' => 'Customer Name',
