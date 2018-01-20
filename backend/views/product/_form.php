@@ -180,6 +180,8 @@ use backend\models\CodesParam;
 
             <?= $form->field($model, 're_order',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
+            <?= $form->field($model, 'style',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
                 <?= $form->field($model, 'status')

@@ -86,6 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                  ],
                    'model',
+                   'style',
                    'origin',
                    'size',
                   [

@@ -134,6 +134,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'max_level',
             'min_level',
             're_order',
+            'style',
             [
                 'attribute'=>'Product Image',
                 'value'=>'uploads/'.$model->image,

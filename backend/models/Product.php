@@ -99,7 +99,7 @@ class Product extends \yii\db\ActiveRecord
             [['image'], 'file'],
             [['class', 'group', 'category', 'currency_id', 'supplier_id', 'created_by', 'updated_by'], 'integer'],
             [['exchange_rate', 'sell_rate', 'cost_price', 'sell_uom_qty', 'purchase_uom_qty', 'sell_tax', 'stock_uom_qty'], 'number'],
-            [['created_at', 'updated_at','image'], 'safe'],
+            [['created_at', 'updated_at','image','style'], 'safe'],
             [['product_code', 'manufacturer_code','manufacturer_year','machine_size','speed'], 'string', 'max' => 16],
             [['model', 'size', 'origin'], 'string', 'max' => 45],
             [['title'], 'string', 'max' => 128],
@@ -118,6 +118,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'product_code' => Yii::t('app', 'Product Code'),
+            'style' => Yii::t('app','Style'),
             'title' => Yii::t('app', 'Product Title'),
             'description' => Yii::t('app', 'Product Description'),
             'image' => Yii::t('app', 'Image'),
