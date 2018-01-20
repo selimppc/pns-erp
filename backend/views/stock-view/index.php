@@ -123,7 +123,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
             'rowOptions'=>function($model){
                 if($model->available <= 10){
-                    return ['class' => 'red'];
+                    #return ['class' => 'red'];
                 }
             },
 
@@ -134,7 +134,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Product',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        $data = '<b>'.$model->product_title.'</b><br/><b>Code : </b>'.$model->product_code.', <b>Model : </b>'.$model->product->model;
+
+                        $pro_model = isset($model->product)?$model->product->model:'';
+                        $data = '<b>'.$model->product_title.'</b><br/><b>Code : </b>'.$model->product_code.', <b>Model : </b>'.$pro_model;
                         return $data;
                     },
                 ],

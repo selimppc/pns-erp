@@ -66,6 +66,20 @@ $this->params['breadcrumbs'][] = $this->title;
               <?=isset($model->supplier)?$model->supplier->supplier_code:''?>
             </div>
 
+            <div class="header">
+              <label>Branch:</label>
+              <?=isset($model->branch)?$model->branch->title:''?>
+            </div>
+
+            <div class="header">
+              <label>Created At:</label>
+              <?=$model->created_at?>
+            </div>
+            <div class="header">
+              <label>Updated At:</label>
+              <?=$model->updated_at?>
+            </div>
+
           </div>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -81,6 +95,15 @@ $this->params['breadcrumbs'][] = $this->title;
                           return isset($model->product)?$model->product->title:'';
                       },
                     ],
+                    [
+                      #'attribute' => 'product_id',
+                      'label' => 'Product Model',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return isset($model->product)?$model->product->model:'';
+                      },
+                    ],
+
                     'batch_number',
                     'expire_date',
                     'receive_quantity',

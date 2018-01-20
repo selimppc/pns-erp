@@ -96,7 +96,7 @@ class VwImStockView extends \yii\db\ActiveRecord
 
         if(!empty($product_q)){
             foreach($product_q as $product){
-                $total += $product->available;
+                $total += abs($product->available);
             }
         }
 
@@ -111,7 +111,7 @@ class VwImStockView extends \yii\db\ActiveRecord
 
         if(!empty($product_q)){
             foreach($product_q as $product){
-                $total += $product->available;
+                $total += abs($product->available);
             }
         }
 
