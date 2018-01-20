@@ -128,22 +128,29 @@ $this->params['breadcrumbs'][] = $this->title;
             },
 
             'columns' => [
-                #['class' => 'yii\grid\SerialColumn'],
+                [
+                  'class' => 'yii\grid\SerialColumn',
+                  'header' => 'No'
+                ],
+                'product_style',
+                'product_model',
                 [
                     'attribute' => 'product_title',
-                    'label' => 'Product',
+                    'label' => 'Product Name',
                     'format' => 'raw',
                     'value' => function ($model) {
-
-                        $pro_model = isset($model->product)?$model->product->model:'';
-                        $data = '<b>'.$model->product_title.'</b><br/><b>Code : </b>'.$model->product_code.', <b>Model : </b>'.$pro_model;
+                        $data = '<b>'.$model->product_title.'</b><br/><b>Code : </b>'.$model->product_code;
                         return $data;
                     },
                 ],
-                'product_code',
-                #'product_code',
-                #'batch_number',
-                
+                [
+                    'attribute' => 'product_description',
+                    'label' => 'Description',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return $model->product_description;
+                    },
+                ],
                 [
                     'attribute' => 'branch_id',
                     'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
@@ -181,8 +188,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         return isset($model->productUom)?$model->productUom->title:'';
                     },
                 ],
-                /*'issueQty',*/
-                #'saleQty',
+                [
+                    'attribute' => 'inhandQty',
+                    'label' => 'Total Purchased Qty',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        $avilable_value = VwImStockView::total_inhandQty($model->product_id,$model->branch_id);
+                        return $avilable_value;
+                    }
+                ],
                 [
                     'attribute' => 'saleQty',
                     'label' => 'Sale Qty',
@@ -192,20 +206,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $avilable_value;
                     }
                 ],
-                #'inhandQty',
-                [
-                    'attribute' => 'inhandQty',
-                    'label' => 'In Hand Qty',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        $avilable_value = VwImStockView::total_inhandQty($model->product_id,$model->branch_id);
-                        return $avilable_value;
-                    }
-                ],
-                #'available',
+                
                 [
                     'attribute' => 'available',
-                    'label' => 'Available',
+                    'label' => 'Available Qty',
                     'format' => 'raw',
                     'value' => function ($model) {
                         $avilable_value = VwImStockView::total_available($model->product_id,$model->branch_id);

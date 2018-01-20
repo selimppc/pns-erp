@@ -26,7 +26,10 @@ class VwImStockView extends \yii\db\ActiveRecord
         return [
             'product_id' => Yii::t('app', 'Product id'),
             'product_code' => Yii::t('app', 'Product Code'),
+            'product_style' => Yii::t('app', 'Style'),
+            'product_model' => Yii::t('app', 'Item / Model'),
             'product_title'  => Yii::t('app', 'Product Title'),
+            'product_description'  => Yii::t('app', 'Description'),
             'batch_number' => Yii::t('app', 'Batch Number'),
             'expire_date' => Yii::t('app', 'Expire Date'),
             'branch_id' => Yii::t('app','Branch'),

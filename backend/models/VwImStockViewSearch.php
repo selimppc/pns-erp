@@ -16,7 +16,7 @@ class VwImStockViewSearch extends VwImStockView
     public function rules()
     {
         return [            
-            [['product_id','product_title','batch_number','expire_date', 'branch_id','sell_rate','sell_tax','im_rate','uom','batch_number','issueQty','saleQty','inhandQty','available','min_level','product_code'], 'safe'],
+            [['product_id','product_title','batch_number','expire_date', 'branch_id','sell_rate','sell_tax','im_rate','uom','batch_number','issueQty','saleQty','inhandQty','available','min_level','product_code','product_style','product_model','product_description'], 'safe'],
         ];
     }
 
@@ -63,6 +63,9 @@ class VwImStockViewSearch extends VwImStockView
 
         $query->andFilterWhere(['like', 'product_code', $this->product_code])
             ->andFilterWhere(['like', 'product_title', $this->product_title])
+            ->andFilterWhere(['like', 'product_style', $this->product_style])
+            ->andFilterWhere(['like', 'product_model', $this->product_model])
+            ->andFilterWhere(['like', 'product_description', $this->product_description])
             ->andFilterWhere(['like', 'batch_number', $this->batch_number])
             ->andFilterWhere(['like', 'expire_date', $this->expire_date])
             ->andFilterWhere(['like', 'branch_id', $this->branch_id])
