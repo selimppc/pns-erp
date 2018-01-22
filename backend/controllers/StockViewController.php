@@ -79,7 +79,7 @@ class StockViewController extends Controller{
 
            $date = date('Y-m-d');
 
-           $product_data = VwImStockView::find()->where(['branch_id' => $_POST['branch_id']])->andWhere(['>=','expire_date',$date])->all();
+           $product_data = VwImStockView::find()->where(['branch_id' => $_POST['branch_id']])->andWhere(['>=','expire_date',$date])->->groupBy('product_id')all();
 
            $select = '<option>--Select Product--</option>';
 

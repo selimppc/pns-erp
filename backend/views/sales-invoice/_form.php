@@ -649,6 +649,32 @@ $this->registerJs($js);
             setTimeout(function(){
                 $('.custom-select2').select2();
             },100)
+
+            var branch_id = $('#smhead-branch_id').val();
+
+           $('.available_quantity_class').val('');
+           $('.rate_class').val('');
+           $('.batch_number_class').val('');
+           $('.sell_rate_class').val('');
+           $('.uom_class').val('');
+           $('.uom_id_class').val('');
+           
+           $.ajax({
+               type : 'POST',
+               dataType : 'json',
+               url : '".Url::toRoute('stock-view/find-product')."',
+               data: {branch_id:branch_id},
+               beforeSend : function( request ){
+                   
+               },
+               success : function( data )
+                   {   
+
+                       newoptions = '<option value=1>NewO1</option><option value=2>NewO1</option>';
+
+                       $('select.custom-select2').html(data.content);
+                   }
+           });
             
         });
 

@@ -95,13 +95,39 @@ class VwImStockView extends \yii\db\ActiveRecord
 
         $total = 0;
 
+        // $product_q = VwImStockView::find()->where(['product_id' => $product_id])->all();
+
+        // if(!empty($product_q)){
+        //     foreach($product_q as $product){
+        //         $total += abs($product->available);
+        //     }
+        // }
+
+        $total_inhand_qty = 0;
+
         $product_q = VwImStockView::find()->where(['product_id' => $product_id])->all();
 
         if(!empty($product_q)){
             foreach($product_q as $product){
-                $total += abs($product->available);
+                if($product->inhandQty > 0)
+                {
+                    $total_inhand_qty += $product->inhandQty;    
+                }
+                
             }
         }
+
+        $total_sale_qty = 0;
+
+        $product_q = VwImStockView::find()->where(['product_id' => $product_id])->all();
+
+        if(!empty($product_q)){
+            foreach($product_q as $product){
+                $total_sale_qty += $product->saleQty;
+            }
+        }
+
+        $total = $total_inhand_qty - $total_sale_qty;
 
         return $total;
     }
@@ -110,13 +136,40 @@ class VwImStockView extends \yii\db\ActiveRecord
 
         $total = 0;
 
-        $product_q = VwImStockView::find()->where(['product_id' => $product_id])->andWhere(['branch_id' => $branch_id])->all();
+        /*$product_q = VwImStockView::find()->where(['product_id' => $product_id])->andWhere(['branch_id' => $branch_id])->all();
 
         if(!empty($product_q)){
             foreach($product_q as $product){
                 $total += abs($product->available);
             }
+        }*/
+
+        $total_inhand_qty = 0;
+
+        $product_q = VwImStockView::find()->where(['product_id' => $product_id])->andWhere(['branch_id' => $branch_id])->all();
+
+        if(!empty($product_q)){
+            foreach($product_q as $product){
+                if($product->inhandQty > 0)
+                {
+                    $total_inhand_qty += $product->inhandQty;    
+                }
+                
+            }
         }
+
+
+        $total_sale_qty = 0;
+
+        $product_q = VwImStockView::find()->where(['product_id' => $product_id])->andWhere(['branch_id' => $branch_id])->all();
+
+        if(!empty($product_q)){
+            foreach($product_q as $product){
+                $total_sale_qty += $product->saleQty;
+            }
+        }
+
+        $total = $total_inhand_qty - $total_sale_qty;
 
         return $total;
     }
@@ -129,7 +182,11 @@ class VwImStockView extends \yii\db\ActiveRecord
 
         if(!empty($product_q)){
             foreach($product_q as $product){
-                $total += $product->inhandQty;
+                if($product->inhandQty > 0)
+                {
+                    $total += $product->inhandQty;    
+                }
+                
             }
         }
 
