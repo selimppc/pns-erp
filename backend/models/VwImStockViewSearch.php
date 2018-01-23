@@ -41,7 +41,8 @@ class VwImStockViewSearch extends VwImStockView
 
     public function search($params)
     {
-    	$query = VwImStockView::find()->groupBy(['product_id','branch_id'])->orderBy('product_id','asc');
+    	$query = VwImStockView::find()->groupBy(['product_id','branch_id'])->orderBy([
+            'product_sort_order' => SORT_ASC]);
         // ->groupBy('product_id,branch_id');
 
         // add conditions that should always apply here

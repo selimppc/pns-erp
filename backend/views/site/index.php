@@ -115,7 +115,7 @@
                 <div class="white float-left py-10">
                   <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i> Upcoming Stock
                 </div>
-                <span class="float-right white font-size-30"><?=$po_approved_qty?></span>
+                <span class="float-right white font-size-30">0</span>
               </div>
               <div class="mb-20 white">
                 <i class="icon md-long-arrow-up white font-size-16"></i>

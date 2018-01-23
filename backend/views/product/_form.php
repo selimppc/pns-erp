@@ -92,6 +92,17 @@ use backend\models\CodesParam;
 
             </div>
 
+
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+
+                <?= $form->field($model, 'supplier_id')
+                            ->dropDownList(
+                                ArrayHelper::map(Supplier::find()->all(), 'id', 'supplier_code'),
+                                 ['prompt'=>'-Select-','class'=>'form-control']
+                            ); ?>
+
+            </div>
+
             <?= $form->field($model, 'image')->fileInput() ?>
 
             <?php
@@ -110,16 +121,6 @@ use backend\models\CodesParam;
         </div>
 
         <div class="col-md-6">
-
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-
-                <?= $form->field($model, 'supplier_id')
-                            ->dropDownList(
-                                ArrayHelper::map(Supplier::find()->all(), 'id', 'supplier_code'),
-                                 ['prompt'=>'-Select-','class'=>'form-control']
-                            ); ?>
-
-            </div>
 
             
             <?= $form->field($model, 'sell_rate',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
@@ -181,6 +182,8 @@ use backend\models\CodesParam;
             <?= $form->field($model, 're_order',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'style',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+             <?= $form->field($model, 'sort_order',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
 
             <div class="form-group form-material floating" data-plugin="formMaterial">
 
