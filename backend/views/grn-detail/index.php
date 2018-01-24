@@ -92,15 +92,15 @@ $this->params['breadcrumbs'][] = $this->title;
                       'label' => 'Product Name',
                       'format' => 'raw',
                       'value' => function ($model) {
-                          return isset($model->product)?$model->product->title:'';
-                      },
-                    ],
-                    [
-                      #'attribute' => 'product_id',
-                      'label' => 'Product Model',
-                      'format' => 'raw',
-                      'value' => function ($model) {
-                          return isset($model->product)?$model->product->model:'';
+
+                          if(isset($model->product))
+                          {
+                            $data = '<b>'.$model->product->title.'</b><br/><b>Code : </b>'.$model->product->product_code. ',<b>  Model : </b>'.$model->product->model;
+                          }else{
+                            $data = '';
+                          }
+                          
+                        return $data;
                       },
                     ],
 
@@ -145,3 +145,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     
 </div>     
+<style type="text/css">
+    b{
+        font-weight: 700;
+    }
+</style>
