@@ -381,7 +381,7 @@ class StockTransferController extends Controller
                 $response['rate'] = $product_data->im_rate;
                 $response['sell_rate'] = number_format($product_data->sell_rate, 3, '.', '');
                 $response['batch_number'] = $product_data->batch_number;
-                $response['uom'] = isset($product_data->productUom)?$product_data->productUom->title:'';
+                $response['uom'] = $product_data->uom;
                 $response['uom_id'] = $product_data->uom;
                 $response['view_popup'] = Url::toRoute(['/product/view-popup','id'=> $product_data->product_id]);
                 $response['result'] = 'success';

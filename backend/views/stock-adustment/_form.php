@@ -235,8 +235,11 @@ $this->registerJs($js);
                             <div class="col-md-1">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
-                                    <?= $form->field($modelAdjustmentDetail,"[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true , 'class' => 'uom_class form-control'])->label(false) ?>
-
+                                    <?= $form->field($modelAdjustmentDetail, "[{$index}]uom", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
+                                    ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
+                                     ['prompt'=>'-Select-','class'=>'form-control floating uom_class']
+                                    )->label(false) ?>
+                                    
                                 </div>
                             </div>
 
@@ -329,6 +332,7 @@ $this->registerJs($js);
                 success : function( data )
                     {   
 
+                        console.log(data.uom);
                         if(data.result == 'success'){ 
                             $(item).closest('.item').find('.batch_number_class').val(data.batch_number);
                             $(item).closest('.item').find('.expire_date_class').val(data.expire_date); 

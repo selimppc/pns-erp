@@ -247,7 +247,7 @@ $this->registerJs($js);
 
                         $modelSmDetail->total = number_format(($modelSmDetail->sell_rate * $modelSmDetail->quantity) - $modelSmDetail->total_discount, 3, '.', '') ;
 
-                        $modelSmDetail->uom_name = isset($modelSmDetail->uomData)?$modelSmDetail->uomData->title:'';
+                        $modelSmDetail->uom_name = $modelSmDetail->uom;
                 ?>
 
                     <div class="item"><!-- widgetBody -->
@@ -301,7 +301,10 @@ $this->registerJs($js);
 
                             <div class="custom-col-07">
 
-                                <?= $form->field($modelSmDetail, "[{$index}]uom_name", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'readonly' => true, 'class' => 'uom_class form-control'])->label(false) ?>
+                                <?= $form->field($modelSmDetail, "[{$index}]uom_name", ['options' => ['class' => 'uom_class form-group form-material floating','data-plugin' => 'formMaterial']])->dropDownList(
+                                    ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->andWhere(['status'=>'active'])->all(), 'id', 'title'),
+                                     ['prompt'=>'-Select-','class'=>'form-control floating uom_class']
+                                    )->label(false) ?>
 
                                 <?= $form->field($modelSmDetail, "[{$index}]uom", ['options' => ['class' => '','data-plugin' => 'formMaterial']])->hiddenInput(['maxlength' => true, 'readonly' => true, 'class' => 'uom_id_class form-control'])->label(false) ?>
                             </div>
