@@ -105,7 +105,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
 
                     'batch_number',
-                    'expire_date',
                     'receive_quantity',
                     [
                       'attribute' => 'cost_price',

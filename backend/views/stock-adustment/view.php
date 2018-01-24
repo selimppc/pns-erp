@@ -118,8 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <tr>
                         <th>Product</th>
-                        <th>Batch Number</th>
-                        <th>Expire Date</th>                            
+                        <th>Batch Number</th>                           
                         <th>Unit of Measurement</th> 
                         <th>Quantity</th>
                         <th>Stock Rate</th>
@@ -132,12 +131,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             <tr>
                                 <td>
                                     <?=isset($adjustment->product)?$adjustment->product->title:''?>
+                                    <br/>
+                                    Model :: <?=isset($adjustment->product)?$adjustment->product->model:''?> 
                                 </td>
                                 <td>
                                     <?=$adjustment->batch_number?>
-                                </td>
-                                <td>
-                                    <?=$adjustment->expire_date?>
                                 </td>
                                 <td>
                                     <?=isset($adjustment->uomData)?$adjustment->uomData->title:''?>
