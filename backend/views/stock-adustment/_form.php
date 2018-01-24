@@ -176,16 +176,12 @@ $this->registerJs($js);
 
                 <div class="row">
                     
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <label class="control-label only-label" for="">Product</label>
                     </div>
 
                     <div class="col-md-2">
                         <label class="control-label only-label" for="">Batch Number</label>
-                    </div>
-
-                    <div class="col-md-2">
-                        <label class="control-label only-label" for="">Expire Date</label>
                     </div>
 
                     <div class="col-md-1">
@@ -196,7 +192,7 @@ $this->registerJs($js);
                         <label class="control-label only-label" for="">Quantity</label>
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <label class="control-label only-label" for="">Rate</label>
                     </div>
                     
@@ -216,7 +212,7 @@ $this->registerJs($js);
 
                         <div class="row">
 
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
                                     <?php
@@ -236,22 +232,6 @@ $this->registerJs($js);
                                 <?= $form->field($modelAdjustmentDetail,"[{$index}]batch_number", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'class' => 'batch_number_class form-control'])->label(false) ?>
                             </div>
 
-                            <div class="col-md-2">
-                                <?= $form->field($modelAdjustmentDetail,"[{$index}]expire_date", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->widget(DatePicker::classname(), [
-                                    'value' => date('Y-m-d'),
-                                    'options' => [
-                                        'placeholder' => 'Enter Date ...',
-                                        'value' => date('Y-m-d') ,
-                                        'class' => 'expire_date_class',
-                                    ],
-                                    'pluginOptions' => [
-                                        'autoclose'=>true,
-                                        'format' => 'yyyy-m-dd',
-                                        'todayHighlight' => true
-                                    ]
-                                ])->label(false) ?>
-                            </div>
-
                             <div class="col-md-1">
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
 
@@ -264,7 +244,7 @@ $this->registerJs($js);
                                 <?= $form->field($modelAdjustmentDetail,"[{$index}]quantity", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true])->label(false) ?>
                             </div>
 
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <?= $form->field($modelAdjustmentDetail,"[{$index}]stock_rate", ['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true, 'class' => 'rate_class form-control'])->label(false) ?>
                             </div>
 

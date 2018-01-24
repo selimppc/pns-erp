@@ -97,7 +97,7 @@ use backend\models\CodesParam;
 
                 <?= $form->field($model, 'supplier_id')
                             ->dropDownList(
-                                ArrayHelper::map(Supplier::find()->all(), 'id', 'supplier_code'),
+                                ArrayHelper::map(Supplier::find()->all(), 'id', 'org_name'),
                                  ['prompt'=>'-Select-','class'=>'form-control']
                             ); ?>
 

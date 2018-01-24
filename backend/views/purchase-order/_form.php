@@ -74,7 +74,7 @@ $this->registerJs($js);
 
                     <?= $form->field($modelPurchaseHead, 'supplier_id')
                                 ->dropDownList(
-                                    ArrayHelper::map(Supplier::find()->where(['status'=>'active'])->all(), 'id', 'supplier_code'),
+                                    ArrayHelper::map(Supplier::find()->where(['status'=>'active'])->all(), 'id', 'org_name'),
                                      ['prompt'=>'-Select-','class'=>'form-control']
                                 ); ?>
 
@@ -124,7 +124,7 @@ $this->registerJs($js);
 
                     <?= $form->field($modelPurchaseHead, 'branch_id')
                                 ->dropDownList(
-                                    ArrayHelper::map(Branch::find()->where(['status'=>'active'])->all(), 'id', 'branch_code'),
+                                    ArrayHelper::map(Branch::find()->where(['status'=>'active'])->all(), 'id', 'title'),
                                      ['prompt'=>'-Select-','class'=>'form-control']
                                 ); ?>
 
