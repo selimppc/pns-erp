@@ -132,7 +132,7 @@ class PurchaseOrderController extends Controller
         $modelPurchaseHead->discount_amount ='0.00';
         $modelPurchaseHead->prime_amount ='0.00';
         $modelPurchaseHead->net_amount ='0.00';
-        $modelPurchaseHead->branch_id = 1;
+        $modelPurchaseHead->branch_id = 2;
         $modelPurchaseHead->currency_id = 1;
 
         // Currency Rate
