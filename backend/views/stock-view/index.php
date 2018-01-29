@@ -132,35 +132,9 @@ $this->params['breadcrumbs'][] = $this->title;
                   'class' => 'yii\grid\SerialColumn',
                   'header' => 'No'
                 ],
-                'product_style',
+                
                 'product_model',
-                [
-                    'attribute' => 'product_title',
-                    'label' => 'Product Name',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        $data = '<b>'.$model->product_title.'</b><br/><b>Code : </b>'.$model->product_code;
-                        return $data;
-                    },
-                ],
-                [
-                    'attribute' => 'product_description',
-                    'label' => 'Description',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return $model->product_description;
-                    },
-                ],
-                [
-                    'attribute' => 'branch_id',
-                    'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
-                    'label' => 'Branch',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return isset($model->branch)?$model->branch->title:'';
-                    },
-                ],
-
+                
                 [
                     'attribute' => 'sell_rate',
                     'label' => 'Sell Rate',
@@ -178,16 +152,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         return number_format($model->im_rate,3);
                     },
                 ],*/
+
                 
                 [
-                    'attribute' => 'uom',
-                    'label' => 'UOM',
-                    'filter'=>ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->asArray()->all(), 'id', 'title'),
+                    'attribute' => 'branch_id',
+                    'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
+                    'label' => 'Branch',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        return isset($model->productUom)?$model->productUom->title:'';
+                        return isset($model->branch)?$model->branch->title:'';
                     },
                 ],
+                
                 [
                     'attribute' => 'inhandQty',
                     'label' => 'Total Purchased Qty',
@@ -215,6 +191,36 @@ $this->params['breadcrumbs'][] = $this->title;
                         $avilable_value = VwImStockView::total_available($model->product_id,$model->branch_id);
                         return $avilable_value;
                     }
+                ],
+                [
+                    'attribute' => 'product_title',
+                    'label' => 'Product Name',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        $data = '<b>'.$model->product_title.'</b><br/><b>Code : </b>'.$model->product_code;
+                        return $data;
+                    },
+                ],
+
+                'product_style',
+
+                [
+                    'attribute' => 'uom',
+                    'label' => 'UOM',
+                    'filter'=>ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->asArray()->all(), 'id', 'title'),
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return isset($model->productUom)?$model->productUom->title:'';
+                    },
+                ],
+
+                [
+                    'attribute' => 'product_description',
+                    'label' => 'Description',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return $model->product_description;
+                    },
                 ],
                 [
                    # 'attribute' => 'product_id',
