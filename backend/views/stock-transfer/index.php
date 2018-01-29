@@ -85,6 +85,32 @@ $this->params['breadcrumbs'][] = $this->title;
                   return Html::a($model->transfer_number, ['/stock-transfer/view', 'id' => $model->id]);
               },
             ],
+
+            [
+               #'attribute' => 'customer_id',  
+               'label' => 'Product Model',
+               'value' => function ($model) {
+                  $product_model = '';
+                  if(!empty($model->imTransferDetails))
+                  {
+                    $product_count = 1;
+                    $total_product_model = count($model->imTransferDetails);
+                    foreach($model->imTransferDetails as $key => $transfer_details)
+                    {
+                        $product_model.=isset($transfer_details->product->model)?$transfer_details->product->model:'';
+                        
+                        if($product_count<$total_product_model)
+                        {
+                          $product_model.= ', ';
+                        }
+
+                        $product_count++;  
+                    }
+                  }  
+                  return $product_model;
+               }
+              ],
+
             'date',
             'confirm_date',
             [
