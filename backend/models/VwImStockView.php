@@ -65,6 +65,64 @@ class VwImStockView extends \yii\db\ActiveRecord
     }
 
 
+    public static function get_stock_data()
+    {
+        $data = VwImStockView::find()->groupBy(['product_id'])->orderBy([
+            'product_sort_order' => SORT_ASC])->all();
+
+        $response = [];
+
+        if(!empty($data))
+        {
+            foreach($data as $key=>$value)
+            {
+                $response[$key]['serial'] = $key+1;
+                $response[$key]['product_id'] = $value->product_id;
+                $response[$key]['product_code'] = $value->product_code;
+                $response[$key]['product_style'] = $value->product_style;
+                $response[$key]['product_model'] = $value->product_model;
+                $response[$key]['product_description'] = $value->product_description;
+                $response[$key]['product_title'] = $value->product_title;
+                $response[$key]['sell_rate'] = $value->sell_rate; 
+
+                $branch_data = self::branch_data($value->product_id);
+
+                $response[$key]['branch'] = $branch_data;
+
+                $response[$key]['product_uom'] = isset($value->productUom)?$value->productUom->title:'';
+
+                $response[$key]['total_qty'] = self::findtotal_available($value->product_id);
+            }
+        }
+
+        return $response;
+    }
+
+
+    public static function branch_data($product_id)
+    {
+
+        $response = [];
+
+        $data = VwImStockView::find()->where(['product_id'=> $product_id])->groupBy(['branch_id'])->all();
+
+
+        if(!empty($data))
+        {
+            foreach($data as $key=>$value)
+            {
+                $response[$key]['branch_id'] = $value->branch_id;
+                $response[$key]['branch_name'] = $value->branch['title'];
+                $response[$key]['total_purchase_qty'] = self::total_inhandQty($product_id,$value->branch_id);
+                $response[$key]['sales_qty'] = self::total_saleQty($product_id,$value->branch_id);
+                $response[$key]['available_qty'] = self::total_available($product_id,$value->branch_id);
+            }
+        }
+
+        return $response;
+    }
+
+
     public static function total_qty_branch($branch_id='')
     {
         $branch_qty = Yii::$app->db->createCommand("SELECT SUM([[available]]) FROM {{vw_im_stock_view}} WHERE branch_id = '$branch_id'")

@@ -118,128 +118,133 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="table-responsive">
 
-          <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            'filterModel' => $searchModel,
-            'rowOptions'=>function($model){
-                if($model->available <= 10){
-                    #return ['class' => 'red'];
-                }
-            },
-
-            'columns' => [
-                [
-                  'class' => 'yii\grid\SerialColumn',
-                  'header' => 'No'
-                ],
+          
+          <?php
+            if(!empty($data))
+            {
+          ?>
+          
+              <table class="table table-striped table-bordered">
                 
-                'product_model',
-                
-                [
-                    'attribute' => 'sell_rate',
-                    'label' => 'Sell Rate',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return number_format($model->sell_rate,3);
-                    },
-                ],
-               
-               /*[
-                    'attribute' => 'im_rate',
-                    'label' => 'IM Rate',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return number_format($model->im_rate,3);
-                    },
-                ],*/
+                <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Item / Model</th>
+                      <th>Sell Rate</th>
+                      <th>Branch</th>
+                      <th>Total Purchased Qty</th>
+                      <th>Sale Qty</th>
+                      <th>Available Qty</th>
+                      <th>Total</th>
+                      <th>Product Name</th>
+                      <th>Style</th>
+                      <th>UOM</th>
+                      <th>Description</th>
+                    </tr>
+                </thead>
 
-                
-                [
-                    'attribute' => 'branch_id',
-                    'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
-                    'label' => 'Branch',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return isset($model->branch)?$model->branch->title:'';
-                    },
-                ],
-                
-                [
-                    'attribute' => 'inhandQty',
-                    'label' => 'Total Purchased Qty',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        $avilable_value = VwImStockView::total_inhandQty($model->product_id,$model->branch_id);
-                        return $avilable_value;
-                    }
-                ],
-                [
-                    'attribute' => 'saleQty',
-                    'label' => 'Sale Qty',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        $avilable_value = VwImStockView::total_saleQty($model->product_id,$model->branch_id);
-                        return $avilable_value;
-                    }
-                ],
-                
-                [
-                    'attribute' => 'available',
-                    'label' => 'Available Qty',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        $avilable_value = VwImStockView::total_available($model->product_id,$model->branch_id);
-                        return $avilable_value;
-                    }
-                ],
-                [
-                    'attribute' => 'product_title',
-                    'label' => 'Product Name',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        $data = '<b>'.$model->product_title.'</b><br/><b>Code : </b>'.$model->product_code;
-                        return $data;
-                    },
-                ],
+                <tbody>
+                    <?php
+                      foreach($data as $values)
+                      {
+                    ?>
+                        
+                        <tr>
+                            <td><?=$values['serial']?></td>
+                            <td><?=$values['product_model']?></td>
+                            <td><?=number_format($values['sell_rate'],3)?></td>
+                            <td style="padding: 0;border:0;">
+                              <table style="width: 100%;height:100%;min-height:100%;text-align: center;">
+                                <?php
+                                  if(count($values['branch']))
+                                  {
+                                    foreach($values['branch'] as $branch_data)
+                                    {
+                                  ?>
+                                      <tr>
+                                          <td><?=$branch_data['branch_name']?></td>
+                                      </tr>
+                                  <?php    
+                                    }   
+                                  }
+                                ?>
+                              </table>
+                            </td>
 
-                'product_style',
+                            <td style="padding: 0;border:0;">
+                              <table style="width: 100%;height:100%;text-align: center;">
+                                <?php
+                                  if(count($values['branch']))
+                                  {
+                                    foreach($values['branch'] as $branch_data)
+                                    {
+                                  ?>
+                                      <tr>
+                                          <td><?=$branch_data['total_purchase_qty']?></td>
+                                      </tr>
+                                  <?php    
+                                    }   
+                                  }
+                                ?>
+                              </table>
+                            </td>
 
-                [
-                    'attribute' => 'uom',
-                    'label' => 'UOM',
-                    'filter'=>ArrayHelper::map(CodesParam::find()->where(['type'=>'Unit Of Measurement'])->asArray()->all(), 'id', 'title'),
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return isset($model->productUom)?$model->productUom->title:'';
-                    },
-                ],
+                            <td style="padding: 0;border:0;">
+                              <table style="width: 100%;height:100%;text-align: center;">
+                                <?php
+                                  if(count($values['branch']))
+                                  {
+                                    foreach($values['branch'] as $branch_data)
+                                    {
+                                  ?>
+                                      <tr>
+                                          <td><?=$branch_data['sales_qty']?></td>
+                                      </tr>
+                                  <?php    
+                                    }   
+                                  }
+                                ?>
+                              </table>
+                            </td>
 
-                [
-                    'attribute' => 'product_description',
-                    'label' => 'Description',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return $model->product_description;
-                    },
-                ],
-                [
-                   # 'attribute' => 'product_id',
-                    'label' => 'Total',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        $total_value = VwImStockView::findtotal_available($model->product_id);
-                        return $total_value;
-                    },
-                ],
-               
-               
-                #['class' => 'yii\grid\ActionColumn'],
-            ],
-        ]); ?>
+                            <td style="padding: 0;border:0;">
+                              <table style="width: 100%;height:100%;text-align: center;">                                <?php
+                                  if(count($values['branch']))
+                                  {
+                                    foreach($values['branch'] as $branch_data)
+                                    {
+                                  ?>
+                                      <tr>
+                                          <td><?=$branch_data['available_qty']?></td>
+                                      </tr>
+                                  <?php    
+                                    }   
+                                  }
+                                ?>
+                              </table>
+                            </td>
 
+                            <td><?=$values['total_qty']?></td>
+                            <td><?=$values['product_title']?></td>
+                            <td><?=$values['product_style']?></td>
+                            <td><?=$values['product_uom']?></td>
+                            <td><?=$values['product_description']?></td>
+
+                        </tr>
+
+                    <?php    
+                      }
+                    ?>
+                </tbody>
+
+              </table>
+
+          <?php    
+            }
+          ?>
            
 
-          </div>
+        </div>
           
       </div>
 
@@ -249,5 +254,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <style type="text/css">
     b{
         font-weight: 700;
+    }
+
+    .table tr td{
+      height: 70px;
     }
 </style>

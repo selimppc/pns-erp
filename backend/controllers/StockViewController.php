@@ -40,6 +40,8 @@ class StockViewController extends Controller{
 
     public function actionIndex(){
 
+        $data = VwImStockView::get_stock_data();
+
         $models = VwImStockView::find()->all();
 
         $searchModel = new VwImStockViewSearch();
@@ -63,6 +65,7 @@ class StockViewController extends Controller{
             'po_approved_qty' => $po_approved_qty,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'data' => $data
         ]);
 
     }
