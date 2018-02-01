@@ -9,6 +9,7 @@ use yii\helpers\ArrayHelper;
 use backend\models\Supplier;
 use backend\models\Branch;
 use backend\models\Currency;
+use backend\models\PpPurchaseDetail;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PpPurchaseHeadSearch */
@@ -87,6 +88,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value' => function ($model) {
                         return Html::a($model->po_order_number, ['/purchase-order/view', 'id' => $model->id]);
                     },
+                  ],
+                  [
+                   'label' => 'Purchase Qty',
+                   'value' => function ($model) {
+
+                      $sales_qty = PpPurchaseDetail::total_purchase_qty($model->id);
+                        
+                      return $sales_qty;
+                   }
                   ],
                   'date',
                   [

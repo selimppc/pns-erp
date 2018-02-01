@@ -11,6 +11,7 @@ use backend\models\Customer;
 use backend\models\SalesPerson;
 use backend\models\Branch;
 use backend\models\SmHead;
+use backend\models\SmDetail;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\SmHeadSearch */
@@ -184,6 +185,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $product_model;
                      }
                     ],
+
+                    [
+                     #'attribute' => 'customer_id',  
+                     'label' => 'Sales Qty',
+                     'value' => function ($model) {
+
+                        $sales_qty = SmDetail::total_sales_qty($model->id);
+                          
+                        return $sales_qty;
+                     }
+                    ],
+
                     [
                      'attribute' => 'customer_id',  
                      'label' => 'Customer Name',

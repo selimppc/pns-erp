@@ -7,6 +7,7 @@ use yii\helpers\ArrayHelper;
 
 use backend\models\Branch;
 use backend\models\Currency;
+use backend\models\ImTransferDetail;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ImTransferHeadSearch */
@@ -110,6 +111,16 @@ $this->params['breadcrumbs'][] = $this->title;
                   return $product_model;
                }
               ],
+
+               [
+                 'label' => 'Transfer Qty',
+                 'value' => function ($model) {
+
+                    $sales_qty = ImTransferDetail::total_transfer_qty($model->id);
+                      
+                    return $sales_qty;
+                 }
+                ],
 
             'date',
             'confirm_date',

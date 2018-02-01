@@ -94,6 +94,17 @@ class ImTransferDetail extends \yii\db\ActiveRecord
         ];
     }
 
+
+     public static function total_transfer_qty($tranfer_head_id)
+    {
+
+        $transfer_qty = Yii::$app->db->createCommand("SELECT SUM([[quantity]]) FROM {{im_transfer_detail}} WHERE im_transfer_head_id = '$tranfer_head_id'")
+            ->queryScalar();
+
+        return $transfer_qty;
+    }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */

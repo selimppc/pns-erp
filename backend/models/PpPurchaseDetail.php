@@ -106,6 +106,15 @@ class PpPurchaseDetail extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public static function total_purchase_qty($purchase_id)
+    {
+
+        $purchase_qty = Yii::$app->db->createCommand("SELECT SUM([[quantity]]) FROM {{pp_purchase_detail}} WHERE pp_purchase_head_id = '$purchase_id'")
+            ->queryScalar();
+
+        return $purchase_qty;
+    }
    
     /**
      * @return \yii\db\ActiveQuery

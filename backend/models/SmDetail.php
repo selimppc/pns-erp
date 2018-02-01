@@ -79,6 +79,16 @@ class SmDetail extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public static function total_sales_qty($sm_head_id)
+    {
+
+        $sales_qty = Yii::$app->db->createCommand("SELECT SUM([[quantity]]) FROM {{sm_detail}} WHERE sm_head_id = '$sm_head_id'")
+            ->queryScalar();
+
+        return $sales_qty;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
