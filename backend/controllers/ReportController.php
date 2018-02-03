@@ -13,6 +13,7 @@ use backend\models\CustomerMaster;
 use backend\models\Chartofaccounts;
 use backend\models\Transaction;
 use backend\models\PurchaseMaster;
+use backend\models\SmHead;
 
 /**
  * ReportController implements the CRUD actions for ProductMaster model.
@@ -34,6 +35,56 @@ class ReportController extends Controller
         ];
     }
 
+
+    public function actionDaily()
+    {
+        $current_date = Date('Y-m-d');
+
+        $start_date = date('Y-m-01',strtotime('this month'));
+        $end_date = date('Y-m-t',strtotime('this month'));
+
+        $daily_report = SmHead::daily_report($current_date);
+
+        $todays_sale = SmHead::total_sales_value($current_date) ;
+        $this_month_sale = SmHead::total_sales_value($start_date,$end_date);
+        $all_sales = SmHead::total_sales_value();
+
+        $title = 'Daily Report';
+        
+        return $this->render('daily_report',[
+                'data' => $daily_report,
+                'todays_sale' => $todays_sale,
+                'this_month_sale' => $this_month_sale,
+                'all_sales' => $all_sales,
+                'title' => $title
+            ]);
+    }
+
+    public function actionMonthly()
+    {
+        $current_date = Date('Y-m-d');
+
+        $start_date = date('Y-m-01',strtotime('this month'));
+        $end_date = date('Y-m-t',strtotime('this month'));
+
+
+        $daily_report = SmHead::daily_report($start_date,$end_date);
+
+        $todays_sale = SmHead::total_sales_value($current_date) ;
+        $this_month_sale = SmHead::total_sales_value($start_date,$end_date);
+        $all_sales = SmHead::total_sales_value();
+
+
+        $title = 'Monthly Report';
+        
+        return $this->render('daily_report',[
+                'data' => $daily_report,
+                'todays_sale' => $todays_sale,
+                'this_month_sale' => $this_month_sale,
+                'all_sales' => $all_sales,
+                'title' => $title
+            ]);
+    }
 
     public function actionProductList(){
 

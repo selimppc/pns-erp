@@ -7,6 +7,10 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\behaviors\BlameableBehavior;
+use backend\models\Product;
+use backend\models\Branch;
+use backend\models\Customer;
+use backend\models\SalesPerson;
 
 /**
  * This is the model class for table "{{%sm_head}}".
@@ -129,6 +133,112 @@ class SmHead extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+
+    public static function daily_report($date1='',$date2='')
+    {
+        $response = [];
+
+        if(!empty($date1) && !empty($date2))
+        {
+
+            $connection = Yii::$app->getDb();
+            $command = $connection->createCommand("
+                SELECT product_id
+                FROM sm_detail INNER JOIN sm_head ON sm_head.id = sm_detail.sm_head_id
+                WHERE status ='confirmed' && date BETWEEN '$date1' AND '$date2'
+                GROUP BY product_id
+                ORDER BY date DESC");
+
+            $result = $command->queryAll();
+
+        }else{
+
+            $connection = Yii::$app->getDb();
+            $command = $connection->createCommand("
+                SELECT product_id
+                FROM sm_detail INNER JOIN sm_head ON sm_head.id = sm_detail.sm_head_id
+                WHERE status ='confirmed' && date = '$date1'
+                GROUP BY product_id
+                ORDER BY date DESC");
+
+            $result = $command->queryAll();
+
+        }
+        
+
+        if(!empty($result))
+        {
+            foreach($result as $key => $values)
+            {
+
+                $product_data = Product::find()->where(['id'=> $values['product_id']])->one();
+
+                $response[$key]['serial'] = $key+1;
+                $response[$key]['product_id'] = $values['product_id'];
+                $response[$key]['product_model'] = !empty($product_data)?$product_data->model:'';
+                $response[$key]['branch'] = self::total_sales($values['product_id'],$date1,$date2);
+            }
+        }
+
+         return $response;
+    }
+
+
+    public static function total_sales($product_id='', $date1='',$date2='')
+    {
+
+        $response = [];
+
+        if(!empty($date1) && !empty($date2))
+        {
+
+            $connection = Yii::$app->getDb();
+            $command = $connection->createCommand("
+                SELECT SUM(sm_detail.quantity) as total_qty,SUM(sm_head.prime_amount) as total_amount,SUM(sm_head.discount_amount) as discount_amount,SUM(sm_head.net_amount) as net_amount,branch_id,customer_id,sales_person_id
+                FROM sm_detail INNER JOIN sm_head ON sm_head.id = sm_detail.sm_head_id
+                WHERE status ='confirmed' && product_id ='$product_id' && date BETWEEN '$date1' AND '$date2'
+                GROUP BY branch_id
+                ORDER BY branch_id ASC");
+
+            
+            $result = $command->queryAll();
+        
+        }else{
+
+            $connection = Yii::$app->getDb();
+            $command = $connection->createCommand("
+                SELECT SUM(sm_detail.quantity) as total_qty,SUM(sm_head.prime_amount) as total_amount,SUM(sm_head.discount_amount) as discount_amount,SUM(sm_head.net_amount) as net_amount,branch_id,customer_id,sales_person_id
+                FROM sm_detail INNER JOIN sm_head ON sm_head.id = sm_detail.sm_head_id
+                WHERE status ='confirmed' && product_id ='$product_id' && date = '$date1'
+                GROUP BY branch_id
+                ORDER BY branch_id ASC");
+
+            
+            $result = $command->queryAll();
+
+        }
+        
+
+        if(!empty($result))
+        {
+            foreach($result as $key => $values)
+            {
+
+                $branch_data = Branch::find()->where(['id'=> $values['branch_id']])->one();
+
+                $response[$key]['branch_id'] = $values['branch_id'];
+                $response[$key]['branch_name'] = !empty($branch_data)?$branch_data->title:'';
+                $response[$key]['total_qty'] = $values['total_qty'];
+                $response[$key]['total_amount'] = $values['total_amount'];
+                $response[$key]['discount_amount'] = $values['discount_amount'];
+                $response[$key]['net_amount'] = $values['net_amount'];
+            }
+        }
+
+
+        return $response;
     }
 
     public static function total_delievered_qty($date1='',$date2='',$status='')
