@@ -51,6 +51,12 @@ $this->registerJs($js);
         </div>
 
         <div class="col-md-2">
+
+            <?= $form->field($modelSmHead, 'note',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+        </div>
+
+        <div class="col-md-2">
             <div class="form-group form-material floating" data-plugin="formMaterial">
                 <?php
 
@@ -164,6 +170,8 @@ $this->registerJs($js);
             <?= $form->field($modelSmHead, 'discount_amount',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => true]) ?>
 
         </div>
+
+        
 
        <!--  <div class="col-md-2">
 

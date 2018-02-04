@@ -83,6 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <tr>
                     <th>Sales Number</th>
+                    <th>Note</th>
                     <th>Sales Date</th>
                     <th>Branch</th>                    
                     <th>Customer Name</th>
@@ -99,6 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         $commission = ($model->net_amount * $model->commission)/100;
                     ?>
                     <td><?=$model->sm_number?></td>
+                    <td><?=$model->note?></td>
                     <td><?=$model->date?></td>
                     <td><?=isset($model->branch)?$model->branch->title:''?></td>
                     <td><?=isset($model->customer)?$model->customer->name:''?></td>

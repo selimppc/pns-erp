@@ -106,7 +106,8 @@ $this->params['breadcrumbs'][] = $this->title;
                       'value' => function ($model) {
                           return Html::a($model->sm_number, ['/sales-invoice/view', 'id' => $model->id]);
                       },
-                    ],                   
+                    ],     
+                    'note',              
                     'date',
                     [
                      #'attribute' => 'customer_id',  
@@ -144,38 +145,6 @@ $this->params['breadcrumbs'][] = $this->title;
                      }
                     ],
 
-                    [
-                     'attribute' => 'customer_id',  
-                     'label' => 'Customer Name',
-                     'filter'=>ArrayHelper::map(Customer::find()->asArray()->all(), 'id', 'name'),
-                     'value' => function ($model) {
-                         return isset($model->customer)?$model->customer->name:'';
-                     }
-                    ],
-                    [
-                     'attribute' => 'sales_person_id',  
-                     'label' => 'Sales Person',
-                     'filter'=>ArrayHelper::map(SalesPerson::find()->asArray()->all(), 'id', 'name'),
-                     'value' => function ($model) {
-                         return isset($model->salesperson)?$model->salesperson->name:'';
-                     }
-                    ],
-                    [
-                     'attribute' => 'branch_id',  
-                     'label' => 'Branch',
-                     'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
-                     'value' => function ($model) {
-                         return isset($model->branch)?$model->branch->title:'';
-                     }
-                   ],
-                    [
-                      'attribute' => 'pay_terms',
-                      'label' => 'Pay Terms',
-                      'filter'=>array("Cash"=>"Cash","Credit"=>"Credit"),
-                      'value' => function ($model){
-                        return ucfirst($model->pay_terms);
-                      }
-                    ],
                     [
                      'attribute' => 'prime_amount',  
                      'label' => 'Total Amount',
@@ -222,6 +191,40 @@ $this->params['breadcrumbs'][] = $this->title;
                      }
                    ],
                    
+                   
+                    [
+                     'attribute' => 'customer_id',  
+                     'label' => 'Customer Name',
+                     'filter'=>ArrayHelper::map(Customer::find()->asArray()->all(), 'id', 'name'),
+                     'value' => function ($model) {
+                         return isset($model->customer)?$model->customer->name:'';
+                     }
+                    ],
+                    [
+                     'attribute' => 'sales_person_id',  
+                     'label' => 'Sales Person',
+                     'filter'=>ArrayHelper::map(SalesPerson::find()->asArray()->all(), 'id', 'name'),
+                     'value' => function ($model) {
+                         return isset($model->salesperson)?$model->salesperson->name:'';
+                     }
+                    ],
+                    [
+                     'attribute' => 'branch_id',  
+                     'label' => 'Branch',
+                     'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
+                     'value' => function ($model) {
+                         return isset($model->branch)?$model->branch->title:'';
+                     }
+                   ],
+                    [
+                      'attribute' => 'pay_terms',
+                      'label' => 'Pay Terms',
+                      'filter'=>array("Cash"=>"Cash","Credit"=>"Credit"),
+                      'value' => function ($model){
+                        return ucfirst($model->pay_terms);
+                      }
+                    ],
+                    
                     [
                       'attribute' => 'status',
                       'label' => 'Status',
