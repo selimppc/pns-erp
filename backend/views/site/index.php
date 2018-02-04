@@ -74,8 +74,7 @@
           <!-- End Widget Linearea One -->
         </div>
 
-        <div class="col-xl-4 col-md-4">
-          <!-- Widget Linearea One-->
+        <!-- <div class="col-xl-4 col-md-4">
           <div class="card card-shadow" id="widgetLineareaOne">
             <div class="card-block p-20 pt-10" style="background: #4875b4;">
               <div class="clearfix">
@@ -90,11 +89,10 @@
               
             </div>
           </div>
-          <!-- End Widget Linearea One -->
-        </div>
+        </div> -->
 
-        <div class="col-xl-4 col-md-4">
-          <!-- Widget Linearea One-->
+        <!-- <div class="col-xl-4 col-md-4">
+          
           <div class="card card-shadow" id="widgetLineareaOne">
             <div class="card-block p-20 pt-10" style="background: #d34836;">
               <div class="clearfix">
@@ -110,11 +108,11 @@
               
             </div>
           </div>
-          <!-- End Widget Linearea One -->
-        </div>
+         
+        </div> -->
 
-        <div class="col-xl-4 col-md-4">
-          <!-- Widget Linearea One-->
+        <!-- <div class="col-xl-4 col-md-4">
+          
           <div class="card card-shadow" id="widgetLineareaOne">
             <div class="card-block p-20 pt-10" style="background: #ffc107;">
               <div class="clearfix">
@@ -130,8 +128,8 @@
               
             </div>
           </div>
-          <!-- End Widget Linearea One -->
-        </div>
+          
+        </div> -->
     
     
   </div>

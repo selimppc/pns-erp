@@ -96,7 +96,7 @@ class ImTransaction extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'transaction_number' => Yii::t('app', 'Transaction Number'),
             'product_id' => Yii::t('app', 'Product'),
-            'supplier_id' => Yii:t('app', 'Supplier'),
+            'supplier_id' => Yii::t('app', 'Supplier'),
             'branch_id' => Yii::t('app', 'Branch'),
             'batch_number' => Yii::t('app', 'Batch Number'),
             'date' => Yii::t('app', 'Date'),

@@ -11,7 +11,7 @@
                   &#2547;
                   Today's Sales
                 </div>
-                <span class="float-right white font-size-30"><?=number_format($todays_sale,3)?></span>
+                <span class="float-right white font-size-30"><?=number_format($todays_sale,2)?></span>
               </div>
               <div class="mb-20 white">
                 <i class="icon md-long-arrow-up white font-size-16"></i> Today's sales of <?=date('F');?>
@@ -30,7 +30,7 @@
                 <div class="white float-left py-10">
                   &#2547; This month sales
                 </div>
-                <span class="float-right white font-size-30"><?=number_format($this_month_sale,3);?></span>
+                <span class="float-right white font-size-30"><?=number_format($this_month_sale,2);?></span>
               </div>
               <div class="mb-20 white">
                 <i class="icon md-long-arrow-up white font-size-16"></i>
@@ -50,7 +50,7 @@
                 <div class="white float-left py-10">
                   &#2547; Total sales
                 </div>
-                <span class="float-right white font-size-30"><?=number_format($all_sales,3);?></span>
+                <span class="float-right white font-size-30"><?=number_format($all_sales,2);?></span>
               </div>
               <div class="mb-20 white">
                 <i class="icon md-long-arrow-up white font-size-16"></i>
