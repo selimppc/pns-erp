@@ -110,6 +110,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'note',              
                     'date',
                     [
+                     'attribute' => 'customer_id',  
+                     'label' => 'Customer Name',
+                     'filter'=>ArrayHelper::map(Customer::find()->asArray()->all(), 'id', 'name'),
+                     'value' => function ($model) {
+                         return isset($model->customer)?$model->customer->name:'';
+                     }
+                    ],
+                    [
                      #'attribute' => 'customer_id',  
                      'label' => 'Product Model',
                      'value' => function ($model) {
@@ -153,21 +161,6 @@ $this->params['breadcrumbs'][] = $this->title;
                      }
                    ],
 
-                    [
-                     'attribute' => 'tax_amount',  
-                     'label' => 'Tax Amount',
-                     'value' => function ($model) {
-                         return number_format($model->tax_amount,3);
-                     }
-                   ],
-
-                   [
-                     'attribute' => 'discount_rate',  
-                     'label' => 'Discount Rate (%)',
-                     'value' => function ($model) {
-                         return number_format($model->discount_rate,3);
-                     }
-                   ],
                    [
                      'attribute' => 'discount_amount',  
                      'label' => 'Discount Amount',
@@ -175,6 +168,32 @@ $this->params['breadcrumbs'][] = $this->title;
                          return number_format($model->discount_amount,3);
                      }
                    ],
+
+                    [
+                     'attribute' => 'net_amount',  
+                     'label' => 'Net Amount',
+                     'value' => function ($model) {
+                         return number_format($model->net_amount,3);
+                     }
+                   ],
+                   
+                   [
+                     'attribute' => 'tax_amount',  
+                     'label' => 'Tax Amount',
+                     'value' => function ($model) {
+                         return number_format($model->tax_amount,3);
+                     }
+                   ],
+
+
+                    [
+                     'attribute' => 'discount_rate',  
+                     'label' => 'Discount Rate (%)',
+                     'value' => function ($model) {
+                         return number_format($model->discount_rate,3);
+                     }
+                   ],
+
                    [
                      'attribute' => 'commission',  
                      'label' => 'Commission',
@@ -183,23 +202,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         return !empty($model->commission)?$model->commission.'%':'';
                      }
                    ],
-                   [
-                     'attribute' => 'net_amount',  
-                     'label' => 'Net Amount',
-                     'value' => function ($model) {
-                         return number_format($model->net_amount,3);
-                     }
-                   ],
+                 
                    
-                   
-                    [
-                     'attribute' => 'customer_id',  
-                     'label' => 'Customer Name',
-                     'filter'=>ArrayHelper::map(Customer::find()->asArray()->all(), 'id', 'name'),
-                     'value' => function ($model) {
-                         return isset($model->customer)?$model->customer->name:'';
-                     }
-                    ],
                     [
                      'attribute' => 'sales_person_id',  
                      'label' => 'Sales Person',
