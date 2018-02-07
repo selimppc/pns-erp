@@ -67,6 +67,10 @@ class ReportController extends Controller
         $start_date = date('Y-m-01',strtotime('this month'));
         $end_date = date('Y-m-t',strtotime('this month'));
 
+        
+        $start_date = '2018-01-01';
+        $end_date = '2018-01-31';
+
 
         $daily_report = SmHead::daily_report($start_date,$end_date);
 

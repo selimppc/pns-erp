@@ -145,10 +145,10 @@ class SmHead extends \yii\db\ActiveRecord
 
             $connection = Yii::$app->getDb();
             $command = $connection->createCommand("
-                SELECT product_id
+                SELECT *
                 FROM sm_detail INNER JOIN sm_head ON sm_head.id = sm_detail.sm_head_id
                 WHERE status ='confirmed' && date BETWEEN '$date1' AND '$date2'
-                GROUP BY product_id
+                #GROUP BY product_id
                 ORDER BY date DESC");
 
             $result = $command->queryAll();
@@ -157,15 +157,46 @@ class SmHead extends \yii\db\ActiveRecord
 
             $connection = Yii::$app->getDb();
             $command = $connection->createCommand("
-                SELECT product_id
+                SELECT *
                 FROM sm_detail INNER JOIN sm_head ON sm_head.id = sm_detail.sm_head_id
                 WHERE status ='confirmed' && date = '$date1'
-                GROUP BY product_id
+                #GROUP BY product_id
                 ORDER BY date DESC");
 
             $result = $command->queryAll();
 
         }
+
+        $sales_person_array = array();
+
+        if(!empty($result))
+        {
+            // push sales person id 
+            foreach($result as $key => $values)
+            {
+                array_push($sales_person_array,$values['sales_person_id']);
+            }
+        }
+
+        
+
+        if(count($sales_person_array) > 0)
+        {
+            foreach(array_unique($sales_person_array) as $key => $values)
+            {
+                $response[$key]['serial'] = $key+1;
+                $response[$key]['sales_person_id'] = $values;
+                $response[$key]['customer_list'] = self::customer_list($result,$values);
+                $response[$key]['order_list'] = self::order_list($result,$values);
+            }
+        }
+
+
+        echo '<pre>';
+        print_r($response);
+
+
+        exit();
         
 
         if(!empty($result))
@@ -185,6 +216,56 @@ class SmHead extends \yii\db\ActiveRecord
          return $response;
     }
 
+    public static function customer_list($data = '',$sales_person_id)
+    {
+        $response = [];
+
+        $customer_list_array = array();
+        
+        if(!empty($data))
+        {
+            foreach($data as $key => $values)
+            {
+                if (strpos($values['sales_person_id'], $sales_person_id ) !== false)
+                {
+                    array_push($customer_list_array,$values['customer_id']);
+                }
+            }
+
+
+            if(count($customer_list_array) > 0)
+            {
+                foreach(array_unique($customer_list_array) as $key => $values)
+                {
+                    $response[$key]['serial'] = $key + 1;
+                    $response[$key]['customer_id'] = $values;
+                }
+            }
+        }
+
+        return $response;
+    }
+
+    public static function order_list($data = '',$sales_person_id = '')
+    {
+        $response = [];
+
+        if(!empty($data))
+        {
+            foreach ($data as $key => $value) {
+                
+                if (strpos($value['sales_person_id'], $sales_person_id ) !== false)
+                {
+                    $response[$key]['serial'] = $key + 1;
+                    $response[$key]['sm_number'] = $value['sm_number'];
+                }
+
+                
+            }
+        }
+
+        return $response;
+    }
 
     public static function total_sales($product_id='', $date1='',$date2='')
     {
