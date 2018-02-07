@@ -50,13 +50,16 @@ class ReportController extends Controller
         $all_sales = SmHead::total_sales_value();
 
         $title = 'Daily Report';
+
+        $label = "Today's sales of ".date('F');
         
         return $this->render('daily_report',[
                 'data' => $daily_report,
                 'todays_sale' => $todays_sale,
                 'this_month_sale' => $this_month_sale,
                 'all_sales' => $all_sales,
-                'title' => $title
+                'title' => $title,
+                'label' => $label
             ]);
     }
 
@@ -67,26 +70,23 @@ class ReportController extends Controller
         $start_date = date('Y-m-01',strtotime('this month'));
         $end_date = date('Y-m-t',strtotime('this month'));
 
-        
-        $start_date = '2018-01-01';
-        $end_date = '2018-01-31';
-
-
         $daily_report = SmHead::daily_report($start_date,$end_date);
 
         $todays_sale = SmHead::total_sales_value($current_date) ;
         $this_month_sale = SmHead::total_sales_value($start_date,$end_date);
         $all_sales = SmHead::total_sales_value();
 
-
         $title = 'Monthly Report';
+
+        $label = "Sales of ".date('F');
         
         return $this->render('daily_report',[
                 'data' => $daily_report,
                 'todays_sale' => $todays_sale,
                 'this_month_sale' => $this_month_sale,
                 'all_sales' => $all_sales,
-                'title' => $title
+                'title' => $title,
+                'label' => $label
             ]);
     }
 

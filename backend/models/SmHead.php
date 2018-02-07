@@ -149,7 +149,7 @@ class SmHead extends \yii\db\ActiveRecord
                 FROM sm_detail INNER JOIN sm_head ON sm_head.id = sm_detail.sm_head_id
                 WHERE status ='confirmed' && date BETWEEN '$date1' AND '$date2'
                 #GROUP BY product_id
-                ORDER BY date DESC");
+                ORDER BY sm_number ASC");
 
             $result = $command->queryAll();
 
@@ -161,7 +161,7 @@ class SmHead extends \yii\db\ActiveRecord
                 FROM sm_detail INNER JOIN sm_head ON sm_head.id = sm_detail.sm_head_id
                 WHERE status ='confirmed' && date = '$date1'
                 #GROUP BY product_id
-                ORDER BY date DESC");
+                ORDER BY sm_number ASC");
 
             $result = $command->queryAll();
 
@@ -184,22 +184,19 @@ class SmHead extends \yii\db\ActiveRecord
         {
             foreach(array_unique($sales_person_array) as $key => $values)
             {
+
+                $sales_person_data = Yii::$app->db->createCommand("SELECT * FROM {{sales_person}} WHERE id ='$values'")->queryOne();
+
                 $response[$key]['serial'] = $key+1;
                 $response[$key]['sales_person_id'] = $values;
-                $response[$key]['customer_list'] = self::customer_list($result,$values);
+                $response[$key]['sales_person_name'] = !empty($sales_person_data)?$sales_person_data['name']:'';
+               # $response[$key]['customer_list'] = self::customer_list($result,$values);
                 $response[$key]['order_list'] = self::order_list($result,$values);
             }
         }
 
 
-        echo '<pre>';
-        print_r($response);
-
-
-        exit();
-        
-
-        if(!empty($result))
+        /*if(!empty($result))
         {
             foreach($result as $key => $values)
             {
@@ -209,9 +206,8 @@ class SmHead extends \yii\db\ActiveRecord
                 $response[$key]['serial'] = $key+1;
                 $response[$key]['product_id'] = $values['product_id'];
                 $response[$key]['product_model'] = !empty($product_data)?$product_data->model:'';
-                $response[$key]['branch'] = self::total_sales($values['product_id'],$date1,$date2);
             }
-        }
+        }*/
 
          return $response;
     }
@@ -237,8 +233,11 @@ class SmHead extends \yii\db\ActiveRecord
             {
                 foreach(array_unique($customer_list_array) as $key => $values)
                 {
+                    $customer_data = Yii::$app->db->createCommand("SELECT * FROM {{customer}} WHERE id ='$values'")->queryOne();
+
                     $response[$key]['serial'] = $key + 1;
                     $response[$key]['customer_id'] = $values;
+                    $response[$key]['customer_name'] = !empty($customer_data)?$customer_data['name']:'';
                 }
             }
         }
@@ -256,8 +255,25 @@ class SmHead extends \yii\db\ActiveRecord
                 
                 if (strpos($value['sales_person_id'], $sales_person_id ) !== false)
                 {
+
+                    $customer_id = $value['customer_id'];
+                    $customer_data = Yii::$app->db->createCommand("SELECT * FROM {{customer}} WHERE id ='$customer_id'")->queryOne();
+
+                    $product_id = $value['product_id'];
+                    $product_data = Yii::$app->db->createCommand("SELECT * FROM {{product}} WHERE id ='$product_id'")->queryOne();
+
                     $response[$key]['serial'] = $key + 1;
+                    $response[$key]['customer_id'] = $customer_id;
+                    $response[$key]['customer_name'] = !empty($customer_data)?$customer_data['name']:'';
                     $response[$key]['sm_number'] = $value['sm_number'];
+                    $response[$key]['date'] = $value['date'];
+                    $response[$key]['product_id'] = $value['product_id'];
+                    $response[$key]['product_model'] = !empty($product_data)?$product_data['model']:'';
+                    $response[$key]['quantity'] = $value['quantity'];
+                    $response[$key]['sell_rate'] = $value['sell_rate'];
+                    $response[$key]['sub_total'] = $value['quantity'] * $value['sell_rate'];
+                    $response[$key]['total_discount'] = $value['total_discount'];
+                    $response[$key]['total_amount'] = $value['quantity'] * $value['rate'];
                 }
 
                 
