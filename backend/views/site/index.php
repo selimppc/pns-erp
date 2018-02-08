@@ -2,6 +2,9 @@
   use yii\helpers\Url;
 
   $this->title = 'Dashboard';
+
+  $i=1;
+  echo date('Y-m-d', strtotime("-$i days"));
 ?>
 
 <div class="page-content container-fluid">

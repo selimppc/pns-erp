@@ -35,6 +35,7 @@
 	    	<div class="setting-column">
 	    		
 	    		<a href="#" class="btn btn-block btn-primary waves-effect">Customer Ledger Report</a>
+          <a href="<?= Url::toRoute(['/sales-reports/month-wise-report']); ?>" class="btn btn-block btn-primary waves-effect">Month Wise Report</a>
 	    		
 	    		
 	    	</div>

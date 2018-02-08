@@ -27,12 +27,19 @@ class SalesReportsController extends Controller{
 
 
      /**
-     * Lists all AmCoa models.
      * @return mixed
      */
     public function actionIndex()
     {
     	return $this->render('index');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function actionMonthWiseReport()
+    {
+        return $this->render('month-wise-report');
     }
 
 }

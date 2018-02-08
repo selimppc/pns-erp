@@ -65,26 +65,30 @@ class ReportController extends Controller
 
     public function actionMonthly()
     {
+
         $current_date = Date('Y-m-d');
 
-        $start_date = date('Y-m-01',strtotime('this month'));
-        $end_date = date('Y-m-t',strtotime('this month'));
+        if(isset($_POST['monthly-wise']) && !empty($_POST['from_date']) && !empty($_POST['to_date']))
+        {
+            $start_date = $_POST['from_date'];
+            $end_date = $_POST['to_date'];
+
+            $label = "Sales Report of ".date('jS M Y',strtotime($start_date)). ' to '.date('jS M Y',strtotime($end_date));
+        }else{
+            $start_date = date('Y-m-01',strtotime('this month'));
+            $end_date = date('Y-m-t',strtotime('this month'));   
+
+            $label = "Sales Report of ".date('F'); 
+        }
 
         $daily_report = SmHead::daily_report($start_date,$end_date);
 
-        $todays_sale = SmHead::total_sales_value($current_date) ;
-        $this_month_sale = SmHead::total_sales_value($start_date,$end_date);
-        $all_sales = SmHead::total_sales_value();
-
         $title = 'Monthly Report';
 
-        $label = "Sales of ".date('F');
+        
         
         return $this->render('daily_report',[
                 'data' => $daily_report,
-                'todays_sale' => $todays_sale,
-                'this_month_sale' => $this_month_sale,
-                'all_sales' => $all_sales,
                 'title' => $title,
                 'label' => $label
             ]);
