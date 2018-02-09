@@ -38,28 +38,39 @@ class ReportController extends Controller
 
     public function actionDaily()
     {
-        $current_date = Date('Y-m-d');
 
-        $start_date = date('Y-m-01',strtotime('this month'));
-        $end_date = date('Y-m-t',strtotime('this month'));
+        if(isset($_GET['date']) && !empty($_GET['date']))
+        {
+            $current_date = $_GET['date'];
+
+            $label = "Sales of ".date('dS F Y');
+        }else{
+            $current_date = Date('Y-m-d');
+
+            $label = "Today's sales of ".date('F');    
+        }
+        
 
         $daily_report = SmHead::daily_report($current_date);
 
-        $todays_sale = SmHead::total_sales_value($current_date) ;
-        $this_month_sale = SmHead::total_sales_value($start_date,$end_date);
-        $all_sales = SmHead::total_sales_value();
-
         $title = 'Daily Report';
 
-        $label = "Today's sales of ".date('F');
+        
         
         return $this->render('daily_report',[
                 'data' => $daily_report,
-                'todays_sale' => $todays_sale,
-                'this_month_sale' => $this_month_sale,
-                'all_sales' => $all_sales,
                 'title' => $title,
                 'label' => $label
+            ]);
+    }
+
+    public function actionLast15Days()
+    {
+
+        $title = 'Last 15 days report';
+
+        return $this->render('last_15_days',[
+                'title' => $title
             ]);
     }
 

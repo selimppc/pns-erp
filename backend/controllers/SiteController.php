@@ -72,8 +72,14 @@ class SiteController extends Controller
         $start_date = date('Y-m-01',strtotime('this month'));
         $end_date = date('Y-m-t',strtotime('this month'));
 
+
+        // Last 15 days 
+        $last_date = date('Y-m-d', strtotime("-1 days"));
+        $last_15_date = date('Y-m-d', strtotime('-15 days'));
+
         $todays_sale = SmHead::total_sales_value($current_date) ;
         $this_month_sale = SmHead::total_sales_value($start_date,$end_date);
+        $last_15_days_sale = SmHead::total_sales_value($last_15_date,$last_date);
         $all_sales = SmHead::total_sales_value();
 
 
@@ -96,6 +102,7 @@ class SiteController extends Controller
 
         return $this->render('index',[
             'todays_sale' => $todays_sale,
+            'last_15_days_sale' => $last_15_days_sale,
             'this_month_sale' => $this_month_sale,
             'all_sales' => $all_sales,
             'dhaka_branch_qty' => $dhaka_branch_qty,

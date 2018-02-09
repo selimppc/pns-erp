@@ -3,8 +3,6 @@
 
   $this->title = 'Dashboard';
 
-  $i=1;
-  echo date('Y-m-d', strtotime("-$i days"));
 ?>
 
 <div class="page-content container-fluid">
@@ -13,7 +11,8 @@
     <?= $this->render('//sales-invoice/_sales_summary',[
         'todays_sale' => $todays_sale,
         'this_month_sale' => $this_month_sale,
-        'all_sales' => $all_sales
+        'all_sales' => $all_sales,
+        'last_15_days_sale' => $last_15_days_sale
     ]); ?>
 
     
