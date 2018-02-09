@@ -113,10 +113,12 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
 
     public static function total_po_qty($po_status='')
     {
-        $po_qty = Yii::$app->db->createCommand("SELECT count([[id]]) FROM {{pp_purchase_head}} WHERE status = '$po_status'")
-            ->queryScalar();
+        /*$po_qty = Yii::$app->db->createCommand("SELECT count([[id]]) FROM {{pp_purchase_head}} WHERE status = '$po_status'")
+            ->queryScalar();*/
 
-        return $po_qty;    
+        $po_qty = Yii::$app->db->createCommand("SELECT SUM([[pp_purchase_detail.quantity]]) FROM {{pp_purchase_detail}} JOIN {{pp_purchase_head}} ON pp_purchase_detail.pp_purchase_head_id = pp_purchase_head.id  WHERE pp_purchase_head.status ='$po_status'")->queryScalar();
+
+        return empty($po_qty)?'0':$po_qty;    
     }
 
     public static function update_purchase_order_amount($purchsed_order_id){
