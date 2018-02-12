@@ -82,8 +82,8 @@ class DeliveryOrderController extends Controller{
 
             try {
 
-                $result = \Yii::$app->db->createCommand("CALL sp_sm_order_delivered(:p_id, :p_userId)") 
-                      ->bindValue(':p_id' , $id )
+                $result = \Yii::$app->db->createCommand("CALL sp_sm_order_delivered(:p_sm_head_id, :p_userId)") 
+                      ->bindValue(':p_sm_head_id' , $id )
                       ->bindValue(':p_userId', Yii::$app->user->id)
                       ->execute(); 
 
