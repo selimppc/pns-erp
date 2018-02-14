@@ -8,6 +8,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use backend\models\VwSmCustomerReceivable;
+use backend\models\VwSmCustomerReceivableSearch;
+
 
 class MoneyReciptController extends Controller{
 
@@ -30,9 +33,22 @@ class MoneyReciptController extends Controller{
 
     public function actionIndex(){
 
+        $searchModel = new VwSmCustomerReceivableSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index');
+        $dataProvider->pagination->pageSize=30;
 
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+
+    public function actionCreateMoneyReceipt($sm_head_id='',$customer_id ='', $branch_id='')
+    {
+        echo $sm_head_id . ' == '.$customer_id .' == '.$branch_id ;
     }
 
 }

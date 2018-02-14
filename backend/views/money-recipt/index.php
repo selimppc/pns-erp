@@ -1,9 +1,19 @@
 <?php
-	use yii\helpers\Url;
-	use yii\helpers\Html;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\grid\GridView;
+use yii\widgets\Pjax;
+
+use yii\helpers\ArrayHelper;
+
+use backend\models\SmInvoiceAllocation;
+use backend\models\CodesParam;
+use backend\models\Branch;
+
 
 	$this->title = Yii::t('app', 'Money Recipt');
 	$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <div class="page-header">
@@ -60,9 +70,63 @@
 
         <div class="panel-body">
 
-        	<div class="table-responsive">
+          <div class="table-responsive">
 
-        	</div>
+          	<?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    #['class' => 'yii\grid\SerialColumn'],
+                   
+                    #'sm_head_id',
+                    #'customer_id',
+                    [
+                      'attribute' => 'customer_code',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return Html::a($model->customer_code, ['/money-recipt/create-money-receipt', 'sm_head_id' => $model->sm_head_id, 'customer_id' => $model->customer_id,'branch_id' => $model->branch_id]);
+                      },
+                   ],
+                    'customer_name',
+                    [
+                        'attribute' => 'customer_group',
+                        'label' => 'Customer Group',
+                        'filter'=>ArrayHelper::map(CodesParam::find()->where(['type'=>'Customer Group'])->asArray()->all(), 'id', 'title'),
+                        'format' => 'raw',
+                        'value' => function ($model) {
+                            return isset($model->customer_group_data)?$model->customer_group_data->title:'';
+                        },
+                    ],
+                    [
+                        'attribute' => 'branch_id',
+                        'label' => 'Branch Id',
+                        'filter'=>ArrayHelper::map(Branch::find()->asArray()->all(), 'id', 'title'),
+                        'format' => 'raw',
+                        'value' => function ($model) {
+                            return isset($model->branch)?$model->branch->title:'';
+                        },
+                    ],
+                    'customer_address',
+                    'customer_cell',
+                    'customer_phone',
+                    'receivable_amount',
+                    [
+                        'header' => 'View Money Receipt',
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} ',
+                        'buttons' => [
+                          
+                            'view' => function ($url,$model) {
+                              $url =  '#'; //$url
+                              return Html::a('<span class="btn btn-xs btn-info">Show </span>', $url, ['target' => '_self']);
+                            },
+                          
+                        ],
+                    ],
+                ],
+            ]); ?>
+
+          </div>
 
         </div>	
 
