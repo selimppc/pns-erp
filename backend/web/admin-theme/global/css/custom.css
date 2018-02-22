@@ -65,6 +65,10 @@ form div label.control-label:after{
     width: 50%;
 }
 
+.form-width-49{
+    width: 49%;
+}
+
 .form-width-40{
     width: 40%;
 }

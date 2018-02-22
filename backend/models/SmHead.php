@@ -50,6 +50,10 @@ use backend\models\SalesPerson;
 class SmHead extends \yii\db\ActiveRecord
 {
 
+    public $money_receipt_amount;
+    public $money_receipt_customer_name;
+    public $money_receipt_branch;
+
     public function behaviors()
     {
         return [
@@ -113,7 +117,7 @@ class SmHead extends \yii\db\ActiveRecord
             'doc_type' => Yii::t('app', 'Doc Type'),
             'pay_terms' => Yii::t('app','Pay Terms'),
             'branch_id' => Yii::t('app', 'Branch'),
-            'am_coa_id' => Yii::t('app', 'Am Coa ID'),
+            'am_coa_id' => Yii::t('app', 'Bank/Cash'),
             'check_number' => Yii::t('app', 'Check Number'),
             'currency_id' => Yii::t('app', 'Currency'),
             'exchange_rate' => Yii::t('app', 'Exchange Rate'),

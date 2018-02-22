@@ -41,7 +41,8 @@ class VwSmCustomerReceivableSearch extends VwSmCustomerReceivable
 
     public function search($params)
     {
-        $query = VwSmCustomerReceivable::find();
+        $query = VwSmCustomerReceivable::find()->groupBy(['customer_id'])->orderBy([
+            'customer_id' => SORT_DESC]);
         // ->groupBy('product_id,branch_id');
 
         // add conditions that should always apply here
