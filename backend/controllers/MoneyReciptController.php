@@ -13,6 +13,8 @@ use backend\models\VwSmCustomerReceivableSearch;
 use backend\models\TransactionCode;
 use backend\models\SmHead;
 
+use backend\models\VwSmMrReceive;
+
 
 class MoneyReciptController extends Controller{
 
@@ -66,6 +68,13 @@ class MoneyReciptController extends Controller{
             $model->status = 'open';
             $model->branch_id = $data->branch_id;
             $model->money_receipt_branch = isset($data->branch)?$data->branch->title:'';
+
+
+            // get due money receipt list
+            $unpaid_money_received = VwSmMrReceive::find()->where(['customer_id' => $customer_id])->andWhere(['branch_id' => $branch_id])->all();
+
+
+
             // Save data
             if ($model->load(Yii::$app->request->post()))
             {
@@ -74,7 +83,8 @@ class MoneyReciptController extends Controller{
 
             return $this->render('create_money_receipt',[
                 'model' => $model,
-                'data' => $data
+                'data' => $data,
+                'unpaid_money_received' => $unpaid_money_received
             ]);
 
         }

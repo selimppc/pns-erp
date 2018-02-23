@@ -228,13 +228,30 @@ $this->params['breadcrumbs'][] = $this->title;
 		                      <tr>
 		                      	<th>Invoice No</th>
 		                      	<th>Receivable Amount</th>
-		                      	<th>Date</th>
 		                      </tr>
 		                    </thead>
 		                    <tbody>
-		                    	<tr>
 
-		                    	</tr>
+		                    	<?php
+		                    		if(!empty($unpaid_money_received))
+		                    		{
+		                    			foreach($unpaid_money_received as $unpaid_money_receipt)
+		                    			{
+		                    	?>
+		                    	
+		                    				<tr>
+		                    					<td>
+		                    						<?=$unpaid_money_receipt->invoice_number?>
+		                    					</td>
+		                    					<td>
+		                    						<?=number_format($unpaid_money_receipt->amount,2)?>
+		                    					</td>
+		                    				</tr>
+		                    	<?php			
+		                    			}
+		                    		}
+		                    	?>
+		                    	
 		                    </tbody>
 		                </table>
 		            </div> 
