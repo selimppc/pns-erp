@@ -117,7 +117,7 @@ use backend\models\Branch;
                         'buttons' => [
                           
                             'view' => function ($url,$model) {
-                              $url =  '#'; //$url
+                              $url =  ['money-recipt/show', 'sm_head_id' => $model->sm_head_id, 'customer_id' => $model->customer_id,'branch_id' => $model->branch_id ]; //$url
                               return Html::a('<span class="btn btn-xs btn-info">Show </span>', $url, ['target' => '_self']);
                             },
                           

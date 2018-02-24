@@ -89,6 +89,9 @@ class SmHead extends \yii\db\ActiveRecord
         return [
             [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id','pay_terms','sales_person_id'],'required','on'=>'create'],
             [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id','prime_amount','net_amount', 'pay_terms'],'required','on'=>'create_direct_sales'],
+
+            [['sm_number','date','customer_id','status','branch_id','currency_id','exchange_rate','money_receipt_amount','am_coa_id'],'required','on'=>'create_money_receipt'],
+
             [['date', 'created_at', 'updated_at','commission'], 'safe'],
             [['customer_id', 'branch_id', 'am_coa_id', 'currency_id', 'created_by', 'updated_by'], 'integer'],
             [['exchange_rate', 'tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],
@@ -109,6 +112,7 @@ class SmHead extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'money_receipt_amount' => Yii::t('app','Amount'),
             'sm_number' => Yii::t('app', 'Sales Number'),
             'date' => Yii::t('app', 'Sales Date'),
             'commission' => Yii::t('app','Commission'),

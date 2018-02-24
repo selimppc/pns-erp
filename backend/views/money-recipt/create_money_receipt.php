@@ -170,23 +170,16 @@ $this->params['breadcrumbs'][] = $this->title;
 	                                    ArrayHelper::map(AmCoa::find()->where(['status'=>'active'])->all(), 'id', 'title'),
 	                                     ['prompt'=>'-Select-','class'=>'form-control']
 	                                ); ?>
-	                                	
-				                <?= $form->field($model, 'am_coa_id',
-				                	['options' => [
-				                    'class' => 'form-group form-material floating',
-				                    'data-plugin' => 'formMaterial'
-				                	],
-				                	 "template" => "<label> Bank/Cash </label>\n{input}\n{hint}\n{error}"
-				                	])->textInput(['maxlength' => true]) ?>	
-
-
-				               <?= $form->field($model, 'money_receipt_amount',
+	                            
+								<?= $form->field($model, 'money_receipt_amount',
 				                	['options' => [
 				                    'class' => 'form-group form-material floating',
 				                    'data-plugin' => 'formMaterial'
 				                	],
 				                	 "template" => "<label> Amount </label>\n{input}\n{hint}\n{error}"
 				                	])->textInput(['maxlength' => true]) ?>	
+
+				                <input type="hidden" id="balance" value="0" style="width: 50px;">	
 
 				                <?= $form->field($model, 'exchange_rate',
 				                	['options' => [
@@ -230,22 +223,20 @@ $this->params['breadcrumbs'][] = $this->title;
 		                      	<th>Receivable Amount</th>
 		                      </tr>
 		                    </thead>
-		                    <tbody>
+		                    <tbody class="unpaid-items">
 
 		                    	<?php
+		                    		$total_amount = 0;
 		                    		if(!empty($unpaid_money_received))
 		                    		{
 		                    			foreach($unpaid_money_received as $unpaid_money_receipt)
 		                    			{
+		                    				$total_amount+=$unpaid_money_receipt->amount;
 		                    	?>
 		                    	
 		                    				<tr>
-		                    					<td>
-		                    						<?=$unpaid_money_receipt->invoice_number?>
-		                    					</td>
-		                    					<td>
-		                    						<?=number_format($unpaid_money_receipt->amount,2)?>
-		                    					</td>
+		                    					<td><?=$unpaid_money_receipt->invoice_number?></td>
+		                    					<td><?=$unpaid_money_receipt->amount?></td>
 		                    				</tr>
 		                    	<?php			
 		                    			}
@@ -253,6 +244,13 @@ $this->params['breadcrumbs'][] = $this->title;
 		                    	?>
 		                    	
 		                    </tbody>
+		                    <tfoot>
+		                    	<tr>
+		                    		<td colspan="2" style="background: #3c89bd14;text-align: right;">
+		                    			Total :: <span id="invoice_total_amount"><?=$total_amount?></span>
+		                    		</td>
+		                    	</tr>
+		                    </tfoot>
 		                </table>
 		            </div> 
 
@@ -266,10 +264,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		                      	<th>Amount</th>
 		                      </tr>
 		                    </thead>
-		                    <tbody>
-		                    	<tr>
-
-		                    	</tr>
+		                    <tbody id="allocate-invoice">
+		                    	
 		                    </tbody>
 		                </table>
 		            </div> 
@@ -277,7 +273,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		            <br/>
 		           	<div class="form-group form-material floating field-smhead-money_receipt_amount" data-plugin="formMaterial">
 						<label>Total Amount </label>
-						<input type="text" id="" class="form-control" name="" readonly="true">
+						<input type="text" id="total-amount" class="form-control" name="" readonly="true">
 
 					</div>
 
@@ -294,13 +290,104 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>  
 
   </div>
-</div>      
+</div>
+
+<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+			var addedProductCodes = [];
+
+    		$(".unpaid-items tr").click(function() {
+
+				var tableData = $(this).children("td").map(function() {
+			        return $(this).text();
+			    }).get();
+
+			    var total = Math.round((document.getElementById("total-amount").value)*100)/100;
+
+			    var value = Math.round(($.trim(tableData[1]))* 100 )/100;
+
+			    var preBalance = Math.round((document.getElementById("balance").value)*100)/100 ; 
+
+			    var td_invoiceNumber = $.trim(tableData[0]);
+
+			    var index = $.inArray(td_invoiceNumber, addedProductCodes);
+
+			    if (index >= 0) {
+					alert("You already added this Product");
+					exit;
+				} else {
+
+					if ( preBalance >= value ){
+
+						var data = "<tr><td><input name='sm_invnumber[]' value='"+ $.trim(tableData[0]) +"' style='width: 97%;padding: 3px;border: 1px solid #cccccca3;' readonly></td><td><input name='sm_amount[]' value='"+ value +"' style='width: 97%; text-align: right;    padding: 3px;border: 1px solid #cccccca3;' readonly ></td></tr>";
+						$("#allocate-invoice").append(data);
+
+						var balance = Math.round( (preBalance - value) * 100)/100;
+				    	document.getElementById("balance").value = balance;
+				    	document.getElementById("total-amount").value = Math.round( (value + total)* 100)/100;
+
+					}else if (preBalance < value && preBalance!=0){
+
+						var data = "<tr><td><input name='sm_invnumber[]' value='"+ $.trim(tableData[0]) +"' style='width: 97%;padding: 3px;border: 1px solid #cccccca3;' readonly></td><td><input name='sm_amount[]' value='"+ preBalance  +"' style='width: 97%; text-align: right;    padding: 3px;border: 1px solid #cccccca3;' readonly ></td></tr>";
+						$("#allocate-invoice").append(data);
+
+						var balance = Math.round( (preBalance - preBalance)*100)/100;
+						document.getElementById("balance").value = balance;
+						document.getElementById("total-amount").value = total + preBalance ;
+		
+					}else{
+						alert("Amount is not sufficient");
+						exit;
+					}
+
+					addedProductCodes.push(td_invoiceNumber);
+				}
+
+
+			});
+
+			$( '#smhead-money_receipt_amount' ).change(function() {
+		  
+				var invoice_total_amount = Math.round((document.getElementById('invoice_total_amount').innerHTML)*100)/100;
+				var amount = Math.round((document.getElementById('smhead-money_receipt_amount').value)*100)/100;
+
+		        if(amount > invoice_total_amount){
+		            alert('Amount is bigger than Invoice Amount');
+		            document.getElementById('smhead-money_receipt_amount').value = '';
+		            
+		        }else{
+		            document.getElementById('balance').value = amount;
+		        }
+
+			});
+
+	});
+
+		
+
+</script>
 
 <style type="text/css">
 	.field-smhead-customer_id,
 	.field-smhead-branch_id{
 		display: none!important;
 	}
+
+	.unpaid-items tr{
+		border-bottom: 1px solid #ccc;
+		cursor: pointer;
+	}
+	.unpaid-items tr td{
+		border: none !important;
+	}
+
 </style>
 <?php Pjax::end(); ?>
 

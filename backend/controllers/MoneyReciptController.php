@@ -12,8 +12,11 @@ use backend\models\VwSmCustomerReceivable;
 use backend\models\VwSmCustomerReceivableSearch;
 use backend\models\TransactionCode;
 use backend\models\SmHead;
+use backend\models\Currency;
+use backend\models\Customer;
 
 use backend\models\VwSmMrReceive;
+use backend\models\SmInvoiceAllocation;
 
 
 class MoneyReciptController extends Controller{
@@ -50,6 +53,48 @@ class MoneyReciptController extends Controller{
 
     }
 
+    public function actionShow($sm_head_id='',$customer_id ='', $branch_id='')
+    {
+
+        $customer = Customer::find()->where(['id' => $customer_id])->one();
+        $model = SmHead::find()->where(['customer_id' => $customer_id])->andWhere(['doc_type' => 'receipt'])->all();
+
+        return $this->render('show-money-receipt',[
+                    'model' => $model,
+                    'customer' => $customer
+            ]);
+    }
+
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     */
+    public function actionApproved($id)
+    {
+        $model = SmHead::find()->where(['id' => $id])->one();
+
+        if(!empty($model))
+        {
+            try{
+
+                $result = \Yii::$app->db->createCommand("CALL sp_sm_mr_to_gl(:pID, :pUserId)")
+                    ->bindValue(':pID' , $model->id )
+                    ->bindValue(':pUserId', Yii::$app->user->id)
+                    ->execute();
+
+                \Yii::$app->getSession()->setFlash('success', 'Money Receipt Confirmed Successfully !');
+
+            }catch (\Exception $e)
+            {
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+            }    
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    
     public function actionCreateMoneyReceipt($sm_head_id='',$customer_id ='', $branch_id='')
     {
 
@@ -61,6 +106,9 @@ class MoneyReciptController extends Controller{
         if(!empty($data))
         {
             $model = new SmHead();
+
+            $model->scenario = 'create_money_receipt';
+
             $model->sm_number = $receipt_number;
             $model->date = Date('Y-m-d');
             $model->customer_id = $data->customer_id;
@@ -68,6 +116,14 @@ class MoneyReciptController extends Controller{
             $model->status = 'open';
             $model->branch_id = $data->branch_id;
             $model->money_receipt_branch = isset($data->branch)?$data->branch->title:'';
+            $model->currency_id = 1;
+
+            // Currency Rate
+            $currency_data = Currency::find()->where(['id' => $model->currency_id])->one();
+
+            if(!empty($currency_data)){           
+                $model->exchange_rate = $currency_data->exchange_rate;
+            }
 
 
             // get due money receipt list
@@ -78,7 +134,62 @@ class MoneyReciptController extends Controller{
             // Save data
             if ($model->load(Yii::$app->request->post()))
             {
+                // validate all models
+                $valid = $model->validate();
 
+                if($valid)
+                {
+                    $transaction = \Yii::$app->db->beginTransaction();
+
+                    try {
+
+                        $model->doc_type = 'receipt';
+
+                        if($model->save())
+                        {
+
+                            // Update money receipt
+                            $update_money_receipt = TransactionCode::update_transaction_number('MR--');
+
+
+                            // sm_invoice_allocation
+
+                            $all_post = Yii::$app->request->post();
+                        
+                            if(!empty($all_post['sm_invnumber']))
+                            {
+                                for($i=0;$i<count($all_post['sm_invnumber']);$i++)
+                                {
+                                    $sm_invoice_allocation = new SmInvoiceAllocation();
+
+                                    $sm_invoice_allocation->sm_head_id = $model->id;
+                                    $sm_invoice_allocation->invoice_number = $all_post['sm_invnumber'][$i];
+                                    $sm_invoice_allocation->amount = $all_post['sm_amount'][$i];
+
+                                    $sm_invoice_allocation->save();
+                                }
+                            }
+
+
+                        }
+                        // Set success data
+                        \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
+
+                        $transaction->commit();
+
+                    }catch (\Exception $e) {
+
+                        // Set error data
+                        \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+
+                        $transaction->rollBack();
+                    }
+
+                }else{
+                    print_r($model->getErrors());
+                    exit();
+                }
+                
             }
 
             return $this->render('create_money_receipt',[
