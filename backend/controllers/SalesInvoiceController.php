@@ -186,6 +186,7 @@ class SalesInvoiceController extends Controller
 
                 try {
                     $modelSmHead->status = 'open';
+                    $modelSmHead->reference_code = $invoice_number;
 
                     if($modelSmHead->doc_type == 'sales'){
                         $modelSmHead->sign = '1';
