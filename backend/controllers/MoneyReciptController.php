@@ -70,6 +70,47 @@ class MoneyReciptController extends Controller{
      * @param $id
      * @return \yii\web\Response
      */
+    public function actionCancel($id)
+    {
+        $model = SmHead::find()->where(['id' => $id])->one();
+
+        if(!empty($model))
+        {
+            $transaction = \Yii::$app->db->beginTransaction();
+
+            try {
+
+                $model->status = 'cancel';
+                $model->save();
+
+                $sm_invoice_allocation = SmInvoiceAllocation::find()->where(['sm_head_id' => $id])->one();
+
+                if(!empty($sm_invoice_allocation))
+                {
+                    $sm_invoice_allocation->delete();
+                }
+
+                \Yii::$app->getSession()->setFlash('success', 'Money Receipt Cancel Successfully !');
+                //commit the changes
+                $transaction->commit();
+
+            } catch (\Exception $e)
+            {
+
+                \Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                $transaction->rollBack();
+                
+            }
+            
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     */
     public function actionApproved($id)
     {
         $model = SmHead::find()->where(['id' => $id])->one();
@@ -94,7 +135,7 @@ class MoneyReciptController extends Controller{
         return $this->redirect(['index']);
     }
 
-    
+
     public function actionCreateMoneyReceipt($sm_head_id='',$customer_id ='', $branch_id='')
     {
 
@@ -145,6 +186,20 @@ class MoneyReciptController extends Controller{
 
                         $model->doc_type = 'receipt';
 
+                        $all_post = Yii::$app->request->post();
+
+                        $net_amount = 0;
+
+                        if(!empty($all_post['sm_invnumber']))
+                        {
+                            for($i=0;$i<count($all_post['sm_invnumber']);$i++)
+                            {
+                                $net_amount+= $all_post['sm_amount'][$i];
+                            }
+                        }
+
+                        $model->net_amount = $net_amount;
+
                         if($model->save())
                         {
 
@@ -153,8 +208,6 @@ class MoneyReciptController extends Controller{
 
 
                             // sm_invoice_allocation
-
-                            $all_post = Yii::$app->request->post();
                         
                             if(!empty($all_post['sm_invnumber']))
                             {
@@ -176,6 +229,8 @@ class MoneyReciptController extends Controller{
                         \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
 
                         $transaction->commit();
+
+                        return $this->redirect(['index']);
 
                     }catch (\Exception $e) {
 
