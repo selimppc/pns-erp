@@ -211,7 +211,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'gl_voucher_number',
                                     
-                  [
+                 /* [
                       'header' => 'Confirm Delivery',
                       'class' => 'yii\grid\ActionColumn',
                       'template' => '{delivery}',
@@ -221,7 +221,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                     ],
                     
-                  ],
+                  ],*/
 
                   [
                       'header' => 'Reports',
