@@ -163,7 +163,7 @@ class MoneyReciptController extends Controller{
             $currency_data = Currency::find()->where(['id' => $model->currency_id])->one();
 
             if(!empty($currency_data)){           
-                $model->exchange_rate = $currency_data->exchange_rate;
+                $model->exchange_rate = number_format($currency_data->exchange_rate,2);
             }
 
 

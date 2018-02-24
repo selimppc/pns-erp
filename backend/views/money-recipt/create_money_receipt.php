@@ -220,7 +220,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                    <thead>
 		                      <tr>
 		                      	<th>Invoice No</th>
-		                      	<th>Receivable Amount</th>
+		                      	<th style="text-align: right;">Receivable Amount</th>
 		                      </tr>
 		                    </thead>
 		                    <tbody class="unpaid-items">
@@ -236,7 +236,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                    	
 		                    				<tr>
 		                    					<td><?=$unpaid_money_receipt->invoice_number?></td>
-		                    					<td><?=$unpaid_money_receipt->amount?></td>
+		                    					<td style="text-align: right;"><?=number_format($unpaid_money_receipt->amount,2,'.','');?></td>
 		                    				</tr>
 		                    	<?php			
 		                    			}
@@ -247,7 +247,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                    <tfoot>
 		                    	<tr>
 		                    		<td colspan="2" style="background: #3c89bd14;text-align: right;">
-		                    			Total :: <span id="invoice_total_amount"><?=$total_amount?></span>
+		                    			Total :: <span id="invoice_total_amount"><?=number_format($total_amount,2,'.','')?></span>
 		                    		</td>
 		                    	</tr>
 		                    </tfoot>
@@ -326,21 +326,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
 					if ( preBalance >= value ){
 
-						var data = "<tr><td><input name='sm_invnumber[]' value='"+ $.trim(tableData[0]) +"' style='width: 97%;padding: 3px;border: 1px solid #cccccca3;' readonly></td><td><input name='sm_amount[]' value='"+ value +"' style='width: 97%; text-align: right;    padding: 3px;border: 1px solid #cccccca3;' readonly ></td></tr>";
+						var data = "<tr><td><input name='sm_invnumber[]' value='"+ $.trim(tableData[0]) +"' style='width: 97%;padding: 3px;border: 1px solid #cccccca3;' readonly></td><td><input name='sm_amount[]' value='"+ value.toFixed(2) +"' style='width: 97%; text-align: right;    padding: 3px;border: 1px solid #cccccca3;' readonly ></td></tr>";
 						$("#allocate-invoice").append(data);
 
 						var balance = Math.round( (preBalance - value) * 100)/100;
 				    	document.getElementById("balance").value = balance;
-				    	document.getElementById("total-amount").value = Math.round( (value + total)* 100)/100;
+				    	document.getElementById("total-amount").value = (Math.round( (value + total)* 100)/100).toFixed(2);
 
 					}else if (preBalance < value && preBalance!=0){
 
-						var data = "<tr><td><input name='sm_invnumber[]' value='"+ $.trim(tableData[0]) +"' style='width: 97%;padding: 3px;border: 1px solid #cccccca3;' readonly></td><td><input name='sm_amount[]' value='"+ preBalance  +"' style='width: 97%; text-align: right;    padding: 3px;border: 1px solid #cccccca3;' readonly ></td></tr>";
+						var data = "<tr><td><input name='sm_invnumber[]' value='"+ $.trim(tableData[0]) +"' style='width: 97%;padding: 3px 8px;border: 1px solid #cccccca3;' readonly></td><td><input name='sm_amount[]' value='"+ preBalance.toFixed(2)  +"' style='width: 97%; text-align: right;    padding: 3px 8px;border: 1px solid #cccccca3;' readonly ></td></tr>";
 						$("#allocate-invoice").append(data);
 
 						var balance = Math.round( (preBalance - preBalance)*100)/100;
 						document.getElementById("balance").value = balance;
-						document.getElementById("total-amount").value = total + preBalance ;
+						document.getElementById("total-amount").value = (total + preBalance).toFixed(2) ;
 		
 					}else{
 						alert("Amount is not sufficient");
