@@ -87,18 +87,17 @@ use yii\helpers\ArrayHelper;
 		        							<td><?=$value->net_amount?></td>
 		        							<td><?=$value->status?></td>
 		        							<td>
-
-		        								<?php
-		        									if($value->status == 'open')
-		        									{
-		        								?>		
+			        							<?php
+			        								if($value->status == 'open')
+			        								{
+			        							?>		        									
 			        								<a class="btn btn-xs btn-success waves-effect" href="<?= Url::toRoute(['/money-recipt/approved','id' => $value->id]); ?>" data-pjax="0" onclick="return confirm(&quot;Are you sure you want to approved this money receipt?&quot;) ">Approve</a>
 
 			        								<a class="btn btn-xs btn-danger waves-effect" href="<?= Url::toRoute(['/money-recipt/cancel','id' => $value->id]); ?>" data-pjax="0" onclick="return confirm(&quot;Are you sure you want to cancel this money receipt?&quot;) ">Cancel</a>
-
 			        							<?php
-		        									}
-		        								?>	
+			        								}
+			        							?>	
+			        							
 		        							</td>
 		        						</tr>
 

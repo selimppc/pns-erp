@@ -60,7 +60,7 @@ class TransactionCode extends \yii\db\ActiveRecord
     {
         return [
             [['type','code','title','last_number','increment'],'required'],
-            [['code'],'unique'],
+           # [['code'],'unique'],
             [['branch_id', 'created_by', 'updated_by'], 'integer'],
             [['last_number', 'increment'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
@@ -91,15 +91,21 @@ class TransactionCode extends \yii\db\ActiveRecord
     }
 
     // Generate Transaction Number :: Parameter is code
-    public function generate_transaction_number($type=''){
+    public function generate_transaction_number($code='',$type=''){
 
-        $transaction_data = TransactionCode::find()->where(['code' => $type])->one();
+        if(!empty($type))
+        {
+            $transaction_data = TransactionCode::find()->where(['code' => $code])->andWhere(['type' => $type])->one();
+        }else{
+            $transaction_data = TransactionCode::find()->where(['code' => $code])->one();    
+        }
+        
 
         if(!empty($transaction_data)){
 
             $number = str_pad($transaction_data->last_number+$transaction_data->increment,8,"0",STR_PAD_LEFT);
 
-            $invoice_number = $type.$number;
+            $invoice_number = $code.$number;
 
             return $invoice_number;
 
@@ -111,9 +117,15 @@ class TransactionCode extends \yii\db\ActiveRecord
 
 
     // Update Transaction Number :: Parameter is code
-    public function update_transaction_number($type=''){
+    public function update_transaction_number($code='',$type=''){
 
-        $po_transaction_data = TransactionCode::find()->where(['code' => $type])->one();
+        if(!empty($type))
+        {   
+            $po_transaction_data = TransactionCode::find()->where(['code' => $code])->andWhere(['type' => $type])->one();
+        }else{
+            $po_transaction_data = TransactionCode::find()->where(['code' => $code])->one();    
+        }
+
 
         $po_transaction_data->last_number = $po_transaction_data->last_number + $po_transaction_data->increment;
 

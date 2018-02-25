@@ -45,6 +45,7 @@ class SmInvoiceAllocation extends \yii\db\ActiveRecord
     {
         return [
             'sm_head_id' => Yii::t('app', 'Sm Head id'),
+            'sm_number' => Yii::t('app','Sm Number'),
             'invoice_number' => Yii::t('app', 'Invoice Number'),
             'amount' => Yii::t('app', 'Amount'),
             'balance_amount' => Yii::t('app', 'Balance Amount')

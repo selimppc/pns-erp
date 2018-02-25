@@ -140,7 +140,7 @@ class MoneyReciptController extends Controller{
     {
 
         // Generate Transaction Code
-        $receipt_number = TransactionCode::generate_transaction_number('MR--');
+        $receipt_number = TransactionCode::generate_transaction_number('MR--','MONEY RECEIPT');
 
         $data = VwSmCustomerReceivable::find()->where(['sm_head_id' => $sm_head_id])->andWhere(['customer_id' => $customer_id])->one();
 
@@ -199,12 +199,13 @@ class MoneyReciptController extends Controller{
                         }
 
                         $model->net_amount = $net_amount;
+                        $model->sign = '-1';
 
                         if($model->save())
                         {
 
                             // Update money receipt
-                            $update_money_receipt = TransactionCode::update_transaction_number('MR--');
+                            $update_money_receipt = TransactionCode::update_transaction_number('MR--','MONEY RECEIPT');
 
 
                             // sm_invoice_allocation
@@ -216,6 +217,7 @@ class MoneyReciptController extends Controller{
                                     $sm_invoice_allocation = new SmInvoiceAllocation();
 
                                     $sm_invoice_allocation->sm_head_id = $model->id;
+                                    $sm_invoice_allocation->sm_number = $model->sm_number;
                                     $sm_invoice_allocation->invoice_number = $all_post['sm_invnumber'][$i];
                                     $sm_invoice_allocation->amount = $all_post['sm_amount'][$i];
 
@@ -224,6 +226,8 @@ class MoneyReciptController extends Controller{
                             }
 
 
+                        }else{
+                            exit('ok');
                         }
                         // Set success data
                         \Yii::$app->getSession()->setFlash('success', 'Successfully Inserted');
