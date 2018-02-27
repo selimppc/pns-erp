@@ -25,6 +25,8 @@ class VwSmMrReceive extends \yii\db\ActiveRecord
     {
         return [
             'invoice_number' => Yii::t('app', 'Invoice Number'),
+            'note' => Yii::t('app', 'Note'),
+            'date' => Yii::t('app', 'Date'),
             'customer_id' => Yii::t('app', 'Customer Id'),
             'branch_id' => Yii::t('app', 'Branch Id'),
             'currency_id' => Yii::t('app','Currency Id'),

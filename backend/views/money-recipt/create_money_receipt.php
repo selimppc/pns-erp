@@ -8,6 +8,7 @@ use backend\models\Currency;
 use backend\models\AmCoa;
 
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
 use yii\helpers\ArrayHelper;
 
 
@@ -151,13 +152,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		        			<div class="col-md-6">
 
-		        				<?= $form->field($model, 'date',
-				                	['options' => [
-				                    'class' => 'form-group form-material floating',
-				                    'data-plugin' => 'formMaterial'
-				                	],
-				                	 "template" => "<label> Receipt Date </label>\n{input}\n{hint}\n{error}"
-				                	])->textInput(['maxlength' => true,'readonly' => true]) ?>
+				                <?php
+
+					                echo $form->field($model, 'date',[
+					                		 "template" => "<label> Receipt Date </label>\n{input}\n{hint}\n{error}",
+					                	])->widget(DatePicker::classname(), [
+					                        'value' => date('Y-m-d'),
+					                        'options' => [
+					                            'placeholder' => 'Enter Date ...',
+					                            'value' => !empty($modelSmHead->date)?$modelSmHead->date:date('Y-m-d'),
+
+					                        ],
+					                        
+					                        'pluginOptions' => [
+
+					                            'autoclose'=>true,
+					                            'format' => 'yyyy-m-dd',
+					                            'todayHighlight' => true
+					                        ]
+					                    ]);
+
+					                    
+					                ?>	
 
 
 				                <?= $form->field($model, 'am_coa_id',[
@@ -220,6 +236,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		                    <thead>
 		                      <tr>
 		                      	<th>Invoice No</th>
+		                      	<th>Note</th>
+		                      	<th>Date</th>
 		                      	<th style="text-align: right;">Receivable Amount</th>
 		                      </tr>
 		                    </thead>
@@ -236,6 +254,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		                    	
 		                    				<tr>
 		                    					<td><?=$unpaid_money_receipt->invoice_number?></td>
+		                    					<td><?=$unpaid_money_receipt->note?></td>
+		                    					<td><?=$unpaid_money_receipt->date?></td>
 		                    					<td style="text-align: right;"><?=number_format($unpaid_money_receipt->amount,2,'.','');?></td>
 		                    				</tr>
 		                    	<?php			
@@ -246,7 +266,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                    </tbody>
 		                    <tfoot>
 		                    	<tr>
-		                    		<td colspan="2" style="background: #3c89bd14;text-align: right;">
+		                    		<td colspan="4" style="background: #3c89bd14;text-align: right;">
 		                    			Total :: <span id="invoice_total_amount"><?=number_format($total_amount,2,'.','')?></span>
 		                    		</td>
 		                    	</tr>
@@ -311,7 +331,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 			    var total = Math.round((document.getElementById("total-amount").value)*100)/100;
 
-			    var value = Math.round(($.trim(tableData[1]))* 100 )/100;
+			    var value = Math.round(($.trim(tableData[3]))* 100 )/100;
 
 			    var preBalance = Math.round((document.getElementById("balance").value)*100)/100 ; 
 
@@ -388,6 +408,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		border: none !important;
 	}
 
+	#smhead-date-kvdate{
+		width: 60%;
+	}
 </style>
 <?php Pjax::end(); ?>
 
