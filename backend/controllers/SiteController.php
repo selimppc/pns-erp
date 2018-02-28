@@ -78,11 +78,17 @@ class SiteController extends Controller
         $last_date = date('Y-m-d', strtotime("-1 days"));
         $last_15_date = date('Y-m-d', strtotime('-15 days'));
 
+        // Sales data
         $todays_sale = SmHead::total_sales_value($current_date) ;
         $this_month_sale = SmHead::total_sales_value($start_date,$end_date);
         $last_15_days_sale = SmHead::total_sales_value($last_15_date,$last_date);
         $all_sales = SmHead::total_sales_value();
 
+        // Collection data
+        $all_collection = SmHead::total_collection();
+        $todays_collection = SmHead::total_collection($current_date) ;
+        $this_month_collection = SmHead::total_collection($start_date,$end_date);
+        $last_15_days_collection = SmHead::total_collection($last_15_date,$last_date);
 
         // Dhaka branch quantity
         $dhaka_branch_qty = VwImStockView::total_qty_branch(1);    
@@ -115,7 +121,11 @@ class SiteController extends Controller
             'todays_delivered' => $todays_delivered,
             'this_month_delivered' => $this_month_delivered,
             'pending_delivered' => $pending_delivered,
-            'total_due' => $total_due
+            'total_due' => $total_due,
+            'all_collection' => $all_collection,
+            'todays_collection' => $todays_collection,
+            'this_month_collection' => $this_month_collection,
+            'last_15_days_collection' => $last_15_days_collection
         ]);
     }
 

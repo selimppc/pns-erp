@@ -39,7 +39,7 @@
               &#2547;
               Today's Collection
             </div>
-            <span class="float-right white font-size-30">0.00</span>
+            <span class="float-right white font-size-30"><?=number_format($todays_collection,2);?></span>
           </div>
           <div class="mb-20 white">
             <i class="icon md-long-arrow-up white font-size-16"></i> Today's collection of <?=date('F');?>
@@ -88,7 +88,7 @@
                   &#2547;
                   Last 15 days collection
                 </div>
-                <span class="float-right white font-size-30">0.00</span>
+                <span class="float-right white font-size-30"><?=number_format($last_15_days_collection,2);?></span>
               </div>
               <div class="mb-20 white">
                 <!-- <i class="icon md-long-arrow-up white font-size-16"></i> Last 15 days sales -->
@@ -128,7 +128,7 @@
                 <div class="white float-left py-10">
                   &#2547; This month collection
                 </div>
-                <span class="float-right white font-size-30">0.00</span>
+                <span class="float-right white font-size-30"><?=number_format($this_month_collection,2);?></span>
               </div>
               <div class="mb-20 white">
                 <i class="icon md-long-arrow-up white font-size-16"></i>
@@ -168,7 +168,7 @@
                 <div class="white float-left py-10">
                   &#2547; Total collection
                 </div>
-                <span class="float-right white font-size-30">0.00</span>
+                <span class="float-right white font-size-30"><?=number_format($all_collection,2);?></span>
               </div>
               <div class="mb-20 white">
                 <i class="icon md-long-arrow-up white font-size-16"></i>

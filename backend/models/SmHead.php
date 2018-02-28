@@ -370,7 +370,32 @@ class SmHead extends \yii\db\ActiveRecord
         return $total_delievered_qty;
     }
 
-    public static function total_sales_value($date1='',$date2='')
+
+    public static function total_collection($date1='', $date2='')
+    {
+       if(!empty($date1) && !empty($date2))
+        {
+
+            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && doc_type ='receipt' && date BETWEEN '$date1' AND '$date2'")
+            ->queryScalar();
+
+        }elseif(!empty($date1))
+        {
+
+            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && doc_type ='receipt' && date = '$date1'")
+            ->queryScalar();
+
+        }else{
+
+            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && doc_type ='receipt'")
+            ->queryScalar();
+
+        }
+
+        return $total_collection;  
+    }
+
+    public static function total_sales_value($date1='', $date2='')
     {
 
         if(!empty($date1) && !empty($date2))
