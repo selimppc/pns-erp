@@ -168,7 +168,7 @@ class MoneyReciptController extends Controller{
 
 
             // get due money receipt list
-            $unpaid_money_received = VwSmMrReceive::find()->where(['customer_id' => $customer_id])->andWhere(['branch_id' => $branch_id])->all();
+            $unpaid_money_received = VwSmMrReceive::find()->where(['customer_id' => $customer_id])->orderBy(['invoice_number'=>SORT_ASC])->all();
 
 
 
