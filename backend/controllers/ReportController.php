@@ -196,6 +196,13 @@ class ReportController extends Controller
 
     }
 
+
+    public function actionTotalDue()
+    {
+
+        return $this->render('total_due');
+    }
+
     public function actionJournalTransaction(){
 
         if(isset(\Yii::$app->params['report_journal_transaction']) && !empty(\Yii::$app->params['report_journal_transaction'])){

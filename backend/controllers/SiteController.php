@@ -10,6 +10,7 @@ use common\models\LoginForm;
 use backend\models\SmHead;
 use backend\models\VwImStockView;
 use backend\models\PpPurchaseHead;
+use backend\models\VwSmMrReceive;
 
 /**
  * Site controller
@@ -92,6 +93,9 @@ class SiteController extends Controller
         // PO approved qty
         $po_approved_qty = PpPurchaseHead::total_po_qty('approved');
 
+        // TODO :: Find total due
+        $total_due = VwSmMrReceive::total_due();
+
 
         // Delivery order
 
@@ -110,7 +114,8 @@ class SiteController extends Controller
             'po_approved_qty' => $po_approved_qty,
             'todays_delivered' => $todays_delivered,
             'this_month_delivered' => $this_month_delivered,
-            'pending_delivered' => $pending_delivered
+            'pending_delivered' => $pending_delivered,
+            'total_due' => $total_due
         ]);
     }
 

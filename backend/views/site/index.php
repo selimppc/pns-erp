@@ -180,6 +180,27 @@
           <!-- End Widget Linearea One -->
         </div>
 
+         <div class="col-xl-4 col-md-4">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+            <a href="<?= Url::toRoute(['/report/total-due']); ?>" class="card-block p-20 pt-10" style="background: #00BCD4;">
+            
+              <div class="clearfix">
+                <div class="white float-left py-10">
+                  &#2547; Total Due
+                </div>
+                <span class="float-right white font-size-30"><?=number_format($total_due,2)?></span>
+              </div>
+              <div class="mb-20 white">
+                <i class="icon md-long-arrow-up white font-size-16"></i>
+                Total due of the entire system
+              </div>
+              
+            </a>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
     
 
         <div class="col-xl-4 col-md-4">
