@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 use backend\models\SmInvoiceAllocation;
 use backend\models\CodesParam;
 use backend\models\Branch;
-
+use backend\models\VwSmMrReceive;
 
 	$this->title = Yii::t('app', 'Money Recipt');
 	$this->params['breadcrumbs'][] = $this->title;
@@ -109,7 +109,15 @@ use backend\models\Branch;
                     'customer_address',
                     'customer_cell',
                     'customer_phone',
-                    'receivable_amount',
+                    [
+                      'attribute' => 'receivable_amount',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                         $total_receivable_amount = VwSmMrReceive::total_receivable_amount($model->customer_id);
+                          return $total_receivable_amount;
+                      },
+                   ],
+                   
                     [
                         'header' => 'View Money Receipt',
                         'class' => 'yii\grid\ActionColumn',

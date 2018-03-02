@@ -35,6 +35,13 @@ class VwSmMrReceive extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function total_receivable_amount($customer_id='')
+    {
+        $total_receivable_amount = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{vw_sm_mr_receive}} WHERE customer_id = '$customer_id'")
+            ->queryScalar();
+
+        return $total_receivable_amount; 
+    }
 
     public static function total_due()
     {

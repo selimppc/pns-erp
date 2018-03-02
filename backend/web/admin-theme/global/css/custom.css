@@ -525,3 +525,16 @@ a.btn{
 .custom-col-06 button{
     width: 100%;
 }
+
+.pagination{
+
+}
+
+.pagination li{
+    padding: 5px;
+}
+
+.pagination li.active a{
+    color: #36459b;
+    font-weight: 700;
+}

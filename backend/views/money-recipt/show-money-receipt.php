@@ -59,8 +59,8 @@ use yii\helpers\ArrayHelper;
 		        	<table class="table table-striped table-bordered">
 		        		<thead>
 		        			<tr>
-		        				<td>Sales Number</td>
-		        				<td>Sales Date</td>
+		        				<td>Money Receipt Number</td>
+		        				<td>Money Receipt Date</td>
 		        				<td>Pay Terms</td>
 		        				<td>Total Amount</td>
 		        				<td>Total Txt Amt</td>
