@@ -202,10 +202,10 @@ class ReportController extends Controller
     {
 
         $total_due = VwSmMrReceive::total_due_list();
-        echo '<pre>';
-        print_r($total_due);
-        exit();
-        return $this->render('total_due');
+        
+        return $this->render('total_due',[
+                'total_due' => $total_due
+            ]);
     }
 
     public function actionJournalTransaction(){

@@ -73,9 +73,8 @@ class VwSmMrReceive extends \yii\db\ActiveRecord
             }
         }
 
-        echo '<pre>';
-        print_r($response);
-        exit();
+
+          return $response;  
     }
 
 
@@ -101,7 +100,7 @@ class VwSmMrReceive extends \yii\db\ActiveRecord
                     $response[$key]['invoice_number'] = $value['invoice_number'];
                     $response[$key]['date'] = $value['date'];
                     $response[$key]['product_id'] = $value['product_id'];
-                    $response[$key]['product_name'] = isset($product_data)?$product_data['model']:'';
+                    $response[$key]['product_model'] = isset($product_data)?$product_data['model']:'';
                     $response[$key]['quantity'] = $value['quantity'];
                     $response[$key]['rate'] = $value['rate'];
                     $response[$key]['row_amount'] = $value['row_amount'];
