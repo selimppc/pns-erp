@@ -14,6 +14,7 @@ use backend\models\Chartofaccounts;
 use backend\models\Transaction;
 use backend\models\PurchaseMaster;
 use backend\models\SmHead;
+USE backend\models\VwSmMrReceive;
 
 /**
  * ReportController implements the CRUD actions for ProductMaster model.
@@ -200,6 +201,10 @@ class ReportController extends Controller
     public function actionTotalDue()
     {
 
+        $total_due = VwSmMrReceive::total_due_list();
+        echo '<pre>';
+        print_r($total_due);
+        exit();
         return $this->render('total_due');
     }
 
