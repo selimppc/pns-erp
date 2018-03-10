@@ -204,20 +204,27 @@ class SmHead extends \yii\db\ActiveRecord
         }
 
 
-        /*if(!empty($result))
-        {
-            foreach($result as $key => $values)
-            {
-
-                $product_data = Product::find()->where(['id'=> $values['product_id']])->one();
-
-                $response[$key]['serial'] = $key+1;
-                $response[$key]['product_id'] = $values['product_id'];
-                $response[$key]['product_model'] = !empty($product_data)?$product_data->model:'';
-            }
-        }*/
 
          return $response;
+    }
+
+
+    public static function collection_report($date1 = '', $date2 = '')
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand("
+            SELECT *
+            FROM sm_head 
+            INNER JOIN sm_invoice_allocation ON sm_head.id = sm_invoice_allocation.sm_head_id
+            WHERE status ='confirmed' && doc_type = 'receipt' && date BETWEEN '$date1' AND '$date2'
+            ORDER BY customer_id ASC");
+
+        $result = $command->queryAll();
+
+        echo '<pre>';
+        print_r($result);
+
+
     }
 
     public static function customer_list($data = '',$sales_person_id)
@@ -401,18 +408,18 @@ class SmHead extends \yii\db\ActiveRecord
         if(!empty($date1) && !empty($date2))
         {
 
-            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && date BETWEEN '$date1' AND '$date2'")
+            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && doc_type = 'sales' && date BETWEEN '$date1' AND '$date2'")
             ->queryScalar();
 
         }elseif(!empty($date1))
         {
 
-            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && date = '$date1'")
+            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && doc_type = 'sales' && date = '$date1'")
             ->queryScalar();
 
         }else{
 
-            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed'")
+            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && doc_type = 'sales'")
             ->queryScalar();
 
         }

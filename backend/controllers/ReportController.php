@@ -65,6 +65,13 @@ class ReportController extends Controller
             ]);
     }
 
+
+    public function actionTodaysCollection()
+    {
+        $collection_report = SmHead::collection_report('2018-01-01','2018-04-01');
+    }
+
+
     public function actionLast15Days()
     {
 

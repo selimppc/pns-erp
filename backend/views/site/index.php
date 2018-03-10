@@ -50,33 +50,28 @@
       <!-- End Widget Linearea One -->
     </div>
 
-    <?php
-          if(isset($last_15_days_sale))
-          {
-        ?>
-            <div class="col-xl-4 col-md-4">
-              <!-- Widget Linearea One-->
-              <div class="card card-shadow" id="widgetLineareaOne">
-                <a href="<?= Url::toRoute(['/report/last-15-days']); ?>" class="card-block p-20 pt-10" style="background: #D81B60;">
-                  <div class="clearfix">
-                    <div class="white float-left py-10">
-                      &#2547;
-                      Last 15 days sales
-                    </div>
-                    <span class="float-right white font-size-30"><?=number_format($last_15_days_sale,2)?></span>
-                  </div>
-                  <div class="mb-20 white">
-                    <!-- <i class="icon md-long-arrow-up white font-size-16"></i> Last 15 days sales -->
-                  </div>
-                  <span class="white float-right">Details</span>
-                </a>
-              </div>
-              <!-- End Widget Linearea One -->
+    
+    <div class="col-xl-4 col-md-4">
+      <!-- Widget Linearea One-->
+      <div class="card card-shadow" id="widgetLineareaOne">
+        <a href="<?= Url::toRoute(['/report/last-15-days']); ?>" class="card-block p-20 pt-10" style="background: #D81B60;">
+          <div class="clearfix">
+            <div class="white float-left py-10">
+              &#2547;
+              Last 15 days sales
             </div>
+            <span class="float-right white font-size-30"><?=number_format($last_15_days_sale,2)?></span>
+          </div>
+          <div class="mb-20 white">
+            <!-- <i class="icon md-long-arrow-up white font-size-16"></i> Last 15 days sales -->
+          </div>
+          <span class="white float-right">Details</span>
+        </a>
+      </div>
+      <!-- End Widget Linearea One -->
+    </div>
 
-        <?php
-          }
-        ?>
+       
 
 
         <div class="col-xl-4 col-md-4">
