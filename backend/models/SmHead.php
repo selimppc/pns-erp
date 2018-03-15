@@ -213,21 +213,67 @@ class SmHead extends \yii\db\ActiveRecord
     {
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("
-            SELECT *
+            SELECT sm_head.sm_number,sm_head.customer_id,sm_head.date,sm_invoice_allocation.amount,sm_invoice_allocation.invoice_number,sm_head.am_coa_id,sm_head.check_number
             FROM sm_head 
             INNER JOIN sm_invoice_allocation ON sm_head.id = sm_invoice_allocation.sm_head_id
             WHERE status ='confirmed' && doc_type = 'receipt' && date BETWEEN '$date1' AND '$date2'
-            ORDER BY customer_id ASC");
+            ORDER BY sm_head.id DESC");
 
         $result = $command->queryAll();
 
+        $customer_list_array = [];
+
+        if(!empty($result))
+        {
+            // push sales person id 
+            foreach($result as $key => $values)
+            {
+                array_push($customer_list_array,$values['customer_id']);
+            }
+        }
+
+        if(count($customer_list_array) > 0)
+        {
+            foreach(array_values(array_unique($customer_list_array)) as $key => $values)
+            {
+                $response[$key]['serial'] = $key+1;
+                $response[$key]['customer_id'] = $values;
+                $response[$key]['order_list'] = self::money_receipt($result,$values);
+            }
+        }
         echo '<pre>';
-        print_r($result);
+        print_r($response);
 
 
     }
 
-    public static function customer_list($data = '',$sales_person_id)
+
+    public static function money_receipt($data = '', $customer_id )
+    {
+        $response = [];
+        $result = [];
+
+        if(!empty($data))
+        {
+            foreach($data as $key => $value)
+            {
+                if($value['customer_id'] == $customer_id)
+                {
+                    $response[$key]['money_receipt'] = $value['sm_number'];
+                    $response[$key]['date'] = $value['date'];
+                    $response[$key]['bank_or_cash'] = $value['am_coa_id'];
+                    $response[$key]['check_number'] = $value['check_number'];
+                    $response[$key]['invoice_number'] = $value['invoice_number'];
+                    $response[$key]['amount'] = $value['amount'];
+                }
+            }
+        }
+
+        return $response;
+    }
+
+
+    public static function customer_list($data = '', $sales_person_id)
     {
         $response = [];
 
