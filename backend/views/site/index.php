@@ -33,7 +33,7 @@
     <div class="col-xl-4 col-md-4">
       <!-- Widget Linearea One-->
       <div class="card card-shadow" id="widgetLineareaOne">
-        <a href="#" class="card-block p-20 pt-10" style="background: #9C27B0;">
+        <a href="<?= Url::toRoute(['/report/todays-collection']); ?>" class="card-block p-20 pt-10" style="background: #9C27B0;">
           <div class="clearfix">
             <div class="white float-left py-10">
               &#2547;
@@ -77,7 +77,7 @@
         <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <a href="#" class="card-block p-20 pt-10" style="background: #673AB7;">
+            <a href="<?= Url::toRoute(['/report/last-15-days-collection']); ?>" class="card-block p-20 pt-10" style="background: #673AB7;">
               <div class="clearfix">
                 <div class="white float-left py-10">
                   &#2547;
@@ -118,7 +118,7 @@
         <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <a href="#" class="card-block p-20 pt-10" style="background: #3F51B5;">
+            <a href="<?= Url::toRoute(['/report/collection-report']); ?>" class="card-block p-20 pt-10" style="background: #3F51B5;">
               <div class="clearfix">
                 <div class="white float-left py-10">
                   &#2547; This month collection

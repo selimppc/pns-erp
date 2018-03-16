@@ -68,7 +68,55 @@ class ReportController extends Controller
 
     public function actionTodaysCollection()
     {
-        $collection_report = SmHead::collection_report('2018-01-01','2018-04-01');
+
+        if(isset($_GET['date']) && !empty($_GET['date']))
+        {
+            $current_date = $_GET['date'];
+
+            $label = "Sales collection of ".date('dS F Y');
+        }else{
+            $current_date = Date('Y-m-d');
+
+            $label = "Today's sales collection of ".date('F');    
+        }
+        
+        $collection_report = SmHead::collection_report($current_date);
+
+        $title = 'Sales collection report';
+        
+        return $this->render('collection_report',[
+                'data' => $collection_report,
+                'title' => $title,
+                'label' => $label
+            ]);
+    }
+
+
+    public function actionCollectionReport()
+    {
+        $current_date = Date('Y-m-d');
+
+        if(isset($_POST['monthly-wise']) && !empty($_POST['from_date']) && !empty($_POST['to_date']))
+        {
+            $start_date = $_POST['from_date'];
+            $end_date = $_POST['to_date'];
+
+            $label = "Sales Report of ".date('jS M Y',strtotime($start_date)). ' to '.date('jS M Y',strtotime($end_date));
+        }else{
+            $start_date = date('Y-m-01',strtotime('this month'));
+            $end_date = date('Y-m-t',strtotime('this month'));   
+
+            $label = "Sales Report of ".date('F'); 
+        }
+            
+        $collection_report = SmHead::collection_report($start_date,$end_date);
+        $title = 'Sales collection report';
+
+        return $this->render('collection_report',[
+                'data' => $collection_report,
+                'title' => $title,
+                'label' => $label
+            ]);
     }
 
 
@@ -78,6 +126,16 @@ class ReportController extends Controller
         $title = 'Last 15 days report';
 
         return $this->render('last_15_days',[
+                'title' => $title
+            ]);
+    }
+
+    public function actionLast15DaysCollection()
+    {
+
+        $title = 'Last 15 days collection report';
+
+        return $this->render('last_15_days_collection',[
                 'title' => $title
             ]);
     }

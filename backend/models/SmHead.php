@@ -211,15 +211,36 @@ class SmHead extends \yii\db\ActiveRecord
 
     public static function collection_report($date1 = '', $date2 = '')
     {
-        $connection = Yii::$app->getDb();
-        $command = $connection->createCommand("
-            SELECT sm_head.sm_number,sm_head.customer_id,sm_head.date,sm_invoice_allocation.amount,sm_invoice_allocation.invoice_number,sm_head.am_coa_id,sm_head.check_number
-            FROM sm_head 
-            INNER JOIN sm_invoice_allocation ON sm_head.id = sm_invoice_allocation.sm_head_id
-            WHERE status ='confirmed' && doc_type = 'receipt' && date BETWEEN '$date1' AND '$date2'
-            ORDER BY sm_head.id DESC");
 
-        $result = $command->queryAll();
+        $response = [];
+
+        if(!empty($date1) && !empty($date2))
+        {
+
+            $connection = Yii::$app->getDb();
+            $command = $connection->createCommand("
+                SELECT sm_head.sm_number,sm_head.customer_id,sm_head.date,sm_invoice_allocation.amount,sm_invoice_allocation.invoice_number,sm_head.am_coa_id,sm_head.check_number
+                FROM sm_head 
+                INNER JOIN sm_invoice_allocation ON sm_head.id = sm_invoice_allocation.sm_head_id
+                WHERE status ='confirmed' && doc_type = 'receipt' && date BETWEEN '$date1' AND '$date2'
+                ORDER BY sm_head.id DESC");
+
+            $result = $command->queryAll();
+
+        }else{
+
+            $connection = Yii::$app->getDb();
+            $command = $connection->createCommand("
+                SELECT sm_head.sm_number,sm_head.customer_id,sm_head.date,sm_invoice_allocation.amount,sm_invoice_allocation.invoice_number,sm_head.am_coa_id,sm_head.check_number
+                FROM sm_head 
+                INNER JOIN sm_invoice_allocation ON sm_head.id = sm_invoice_allocation.sm_head_id
+                WHERE status ='confirmed' && doc_type = 'receipt' && date = '$date1'
+                ORDER BY sm_head.id DESC");
+
+            $result = $command->queryAll();
+
+        }
+        
 
         $customer_list_array = [];
 
@@ -236,14 +257,16 @@ class SmHead extends \yii\db\ActiveRecord
         {
             foreach(array_values(array_unique($customer_list_array)) as $key => $values)
             {
+                $customer_data = Yii::$app->db->createCommand("SELECT * FROM {{customer}} WHERE id ='$values'")->queryOne();
+
                 $response[$key]['serial'] = $key+1;
                 $response[$key]['customer_id'] = $values;
+                $response[$key]['customer_name'] = $customer_data['name'];
                 $response[$key]['order_list'] = self::money_receipt($result,$values);
             }
         }
-        echo '<pre>';
-        print_r($response);
-
+        
+        return $response;
 
     }
 
@@ -259,9 +282,13 @@ class SmHead extends \yii\db\ActiveRecord
             {
                 if($value['customer_id'] == $customer_id)
                 {
+                    $am_coa_id = $value['am_coa_id'];
+                    $am_coa_data = Yii::$app->db->createCommand("SELECT * FROM {{am_coa}} WHERE id ='$am_coa_id'")->queryOne();
+
                     $response[$key]['money_receipt'] = $value['sm_number'];
                     $response[$key]['date'] = $value['date'];
-                    $response[$key]['bank_or_cash'] = $value['am_coa_id'];
+                    $response[$key]['bank_or_cash_id'] = $value['am_coa_id'];
+                    $response[$key]['bank_or_cash'] = !empty($am_coa_data)?$am_coa_data['title']:'';
                     $response[$key]['check_number'] = $value['check_number'];
                     $response[$key]['invoice_number'] = $value['invoice_number'];
                     $response[$key]['amount'] = $value['amount'];
