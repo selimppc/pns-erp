@@ -107,6 +107,8 @@ class SmHeadSearch extends SmHead
 
         if($sales_type == 'direct_sale'){
             $query->andFilterWhere(['like', 'sm_number', 'DS--']);
+        }else if($sales_type == 'return'){
+            $query->andFilterWhere(['like', 'sm_number', 'SR--']);
         }else{
             $query->andFilterWhere(['like', 'sm_number', 'IN--']);
         }

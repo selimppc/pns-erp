@@ -88,6 +88,7 @@ class SmHead extends \yii\db\ActiveRecord
     {
         return [
             [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id','pay_terms','sales_person_id'],'required','on'=>'create'],
+            [['sm_number'],'required','on'=>'sales_return'],
             [['sm_number','date','customer_id','doc_type','currency_id','exchange_rate','branch_id','prime_amount','net_amount', 'pay_terms'],'required','on'=>'create_direct_sales'],
 
             [['sm_number','date','customer_id','status','branch_id','currency_id','exchange_rate','money_receipt_amount','am_coa_id'],'required','on'=>'create_money_receipt'],
