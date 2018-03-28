@@ -170,7 +170,7 @@ class SalesReturnController extends Controller
                                 $sm_batch_sale_model->sm_head_id = $modelSmHead_sales_return->id;
                                 $sm_batch_sale_model->product_id = $sm_d->product_id;
                                 $sm_batch_sale_model->batch_number = $sm_d->batch_number;
-                                $sm_batch_sale_model->expire_date = $modelSmHead_sales_return->date;
+                                $sm_batch_sale_model->expire_date = '2023-01-22';
                                 $sm_batch_sale_model->uom = $sm_d->uom;
                                 $sm_batch_sale_model->quantity = $sm_d->quantity;
                                 $sm_batch_sale_model->bonus_quantity = $sm_d->bonus_quantity;
@@ -253,7 +253,7 @@ class SalesReturnController extends Controller
 
                 // send sales data into the table sm_batch_sale
 
-                $result = \Yii::$app->db->createCommand("CALL sp_sm_order_return_1(:pID, :pUserId)")
+                $result = \Yii::$app->db->createCommand("CALL sp_sm_order_return(:pID, :pUserId)")
                     ->bindValue(':pID' , $model->id )
                     ->bindValue(':pUserId', Yii::$app->user->id)
                     ->execute();

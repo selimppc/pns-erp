@@ -237,7 +237,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a('<span class="btn btn-xs btn-info">Show </span>', $url);
                           },
                           'cancel' => function ($url, $model) {
-                                return $model->status == 'open'?Html::a('Cancel', ['sales-invoice/cancel', 'id' => $model->id], ['class' => 'btn btn-xs btn-danger', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this invoice?") ']):'';
+                                return $model->status == 'open'?Html::a('Cancel', ['sales-return/cancel', 'id' => $model->id], ['class' => 'btn btn-xs btn-danger', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this invoice?") ']):'';
                             },
                     ],
 
@@ -248,7 +248,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       'template' => '{confirm}',
                       'buttons' => [
                           'confirm' => function ($url, $model) {
-                                return $model->status == 'open'?Html::a('Confirm', ['sales-invoice/confirm', 'id' => $model->id], ['class' => 'btn btn-xs btn-primary', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to confirm this invoice?") ']):'';
+                                return $model->status == 'open'?Html::a('Confirm', ['sales-return/confirm', 'id' => $model->id], ['class' => 'btn btn-xs btn-primary', "data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to confirm this invoice?") ']):'';
                             },
                     ],
                     

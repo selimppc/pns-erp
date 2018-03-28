@@ -172,7 +172,7 @@ class GrnController extends Controller
                 // Set up Grn Details data
                 $model->product_id = $transaction_details->product_id;
                 #$model->expire_date = $transaction_head->delivery_date;
-                $model->expire_date = date('Y-m-d', strtotime('+5 years'));
+                $model->expire_date = '2023-01-22';
                 $model->uom = $transaction_details->uom;
                 $model->quantity = $transaction_details->uom_quantity;
                 $model->receive_quantity = $transaction_details->quantity;
