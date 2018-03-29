@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                      <th>Bank/Cash</th>
 		                      <th>Cheque Number</th>
 		                      <th>Invoice Number</th>
+		                      <th>Note</th>
 		                      <th>Total Amount</th>
 		                    </tr>
 		                </thead>
@@ -159,6 +160,24 @@ $this->params['breadcrumbs'][] = $this->title;
 				                                  {
 				                                    foreach($values['order_list'] as $order_data)
 				                                    {
+				                                  ?>
+				                                      <tr>
+				                                          <td><?=$order_data['note']?></td>
+				                                      </tr>
+				                                  <?php    
+				                                    }   
+				                                  }
+				                                ?>
+	                            			</table>
+	                            		</td>
+
+	                            		<td style="padding: 0;border:0;">
+	                            			<table style="width: 100%;height:100%;min-height:100%;text-align: center;">
+	                            				<?php
+				                                  if(count($values['order_list']))
+				                                  {
+				                                    foreach($values['order_list'] as $order_data)
+				                                    {
 				                                    	$total_amount+=$order_data['amount'];
 				                                  ?>
 				                                      <tr>
@@ -175,7 +194,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                    	}
 		                    ?>
 		                    		<tr>
-				                    	<td colspan="7">
+				                    	<td colspan="8">
 				                    		<b>Total</b>
 				                    	</td>
 				                    	<td>

@@ -220,7 +220,7 @@ class SmHead extends \yii\db\ActiveRecord
 
             $connection = Yii::$app->getDb();
             $command = $connection->createCommand("
-                SELECT sm_head.sm_number,sm_head.customer_id,sm_head.date,sm_invoice_allocation.amount,sm_invoice_allocation.invoice_number,sm_head.am_coa_id,sm_head.check_number
+                SELECT sm_head.sm_number,sm_head.customer_id,sm_head.date,sm_invoice_allocation.amount,sm_invoice_allocation.invoice_number,sm_invoice_allocation.note,sm_head.am_coa_id,sm_head.check_number
                 FROM sm_head 
                 INNER JOIN sm_invoice_allocation ON sm_head.id = sm_invoice_allocation.sm_head_id
                 WHERE status ='confirmed' && doc_type = 'receipt' && date BETWEEN '$date1' AND '$date2'
@@ -232,7 +232,7 @@ class SmHead extends \yii\db\ActiveRecord
 
             $connection = Yii::$app->getDb();
             $command = $connection->createCommand("
-                SELECT sm_head.sm_number,sm_head.customer_id,sm_head.date,sm_invoice_allocation.amount,sm_invoice_allocation.invoice_number,sm_head.am_coa_id,sm_head.check_number
+                SELECT sm_head.sm_number,sm_head.customer_id,sm_head.date,sm_invoice_allocation.amount,sm_invoice_allocation.invoice_number,sm_invoice_allocation.note,sm_head.am_coa_id,sm_head.check_number
                 FROM sm_head 
                 INNER JOIN sm_invoice_allocation ON sm_head.id = sm_invoice_allocation.sm_head_id
                 WHERE status ='confirmed' && doc_type = 'receipt' && date = '$date1'
@@ -292,6 +292,7 @@ class SmHead extends \yii\db\ActiveRecord
                     $response[$key]['bank_or_cash'] = !empty($am_coa_data)?$am_coa_data['title']:'';
                     $response[$key]['check_number'] = $value['check_number'];
                     $response[$key]['invoice_number'] = $value['invoice_number'];
+                    $response[$key]['note'] = $value['note'];
                     $response[$key]['amount'] = $value['amount'];
                 }
             }

@@ -282,6 +282,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                      <tr>
 		                      	<th>Invoice No</th>
 		                      	<th>Amount</th>
+		                      	<th>Note</th>
 		                      </tr>
 		                    </thead>
 		                    <tbody id="allocate-invoice">
@@ -346,7 +347,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 					if ( preBalance >= value ){
 
-						var data = "<tr><td><input name='sm_invnumber[]' value='"+ $.trim(tableData[0]) +"' style='width: 97%;padding: 3px;border: 1px solid #cccccca3;' readonly></td><td><input name='sm_amount[]' value='"+ value.toFixed(2) +"' style='width: 97%; text-align: right;    padding: 3px;border: 1px solid #cccccca3;' readonly ></td></tr>";
+						var data = "<tr><td><input name='sm_invnumber[]' value='"+ $.trim(tableData[0]) +"' style='width: 97%;padding: 3px;border: 1px solid #cccccca3;' readonly></td><td><input name='sm_amount[]' value='"+ value.toFixed(2) +"' style='width: 97%; text-align: right;    padding: 3px;border: 1px solid #cccccca3;' readonly ></td><td><input name='sm_note[]' value='"+ $.trim(tableData[1]) +"' style='width: 97%;padding: 3px 8px;border: 1px solid #cccccca3;' readonly></td></tr>";
 						$("#allocate-invoice").append(data);
 
 						var balance = Math.round( (preBalance - value) * 100)/100;
@@ -355,7 +356,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 					}else if (preBalance < value && preBalance!=0){
 
-						var data = "<tr><td><input name='sm_invnumber[]' value='"+ $.trim(tableData[0]) +"' style='width: 97%;padding: 3px 8px;border: 1px solid #cccccca3;' readonly></td><td><input name='sm_amount[]' value='"+ preBalance.toFixed(2)  +"' style='width: 97%; text-align: right;    padding: 3px 8px;border: 1px solid #cccccca3;' readonly ></td></tr>";
+						var data = "<tr><td><input name='sm_invnumber[]' value='"+ $.trim(tableData[0]) +"' style='width: 97%;padding: 3px 8px;border: 1px solid #cccccca3;' readonly></td><td><input name='sm_amount[]' value='"+ preBalance.toFixed(2)  +"' style='width: 97%; text-align: right;    padding: 3px 8px;border: 1px solid #cccccca3;' readonly ></td><td><input name='sm_note[]' value='"+ $.trim(tableData[1]) +"' style='width: 97%;padding: 3px 8px;border: 1px solid #cccccca3;' readonly></td></tr>";
 						$("#allocate-invoice").append(data);
 
 						var balance = Math.round( (preBalance - preBalance)*100)/100;

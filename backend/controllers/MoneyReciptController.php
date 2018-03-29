@@ -220,6 +220,7 @@ class MoneyReciptController extends Controller{
                                     $sm_invoice_allocation->sm_number = $model->sm_number;
                                     $sm_invoice_allocation->invoice_number = $all_post['sm_invnumber'][$i];
                                     $sm_invoice_allocation->amount = $all_post['sm_amount'][$i];
+                                    $sm_invoice_allocation->note = $all_post['sm_note'][$i];
 
                                     $sm_invoice_allocation->save();
                                 }
