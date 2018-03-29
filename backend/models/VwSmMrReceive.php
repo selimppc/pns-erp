@@ -121,10 +121,14 @@ class VwSmMrReceive extends \yii\db\ActiveRecord
 
     public static function total_due()
     {
+        $total_sales_return = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='returned' && doc_type = 'return'")
+            ->queryScalar();
+
+
         $total_due = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{vw_sm_mr_receive}}")
             ->queryScalar();
 
-        return $total_due;    
+        return $total_due - $total_sales_return;    
     }
 
     

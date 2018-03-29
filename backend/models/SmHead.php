@@ -493,8 +493,13 @@ class SmHead extends \yii\db\ActiveRecord
 
         }else{
 
-            $total_sales = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && doc_type = 'sales'")
+            $total_sales_return = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='returned' && doc_type = 'return'")
             ->queryScalar();
+
+            $total_sales_value = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && doc_type = 'sales'")
+            ->queryScalar();
+
+            $total_sales = $total_sales_value - $total_sales_return;
 
         }
 
