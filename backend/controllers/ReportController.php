@@ -130,6 +130,16 @@ class ReportController extends Controller
             ]);
     }
 
+    public function actionLastMonthOfCurrentYear()
+    {
+
+        $title = 'Last Month Of Current Year report';
+
+        return $this->render('last_month_of_current_year',[
+                'title' => $title
+            ]);
+    }
+
     public function actionLast15DaysCollection()
     {
 
@@ -151,7 +161,15 @@ class ReportController extends Controller
             $end_date = $_POST['to_date'];
 
             $label = "Sales Report of ".date('jS M Y',strtotime($start_date)). ' to '.date('jS M Y',strtotime($end_date));
-        }else{
+        }elseif (isset($_GET['first-date']) && isset($_GET['last-date'])) {
+            
+            $start_date = $_GET['first-date'];
+            $end_date = $_GET['last-date'];   
+
+            $label = "Sales Report of ".date('F Y', strtotime($start_date));
+
+        }
+        else{
             $start_date = date('Y-m-01',strtotime('this month'));
             $end_date = date('Y-m-t',strtotime('this month'));   
 

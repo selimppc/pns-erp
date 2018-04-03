@@ -65,9 +65,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
-
-        // Calculate todays & current month sales
+       // Calculate todays & current month sales
         $current_date = Date('Y-m-d');
         
         $start_date = date('Y-m-01',strtotime('this month'));
@@ -78,12 +76,17 @@ class SiteController extends Controller
         $last_date = date('Y-m-d', strtotime("-1 days"));
         $last_15_date = date('Y-m-d', strtotime('-15 days'));
 
+        // First day of current year
+        $first_day_of_current_year = date('Y-m-d', strtotime('first day of january this year'));
+        $last_day_of_current_year = date('Y-m-d', strtotime('last day of december this year'));
+
         // Sales data
         $todays_sale = SmHead::total_sales_value($current_date) ;
         $this_month_sale = SmHead::total_sales_value($start_date,$end_date);
         $last_15_days_sale = SmHead::total_sales_value($last_15_date,$last_date);
+        $this_year_sale = SmHead::total_sales_value($first_day_of_current_year,$last_day_of_current_year);
         $all_sales = SmHead::total_sales_value();
-
+        
         // Collection data
         $all_collection = SmHead::total_collection();
         $todays_collection = SmHead::total_collection($current_date) ;
@@ -125,7 +128,8 @@ class SiteController extends Controller
             'all_collection' => $all_collection,
             'todays_collection' => $todays_collection,
             'this_month_collection' => $this_month_collection,
-            'last_15_days_collection' => $last_15_days_collection
+            'last_15_days_collection' => $last_15_days_collection,
+            'this_year_sale' => $this_year_sale
         ]);
     }
 
