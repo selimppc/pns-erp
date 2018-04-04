@@ -91,6 +91,7 @@ class SiteController extends Controller
         $all_collection = SmHead::total_collection();
         $todays_collection = SmHead::total_collection($current_date) ;
         $this_month_collection = SmHead::total_collection($start_date,$end_date);
+        $this_year_collection = SmHead::total_collection($first_day_of_current_year,$last_day_of_current_year);
         $last_15_days_collection = SmHead::total_collection($last_15_date,$last_date);
 
         // Dhaka branch quantity
@@ -129,7 +130,8 @@ class SiteController extends Controller
             'todays_collection' => $todays_collection,
             'this_month_collection' => $this_month_collection,
             'last_15_days_collection' => $last_15_days_collection,
-            'this_year_sale' => $this_year_sale
+            'this_year_sale' => $this_year_sale,
+            'this_year_collection' => $this_year_collection
         ]);
     }
 
