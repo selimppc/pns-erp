@@ -101,12 +101,21 @@ class ReportController extends Controller
             $start_date = $_POST['from_date'];
             $end_date = $_POST['to_date'];
 
-            $label = "Sales Report of ".date('jS M Y',strtotime($start_date)). ' to '.date('jS M Y',strtotime($end_date));
-        }else{
+            $label = "Sales collection Report of ".date('jS M Y',strtotime($start_date)). ' to '.date('jS M Y',strtotime($end_date));
+        }
+        elseif (isset($_GET['first-date']) && isset($_GET['last-date'])) {
+            
+            $start_date = $_GET['first-date'];
+            $end_date = $_GET['last-date'];   
+
+            $label = "Sales collection Report of ".date('F Y', strtotime($start_date));
+ 
+        }
+        else{
             $start_date = date('Y-m-01',strtotime('this month'));
             $end_date = date('Y-m-t',strtotime('this month'));   
 
-            $label = "Sales Report of ".date('F'); 
+            $label = "Sales collection Report of ".date('F'); 
         }
             
         $collection_report = SmHead::collection_report($start_date,$end_date);
@@ -135,9 +144,22 @@ class ReportController extends Controller
 
         $title = 'Last Month Of Current Year report';
 
-        return $this->render('last_month_of_current_year',[
-                'title' => $title
-            ]);
+        if(isset($_GET['type']) && $_GET['type'] == 'collection')
+        {
+
+            return $this->render('last_month_of_current_year_collection',[
+                    'title' => $title
+                ]);
+
+        }else{
+
+            return $this->render('last_month_of_current_year',[
+                    'title' => $title
+                ]);
+
+        }
+
+        
     }
 
     public function actionLast15DaysCollection()

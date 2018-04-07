@@ -42,4 +42,14 @@ class SalesReportsController extends Controller{
         return $this->render('month-wise-report');
     }
 
+
+        /**
+     * @return mixed
+     */
+    public function actionMonthWiseCollectionReport()
+    {
+        return $this->render('month-wise-collection-report');
+    }    
+    
+
 }
