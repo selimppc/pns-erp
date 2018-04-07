@@ -70,6 +70,48 @@ class StockViewController extends Controller{
 
     }
 
+    public function actionAll()
+    {
+
+        if(isset($_GET['branch']) && !empty($_GET['branch'])){
+
+          if($_GET['branch'] == 'dhaka')
+          {
+            $data = VwImStockView::get_stock_data(1);
+            // Dhaka branch quantity
+            $total_qty = VwImStockView::total_qty_branch(1);     
+          }
+
+          if($_GET['branch'] == 'savar')
+          {
+            $data = VwImStockView::get_stock_data(2);
+            // Dhaka branch quantity
+            $total_qty = VwImStockView::total_qty_branch(2);     
+          }
+
+          $pageTitle = 'Present stock of '. ucfirst($_GET['branch']) .' :: '. $total_qty;
+
+        }else{
+
+          $data = VwImStockView::get_stock_data();
+
+          // Dhaka branch quantity
+          $dhaka_branch_qty = VwImStockView::total_qty_branch(1);    
+
+          // Savar branch quantity
+          $savar_branch_qty = VwImStockView::total_qty_branch(2); 
+
+          $pageTitle = 'Total Present Stock :: '. ($dhaka_branch_qty + $savar_branch_qty);
+
+        }
+        
+        return $this->render('all', [
+            'data' => $data,
+            'pageTitle' => $pageTitle
+        ]);
+
+    }
+
 
     public function actionFindProduct()
    {

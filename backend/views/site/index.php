@@ -217,11 +217,31 @@
         </div>
 
     
+      <div class="col-xl-4 col-md-4">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+          <a href="<?= Url::toRoute(['/stock-view/all']); ?>" class="card-block p-20 pt-10" style="background: #6D4C41;">
+            
+              <div class="clearfix">
+                <div class="white float-left py-10">
+                  <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i> Total Stock
+                </div>
+                <span class="float-right white font-size-30"><?=$savar_branch_qty + $dhaka_branch_qty?></span>
+              </div>
+              <div class="mb-20 white">
+                <i class="icon md-long-arrow-up white font-size-16"></i>
+                Total stock of entire system
+              </div>
+              
+            </a>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
 
         <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <div class="card-block p-20 pt-10" style="background: #f86c6b;">
+            <a href="<?= Url::toRoute(['/stock-view/all','branch' => 'dhaka']); ?>" class="card-block p-20 pt-10" style="background: #f86c6b;">
               <div class="clearfix">
                 <div class="white float-left py-10">
                   <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i>     Dhaka
@@ -232,7 +252,7 @@
                 <i class="icon md-long-arrow-up white font-size-16"></i> Stock of Dhaka
               </div>
               
-            </div>
+            </a>
           </div>
           <!-- End Widget Linearea One -->
         </div>
@@ -240,7 +260,7 @@
         <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <div class="card-block p-20 pt-10" style="background: #3b5998;">
+          <a href="<?= Url::toRoute(['/stock-view/all','branch' => 'savar']); ?>" class="card-block p-20 pt-10" style="background: #3b5998;">
               <div class="clearfix">
                 <div class="white float-left py-10">
                   <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i> Savar
@@ -252,7 +272,7 @@
                 Stock of Savar
               </div>
               
-            </div>
+            </a>
           </div>
           <!-- End Widget Linearea One -->
         </div>
@@ -270,6 +290,26 @@
               <div class="mb-20 white">
                 <i class="icon md-long-arrow-up white font-size-16"></i>
                 Approved purchased
+              </div>
+              
+            </div>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
+        <div class="col-xl-4 col-md-4">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+            <div class="card-block p-20 pt-10" style="background: #9C27B0;">
+              <div class="clearfix">
+                <div class="white float-left py-10">
+                  <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i> New PI
+                </div>
+                <span class="float-right white font-size-30">0</span>
+              </div>
+              <div class="mb-20 white">
+                <i class="icon md-long-arrow-up white font-size-16"></i>
+                Just created purchased
               </div>
               
             </div>

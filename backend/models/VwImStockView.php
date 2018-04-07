@@ -65,10 +65,21 @@ class VwImStockView extends \yii\db\ActiveRecord
     }
 
 
-    public static function get_stock_data()
+    public static function get_stock_data($branch='')
     {
-        $data = VwImStockView::find()->groupBy(['product_id'])->orderBy([
+        if(!empty($branch))
+        {
+            $data = VwImStockView::find()->where(['branch_id'=>$branch])->groupBy(['product_id'])->orderBy([
             'product_sort_order' => SORT_ASC])->all();
+
+        }else{
+
+            $data = VwImStockView::find()->groupBy(['product_id'])->orderBy([
+            'product_sort_order' => SORT_ASC])->all();
+
+        }
+
+        
 
         $response = [];
 
@@ -85,13 +96,13 @@ class VwImStockView extends \yii\db\ActiveRecord
                 $response[$key]['product_title'] = $value->product_title;
                 $response[$key]['sell_rate'] = $value->sell_rate; 
 
-                $branch_data = self::branch_data($value->product_id);
+                $branch_data = self::branch_data($value->product_id,$branch);
 
                 $response[$key]['branch'] = $branch_data;
 
                 $response[$key]['product_uom'] = isset($value->productUom)?$value->productUom->title:'';
 
-                $response[$key]['total_qty'] = self::findtotal_available($value->product_id);
+                $response[$key]['total_qty'] = self::findtotal_available($value->product_id,$branch);
             }
         }
 
@@ -99,12 +110,18 @@ class VwImStockView extends \yii\db\ActiveRecord
     }
 
 
-    public static function branch_data($product_id)
+    public static function branch_data($product_id,$branch='')
     {
 
         $response = [];
 
-        $data = VwImStockView::find()->where(['product_id'=> $product_id])->groupBy(['branch_id'])->all();
+        if(!empty($branch))
+        {
+            $data = VwImStockView::find()->where(['product_id'=> $product_id])->andWhere(['branch_id'=> $branch])->groupBy(['branch_id'])->all();    
+        }else{
+            $data = VwImStockView::find()->where(['product_id'=> $product_id])->groupBy(['branch_id'])->all();
+        }
+        
 
 
         if(!empty($data))
@@ -149,21 +166,19 @@ class VwImStockView extends \yii\db\ActiveRecord
         return $options;
     }
 
-    public static function findtotal_available($product_id){
+    public static function findtotal_available($product_id, $branch = ''){
 
         $total = 0;
 
-        // $product_q = VwImStockView::find()->where(['product_id' => $product_id])->all();
-
-        // if(!empty($product_q)){
-        //     foreach($product_q as $product){
-        //         $total += abs($product->available);
-        //     }
-        // }
-
         $total_inhand_qty = 0;
 
-        $product_q = VwImStockView::find()->where(['product_id' => $product_id])->all();
+        if(!empty($branch))
+        {
+            $product_q = VwImStockView::find()->where(['product_id' => $product_id])->andWhere(['branch_id' => $branch])->all();
+        }else{
+            $product_q = VwImStockView::find()->where(['product_id' => $product_id])->all();    
+        }
+        
 
         if(!empty($product_q)){
             foreach($product_q as $product){
@@ -177,7 +192,7 @@ class VwImStockView extends \yii\db\ActiveRecord
 
         $total_sale_qty = 0;
 
-        $product_q = VwImStockView::find()->where(['product_id' => $product_id])->all();
+        #$product_q = VwImStockView::find()->where(['product_id' => $product_id])->all();
 
         if(!empty($product_q)){
             foreach($product_q as $product){
