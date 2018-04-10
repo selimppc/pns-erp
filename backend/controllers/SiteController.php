@@ -103,6 +103,9 @@ class SiteController extends Controller
         // PO approved qty
         $po_approved_qty = PpPurchaseHead::total_po_qty('approved');
 
+        // PO open qty
+        $po_open_qty = PpPurchaseHead::total_po_qty('open');
+
         // TODO :: Find total due
         $total_due = VwSmMrReceive::total_due();
 
@@ -131,7 +134,8 @@ class SiteController extends Controller
             'this_month_collection' => $this_month_collection,
             'last_15_days_collection' => $last_15_days_collection,
             'this_year_sale' => $this_year_sale,
-            'this_year_collection' => $this_year_collection
+            'this_year_collection' => $this_year_collection,
+            'po_open_qty' => $po_open_qty
         ]);
     }
 

@@ -280,7 +280,8 @@
         <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <div class="card-block p-20 pt-10" style="background: #00aced;">
+
+            <a href="<?= Url::toRoute(['/stock-view/upcoming-stock']); ?>" class="card-block p-20 pt-10" style="background: #00aced;">
               <div class="clearfix">
                 <div class="white float-left py-10">
                   <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i> Upcoming Stock
@@ -292,27 +293,50 @@
                 Approved purchased
               </div>
               
-            </div>
+            </a>
           </div>
           <!-- End Widget Linearea One -->
         </div>
 
+
+
         <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
-            <div class="card-block p-20 pt-10" style="background: #9C27B0;">
+           <a href="<?= Url::toRoute(['/stock-view/new-pi']); ?>" class="card-block p-20 pt-10" style="background: #9C27B0;">
               <div class="clearfix">
                 <div class="white float-left py-10">
                   <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i> New PI
                 </div>
-                <span class="float-right white font-size-30">0</span>
+                <span class="float-right white font-size-30"><?=$po_open_qty?></span>
               </div>
               <div class="mb-20 white">
                 <i class="icon md-long-arrow-up white font-size-16"></i>
                 Just created purchased
               </div>
               
-            </div>
+            </a>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
+
+        <div class="col-xl-4 col-md-4">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+           <a href="<?= Url::toRoute(['/am-coa']); ?>" class="card-block p-20 pt-10" style="background: #D81B60;">
+              <div class="clearfix">
+                <div class="white float-left py-10">
+                  <i class="icon md-chart white font-size-24 vertical-align-bottom mr-5"></i> Bank accounts
+                </div>
+                
+              </div>
+              <div class="mb-20 white">
+                <i class="icon md-long-arrow-up white font-size-16"></i>
+                Bank accounts
+              </div>
+              
+            </a>
           </div>
           <!-- End Widget Linearea One -->
         </div>

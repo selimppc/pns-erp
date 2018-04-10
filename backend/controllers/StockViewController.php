@@ -142,4 +142,28 @@ class StockViewController extends Controller{
        }
    }
 
+
+
+   public function actionUpcomingStock()
+   {
+      $data = 'upcoming stock';
+
+      return $this->render('upcoming_stock',[
+          'data' => $data
+        ]);
+
+   }
+
+
+   public function actionNewPi()
+   {
+
+      $data = 'new pi';
+
+      return $this->render('upcoming_stock',[
+          'data' => $data
+        ]);
+
+   }
+
 }
