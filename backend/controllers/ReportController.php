@@ -119,6 +119,7 @@ class ReportController extends Controller
         }
             
         $collection_report = SmHead::collection_report($start_date,$end_date);
+
         $title = 'Sales collection report';
 
         return $this->render('collection_report',[

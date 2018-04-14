@@ -41,42 +41,93 @@ class VwSmMrReceive extends \yii\db\ActiveRecord
 
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("
-            SELECT *
-            FROM vw_sm_mr_receive INNER JOIN sm_head ON vw_sm_mr_receive.invoice_number = sm_head.sm_number
-            INNER JOIN sm_detail ON sm_detail.sm_head_id = sm_head.id
-            ORDER BY vw_sm_mr_receive.customer_id ASC");
+            SELECT sm_number,sm_head.date,sm_head.customer_id,sales_person_id, sm_head.id as sales_return_id, product.model,sm_detail.quantity, rate, net_amount, net_amount - vw_sm_mr_receive.amount as paid_amount ,vw_sm_mr_receive.amount as due_amount
+            FROM vw_sm_mr_receive JOIN sm_head ON vw_sm_mr_receive.invoice_number = sm_head.sm_number 
+            JOIN sm_detail ON sm_head.id = sm_detail.sm_head_id
+            JOIN product ON sm_detail.product_id = product.id
+            WHERE vw_sm_mr_receive.amount > 0 group by sm_number ");
 
         $result = $command->queryAll();
 
-        $customer_list_array = [];
+        $sales_person_id = [];
 
         if(!empty($result))
         {
-            foreach($result as $key => $value)
-            {
-                array_push($customer_list_array,$value['customer_id']);
+            foreach ($result as $key => $value) {
+               array_push($sales_person_id,$value['sales_person_id']);
             }
         }
 
-        if(!empty($customer_list_array))
+
+        if(count($sales_person_id) > 0)
         {
-            $customer_list = array_values(array_unique($customer_list_array));
-            foreach($customer_list as $key => $values)
+            $sales_person_list = array_values(array_unique($sales_person_id));
+
+            foreach($sales_person_list as $key => $values)
             {
-                $customer_data = Yii::$app->db->createCommand("SELECT * FROM {{customer}} WHERE id ='$values'")->queryOne();
+
+                $sales_person_id = $values;
+                $sales_person_data = Yii::$app->db->createCommand("SELECT * FROM {{sales_person}} WHERE id ='$sales_person_id'")->queryOne();
 
                 $response[$key]['serial'] = $key+1;
-                $response[$key]['customer_id'] = $values;
-                $response[$key]['customer_name'] = isset($customer_data)?$customer_data['name']:'';
+                $response[$key]['sales_person_id'] = $values;
+                $response[$key]['sales_person_name'] = isset($sales_person_data)?$sales_person_data['name']:'';
 
-                $response[$key]['order_list'] = self::order_list($result,$values);
+                $response[$key]['due_customer_list'] = self::due_customer_list($result,$values);
+            }
+        }
+        
+        return $response;
+
+ 
+    }
+
+
+    public static function due_customer_list($data = '', $sales_person_id = '')
+    {
+        $response = [];
+
+        if(!empty($data))
+        {
+            foreach ($data as $key => $value)
+            {
+                if ($value['sales_person_id'] == $sales_person_id )
+                {
+                    $customer_id = $value['customer_id'];
+                    $customer_data = Yii::$app->db->createCommand("SELECT * FROM {{customer}} WHERE id ='$customer_id'")->queryOne();
+
+                    // TODO :: Need to recheck
+                    $sales_return_id = $value['sales_return_id'];
+                    $return_sales_data = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status = 'returned' && return_sales_id = '$sales_return_id'")
+            ->queryScalar();
+
+                    if(count($return_sales_data) > 0)
+                    {
+                        $net_amount = $value['net_amount'] - $return_sales_data; 
+                        $due_amount = $value['due_amount'] - $return_sales_data;  
+                    }else{
+                        $net_amount = $value['net_amount'];
+                        $due_amount = $value['due_amount'];
+                    }
+
+                    $response[$key]['serial'] = $key + 1;
+                    $response[$key]['customer_id'] = $value['customer_id'];
+                    $response[$key]['customer_name'] = isset($customer_data)?$customer_data['name']:'';
+                    $response[$key]['invoice_number'] = $value['sm_number'];
+                    $response[$key]['date'] = $value['date'];
+                    $response[$key]['model'] = $value['model'];
+                    $response[$key]['quantity'] = $value['quantity'];
+                    $response[$key]['rate'] = $value['rate'];
+                    $response[$key]['net_amount'] = $net_amount;
+                    $response[$key]['paid_amount'] = $value['paid_amount'];
+                    $response[$key]['due_amount'] = $due_amount;
+                }
             }
         }
 
 
-          return $response;  
+        return $response;
     }
-
 
     public static function order_list($data='', $customer_id ='')
     {
@@ -123,7 +174,6 @@ class VwSmMrReceive extends \yii\db\ActiveRecord
     {
         $total_sales_return = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='returned' && doc_type = 'return'")
             ->queryScalar();
-
 
         $total_due = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{vw_sm_mr_receive}}")
             ->queryScalar();

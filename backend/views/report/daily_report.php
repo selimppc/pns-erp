@@ -72,6 +72,13 @@ $this->params['breadcrumbs'][] = $this->title;
 		                    <?php
 		                      foreach($data as $values)
 		                      {
+
+		                      	$sub_qty = 0;
+		                      	$sub_sell_rate = 0;
+		                      	$sub_sub_total = 0;
+		                      	$sub_discount = 0;
+		                      	$sub_total = 0;
+
 		                    ?>
 
 		                    	<tr>
@@ -153,6 +160,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			                                    foreach($values['order_list'] as $order_data)
 			                                    {
 			                                    	$total_qty +=$order_data['quantity'];
+			                                    	$sub_qty +=$order_data['quantity'];
 			                                  ?>
 			                                      <tr>
 			                                          <td><?=$order_data['quantity']?></td>
@@ -172,6 +180,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			                                    foreach($values['order_list'] as $order_data)
 			                                    {
 			                                    	$total_sell_rate +=$order_data['sell_rate'];
+			                                    	$sub_sell_rate +=$order_data['sell_rate'];
+							                      	
 			                                  ?>
 			                                      <tr>
 			                                          <td><?=number_format($order_data['sell_rate'],2)?></td>
@@ -190,6 +200,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			                                    foreach($values['order_list'] as $order_data)
 			                                    {
 			                                    	$total_sub_total +=$order_data['sub_total'];
+			                                    	$sub_sub_total +=$order_data['sub_total'];
+							                      	
 			                                  ?>
 			                                      <tr>
 			                                          <td><?=number_format($order_data['sub_total'],2)?></td>
@@ -209,6 +221,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			                                    foreach($values['order_list'] as $order_data)
 			                                    {
 			                                    	$total_discount_value +=$order_data['total_discount'];
+			                                    	$sub_discount +=$order_data['total_discount'];
+							                      	
 			                                  ?>
 			                                      <tr>
 			                                          <td><?=number_format($order_data['total_discount'],2)?></td>
@@ -228,6 +242,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			                                    foreach($values['order_list'] as $order_data)
 			                                    {
 			                                    	$total_value +=$order_data['total_amount'];
+			                                    	$sub_total +=$order_data['total_amount'];
 			                                  ?>
 			                                      <tr>
 			                                          <td><?=number_format($order_data['total_amount'],2)?></td>
@@ -239,6 +254,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             			</table>
                             		</td>
 		                    	</tr>
+
+		                    	<tr>
+			                    	<td colspan="6">
+			                    		<b>Sub Total</b>
+			                    	</td>
+			                    	<td><?=$sub_qty?></td>
+			                    	<td><?=number_format($sub_sell_rate,2)?></td>
+			                    	<td><?=number_format($sub_sub_total,2)?></td>
+			                    	<td><?=number_format($sub_discount,2)?></td>
+			                    	<td><?=number_format($sub_total,2)?></td>
+			                    </tr>
 
 		                    <?php
 		                    	}

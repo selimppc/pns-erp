@@ -48,6 +48,8 @@ $this->registerJs($js);
 
         <div class="col-md-2">
             <?= $form->field($modelSmHead, 'sm_number',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => 1]) ?>
+
+            <?= $form->field($modelSmHead, 'return_sales_id',['options' => ['class' => '','data-plugin' => '']])->hiddenInput(['maxlength' => true,'readonly' => 1])->label(false) ?>
         </div>
 
         <div class="col-md-2">

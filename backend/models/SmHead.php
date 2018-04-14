@@ -220,11 +220,10 @@ class SmHead extends \yii\db\ActiveRecord
 
             $connection = Yii::$app->getDb();
             $command = $connection->createCommand("
-                SELECT sm_head.sm_number,sm_head.customer_id,sm_head.date,sm_invoice_allocation.amount,sm_invoice_allocation.invoice_number,sm_invoice_allocation.note,sm_head.am_coa_id,sm_head.check_number
-                FROM sm_head 
-                INNER JOIN sm_invoice_allocation ON sm_head.id = sm_invoice_allocation.sm_head_id
-                WHERE status ='confirmed' && doc_type = 'receipt' && date BETWEEN '$date1' AND '$date2'
-                ORDER BY sm_head.id DESC");
+                SELECT sales_person_id,customer_id, sm_invoice_allocation.sm_number, sm_invoice_allocation.created_at, am_coa_id, check_number, sm_invoice_allocation.invoice_number, sm_invoice_allocation.note, sm_invoice_allocation.amount
+                FROM sm_invoice_allocation 
+                JOIN sm_head ON sm_head.sm_number = sm_invoice_allocation.invoice_number
+                WHERE sm_invoice_allocation.created_at BETWEEN '$date1' AND '$date2'");
 
             $result = $command->queryAll();
 
@@ -232,47 +231,47 @@ class SmHead extends \yii\db\ActiveRecord
 
             $connection = Yii::$app->getDb();
             $command = $connection->createCommand("
-                SELECT sm_head.sm_number,sm_head.customer_id,sm_head.date,sm_invoice_allocation.amount,sm_invoice_allocation.invoice_number,sm_invoice_allocation.note,sm_head.am_coa_id,sm_head.check_number
-                FROM sm_head 
-                INNER JOIN sm_invoice_allocation ON sm_head.id = sm_invoice_allocation.sm_head_id
-                WHERE status ='confirmed' && doc_type = 'receipt' && date = '$date1'
-                ORDER BY sm_head.id DESC");
+                SELECT sales_person_id,customer_id, sm_invoice_allocation.sm_number, sm_invoice_allocation.created_at, am_coa_id, check_number, sm_invoice_allocation.invoice_number, sm_invoice_allocation.note, sm_invoice_allocation.amount
+                FROM sm_invoice_allocation 
+                JOIN sm_head ON sm_head.sm_number = sm_invoice_allocation.invoice_number
+                WHERE DATE(sm_invoice_allocation.created_at) = '$date1'");
 
             $result = $command->queryAll();
 
         }
-        
 
-        $customer_list_array = [];
-
+        $sales_person_id = [];
         if(!empty($result))
         {
-            // push sales person id 
             foreach($result as $key => $values)
             {
-                array_push($customer_list_array,$values['customer_id']);
+                array_push($sales_person_id, $values['sales_person_id']);
             }
         }
 
-        if(count($customer_list_array) > 0)
+
+        if(count($sales_person_id) > 0)
         {
-            foreach(array_values(array_unique($customer_list_array)) as $key => $values)
+            foreach(array_values(array_unique($sales_person_id)) as $key => $values)
             {
-                $customer_data = Yii::$app->db->createCommand("SELECT * FROM {{customer}} WHERE id ='$values'")->queryOne();
+
+                $sales_person_data = Yii::$app->db->createCommand("SELECT * FROM {{sales_person}} WHERE id ='$values'")->queryOne();
 
                 $response[$key]['serial'] = $key+1;
-                $response[$key]['customer_id'] = $values;
-                $response[$key]['customer_name'] = $customer_data['name'];
-                $response[$key]['order_list'] = self::money_receipt($result,$values);
+                $response[$key]['sales_person_id'] = $values;
+                $response[$key]['sales_person_name'] = isset($sales_person_data)?$sales_person_data['name']:'';
+
+                $response[$key]['collection_list'] = self::money_receipt($result,$values);
             }
         }
-        
+
         return $response;
+
 
     }
 
 
-    public static function money_receipt($data = '', $customer_id )
+    public static function money_receipt($data = '', $sales_person_id = '' )
     {
         $response = [];
         $result = [];
@@ -281,13 +280,22 @@ class SmHead extends \yii\db\ActiveRecord
         {
             foreach($data as $key => $value)
             {
-                if($value['customer_id'] == $customer_id)
+                if($value['sales_person_id'] == $sales_person_id)
                 {
                     $am_coa_id = $value['am_coa_id'];
                     $am_coa_data = Yii::$app->db->createCommand("SELECT * FROM {{am_coa}} WHERE id ='$am_coa_id'")->queryOne();
 
+                    $customer_id = $value['customer_id'];
+                    $customer_data = Yii::$app->db->createCommand("SELECT * FROM {{customer}} WHERE id ='$customer_id'")->queryOne();
+
+                    $timestamp = strtotime($value['created_at']);
+
+                    $date = date('Y-m-d', $timestamp);
+
+                    $response[$key]['customer_id'] = $value['customer_id'];
+                    $response[$key]['customer_name'] = isset($customer_data)?$customer_data['name']:'';
                     $response[$key]['money_receipt'] = $value['sm_number'];
-                    $response[$key]['date'] = $value['date'];
+                    $response[$key]['date'] = $date;
                     $response[$key]['bank_or_cash_id'] = $value['am_coa_id'];
                     $response[$key]['bank_or_cash'] = !empty($am_coa_data)?$am_coa_data['title']:'';
                     $response[$key]['check_number'] = $value['check_number'];
@@ -458,18 +466,18 @@ class SmHead extends \yii\db\ActiveRecord
        if(!empty($date1) && !empty($date2))
         {
 
-            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && doc_type ='receipt' && date BETWEEN '$date1' AND '$date2'")
+            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{sm_invoice_allocation}} WHERE created_at BETWEEN '$date1' AND '$date2'")
             ->queryScalar();
 
         }elseif(!empty($date1))
         {
 
-            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && doc_type ='receipt' && date = '$date1'")
+            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{sm_invoice_allocation}} WHERE created_at = '$date1'")
             ->queryScalar();
 
         }else{
 
-            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[net_amount]]) FROM {{sm_head}} WHERE status ='confirmed' && doc_type ='receipt'")
+            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{sm_invoice_allocation}}")
             ->queryScalar();
 
         }

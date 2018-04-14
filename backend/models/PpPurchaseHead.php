@@ -110,6 +110,14 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function stock_list_data($po_status = '')
+    {
+        $data = Yii::$app->db->createCommand("SELECT style,model,title, quantity, sell_rate, cost_price FROM {{pp_purchase_detail}} JOIN {{pp_purchase_head}} ON pp_purchase_detail.pp_purchase_head_id = pp_purchase_head.id JOIN {{product}} ON product.id = pp_purchase_detail.product_id WHERE pp_purchase_head.status ='$po_status'")->queryAll();
+
+
+        return $data;
+        
+    }
 
     public static function total_po_qty($po_status='')
     {

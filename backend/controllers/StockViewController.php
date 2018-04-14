@@ -146,10 +146,13 @@ class StockViewController extends Controller{
 
    public function actionUpcomingStock()
    {
-      $data = 'upcoming stock';
+      $data = 'Upcoming stock';
+
+      $stock_list = PpPurchaseHead::stock_list_data('approved');
 
       return $this->render('upcoming_stock',[
-          'data' => $data
+          'data' => $data,
+          'stock_list' => $stock_list
         ]);
 
    }
@@ -158,10 +161,13 @@ class StockViewController extends Controller{
    public function actionNewPi()
    {
 
-      $data = 'new pi';
+      $data = 'New pi';
+
+      $stock_list = PpPurchaseHead::stock_list_data('open');
 
       return $this->render('upcoming_stock',[
-          'data' => $data
+          'data' => $data,
+          'stock_list' => $stock_list
         ]);
 
    }

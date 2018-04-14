@@ -93,6 +93,7 @@ class SalesReturnController extends Controller
 
         // Set Default Data
         $modelSmHead->sm_number = $invoice_number; 
+        $modelSmHead->return_sales_id = $invoice_id;
         
         if ($modelSmHead->load(Yii::$app->request->post())) {
 
@@ -110,6 +111,7 @@ class SalesReturnController extends Controller
             $modelSmHead_sales_return->customer_id = $modelSmHead->customer_id;
             $modelSmHead_sales_return->sales_person_id = $modelSmHead->sales_person_id;
             $modelSmHead_sales_return->discount_amount = $modelSmHead->discount_amount;
+            $modelSmHead_sales_return->return_sales_id = $modelSmHead->return_sales_id;
             
             $modelsSmDetail = Model::createMultiple(SmDetail::classname());
             Model::loadMultiple($modelsSmDetail, Yii::$app->request->post());

@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		          		<thead>
 		                    <tr>
 		                      <th>SL. No.</th>
+		                      <th>Sales Person Name</th>
 		                      <th>Customer Name</th>
 		                      <th>Money Receipt</th>
 		                      <th>Date</th>
@@ -59,16 +60,35 @@ $this->params['breadcrumbs'][] = $this->title;
 		                	  $total_amount = 0;
 		                      foreach($data as $values)
 		                      {
+		                      	$sub_total = 0;
 		                    ?>
 		                    		<tr>
 		                    			<td><?=$values['serial']?></td>
-		                    			<td><?=$values['customer_name']?></td>
+		                    			<td><?=$values['sales_person_name']?></td>
 		                    			<td style="padding: 0;border:0;">
 	                            			<table style="width: 100%;height:100%;min-height:100%;text-align: center;">
 	                            				<?php
-				                                  if(count($values['order_list']))
+				                                  if(count($values['collection_list']))
 				                                  {
-				                                    foreach($values['order_list'] as $order_data)
+				                                    foreach($values['collection_list'] as $order_data)
+				                                    {
+				                                  ?>
+				                                      <tr>
+				                                          <td><?=$order_data['customer_name']?></td>
+				                                      </tr>
+				                                  <?php    
+				                                    }   
+				                                  }
+				                                ?>
+	                            			</table>
+	                            		</td>
+
+		                    			<td style="padding: 0;border:0;">
+	                            			<table style="width: 100%;height:100%;min-height:100%;text-align: center;">
+	                            				<?php
+				                                  if(count($values['collection_list']))
+				                                  {
+				                                    foreach($values['collection_list'] as $order_data)
 				                                    {
 				                                  ?>
 				                                      <tr>
@@ -84,9 +104,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	                            		<td style="padding: 0;border:0;">
 	                            			<table style="width: 100%;height:100%;min-height:100%;text-align: center;">
 	                            				<?php
-				                                  if(count($values['order_list']))
+				                                  if(count($values['collection_list']))
 				                                  {
-				                                    foreach($values['order_list'] as $order_data)
+				                                    foreach($values['collection_list'] as $order_data)
 				                                    {
 				                                  ?>
 				                                      <tr>
@@ -102,9 +122,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	                            		<td style="padding: 0;border:0;">
 	                            			<table style="width: 100%;height:100%;min-height:100%;text-align: center;">
 	                            				<?php
-				                                  if(count($values['order_list']))
+				                                  if(count($values['collection_list']))
 				                                  {
-				                                    foreach($values['order_list'] as $order_data)
+				                                    foreach($values['collection_list'] as $order_data)
 				                                    {
 				                                  ?>
 				                                      <tr>
@@ -120,9 +140,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	                            		<td style="padding: 0;border:0;">
 	                            			<table style="width: 100%;height:100%;min-height:100%;text-align: center;">
 	                            				<?php
-				                                  if(count($values['order_list']))
+				                                  if(count($values['collection_list']))
 				                                  {
-				                                    foreach($values['order_list'] as $order_data)
+				                                    foreach($values['collection_list'] as $order_data)
 				                                    {
 				                                  ?>
 				                                      <tr>
@@ -138,9 +158,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	                            		<td style="padding: 0;border:0;">
 	                            			<table style="width: 100%;height:100%;min-height:100%;text-align: center;">
 	                            				<?php
-				                                  if(count($values['order_list']))
+				                                  if(count($values['collection_list']))
 				                                  {
-				                                    foreach($values['order_list'] as $order_data)
+				                                    foreach($values['collection_list'] as $order_data)
 				                                    {
 				                                  ?>
 				                                      <tr>
@@ -156,9 +176,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	                            		<td style="padding: 0;border:0;">
 	                            			<table style="width: 100%;height:100%;min-height:100%;text-align: center;">
 	                            				<?php
-				                                  if(count($values['order_list']))
+				                                  if(count($values['collection_list']))
 				                                  {
-				                                    foreach($values['order_list'] as $order_data)
+				                                    foreach($values['collection_list'] as $order_data)
 				                                    {
 				                                  ?>
 				                                      <tr>
@@ -174,11 +194,12 @@ $this->params['breadcrumbs'][] = $this->title;
 	                            		<td style="padding: 0;border:0;">
 	                            			<table style="width: 100%;height:100%;min-height:100%;text-align: center;">
 	                            				<?php
-				                                  if(count($values['order_list']))
+				                                  if(count($values['collection_list']))
 				                                  {
-				                                    foreach($values['order_list'] as $order_data)
+				                                    foreach($values['collection_list'] as $order_data)
 				                                    {
 				                                    	$total_amount+=$order_data['amount'];
+				                                    	$sub_total+=$order_data['amount'];
 				                                  ?>
 				                                      <tr>
 				                                          <td><?=number_format($order_data['amount'],2)?></td>
@@ -190,11 +211,20 @@ $this->params['breadcrumbs'][] = $this->title;
 	                            			</table>
 	                            		</td>
 		                    		</tr>
+
+		                    		<tr>
+				                    	<td colspan="9">
+				                    		<b>Sub Total</b>
+				                    	</td>
+				                    	<td>
+				                    		<?=number_format($sub_total,2);?>
+				                    	</td>
+				                    </tr>
 		                    <?php
 		                    	}
 		                    ?>
 		                    		<tr>
-				                    	<td colspan="8">
+				                    	<td colspan="9">
 				                    		<b>Total</b>
 				                    	</td>
 				                    	<td>

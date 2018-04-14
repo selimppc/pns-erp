@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
       </ol>
      
       <div class="middle-menu-bar">
-          
+          <a href="#"><?=$data?></a>
         <?php
           echo \yii\helpers\Html::a( '<i class="icon md-arrow-left" aria-hidden="true"></i> Back', Yii::$app->request->referrer,['class' => 'back']);
         ?>    
@@ -44,7 +44,66 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="table-responsive">
 
           
-          <?=ucfirst($data)?> data are coming
+            <?php
+              if(count($stock_list) > 0)
+              {
+                $count = 1;
+                $total_quantity = 0;
+            ?>
+            
+                  <table class="table table-striped table-bordered">
+                
+                    <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Style</th>
+                          <th>Item / Model</th>
+                          <th>Product Name</th>
+                          <th>Purchased Quantity</th>
+                          <th>Sell Price</th>
+                          <th>Cost Price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <?php
+                          foreach($stock_list as $values)
+                          {
+                            $total_quantity+=$values['quantity'];
+                        ?>
+                            <tr>
+                                <td><?=$count?></td>
+                                <td><?=$values['style']?></td>
+                                <td><?=$values['model']?></td>
+                                <td><?=$values['title']?></td>
+                                <td><?=$values['quantity']?></td>
+                                <td><?=number_format($values['sell_rate'],2)?></td>
+                                <td><?=number_format($values['cost_price'],2)?></td>
+                            </tr>
+
+                        <?php
+                          $count++;
+                          }
+                        ?>
+
+                        <tr>
+                            <td colspan="4" align="right">
+                                Total quantity
+                            </td>
+                            <td colspan="3">
+                              <?=$total_quantity?>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                  </table>  
+
+            <?php    
+              }else{
+                echo $data . ' not available';
+              }
+            ?>
            
 
         </div>

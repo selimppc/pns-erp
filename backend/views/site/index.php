@@ -155,6 +155,26 @@
           <!-- End Widget Linearea One -->
         </div>
 
+        <div class="col-xl-4 col-md-4">
+          <!-- Widget Linearea One-->
+          <div class="card card-shadow" id="widgetLineareaOne">
+            <a href="<?= Url::toRoute(['/report/last-month-of-current-year','type' =>'collection']); ?>" class="card-block p-20 pt-10" style="background: #f86c6b;">
+              <div class="clearfix">
+                <div class="white float-left py-10">
+                  &#2547; Total collection of <?=Date('Y')?>
+                </div>
+                <span class="float-right white font-size-30"><?=number_format($this_year_collection,2);?></span>
+              </div>
+              <div class="mb-20 white">
+                <i class="icon md-long-arrow-up white font-size-16"></i>
+                Total collection of current year
+              </div>
+              
+            </a>
+          </div>
+          <!-- End Widget Linearea One -->
+        </div>
+
          <div class="col-xl-4 col-md-4">
           <!-- Widget Linearea One-->
           <div class="card card-shadow" id="widgetLineareaOne">
