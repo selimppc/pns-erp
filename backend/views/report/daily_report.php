@@ -58,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		                      <th>Sales Person</th>
 		                      <th>Customer Name</th>
 		                      <th>Invoice No.</th>
+		                      <th>Note</th>
 		                      <th>Date</th>
 		                      <th>Product Model</th>
 		                      <th>Qty.</th>
@@ -111,6 +112,23 @@ $this->params['breadcrumbs'][] = $this->title;
 			                                  ?>
 			                                      <tr>
 			                                          <td><?=$order_data['sm_number']?></td>
+			                                      </tr>
+			                                  <?php    
+			                                    }   
+			                                  }
+			                                ?>
+                            			</table>
+                            		</td>
+                            		<td style="padding: 0;border:0;">
+                            			<table style="width: 100%;height:100%;min-height:100%;text-align: center;">
+                            				<?php
+			                                  if(count($values['order_list']))
+			                                  {
+			                                    foreach($values['order_list'] as $order_data)
+			                                    {
+			                                  ?>
+			                                      <tr>
+			                                          <td><?=$order_data['note']?></td>
 			                                      </tr>
 			                                  <?php    
 			                                    }   

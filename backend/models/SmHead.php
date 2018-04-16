@@ -364,6 +364,7 @@ class SmHead extends \yii\db\ActiveRecord
                     $response[$key]['customer_id'] = $customer_id;
                     $response[$key]['customer_name'] = !empty($customer_data)?$customer_data['name']:'';
                     $response[$key]['sm_number'] = $value['sm_number'];
+                    $response[$key]['note'] = $value['note'];
                     $response[$key]['date'] = $value['date'];
                     $response[$key]['product_id'] = $value['product_id'];
                     $response[$key]['product_model'] = !empty($product_data)?$product_data['model']:'';
@@ -472,7 +473,7 @@ class SmHead extends \yii\db\ActiveRecord
         }elseif(!empty($date1))
         {
 
-            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{sm_invoice_allocation}} WHERE created_at = '$date1'")
+            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{sm_invoice_allocation}} WHERE DATE(sm_invoice_allocation.created_at) = '$date1'")
             ->queryScalar();
 
         }else{

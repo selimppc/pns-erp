@@ -54,6 +54,7 @@
                             <th style="text-align: center;">Sales Person</th>
                             <th style="text-align: center;">Customer Name</th>
                             <th style="text-align: center;">Invoice No.</th>
+                            <th style="text-align: center;">Note</th>
                             <th style="text-align: center;">Date</th>
                             <th style="text-align: center;">Item / Model</th>
                             <th style="text-align: center;">Total Sell Amount</th>
@@ -107,6 +108,24 @@
                                               ?>
                                                   <tr>
                                                       <td><?=$due_customer['invoice_number']?></td>
+                                                  </tr>
+                                              <?php    
+                                                }   
+                                              }
+                                            ?>
+                                        </table>
+                                    </td>
+
+                                    <td style="padding: 0;border:0;">
+                                        <table style="width: 100%;height:100%;min-height:100%;text-align: center;">
+                                          <?php
+                                              if(count($values['due_customer_list']))
+                                              {
+                                                foreach($values['due_customer_list'] as $due_customer)
+                                                {
+                                              ?>
+                                                  <tr>
+                                                      <td><?=$due_customer['note']?></td>
                                                   </tr>
                                               <?php    
                                                 }   
@@ -219,7 +238,7 @@
                                 </tr>
 
                                 <tr>
-                                  <td colspan="6" align="right"> 
+                                  <td colspan="7" align="right"> 
                                     Sub Total :: 
                                   </td>
                                   <td><?=number_format($sub_total_sell_amount,2)?></td>
@@ -232,7 +251,7 @@
                           ?>
 
                           <tr>
-                              <td colspan="6" align="right"> 
+                              <td colspan="7" align="right"> 
                                 Total :: 
                               </td>
                               <td><?=number_format($total_amount,2)?></td>

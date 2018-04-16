@@ -41,7 +41,7 @@ class VwSmMrReceive extends \yii\db\ActiveRecord
 
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand("
-            SELECT sm_number,sm_head.date,sm_head.customer_id,sales_person_id, sm_head.id as sales_return_id, product.model,sm_detail.quantity, rate, net_amount, net_amount - vw_sm_mr_receive.amount as paid_amount ,vw_sm_mr_receive.amount as due_amount
+            SELECT sm_number,vw_sm_mr_receive.note,sm_head.date,sm_head.customer_id,sales_person_id, sm_head.id as sales_return_id, product.model,sm_detail.quantity, rate, net_amount, net_amount - vw_sm_mr_receive.amount as paid_amount ,vw_sm_mr_receive.amount as due_amount
             FROM vw_sm_mr_receive JOIN sm_head ON vw_sm_mr_receive.invoice_number = sm_head.sm_number 
             JOIN sm_detail ON sm_head.id = sm_detail.sm_head_id
             JOIN product ON sm_detail.product_id = product.id
@@ -114,6 +114,7 @@ class VwSmMrReceive extends \yii\db\ActiveRecord
                     $response[$key]['customer_id'] = $value['customer_id'];
                     $response[$key]['customer_name'] = isset($customer_data)?$customer_data['name']:'';
                     $response[$key]['invoice_number'] = $value['sm_number'];
+                    $response[$key]['note'] = $value['note'];
                     $response[$key]['date'] = $value['date'];
                     $response[$key]['model'] = $value['model'];
                     $response[$key]['quantity'] = $value['quantity'];
