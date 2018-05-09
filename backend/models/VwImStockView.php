@@ -171,6 +171,7 @@ class VwImStockView extends \yii\db\ActiveRecord
         $total = 0;
 
         $total_inhand_qty = 0;
+        $total_available_qty = 0;
 
         if(!empty($branch))
         {
@@ -178,6 +179,16 @@ class VwImStockView extends \yii\db\ActiveRecord
         }else{
             $product_q = VwImStockView::find()->where(['product_id' => $product_id])->all();    
         }
+
+        if(!empty($product_q)){
+            foreach($product_q as $product){
+                
+                $total_available_qty += $product->available;    
+                
+            }
+        }
+
+        return $total_available_qty;
         
 
         if(!empty($product_q)){
@@ -218,8 +229,20 @@ class VwImStockView extends \yii\db\ActiveRecord
         }*/
 
         $total_inhand_qty = 0;
+        $total_available_qty = 0;
 
         $product_q = VwImStockView::find()->where(['product_id' => $product_id])->andWhere(['branch_id' => $branch_id])->all();
+
+
+        if(!empty($product_q)){
+            foreach($product_q as $product){
+                
+                $total_available_qty += $product->available;    
+                
+            }
+        }
+
+        return $total_available_qty;
 
         if(!empty($product_q)){
             foreach($product_q as $product){
@@ -250,6 +273,11 @@ class VwImStockView extends \yii\db\ActiveRecord
     public static function total_inhandQty($product_id,$branch_id){
 
         $total = 0;
+
+        $qty = Yii::$app->db->createCommand("SELECT SUM([[inhandQty]]) FROM {{vw_im_stock_view}} WHERE branch_id = '$branch_id' && product_id = '$product_id'")
+            ->queryScalar();
+
+         return $qty;   
 
         $product_q = VwImStockView::find()->where(['product_id' => $product_id])->andWhere(['branch_id' => $branch_id])->all();
 

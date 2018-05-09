@@ -51,6 +51,7 @@ class SmHead extends \yii\db\ActiveRecord
 {
 
     public $money_receipt_amount;
+    public $money_receipt_discount_amount;
     public $money_receipt_customer_name;
     public $money_receipt_branch;
 
@@ -114,6 +115,7 @@ class SmHead extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'money_receipt_amount' => Yii::t('app','Amount'),
+            'money_receipt_discount_amount' => Yii::t('app','Discount Amount'),
             'sm_number' => Yii::t('app', 'Sales Number'),
             'date' => Yii::t('app', 'Sales Date'),
             'commission' => Yii::t('app','Commission'),
@@ -351,7 +353,8 @@ class SmHead extends \yii\db\ActiveRecord
         {
             foreach ($data as $key => $value) {
                 
-                if (strpos($value['sales_person_id'], $sales_person_id ) !== false)
+                #if (strpos($value['sales_person_id'], $sales_person_id ) !== false)
+                if($value['sales_person_id'] == $sales_person_id)
                 {
 
                     $customer_id = $value['customer_id'];

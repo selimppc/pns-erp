@@ -120,6 +120,14 @@ $this->params['breadcrumbs'][] = $this->title;
 				                	 "template" => "<label> Check Number </label>\n{input}\n{hint}\n{error}"
 				                	])->textInput(['maxlength' => true]) ?>	
 
+				                 <?= $form->field($model, 'money_receipt_branch',
+				                	['options' => [
+				                    'class' => 'form-group form-material floating',
+				                    'data-plugin' => 'formMaterial'
+				                	],
+				                	 "template" => "<label> Branch </label>\n{input}\n{hint}\n{error}"
+				                	])->textInput(['maxlength' => true,'readonly' => true]) ?>		
+
 				                <?= $form->field($model, 'currency_id',[
 									'options' => [
 				                    	'class' => 'form-group form-material floating',
@@ -139,15 +147,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				                	 "template" => "<label> Status </label>\n{input}\n{hint}\n{error}"
 				                	])->textInput(['maxlength' => true, 'readonly' => true]) ?>	
 
-				                <?= $form->field($model, 'note',
-				                	['options' => [
-				                    'class' => 'form-group form-material floating',
-				                    'data-plugin' => 'formMaterial'
-				                	],
-				                	 "template" => "<label> Note </label>\n{input}\n{hint}\n{error}"
-				                	])->textInput(['maxlength' => true]) ?>			
-
-
+				                
 		        			</div>
 
 		        			<div class="col-md-6">
@@ -195,6 +195,14 @@ $this->params['breadcrumbs'][] = $this->title;
 				                	 "template" => "<label> Amount </label>\n{input}\n{hint}\n{error}"
 				                	])->textInput(['maxlength' => true]) ?>	
 
+				                <?= $form->field($model, 'money_receipt_discount_amount',
+				                	['options' => [
+				                    'class' => 'form-group form-material floating',
+				                    'data-plugin' => 'formMaterial'
+				                	],
+				                	 "template" => "<label> Discount Amount </label>\n{input}\n{hint}\n{error}"
+				                	])->textInput(['maxlength' => true]) ?>		
+
 				                <input type="hidden" id="balance" value="0" style="width: 50px;">	
 
 				                <?= $form->field($model, 'exchange_rate',
@@ -205,13 +213,16 @@ $this->params['breadcrumbs'][] = $this->title;
 				                	 "template" => "<label> Exchange Rate </label>\n{input}\n{hint}\n{error}"
 				                	])->textInput(['maxlength' => true]) ?>		 	
 
-				                <?= $form->field($model, 'money_receipt_branch',
+
+				                <?= $form->field($model, 'note',
 				                	['options' => [
 				                    'class' => 'form-group form-material floating',
 				                    'data-plugin' => 'formMaterial'
 				                	],
-				                	 "template" => "<label> Branch </label>\n{input}\n{hint}\n{error}"
-				                	])->textInput(['maxlength' => true,'readonly' => true]) ?>	
+				                	 "template" => "<label> Note </label>\n{input}\n{hint}\n{error}"
+				                	])->textInput(['maxlength' => true]) ?>			
+	
+				               
 
 				                <?= $form->field($model, 'branch_id',
 				                	['options' => [
@@ -378,10 +389,33 @@ $this->params['breadcrumbs'][] = $this->title;
 		  
 				var invoice_total_amount = Math.round((document.getElementById('invoice_total_amount').innerHTML)*100)/100;
 				var amount = Math.round((document.getElementById('smhead-money_receipt_amount').value)*100)/100;
+				var discount_amount = Math.round((document.getElementById('smhead-money_receipt_discount_amount').value)*100)/100;
 
-		        if(amount > invoice_total_amount){
+				var total_amount = amount + discount_amount;
+
+		        if(total_amount > invoice_total_amount){
 		            alert('Amount is bigger than Invoice Amount');
 		            document.getElementById('smhead-money_receipt_amount').value = '';
+		            document.getElementById('smhead-money_receipt_discount_amount').value = '';
+		            
+		        }else{
+		            document.getElementById('balance').value = amount;
+		        }
+
+			});
+
+			$( '#smhead-money_receipt_discount_amount' ).change(function() {
+		  
+				var invoice_total_amount = Math.round((document.getElementById('invoice_total_amount').innerHTML)*100)/100;
+				var amount = Math.round((document.getElementById('smhead-money_receipt_amount').value)*100)/100;
+				var discount_amount = Math.round((document.getElementById('smhead-money_receipt_discount_amount').value)*100)/100;
+
+				var total_amount = amount + discount_amount;
+				
+		        if(total_amount > invoice_total_amount){
+		            alert('Amount is bigger than Invoice Amount');
+		            document.getElementById('smhead-money_receipt_amount').value = '';
+		            document.getElementById('smhead-money_receipt_discount_amount').value = '';
 		            
 		        }else{
 		            document.getElementById('balance').value = amount;

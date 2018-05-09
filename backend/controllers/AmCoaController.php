@@ -44,6 +44,7 @@ class AmCoaController extends Controller
      */
     public function actionIndex()
     {
+        
         $searchModel = new AmCoaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
