@@ -140,6 +140,13 @@ $this->params['breadcrumbs'][] = $this->title;
                    }
                  ],
                  [
+                   'attribute' => 'note',  
+                   'label' => 'Note',
+                   'value' => function ($model) {
+                       return $model->note;
+                   }
+                 ],
+                 [
                    'attribute' => 'net_amount',  
                    'label' => 'Total Amount',
                    'value' => function ($model) {

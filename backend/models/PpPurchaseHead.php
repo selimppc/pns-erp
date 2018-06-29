@@ -72,7 +72,7 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
         return [
            # [['supplier_id','branch_id','tax_rate','po_order_number'],'required'],
             [['po_order_number','date','delivery_date','supplier_id','pay_terms','branch_id','currency_id','exchange_rate'],'required'],
-            [['date', 'delivery_date', 'created_at', 'updated_at'], 'safe'],
+            [['date', 'delivery_date', 'created_at', 'updated_at', 'note'], 'safe'],
             [['supplier_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
             [['tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],
             [['po_order_number', 'pay_terms', 'status'], 'string', 'max' => 16],
@@ -103,6 +103,7 @@ class PpPurchaseHead extends \yii\db\ActiveRecord
             'prime_amount' => Yii::t('app', 'Prime Amount'),
             'net_amount' => Yii::t('app', 'Total Amount'),
             'status' => Yii::t('app', 'Status'),
+            'note' => Yii::t('app', 'Note'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
             'created_at' => Yii::t('app', 'Created At'),

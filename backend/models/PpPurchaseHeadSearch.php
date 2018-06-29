@@ -19,7 +19,7 @@ class PpPurchaseHeadSearch extends PpPurchaseHead
     {
         return [
             [['id', 'supplier_id', 'branch_id', 'created_by', 'updated_by'], 'integer'],
-            [['po_order_number', 'date', 'pay_terms', 'delivery_date', 'status', 'created_at', 'updated_at','currency_id','exchange_rate','status'], 'safe'],
+            [['po_order_number', 'date', 'pay_terms', 'delivery_date', 'status', 'created_at', 'updated_at','currency_id','exchange_rate','status', 'note'], 'safe'],
             [['tax_rate', 'tax_amount', 'discount_rate', 'discount_amount', 'prime_amount', 'net_amount'], 'number'],
         ];
     }
@@ -93,6 +93,7 @@ class PpPurchaseHeadSearch extends PpPurchaseHead
             'tax_amount' => $this->tax_amount,
             'discount_rate' => $this->discount_rate,
             'discount_amount' => $this->discount_amount,
+            'note' => $this->note,
             'prime_amount' => $this->prime_amount,
             'net_amount' => $this->net_amount,
             'created_by' => $this->created_by,

@@ -163,6 +163,11 @@ $this->registerJs($js);
              <?= $form->field($modelPurchaseHead, 'status',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true,'readonly' => 1]) ?>
             </div> 
 
+            <div class="col-md-2">
+
+                <?= $form->field($modelPurchaseHead, 'note',['options' => ['class' => 'form-group form-material floating','data-plugin' => 'formMaterial']])->textInput(['maxlength' => true]) ?>
+
+            </div>
 
         </div>
 

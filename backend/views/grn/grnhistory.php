@@ -93,6 +93,16 @@ $this->params['breadcrumbs'][] = $this->title;
                  }
                ],
                 'delivery_date',
+
+                 [
+                      'attribute' => 'note',
+                      'label' => 'Note',
+                      'format' => 'raw',
+                      'value' => function ($model) {
+                          return $model->note;
+                      },
+                    ],
+
                
                 [
                   'attribute' => 'status',

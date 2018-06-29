@@ -96,6 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <th>Exchange Rate</th>
                     <th>Prime Amount</th>
                     <th>Net Amount</th>
+                    <th>Note</th>
                     <th>Status</th>
                 </tr>
 
@@ -110,7 +111,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td><?=number_format($model->exchange_rate,3)?></td>
                     <td><?=number_format($model->prime_amount,3)?></td>
                     <td><?=number_format($model->net_amount,3)?></td>
+                    <td><?=$model->note?></td>
                     <td><?=ucfirst($model->status)?></td>
+
                 </tr>
                 
             </table>
