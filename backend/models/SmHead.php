@@ -225,7 +225,7 @@ class SmHead extends \yii\db\ActiveRecord
                 SELECT sales_person_id,customer_id, sm_invoice_allocation.sm_number, sm_invoice_allocation.created_at, am_coa_id, check_number, sm_invoice_allocation.invoice_number, sm_invoice_allocation.note, sm_invoice_allocation.amount
                 FROM sm_invoice_allocation 
                 JOIN sm_head ON sm_head.sm_number = sm_invoice_allocation.invoice_number
-                WHERE sm_invoice_allocation.created_at BETWEEN '$date1' AND '$date2'");
+                WHERE sm_invoice_allocation.date BETWEEN '$date1' AND '$date2'");
 
             $result = $command->queryAll();
 
@@ -236,7 +236,7 @@ class SmHead extends \yii\db\ActiveRecord
                 SELECT sales_person_id,customer_id, sm_invoice_allocation.sm_number, sm_invoice_allocation.created_at, am_coa_id, check_number, sm_invoice_allocation.invoice_number, sm_invoice_allocation.note, sm_invoice_allocation.amount
                 FROM sm_invoice_allocation 
                 JOIN sm_head ON sm_head.sm_number = sm_invoice_allocation.invoice_number
-                WHERE DATE(sm_invoice_allocation.created_at) = '$date1'");
+                WHERE DATE(sm_invoice_allocation.date) = '$date1'");
 
             $result = $command->queryAll();
 
@@ -470,13 +470,13 @@ class SmHead extends \yii\db\ActiveRecord
        if(!empty($date1) && !empty($date2))
         {
 
-            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{sm_invoice_allocation}} WHERE created_at BETWEEN '$date1' AND '$date2'")
+            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{sm_invoice_allocation}} WHERE date BETWEEN '$date1' AND '$date2'")
             ->queryScalar();
 
         }elseif(!empty($date1))
         {
 
-            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{sm_invoice_allocation}} WHERE DATE(sm_invoice_allocation.created_at) = '$date1'")
+            $total_collection = Yii::$app->db->createCommand("SELECT SUM([[amount]]) FROM {{sm_invoice_allocation}} WHERE DATE(sm_invoice_allocation.date) = '$date1'")
             ->queryScalar();
 
         }else{
