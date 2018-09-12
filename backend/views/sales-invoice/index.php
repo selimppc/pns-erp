@@ -271,11 +271,11 @@ $this->params['breadcrumbs'][] = $this->title;
                       'template' => '{pdf}{xlsx}',
                       'buttons' => [
                           'pdf' => function ($url, $model) {
-                                return Html::a('<span id="action-btn-pdf" class="action-btn-2" title="PDF">&nbsp;</span>', ['purchase-order/cancel', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']);
+                                return Html::a('<span id="action-btn-pdf" class="action-btn-2" title="PDF">&nbsp;</span>', '#');
                             },
 
                             'xlsx' => function ($url, $model) {
-                                return Html::a('<span id="action-btn-xls" class="action-btn-2" title="XLSX">&nbsp;</span>', ['purchase-order/cancel', 'id' => $model->id], ["data-pjax" => 0, 'onClick' => 'return confirm("Are you sure you want to cancel this purchased order?") ']);
+                                return Html::a('<span id="action-btn-xls" class="action-btn-2" title="XLSX">&nbsp;</span>', '#');
                             },
                         
                       ],
